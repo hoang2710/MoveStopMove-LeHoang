@@ -9,6 +9,7 @@ public class ItemStorage : Singleton<ItemStorage>
     {
         public WeaponType WeaponTag;
         public GameObject WeaponPrefab;
+        public int PoolSize;
     }
     [System.Serializable]
     public class WeaponSkinData
@@ -34,9 +35,13 @@ public class ItemStorage : Singleton<ItemStorage>
     private Dictionary<WeaponSkinType, Material> weaponSkins = new Dictionary<WeaponSkinType, Material>();
     private Dictionary<PantSkinType, Material> pantSkins = new Dictionary<PantSkinType, Material>();
 
+    //Pool of weapon
+    private Dictionary<WeaponType, Stack<GameObject>> weaponPool = new Dictionary<WeaponType, Stack<GameObject>>();
+
     private void Start()
     {
         DataToDictionary();
+        InitPool();
     }
     private void DataToDictionary()
     {
@@ -55,6 +60,60 @@ public class ItemStorage : Singleton<ItemStorage>
 
         Debug.Log(weaponItems.Count + "  " + weaponSkins.Count + "   " + pantSkins.Count);
     }
+    private void InitPool()
+    {
+        foreach (var item in WeaponTypeDatas)
+        {
+            Stack<GameObject> tmpStack = new Stack<GameObject>();
+            for (int i = 0; i < item.PoolSize; i++)
+            {
+                GameObject tmpObj = Instantiate(item.WeaponPrefab);
+                tmpStack.Push(tmpObj);
+
+                tmpObj.SetActive(false);
+            }
+
+            weaponPool.Add(item.WeaponTag, tmpStack); Debug.Log("Pool " + item.WeaponTag + "  " + tmpStack.Count);
+        }
+    }
+    public GameObject PopWeaponFromPool(WeaponType weaponTag, WeaponSkinType skinTag, Vector3 position, Quaternion rotation)
+    {
+        GameObject obj = CheckIfHaveWeaponLeftInPool(weaponTag);
+        Transform objTrans = obj.transform;
+
+        obj.SetActive(true);
+        objTrans.position = position;
+        objTrans.rotation = rotation;
+
+        IPooledWeapon weapon = obj.GetComponent<IPooledWeapon>();
+        weapon?.OnPopFromPool(weaponSkins[skinTag]);
+
+        return obj;
+    }
+    public void PushWeaponToPool(WeaponType weaponTag, GameObject obj)
+    {
+        weaponPool[weaponTag].Push(obj);
+
+        IPooledWeapon weapon = obj.GetComponent<IPooledWeapon>();
+        weapon?.OnPushToPool();
+
+        obj.SetActive(false);
+    }
+    private GameObject CheckIfHaveWeaponLeftInPool(WeaponType tag)
+    {
+        if (weaponPool[tag].Count > 0)
+        {
+            GameObject obj = weaponPool[tag].Peek();
+            weaponPool[tag].Pop();
+            return obj;
+        }
+        else
+        {
+            GameObject obj = Instantiate(weaponItems[tag]);
+            return obj;
+        }
+    }
+
     public GameObject GetWeaponType(WeaponType tag)
     {
         return weaponItems[tag];

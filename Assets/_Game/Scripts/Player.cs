@@ -7,23 +7,27 @@ public class Player : CharacterBase
     public static Vector3 MoveDir;
     [SerializeField]
     private float moveSpeed = 1.5f;
+    [SerializeField]
+    private float rotateSpeed = 5f;
+
+    public Transform AttackPos;
+    public Transform AttackTarget;
+
+    private bool isAttackable;
+    private bool isAttack;
+    private Quaternion weaponRotation = Quaternion.Euler(-90f, 0, 90f);
+    private float attackAnimThrow = ConstValues.VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT;
+    private float attackAnimEnd = ConstValues.VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT;
+    private float timer = 0;
+
+    public GameObject WeaponPlaceHolder;
+    private Quaternion handWeaponRotation = Quaternion.Euler(-90f, -90f, 180f); //TODO: understand why this shit not (90, -90, 180)
+
+    public static bool isShop;
 
     private void FixedUpdate()
     {
         Move();
-    }
-    private void Move()
-    {
-        if (MoveDir.sqrMagnitude > 0.01f)
-        {
-            charaterTrans.position = Vector3.MoveTowards(charaterTrans.position, charaterTrans.position + MoveDir, moveSpeed * Time.deltaTime);
-            SetCharacterRotation();
-        }
-    }
-    private void SetCharacterRotation()
-    {
-        float tmp = Mathf.Atan2(MoveDir.x, MoveDir.z) * Mathf.Rad2Deg;
-        charaterTrans.rotation = Quaternion.Lerp(charaterTrans.rotation, Quaternion.Euler(0, tmp, 0), Time.deltaTime * 5);
     }
     protected override void GameManagerOnGameStateChange(GameState state)
     {
@@ -32,8 +36,100 @@ public class Player : CharacterBase
             case GameState.LoadGame:
                 LoadDataFromPlayerPrefs();
                 break;
+            case GameState.LoadLevel:
+                SetUpHandWeapon();
+                break;
+            case GameState.MainMenu:
+                if (isShop)
+                {
+                    SetUpHandWeapon();
+                }
+                break;
             default:
                 break;
+        }
+    }
+    private void Move()
+    {
+        if (MoveDir.sqrMagnitude > 0.01f)
+        {
+            charaterTrans.position = Vector3.MoveTowards(charaterTrans.position, charaterTrans.position + MoveDir, moveSpeed * Time.deltaTime);
+            SetCharacterRotation();
+
+            anim.SetTrigger(ConstValues.ANIM_TRIGGER_RUN);
+
+            isAttackable = true;
+            timer = 0;
+        }
+        else
+        {
+            if (AttackTarget != null && isAttackable)
+            {
+                Attack();
+            }
+            else
+            {
+                if (isAttack)
+                {
+                    if (timer >= attackAnimEnd)
+                    {
+                        isAttack = false;
+                        WeaponPlaceHolder.SetActive(true);
+                    }
+                }
+                else
+                {
+                    Idle();
+                }
+            }
+
+            timer += Time.deltaTime;
+        }
+    }
+    private void Idle()
+    {
+        anim.SetTrigger(ConstValues.ANIM_TRIGGER_IDLE);
+    }
+    private void Attack()
+    {
+        anim.SetTrigger(ConstValues.ANIM_TRIGGER_ATTACK);
+
+        Quaternion tempRotation = Quaternion.LookRotation(AttackTarget.position - charaterTrans.position);
+        charaterTrans.rotation = tempRotation;
+
+        if (timer > attackAnimThrow)
+        {
+            WeaponPlaceHolder.SetActive(false);
+
+            GameObject obj = ItemStorage.Instance.PopWeaponFromPool(weaponTag, weaponSkinTag, AttackPos.position, tempRotation * weaponRotation);
+            Weapon weapon = obj.GetComponent<Weapon>();
+
+            weapon.SetFlyDir(AttackPos.forward);
+
+            isAttackable = false;
+            isAttack = true;
+        }
+
+    }
+    private void SetCharacterRotation()
+    {
+        float tmp = Mathf.Atan2(MoveDir.x, MoveDir.z) * Mathf.Rad2Deg;
+        charaterTrans.rotation = Quaternion.Lerp(charaterTrans.rotation, Quaternion.Euler(0, tmp, 0), Time.deltaTime * rotateSpeed);
+    }
+    private void SetUpHandWeapon()
+    {
+        Transform WeaponPlaceHolderTrans = WeaponPlaceHolder.transform; Debug.Log(WeaponPlaceHolderTrans.forward);
+        GameObject obj = Instantiate(ItemStorage.Instance.GetWeaponType(weaponTag), WeaponPlaceHolderTrans.position, Quaternion.LookRotation(WeaponPlaceHolderTrans.forward) * handWeaponRotation, WeaponPlaceHolderTrans);
+
+        Weapon weapon = obj.GetComponent<Weapon>();
+        weapon?.DeactiveWeaponScript();
+
+        Renderer objRen = obj.GetComponent<Renderer>();
+
+        if (objRen != null)
+        {
+            Material material = ItemStorage.Instance.GetWeaponSkin(weaponSkinTag);
+            objRen.materials = new Material[] { material, material };
         }
     }
     private void LoadDataFromPlayerPrefs()

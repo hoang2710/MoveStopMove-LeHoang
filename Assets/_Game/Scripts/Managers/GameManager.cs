@@ -7,6 +7,10 @@ public class GameManager : Singleton<GameManager>
 {
     public static event Action<GameState> OnGameStateChange;
 
+    private void Start()
+    {
+        StartCoroutine(DelayChangeGameState(GameState.LoadGame, 0.15f));
+    }
     public void ChangeGameState(GameState state)
     {
         switch (state)
@@ -42,6 +46,7 @@ public class GameManager : Singleton<GameManager>
     private void OnGameStateLoadGame()
     {
         Debug.Log("Load Game State");
+        StartCoroutine(DelayChangeGameState(GameState.LoadLevel, 0.15f));
     }
     private void OnGameStateLoadLevel()
     {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : CharacterBase, IPoolCharacter
 {
     public NavMeshAgent agent;
@@ -32,7 +31,7 @@ public class Enemy : CharacterBase, IPoolCharacter
         score = 0;
         killScore = 0;
     }
-    protected void NavMeshAgentSetting()
+    protected virtual void NavMeshAgentSetting()
     {
         agent.autoBraking = false;
         agent.updateRotation = false;

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class CharacterBase : MonoBehaviour
 {
     [SerializeField]
@@ -35,14 +37,14 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    protected Transform charaterTrans;
+    public Transform charaterTrans;
+    public Animator anim;
 
-    private void Start()
+    protected virtual void Start()
     {
         GameManager.OnGameStateChange += GameManagerOnGameStateChange;
     }
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         GameManager.OnGameStateChange -= GameManagerOnGameStateChange;
     }
@@ -50,6 +52,7 @@ public class CharacterBase : MonoBehaviour
     {
 
     }
+
     public void SetWeaponType(WeaponType tag)
     {
         weaponTag = tag;
