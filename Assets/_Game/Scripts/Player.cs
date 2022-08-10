@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : CharacterBase
+public class Player : CharacterBase, IHit
 {
     public static Vector3 MoveDir;
     [SerializeField]
@@ -15,19 +15,24 @@ public class Player : CharacterBase
 
     private bool isAttackable;
     private bool isAttack;
+    private bool isDead;
     private Quaternion weaponRotation = Quaternion.Euler(-90f, 0, 90f);
     private float attackAnimThrow = ConstValues.VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT;
     private float attackAnimEnd = ConstValues.VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT;
     private float timer = 0;
 
     public GameObject WeaponPlaceHolder;
-    private Quaternion handWeaponRotation = Quaternion.Euler(-90f, -90f, 180f); //TODO: understand why this shit not (90, -90, 180)
+    //TODO: understand why this shit not (90, -90, 180)
+    private Quaternion handWeaponRotation = Quaternion.Euler(-90f, -90f, 180f);
 
     public static bool isShop;
 
     private void FixedUpdate()
     {
-        Move();
+        if (!isDead)
+        {
+            LogicHandle();
+        }
     }
     protected override void GameManagerOnGameStateChange(GameState state)
     {
@@ -49,17 +54,11 @@ public class Player : CharacterBase
                 break;
         }
     }
-    private void Move()
+    private void LogicHandle()
     {
         if (MoveDir.sqrMagnitude > 0.01f)
         {
-            charaterTrans.position = Vector3.MoveTowards(charaterTrans.position, charaterTrans.position + MoveDir, moveSpeed * Time.deltaTime);
-            SetCharacterRotation();
-
-            anim.SetTrigger(ConstValues.ANIM_TRIGGER_RUN);
-
-            isAttackable = true;
-            timer = 0;
+            Move();
         }
         else
         {
@@ -69,26 +68,37 @@ public class Player : CharacterBase
             }
             else
             {
-                if (isAttack)
-                {
-                    if (timer >= attackAnimEnd)
-                    {
-                        isAttack = false;
-                        WeaponPlaceHolder.SetActive(true);
-                    }
-                }
-                else
-                {
-                    Idle();
-                }
+                Idle();
             }
 
             timer += Time.deltaTime;
         }
     }
+    private void Move()
+    {
+        charaterTrans.position = Vector3.MoveTowards(charaterTrans.position, charaterTrans.position + MoveDir, moveSpeed * Time.deltaTime);
+        SetCharacterRotation();
+
+        anim.SetTrigger(ConstValues.ANIM_TRIGGER_RUN);
+
+        isAttackable = true;
+        timer = 0;
+        WeaponPlaceHolder.SetActive(true);
+    }
     private void Idle()
     {
-        anim.SetTrigger(ConstValues.ANIM_TRIGGER_IDLE);
+        if (isAttack)
+        {
+            if (timer >= attackAnimEnd)
+            {
+                isAttack = false;
+                WeaponPlaceHolder.SetActive(true);
+            }
+        }
+        else
+        {
+            anim.SetTrigger(ConstValues.ANIM_TRIGGER_IDLE);
+        }
     }
     private void Attack()
     {
@@ -109,7 +119,17 @@ public class Player : CharacterBase
             isAttackable = false;
             isAttack = true;
         }
+    }
+    private void Die()
+    {
+        anim.SetTrigger(ConstValues.ANIM_TRIGGER_DEAD);
 
+        GameManager.Instance.ChangeGameState(GameState.ResultPhase);
+    }
+    public void OnHit()
+    {
+        isDead = true;
+        Die();
     }
     private void SetCharacterRotation()
     {

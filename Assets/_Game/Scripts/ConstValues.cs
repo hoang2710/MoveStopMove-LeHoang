@@ -18,4 +18,5 @@ public class ConstValues
     public const float VALUE_WEAPON_DEFAULT_LIFE_TIME = 2f;
     public const float VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT = 0.24f;
     public const float VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT = 0.64f;
+    public const string TAG_PLAYER = "Player";
 }

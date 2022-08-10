@@ -21,6 +21,14 @@ public class Weapon : MonoBehaviour, IPooledWeapon
         Move();
         CheckLifeTime();
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(ConstValues.TAG_PLAYER))
+        {
+            IHit hit = other.GetComponent<IHit>();
+            hit?.OnHit();
+        }
+    }
     public void Move()
     {
         WeaponTrans.position = Vector3.MoveTowards(WeaponTrans.position, WeaponTrans.position + flyDir, flyingSpeed * Time.deltaTime);
