@@ -40,6 +40,7 @@ public class CharacterBase : MonoBehaviour
     public Transform charaterTrans;
     public Animator anim;
 
+    
     protected virtual void Start()
     {
         GameManager.OnGameStateChange += GameManagerOnGameStateChange;

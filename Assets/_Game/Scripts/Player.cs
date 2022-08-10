@@ -17,10 +17,9 @@ public class Player : CharacterBase, IHit
     private bool isAttack;
     private bool isDead;
     private Quaternion weaponRotation = Quaternion.Euler(-90f, 0, 90f);
-    private float attackAnimThrow = ConstValues.VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT;
+    protected float attackAnimThrow = ConstValues.VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT;
     private float attackAnimEnd = ConstValues.VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT;
     private float timer = 0;
-
     public GameObject WeaponPlaceHolder;
     //TODO: understand why this shit not (90, -90, 180)
     private Quaternion handWeaponRotation = Quaternion.Euler(-90f, -90f, 180f);
