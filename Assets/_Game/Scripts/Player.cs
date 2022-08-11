@@ -13,18 +13,18 @@ public class Player : CharacterBase, IHit
     private bool isAttackable = true;
     private bool isAttack;
     private bool isDead;
-    private Quaternion weaponRotation = Quaternion.Euler(-90f, 0, 90f);
-    protected float attackAnimThrow = ConstValues.VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT;
-    private float attackAnimEnd = ConstValues.VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT;
+
     private float timer = 0;
-    public GameObject WeaponPlaceHolder;
-    private Quaternion handWeaponRotation = Quaternion.Euler(-90f, -90f, 180f); //TODO: understand why this shit not (90, -90, 180)
 
     public static bool isShop;
 
     private void FixedUpdate()
     {
         LogicHandle();
+        if (Input.GetKey(KeyCode.G))
+        {
+            SetUpHandWeapon();
+        }
     }
     protected override void GameManagerOnGameStateChange(GameState state)
     {
@@ -35,12 +35,14 @@ public class Player : CharacterBase, IHit
                 break;
             case GameState.LoadLevel:
                 SetUpHandWeapon();
+                SetUpPantSkin();
                 break;
             case GameState.MainMenu:
                 if (isShop)
                 {
                     LoadDataFromPlayerPrefs();
                     SetUpHandWeapon();
+                    SetUpPantSkin();
                 }
                 break;
             default:
@@ -159,22 +161,6 @@ public class Player : CharacterBase, IHit
     {
         float tmp = Mathf.Atan2(MoveDir.x, MoveDir.z) * Mathf.Rad2Deg;
         charaterTrans.rotation = Quaternion.Lerp(charaterTrans.rotation, Quaternion.Euler(0, tmp, 0), Time.deltaTime * rotateSpeed);
-    }
-    private void SetUpHandWeapon()
-    {
-        Transform WeaponPlaceHolderTrans = WeaponPlaceHolder.transform;
-        GameObject obj = Instantiate(ItemStorage.Instance.GetWeaponType(weaponTag), WeaponPlaceHolderTrans.position, Quaternion.LookRotation(WeaponPlaceHolderTrans.forward) * handWeaponRotation, WeaponPlaceHolderTrans);
-
-        Weapon weapon = obj.GetComponent<Weapon>();
-        weapon?.DeactiveWeaponScript();
-
-        Renderer objRen = obj.GetComponent<Renderer>();
-
-        if (objRen != null)
-        {
-            Material material = ItemStorage.Instance.GetWeaponSkin(weaponSkinTag);
-            objRen.materials = new Material[] { material, material };
-        }
     }
     private void LoadDataFromPlayerPrefs()
     {

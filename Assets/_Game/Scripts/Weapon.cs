@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     private Vector3 flyDir;
     private float lifeTime = ConstValues.VALUE_WEAPON_DEFAULT_LIFE_TIME;
     private float timer = 0;
+
     private void Update()
     {
         Move();
@@ -23,11 +24,8 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(ConstValues.TAG_PLAYER))
-        {
-            IHit hit = other.GetComponent<IHit>();
-            hit?.OnHit();
-        }
+        IHit hit = other.GetComponent<IHit>();
+        hit?.OnHit();
     }
     public void Move()
     {
@@ -54,7 +52,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     }
     public void DeactiveWeaponScript()
     {
-        Destroy(this);
+        this.enabled = false;
     }
     public void OnPopFromPool(Material skinMaterial)
     {

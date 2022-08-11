@@ -24,6 +24,16 @@ public class CharacterBase : MonoBehaviour
     public Transform AttackPos;
     public Transform AttackTarget;
 
+    protected Quaternion weaponRotation = Quaternion.Euler(-90f, 0, 90f);
+    protected float attackAnimThrow = ConstValues.VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT;
+    protected float attackAnimEnd = ConstValues.VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT;
+
+    public GameObject WeaponPlaceHolder;
+    protected GameObject handWeapon;
+    protected Quaternion handWeaponRotation = Quaternion.Euler(-90f, -90f, 180f); //TODO: understand why this shit not (90, -90, 180)
+
+    public Renderer PantRenderer;
+
     private void Awake()
     {
         Score = 0;
@@ -42,6 +52,45 @@ public class CharacterBase : MonoBehaviour
     protected virtual void GameManagerOnGameStateChange(GameState state)
     {
 
+    }
+    protected void SetUpHandWeapon()
+    {
+        if (handWeapon != null)
+        {
+            Destroy(handWeapon);
+        }
+
+        anim.Play(ConstValues.ANIM_PLAY_DEFAULT_IDLE); //NOTE: make sure character model is in right position for assign hand weapon
+
+        Transform WeaponPlaceHolderTrans = WeaponPlaceHolder.transform;
+        handWeapon = Instantiate(ItemStorage.Instance.GetWeaponType(weaponTag), 
+                                WeaponPlaceHolderTrans.position, 
+                                Quaternion.LookRotation(WeaponPlaceHolderTrans.forward) * handWeaponRotation, 
+                                WeaponPlaceHolderTrans);
+
+        Weapon weapon = handWeapon.GetComponent<Weapon>();
+        weapon?.DeactiveWeaponScript();
+
+        Renderer objRen = handWeapon.GetComponent<Renderer>();
+
+        if (objRen != null)
+        {
+            switch (weaponTag)
+            {
+                case WeaponType.Candy:
+                    Material materialCandy = ItemStorage.Instance.GetWeaponSkin(weaponSkinTag);
+                    objRen.materials = new Material[] {materialCandy, materialCandy, materialCandy}; //NOTE: Candy weapon have 3 material
+                    break;
+                default:
+                    Material material = ItemStorage.Instance.GetWeaponSkin(weaponSkinTag);
+                    objRen.materials = new Material[] { material, material };
+                    break;
+            }
+        }
+    }
+    protected void SetUpPantSkin()
+    {
+        PantRenderer.material = ItemStorage.Instance.GetPantSkin(pantSkinTag);
     }
 
     public void SetWeaponType(WeaponType tag)

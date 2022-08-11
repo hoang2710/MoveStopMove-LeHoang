@@ -217,6 +217,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!137 &360204150 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -529177695146175607, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 1261092638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &374846432
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,16 +315,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5614a00800b9ada44b7462ae4f5d0218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponTag: 0
-  weaponSkinTag: 0
+  weaponTag: 1
+  weaponSkinTag: 4
   pantSkinTag: 0
   charaterTrans: {fileID: 400541274}
   anim: {fileID: 400541273}
   AttackPos: {fileID: 1003120925}
   AttackTarget: {fileID: 0}
+  WeaponPlaceHolder: {fileID: 2125164831}
+  PantRenderer: {fileID: 360204150}
   moveSpeed: 5
   rotateSpeed: 8
-  WeaponPlaceHolder: {fileID: 2125164831}
 --- !u!195 &400541272
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -440,7 +446,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 12
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -3797,7 +3803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df24c7b81a84cee4fa3bf9ac550d506b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initState: 3
+  initState: 2
   NavAgent: {fileID: 524195071}
   enemyRef: {fileID: 8296172668964482462}
 --- !u!114 &8296172668964482462
@@ -3819,6 +3825,9 @@ MonoBehaviour:
   anim: {fileID: 3166231813654639349}
   AttackPos: {fileID: 1461919194}
   AttackTarget: {fileID: 0}
+  WeaponPlaceHolder: {fileID: 914507246}
+  PantRenderer: {fileID: 8694194341933049628}
+  agent: {fileID: 8296172668964482461}
 --- !u!1 &8404232990381074676
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class AIAgent : MonoBehaviour
         stateMachine.RegisterState(new AIDeathState());
         stateMachine.RegisterState(new AIIdleState());
         stateMachine.RegisterState(new AIPatrolState());
-        stateMachine.ChangeState(initState);
+        // stateMachine.ChangeState(initState);
 
         NavMeshAgentSetting();
     }

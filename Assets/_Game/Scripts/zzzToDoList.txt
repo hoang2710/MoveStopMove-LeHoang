@@ -1,3 +1,8 @@
 player movement --done--
 throw wepaon --done--
 detect target
+anim triiger like shit
+    trigger same state twice --> bug
+        trigger another state will not play unless trigger multiple time 
+
+weapon shit player on start
