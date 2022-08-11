@@ -10,10 +10,7 @@ public class Player : CharacterBase, IHit
     [SerializeField]
     private float rotateSpeed = 5f;
 
-    public Transform AttackPos;
-    public Transform AttackTarget;
-
-    private bool isAttackable;
+    private bool isAttackable = true;
     private bool isAttack;
     private bool isDead;
     private Quaternion weaponRotation = Quaternion.Euler(-90f, 0, 90f);
@@ -21,17 +18,13 @@ public class Player : CharacterBase, IHit
     private float attackAnimEnd = ConstValues.VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT;
     private float timer = 0;
     public GameObject WeaponPlaceHolder;
-    //TODO: understand why this shit not (90, -90, 180)
-    private Quaternion handWeaponRotation = Quaternion.Euler(-90f, -90f, 180f);
+    private Quaternion handWeaponRotation = Quaternion.Euler(-90f, -90f, 180f); //TODO: understand why this shit not (90, -90, 180)
 
     public static bool isShop;
 
     private void FixedUpdate()
     {
-        if (!isDead)
-        {
-            LogicHandle();
-        }
+        LogicHandle();
     }
     protected override void GameManagerOnGameStateChange(GameState state)
     {
@@ -46,6 +39,7 @@ public class Player : CharacterBase, IHit
             case GameState.MainMenu:
                 if (isShop)
                 {
+                    LoadDataFromPlayerPrefs();
                     SetUpHandWeapon();
                 }
                 break;
@@ -55,22 +49,27 @@ public class Player : CharacterBase, IHit
     }
     private void LogicHandle()
     {
-        if (MoveDir.sqrMagnitude > 0.01f)
+        if (!isDead)
         {
-            Move();
-        }
-        else
-        {
-            if (AttackTarget != null && isAttackable)
+            if (MoveDir.sqrMagnitude > 0.01f)
             {
-                Attack();
+                Move();
+                DetectEnemy();
             }
             else
             {
-                Idle();
-            }
+                if (AttackTarget != null && isAttackable)
+                {
+                    Attack();
+                }
+                else
+                {
+                    Idle();
+                    DetectEnemy();
+                }
 
-            timer += Time.deltaTime;
+                timer += Time.deltaTime;
+            }
         }
     }
     private void Move()
@@ -97,13 +96,17 @@ public class Player : CharacterBase, IHit
         else
         {
             anim.SetTrigger(ConstValues.ANIM_TRIGGER_IDLE);
+            timer = 0;
         }
     }
     private void Attack()
     {
         anim.SetTrigger(ConstValues.ANIM_TRIGGER_ATTACK);
 
-        Quaternion tempRotation = Quaternion.LookRotation(AttackTarget.position - charaterTrans.position);
+        Vector3 lookDir = AttackTarget.position - charaterTrans.position;
+        lookDir.y = 0;
+
+        Quaternion tempRotation = Quaternion.LookRotation(lookDir);
         charaterTrans.rotation = tempRotation;
 
         if (timer > attackAnimThrow)
@@ -121,13 +124,35 @@ public class Player : CharacterBase, IHit
     }
     private void Die()
     {
+        isDead = true;
         anim.SetTrigger(ConstValues.ANIM_TRIGGER_DEAD);
 
         GameManager.Instance.ChangeGameState(GameState.ResultPhase);
     }
+    private void DetectEnemy()
+    {
+        if (AttackTarget == null)
+        {
+            Collider[] objs = Physics.OverlapSphere(charaterTrans.position, AttackRange, ConstValues.LAYER_MASK_ENEMY);
+
+            if (objs.Length > 0)
+            {
+                float minDistSqr = float.MaxValue;
+                foreach (var item in objs)
+                {
+                    float distSqr = (item.transform.position - charaterTrans.position).sqrMagnitude;
+
+                    if (distSqr < minDistSqr)
+                    {
+                        minDistSqr = distSqr;
+                        AttackTarget = item.transform;
+                    }
+                }
+            }
+        }
+    }
     public void OnHit()
     {
-        isDead = true;
         Die();
     }
     private void SetCharacterRotation()
@@ -137,7 +162,7 @@ public class Player : CharacterBase, IHit
     }
     private void SetUpHandWeapon()
     {
-        Transform WeaponPlaceHolderTrans = WeaponPlaceHolder.transform; Debug.Log(WeaponPlaceHolderTrans.forward);
+        Transform WeaponPlaceHolderTrans = WeaponPlaceHolder.transform;
         GameObject obj = Instantiate(ItemStorage.Instance.GetWeaponType(weaponTag), WeaponPlaceHolderTrans.position, Quaternion.LookRotation(WeaponPlaceHolderTrans.forward) * handWeaponRotation, WeaponPlaceHolderTrans);
 
         Weapon weapon = obj.GetComponent<Weapon>();

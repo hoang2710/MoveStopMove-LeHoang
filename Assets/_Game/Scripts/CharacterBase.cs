@@ -13,34 +13,24 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     protected PantSkinType pantSkinTag;
 
-    [SerializeField]
-    protected int score = 0;
-    [SerializeField]
-    protected int killScore = 0;
-    [SerializeField]
-    protected float attackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
-    [SerializeField]
-    protected float attackRate = ConstValues.VALUE_BASE_ATTACK_RATE;
-
-    public int Score
-    {
-        get
-        {
-            return score;
-        }
-    }
-    public int KillScore
-    {
-        get
-        {
-            return killScore;
-        }
-    }
+    public int Score { get; protected set; }
+    public int KillScore { get; protected set; }
+    public float AttackRange { get; protected set; }
+    public float AttackRate { get; protected set; }
 
     public Transform charaterTrans;
     public Animator anim;
 
-    
+    public Transform AttackPos;
+    public Transform AttackTarget;
+
+    private void Awake()
+    {
+        Score = 0;
+        KillScore = 0;
+        AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
+        AttackRate = ConstValues.VALUE_BASE_ATTACK_RATE;
+    }
     protected virtual void Start()
     {
         GameManager.OnGameStateChange += GameManagerOnGameStateChange;

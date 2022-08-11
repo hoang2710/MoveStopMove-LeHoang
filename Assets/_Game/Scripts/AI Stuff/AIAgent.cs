@@ -1,18 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIAgent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public AIStateMachine stateMachine;
+    public AIStateId initState;
+    public NavMeshAgent NavAgent;
+    public Enemy enemyRef;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
+        stateMachine = new AIStateMachine(this);
+        stateMachine.RegisterState(new AIAttackState());
+        stateMachine.RegisterState(new AIDeathState());
+        stateMachine.RegisterState(new AIIdleState());
+        stateMachine.RegisterState(new AIPatrolState());
+        stateMachine.ChangeState(initState);
+
+        NavMeshAgentSetting();
+    }
+    private void Update()
+    {
+        stateMachine.Update();
         
+        UpdateRotation();
+    }
+    protected virtual void NavMeshAgentSetting()
+    {
+        NavAgent.autoBraking = false;
+        NavAgent.updateRotation = false;
+    }
+    protected void UpdateRotation()
+    {
+        Vector3 velocity = NavAgent.velocity;
+
+        if (velocity.sqrMagnitude > 0.01f)
+        {
+            enemyRef.charaterTrans.rotation = Quaternion.LookRotation(velocity);
+        }
     }
 }

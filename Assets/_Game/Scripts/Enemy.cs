@@ -5,12 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : CharacterBase, IPoolCharacter
 {
-    public NavMeshAgent agent;
 
-    private void Awake()
-    {
-        NavMeshAgentSetting();
-    }
     public void OnInit()
     {
         SetRandomEnumData();
@@ -28,22 +23,7 @@ public class Enemy : CharacterBase, IPoolCharacter
     }
     private void ResetScore()
     {
-        score = 0;
-        killScore = 0;
+        Score = 0;
+        KillScore = 0;
     }
-    protected virtual void NavMeshAgentSetting()
-    {
-        agent.autoBraking = false;
-        agent.updateRotation = false;
-    }
-    protected void UpdateRotation()
-    {
-        Vector3 velocity = agent.velocity;
-
-        if (velocity.sqrMagnitude > 0.01f)
-        {
-            charaterTrans.rotation = Quaternion.LookRotation(velocity);
-        }
-    }
-
 }

@@ -19,4 +19,8 @@ public class ConstValues
     public const float VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT = 0.24f;
     public const float VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT = 0.64f;
     public const string TAG_PLAYER = "Player";
+    public const int LAYER_MASK_ENEMY = 1 << 6;
+    public const float VALUE_AI_PATROL_RANGE = 25f;
+    public const float VALUE_AI_IDLE_MAX_TIME = 3f;
+    public const float VALUE_AI_STOP_DIST_THRESHOLD = 2f;
 }

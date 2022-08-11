@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIAttackState : MonoBehaviour
+public class AIAttackState : AIState
 {
-    // Start is called before the first frame update
-    void Start()
+    public AIStateId GetId()
+    {
+        return AIStateId.AttackState;
+    }
+    public void Enter(AIAgent agent)
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    public void Exit(AIAgent agent)
+    {
+        
+    }
+    public void Update(AIAgent agent)
     {
         
     }
