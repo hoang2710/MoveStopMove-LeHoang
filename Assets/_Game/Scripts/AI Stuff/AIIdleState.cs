@@ -14,7 +14,7 @@ public class AIIdleState : AIState
     {
         agent.NavAgent.enabled = false;
 
-        agent.enemyRef.anim.SetTrigger(ConstValues.ANIM_TRIGGER_IDLE);
+        agent.enemyRef.Anim.SetTrigger(ConstValues.ANIM_TRIGGER_IDLE);
 
         timer = 0;
     }
@@ -31,6 +31,11 @@ public class AIIdleState : AIState
         else
         {
             timer += Time.deltaTime;
+        }
+
+        if (agent.enemyRef.DetectTarget())
+        {
+            agent.stateMachine.ChangeState(AIStateId.AttackState);
         }
     }
 }

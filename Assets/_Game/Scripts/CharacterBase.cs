@@ -6,27 +6,30 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class CharacterBase : MonoBehaviour
 {
-    [SerializeField]
-    protected WeaponType weaponTag;
-    [SerializeField]
-    protected WeaponSkinType weaponSkinTag;
-    [SerializeField]
-    protected PantSkinType pantSkinTag;
+    public WeaponType WeaponTag { get; protected set; }
+    public WeaponSkinType WeaponSkinTag { get; protected set; }
+    public PantSkinType PantSkinTag { get; protected set; }
 
     public int Score { get; protected set; }
     public int KillScore { get; protected set; }
     public float AttackRange { get; protected set; }
     public float AttackRate { get; protected set; }
 
-    public Transform charaterTrans;
-    public Animator anim;
+    public Transform CharaterTrans;
+    public Collider CharacterCollider;
+    public Animator Anim;
 
     public Transform AttackPos;
-    public Transform AttackTarget;
+    public Transform AttackTargetTrans;
+    public CharacterBase AttackTarget;
+    private float minorOffset = 1.1f; //NOTE: prevent targetmark blinking due to detect and un-detect at the same time
+    private float detectOffSetDistance = 2f;
 
-    protected Quaternion weaponRotation = Quaternion.Euler(-90f, 0, 90f);
-    protected float attackAnimThrow = ConstValues.VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT;
-    protected float attackAnimEnd = ConstValues.VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT;
+    public bool IsAlive { get; protected set; }
+
+    public Quaternion WeaponRotation { get; protected set; }
+    public float AttackAnimThrow { get; protected set; }
+    public float AttackAnimEnd { get; protected set; }
 
     public GameObject WeaponPlaceHolder;
     protected GameObject handWeapon;
@@ -40,6 +43,11 @@ public class CharacterBase : MonoBehaviour
         KillScore = 0;
         AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
         AttackRate = ConstValues.VALUE_BASE_ATTACK_RATE;
+
+        WeaponRotation = Quaternion.Euler(-90f, 0, 90f);
+
+        AttackAnimThrow = ConstValues.VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT;
+        AttackAnimEnd = ConstValues.VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT;
     }
     protected virtual void Start()
     {
@@ -53,19 +61,69 @@ public class CharacterBase : MonoBehaviour
     {
 
     }
-    protected void SetUpHandWeapon()
+    public bool DetectTarget()
+    {
+        if (AttackTargetTrans == null)
+        {
+            Collider[] objs = Physics.OverlapSphere(CharaterTrans.position, AttackRange, ConstValues.LAYER_MASK_ENEMY);
+
+            if (objs.Length > 1)
+            {
+
+
+                float minDistSqr = float.MaxValue;
+                Collider bestMatch = objs[0];
+                foreach (var item in objs)
+                {
+                    float distSqr = (item.transform.position - CharaterTrans.position).sqrMagnitude;
+
+                    if (distSqr < minDistSqr && distSqr > detectOffSetDistance)
+                    {
+                        minDistSqr = distSqr;
+                        bestMatch = item;
+                    }
+                }
+                AttackTargetTrans = bestMatch.transform;
+                AttackTarget = AttackTargetTrans.GetComponent<CharacterBase>();
+
+                return true;
+            }
+
+            return false; //NOTE: objs.Length = 1 --> detect self
+        }
+        else
+        {
+            if (AttackTarget.IsAlive)
+            {
+                float distSqr = (AttackTargetTrans.position - CharaterTrans.position).sqrMagnitude;
+                if (distSqr > AttackRange * AttackRange * minorOffset * minorOffset) //NOTE: optimize later or not
+                {
+                    AttackTargetTrans = null;
+                    return false;
+                }
+            }
+            else
+            {
+                AttackTargetTrans = null;
+                return false;
+            }
+
+            return true;
+        }
+    }
+    public void SetUpHandWeapon()
     {
         if (handWeapon != null)
         {
             Destroy(handWeapon);
         }
 
-        anim.Play(ConstValues.ANIM_PLAY_DEFAULT_IDLE); //NOTE: make sure character model is in right position for assign hand weapon
+        Anim.Play(ConstValues.ANIM_PLAY_DEFAULT_IDLE); //NOTE: make sure character model is in right position for assign hand weapon
 
         Transform WeaponPlaceHolderTrans = WeaponPlaceHolder.transform;
-        handWeapon = Instantiate(ItemStorage.Instance.GetWeaponType(weaponTag), 
-                                WeaponPlaceHolderTrans.position, 
-                                Quaternion.LookRotation(WeaponPlaceHolderTrans.forward) * handWeaponRotation, 
+        handWeapon = Instantiate(ItemStorage.Instance.GetWeaponType(WeaponTag),
+                                WeaponPlaceHolderTrans.position,
+                                Quaternion.LookRotation(WeaponPlaceHolderTrans.forward) * handWeaponRotation,
                                 WeaponPlaceHolderTrans);
 
         Weapon weapon = handWeapon.GetComponent<Weapon>();
@@ -75,35 +133,35 @@ public class CharacterBase : MonoBehaviour
 
         if (objRen != null)
         {
-            switch (weaponTag)
+            switch (WeaponTag)
             {
                 case WeaponType.Candy:
-                    Material materialCandy = ItemStorage.Instance.GetWeaponSkin(weaponSkinTag);
-                    objRen.materials = new Material[] {materialCandy, materialCandy, materialCandy}; //NOTE: Candy weapon have 3 material
+                    Material materialCandy = ItemStorage.Instance.GetWeaponSkin(WeaponSkinTag);
+                    objRen.materials = new Material[] { materialCandy, materialCandy, materialCandy }; //NOTE: Candy weapon have 3 material
                     break;
                 default:
-                    Material material = ItemStorage.Instance.GetWeaponSkin(weaponSkinTag);
+                    Material material = ItemStorage.Instance.GetWeaponSkin(WeaponSkinTag);
                     objRen.materials = new Material[] { material, material };
                     break;
             }
         }
     }
-    protected void SetUpPantSkin()
+    public void SetUpPantSkin()
     {
-        PantRenderer.material = ItemStorage.Instance.GetPantSkin(pantSkinTag);
+        PantRenderer.material = ItemStorage.Instance.GetPantSkin(PantSkinTag);
     }
 
     public void SetWeaponType(WeaponType tag)
     {
-        weaponTag = tag;
+        WeaponTag = tag;
     }
     public void SetWeaponSkin(WeaponSkinType tag)
     {
-        weaponSkinTag = tag;
+        WeaponSkinTag = tag;
     }
     public void SetPantSkin(PantSkinType tag)
     {
-        pantSkinTag = tag;
+        PantSkinTag = tag;
     }
 
 }

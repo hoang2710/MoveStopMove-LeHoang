@@ -13,18 +13,18 @@ public class AIAgent : MonoBehaviour
     private void Start()
     {
         stateMachine = new AIStateMachine(this);
-        stateMachine.RegisterState(new AIAttackState());
         stateMachine.RegisterState(new AIDeathState());
+        stateMachine.RegisterState(new AIAttackState());
         stateMachine.RegisterState(new AIIdleState());
         stateMachine.RegisterState(new AIPatrolState());
-        // stateMachine.ChangeState(initState);
+        stateMachine.ChangeState(initState); //TODO: understand why this line prevent error auto update in all State Scrpit
 
         NavMeshAgentSetting();
     }
     private void Update()
     {
         stateMachine.Update();
-        
+
         UpdateRotation();
     }
     protected virtual void NavMeshAgentSetting()
@@ -38,7 +38,7 @@ public class AIAgent : MonoBehaviour
 
         if (velocity.sqrMagnitude > 0.01f)
         {
-            enemyRef.charaterTrans.rotation = Quaternion.LookRotation(velocity);
+            enemyRef.CharaterTrans.rotation = Quaternion.LookRotation(velocity);
         }
     }
 }

@@ -18,24 +18,25 @@ public class Player : CharacterBase, IHit
 
     public static bool isShop;
 
+    public GameObject TargetMark;
+    public Transform TargetMarkTrans;
+    public bool SetActiveFlag;
+
     private void FixedUpdate()
     {
         LogicHandle();
-        if (Input.GetKey(KeyCode.G))
-        {
-            SetUpHandWeapon();
-        }
     }
     protected override void GameManagerOnGameStateChange(GameState state)
     {
         switch (state)
         {
             case GameState.LoadGame:
-                LoadDataFromPlayerPrefs();
+                // LoadDataFromPlayerPrefs(); //NOTE: Disable for debug
                 break;
             case GameState.LoadLevel:
                 SetUpHandWeapon();
                 SetUpPantSkin();
+                SetUpPlayer();
                 break;
             case GameState.MainMenu:
                 if (isShop)
@@ -49,47 +50,53 @@ public class Player : CharacterBase, IHit
                 break;
         }
     }
-    private void LogicHandle()
+    private void LogicHandle() //NOTE: optimize later
     {
         if (!isDead)
         {
+            DispalyTargetMark();
             if (MoveDir.sqrMagnitude > 0.01f)
             {
                 Move();
-                DetectEnemy();
+                DetectTarget();
             }
             else
             {
-                if (AttackTarget != null && isAttackable)
+                if (AttackTargetTrans != null && isAttackable)
                 {
                     Attack();
                 }
                 else
                 {
                     Idle();
-                    DetectEnemy();
+                    DetectTarget();
                 }
 
                 timer += Time.deltaTime;
             }
         }
+        else
+        {
+            Anim.SetTrigger(ConstValues.ANIM_TRIGGER_DEAD);
+        }
     }
-    private void Move()
+    private void Move() //NOTE: optimize later
     {
-        charaterTrans.position = Vector3.MoveTowards(charaterTrans.position, charaterTrans.position + MoveDir, moveSpeed * Time.deltaTime);
+        CharaterTrans.position = Vector3.MoveTowards(CharaterTrans.position, CharaterTrans.position + MoveDir, moveSpeed * Time.deltaTime);
         SetCharacterRotation();
 
-        anim.SetTrigger(ConstValues.ANIM_TRIGGER_RUN);
+        Anim.SetTrigger(ConstValues.ANIM_TRIGGER_RUN);
 
         isAttackable = true;
+        isAttack = false;
         timer = 0;
         WeaponPlaceHolder.SetActive(true);
     }
-    private void Idle()
+    private void Idle() //Optimize later
     {
         if (isAttack)
         {
-            if (timer >= attackAnimEnd)
+            if (timer >= AttackAnimEnd)
             {
                 isAttack = false;
                 WeaponPlaceHolder.SetActive(true);
@@ -97,25 +104,25 @@ public class Player : CharacterBase, IHit
         }
         else
         {
-            anim.SetTrigger(ConstValues.ANIM_TRIGGER_IDLE);
+            Anim.SetTrigger(ConstValues.ANIM_TRIGGER_IDLE);
             timer = 0;
         }
     }
-    private void Attack()
+    private void Attack() //NOTE: optimize later
     {
-        anim.SetTrigger(ConstValues.ANIM_TRIGGER_ATTACK);
+        Anim.SetTrigger(ConstValues.ANIM_TRIGGER_ATTACK);
 
-        Vector3 lookDir = AttackTarget.position - charaterTrans.position;
+        Vector3 lookDir = AttackTargetTrans.position - CharaterTrans.position;
         lookDir.y = 0;
 
         Quaternion tempRotation = Quaternion.LookRotation(lookDir);
-        charaterTrans.rotation = tempRotation;
+        CharaterTrans.rotation = tempRotation;
 
-        if (timer > attackAnimThrow)
+        if (timer > AttackAnimThrow)
         {
             WeaponPlaceHolder.SetActive(false);
 
-            GameObject obj = ItemStorage.Instance.PopWeaponFromPool(weaponTag, weaponSkinTag, AttackPos.position, tempRotation * weaponRotation);
+            GameObject obj = ItemStorage.Instance.PopWeaponFromPool(WeaponTag, WeaponSkinTag, AttackPos.position, tempRotation * WeaponRotation);
             Weapon weapon = obj.GetComponent<Weapon>();
 
             weapon.SetFlyDir(AttackPos.forward);
@@ -127,45 +134,45 @@ public class Player : CharacterBase, IHit
     private void Die()
     {
         isDead = true;
-        anim.SetTrigger(ConstValues.ANIM_TRIGGER_DEAD);
+        // Anim.SetTrigger(ConstValues.ANIM_TRIGGER_DEAD);
+        CharacterCollider.enabled = false;
 
         GameManager.Instance.ChangeGameState(GameState.ResultPhase);
     }
-    private void DetectEnemy()
+    private void DispalyTargetMark()
     {
-        if (AttackTarget == null)
+        //NOTE: temp solution, optimize later, or not
+        if (AttackTargetTrans != null && !SetActiveFlag)
         {
-            Collider[] objs = Physics.OverlapSphere(charaterTrans.position, AttackRange, ConstValues.LAYER_MASK_ENEMY);
-
-            if (objs.Length > 0)
-            {
-                float minDistSqr = float.MaxValue;
-                foreach (var item in objs)
-                {
-                    float distSqr = (item.transform.position - charaterTrans.position).sqrMagnitude;
-
-                    if (distSqr < minDistSqr)
-                    {
-                        minDistSqr = distSqr;
-                        AttackTarget = item.transform;
-                    }
-                }
-            }
+            TargetMark.SetActive(true);
+            SetActiveFlag = true;
+            TargetMarkTrans.position = AttackTargetTrans.position;
+            TargetMarkTrans.SetParent(AttackTargetTrans);
+        }
+        else if (AttackTargetTrans == null && SetActiveFlag)
+        {
+            TargetMark.SetActive(false);
+            SetActiveFlag = false;
         }
     }
     public void OnHit()
     {
         Die();
     }
+    private void SetUpPlayer()
+    {
+        isDead = false;
+        CharacterCollider.enabled = true;
+    }
     private void SetCharacterRotation()
     {
         float tmp = Mathf.Atan2(MoveDir.x, MoveDir.z) * Mathf.Rad2Deg;
-        charaterTrans.rotation = Quaternion.Lerp(charaterTrans.rotation, Quaternion.Euler(0, tmp, 0), Time.deltaTime * rotateSpeed);
+        CharaterTrans.rotation = Quaternion.Lerp(CharaterTrans.rotation, Quaternion.Euler(0, tmp, 0), Time.deltaTime * rotateSpeed);
     }
     private void LoadDataFromPlayerPrefs()
     {
-        weaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG);
-        weaponSkinTag = (WeaponSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG);
-        pantSkinTag = (PantSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_PANT_SKIN_TAG);
+        WeaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG);
+        WeaponSkinTag = (WeaponSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG);
+        PantSkinTag = (PantSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_PANT_SKIN_TAG);
     }
 }

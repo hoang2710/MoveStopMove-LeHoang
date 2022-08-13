@@ -10,7 +10,9 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
     public void OnInit()
     {
         agent.stateMachine.ChangeState(AIStateId.IdleState);
-   
+        IsAlive = true;
+        CharacterCollider.enabled = true;
+
         SetRandomEnumData();
         ResetScore();
         SetUpHandWeapon();
@@ -24,12 +26,12 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
     {
         switch (state)
         {
-            // case GameState.MainMenu:
-            //     agent.stateMachine.ChangeState(AIStateId.IdleState);
-            //     break;
-            // case GameState.Playing:
-            //     agent.stateMachine.ChangeState(AIStateId.PatrolState);
-            //     break;
+            case GameState.MainMenu:
+                agent.stateMachine.ChangeState(AIStateId.IdleState);
+                break;
+            case GameState.Playing:
+                agent.stateMachine.ChangeState(AIStateId.PatrolState);
+                break;
             case GameState.LoadLevel: //NOTE: testing 
                 OnInit();
                 break;
@@ -39,28 +41,28 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
     }
     private void SetRandomEnumData()
     {
-        weaponTag = (WeaponType)Random.Range(0, System.Enum.GetNames(typeof(WeaponType)).Length);
+        WeaponTag = (WeaponType)Random.Range(0, System.Enum.GetNames(typeof(WeaponType)).Length);
 
         //NOTE: Optimize later, dont rush
-        switch (weaponTag)
+        switch (WeaponTag)
         {
             case WeaponType.Axe:
-                weaponSkinTag = (WeaponSkinType)Random.Range(0, 4);
+                WeaponSkinTag = (WeaponSkinType)Random.Range(0, 4);
                 break;
             case WeaponType.Knife:
-                weaponSkinTag = (WeaponSkinType)Random.Range(8, 10);
+                WeaponSkinTag = (WeaponSkinType)Random.Range(8, 10);
                 break;
             case WeaponType.Candy:
-                weaponSkinTag = (WeaponSkinType)Random.Range(6, 8);
+                WeaponSkinTag = (WeaponSkinType)Random.Range(6, 8);
                 break;
             case WeaponType.Hammer:
-                weaponSkinTag = (WeaponSkinType)Random.Range(4, 6);
+                WeaponSkinTag = (WeaponSkinType)Random.Range(4, 6);
                 break;
             default:
                 break;
         }
 
-        pantSkinTag = (PantSkinType)Random.Range(0, System.Enum.GetNames(typeof(PantSkinType)).Length);
+        PantSkinTag = (PantSkinType)Random.Range(0, System.Enum.GetNames(typeof(PantSkinType)).Length);
     }
 
     private void ResetScore()
@@ -72,5 +74,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
     public void OnHit()
     {
         agent.stateMachine.ChangeState(AIStateId.DeathState);
+        IsAlive = false;
+        CharacterCollider.enabled = false;
     }
 }

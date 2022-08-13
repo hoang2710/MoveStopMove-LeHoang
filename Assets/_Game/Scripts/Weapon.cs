@@ -25,7 +25,11 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     private void OnTriggerEnter(Collider other)
     {
         IHit hit = other.GetComponent<IHit>();
-        hit?.OnHit();
+        if (hit != null)
+        {
+            hit.OnHit();
+            ItemStorage.Instance.PushWeaponToPool(WeaponType, WeaponObject);
+        }
     }
     public void Move()
     {
@@ -52,7 +56,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     }
     public void DeactiveWeaponScript()
     {
-        this.enabled = false;
+        Destroy(this);
     }
     public void OnPopFromPool(Material skinMaterial)
     {

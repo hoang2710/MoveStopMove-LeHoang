@@ -14,8 +14,8 @@ public class AIPatrolState : AIState
     }
     public void Enter(AIAgent agent)
     {
-        agent.enemyRef.anim.SetTrigger(ConstValues.ANIM_TRIGGER_RUN);
-        if (!GetRandomPos(agent.enemyRef.charaterTrans.position, patrolRange, out patrolTargetPos))
+        agent.enemyRef.Anim.SetTrigger(ConstValues.ANIM_TRIGGER_RUN);
+        if (!GetRandomPos(agent.enemyRef.CharaterTrans.position, patrolRange, out patrolTargetPos))
         {
             agent.stateMachine.ChangeState(AIStateId.PatrolState);
         }
@@ -29,10 +29,15 @@ public class AIPatrolState : AIState
     public void Update(AIAgent agent)
     {
         //NOTE: Change to Idle state if reach destination
-        float dist = (patrolTargetPos - agent.enemyRef.charaterTrans.position).sqrMagnitude;
+        float dist = (patrolTargetPos - agent.enemyRef.CharaterTrans.position).sqrMagnitude;
         if (agent.NavAgent.velocity.sqrMagnitude < 0.01f && dist < ConstValues.VALUE_AI_STOP_DIST_THRESHOLD)
         {
-            agent.stateMachine.ChangeState(AIStateId.IdleState); 
+            agent.stateMachine.ChangeState(AIStateId.IdleState);
+        }
+
+        if (agent.enemyRef.DetectTarget())
+        {
+            agent.stateMachine.ChangeState(AIStateId.AttackState);
         }
     }
 
