@@ -58,6 +58,7 @@ public class AIAttackState : AIState
 
             weapon.SetFlyDir(agent.enemyRef.AttackPos.forward);
             weapon.SetBulletOwner(agent.enemyRef);
+            weapon.CalculateLifeTime();
 
             isAttack = true;
         }

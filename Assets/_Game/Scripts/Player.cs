@@ -124,6 +124,7 @@ public class Player : CharacterBase, IHit
 
             weapon.SetFlyDir(AttackPos.forward);
             weapon.SetBulletOwner(this);
+            weapon.CalculateLifeTime();
 
             isAttackable = false;
             isAttack = true;
@@ -173,10 +174,5 @@ public class Player : CharacterBase, IHit
         WeaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG);
         WeaponSkinTag = (WeaponSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG);
         PantSkinTag = (PantSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_PANT_SKIN_TAG);
-    }
-    public override void OnKillEnemy()
-    {
-        base.OnKillEnemy();
-        AttackTargetTrans.localScale *= ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
     }
 }

@@ -7,7 +7,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     public Renderer WeaponRenderer;
 
     [SerializeField]
-    private float flyingSpeed = 8f;
+    private float flyingSpeed = ConstValues.WALUE_WEAPON_DEFAULT_FLY_SPEED;
 
     public WeaponType WeaponTag;
     public BulletType BulletTag;
@@ -62,6 +62,10 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     public void SetBulletOwner(CharacterBase owner)
     {
         bulletOwner = owner;
+    }
+    public void CalculateLifeTime()
+    {
+        lifeTime = bulletOwner.AttackRange / flyingSpeed;
     }
     public void OnPopFromPool(Material weaponSkinMaterial)
     {
