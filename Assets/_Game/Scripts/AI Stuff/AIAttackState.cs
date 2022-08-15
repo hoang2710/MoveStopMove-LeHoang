@@ -6,6 +6,8 @@ public class AIAttackState : AIState
 {
     private float timer;
     private bool isAttack;
+
+    Quaternion tempRotation;
     public AIStateId GetId()
     {
         return AIStateId.AttackState;
@@ -15,6 +17,8 @@ public class AIAttackState : AIState
         timer = 0;
         isAttack = false;
         agent.NavAgent.enabled = false;
+
+        StartAttack(agent);
     }
     public void Exit(AIAgent agent)
     {
@@ -31,22 +35,16 @@ public class AIAttackState : AIState
         {
             timer += Time.deltaTime;
         }
-        if (!isAttack)
-        {
-            Attack(agent);
-        }
+
+        AttackHandler(agent);
     }
-    private void Attack(AIAgent agent)
+    private void AttackHandler(AIAgent agent)
     {
-        agent.enemyRef.ChangeAnimation(ConstValues.ANIM_PLAY_ATTACK);
-
-        Vector3 lookDir = agent.enemyRef.AttackTargetTrans.position - agent.enemyRef.CharaterTrans.position;
-        lookDir.y = 0;
-
-        Quaternion tempRotation = Quaternion.LookRotation(lookDir);
-        agent.enemyRef.CharaterTrans.rotation = tempRotation;
-
-        if (timer > agent.enemyRef.AttackAnimThrow)
+        if (timer > agent.enemyRef.AttackAnimEnd)
+        {
+            agent.enemyRef.WeaponPlaceHolder.SetActive(true);
+        }
+        else if (timer > agent.enemyRef.AttackAnimThrow && !isAttack)
         {
             agent.enemyRef.WeaponPlaceHolder.SetActive(false);
 
@@ -62,5 +60,15 @@ public class AIAttackState : AIState
 
             isAttack = true;
         }
+    }
+    private void StartAttack(AIAgent agent)
+    {
+        agent.enemyRef.ChangeAnimation(ConstValues.ANIM_TRIGGER_ATTACK);
+
+        Vector3 lookDir = agent.enemyRef.AttackTargetTrans.position - agent.enemyRef.CharaterTrans.position;
+        lookDir.y = 0;
+
+        tempRotation = Quaternion.LookRotation(lookDir);
+        agent.enemyRef.CharaterTrans.rotation = tempRotation;
     }
 }

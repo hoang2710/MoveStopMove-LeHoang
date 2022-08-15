@@ -14,7 +14,7 @@ public class AIPatrolState : AIState
     }
     public void Enter(AIAgent agent)
     {
-        agent.enemyRef.ChangeAnimation(ConstValues.ANIM_PLAY_RUN);
+        agent.enemyRef.ChangeAnimation(ConstValues.ANIM_TRIGGER_RUN);
         if (!GetRandomPos(agent.enemyRef.CharaterTrans.position, patrolRange, out patrolTargetPos))
         {
             agent.stateMachine.ChangeState(AIStateId.PatrolState);

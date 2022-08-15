@@ -82,7 +82,7 @@ public class Player : CharacterBase, IHit
         CharaterTrans.position = Vector3.MoveTowards(CharaterTrans.position, CharaterTrans.position + MoveDir, moveSpeed * Time.deltaTime);
         SetCharacterRotation();
 
-        ChangeAnimation(ConstValues.ANIM_PLAY_RUN);
+        ChangeAnimation(ConstValues.ANIM_TRIGGER_RUN);
 
         isAttackable = true;
         isAttack = false;
@@ -101,13 +101,13 @@ public class Player : CharacterBase, IHit
         }
         else
         {
-            ChangeAnimation(ConstValues.ANIM_PLAY_IDLE);
+            ChangeAnimation(ConstValues.ANIM_TRIGGER_IDLE);
             timer = 0;
         }
     }
     private void Attack() //NOTE: optimize later
     {
-        ChangeAnimation(ConstValues.ANIM_PLAY_ATTACK);
+        ChangeAnimation(ConstValues.ANIM_TRIGGER_ATTACK);
 
         Vector3 lookDir = AttackTargetTrans.position - CharaterTrans.position;
         lookDir.y = 0;
@@ -133,7 +133,7 @@ public class Player : CharacterBase, IHit
     private void Die()
     {
         isDead = true;
-        ChangeAnimation(ConstValues.ANIM_PLAY_DEAD);
+        ChangeAnimation(ConstValues.ANIM_TRIGGER_DEAD);
         CharacterCollider.enabled = false;
 
         GameManager.Instance.ChangeGameState(GameState.ResultPhase);

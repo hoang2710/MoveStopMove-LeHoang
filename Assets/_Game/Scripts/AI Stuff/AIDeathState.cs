@@ -11,6 +11,7 @@ public class AIDeathState : AIState
     public void Enter(AIAgent agent)
     {
         agent.NavAgent.enabled = false;
+        agent.enemyRef.ChangeAnimation(ConstValues.ANIM_TRIGGER_DEAD);
     }
     public void Exit(AIAgent agent)
     {
@@ -18,6 +19,5 @@ public class AIDeathState : AIState
     }
     public void Update(AIAgent agent)
     {
-        agent.enemyRef.ChangeAnimation(ConstValues.ANIM_PLAY_DEAD);
     }
 }

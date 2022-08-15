@@ -152,7 +152,7 @@ public class CharacterBase : MonoBehaviour
     {
         if (curAnim != anim)
         {
-            Anim.Play(anim);
+            Anim.SetTrigger(anim);
             curAnim = anim;
         }
     }
