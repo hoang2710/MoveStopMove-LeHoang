@@ -57,6 +57,7 @@ public class AIAttackState : AIState
             Weapon weapon = obj.GetComponent<Weapon>();
 
             weapon.SetFlyDir(agent.enemyRef.AttackPos.forward);
+            weapon.SetBulletOwner(agent.enemyRef);
 
             isAttack = true;
         }

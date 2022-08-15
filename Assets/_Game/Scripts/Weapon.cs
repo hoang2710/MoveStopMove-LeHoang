@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     private Vector3 flyDir;
     private float lifeTime = ConstValues.VALUE_WEAPON_DEFAULT_LIFE_TIME;
     private float timer = 0;
+    private CharacterBase bulletOwner;
 
     private void Update()
     {
@@ -27,7 +28,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
         IHit hit = other.GetComponent<IHit>();
         if (hit != null)
         {
-            hit.OnHit();
+            hit.OnHit(bulletOwner);
             ItemStorage.Instance.PushWeaponToPool(WeaponTag, WeaponObject);
         }
     }
@@ -58,6 +59,10 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     {
         Destroy(this);
     }
+    public void SetBulletOwner(CharacterBase owner)
+    {
+        bulletOwner = owner;
+    }
     public void OnPopFromPool(Material weaponSkinMaterial)
     {
         switch (WeaponTag)
@@ -74,7 +79,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     }
     public void OnPushToPool()
     {
-
+        // bulletOwner = null;
     }
 }
 

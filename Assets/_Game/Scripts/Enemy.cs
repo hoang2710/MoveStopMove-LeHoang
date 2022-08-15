@@ -71,10 +71,12 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         KillScore = 0;
     }
 
-    public void OnHit()
+    public void OnHit(CharacterBase bulletOwner)
     {
         agent.stateMachine.ChangeState(AIStateId.DeathState);
         IsAlive = false;
         CharacterCollider.enabled = false;
+
+        bulletOwner?.OnKillEnemy();
     }
 }

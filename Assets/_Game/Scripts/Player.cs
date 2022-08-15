@@ -20,6 +20,7 @@ public class Player : CharacterBase, IHit
 
     public GameObject TargetMark;
     public Transform TargetMarkTrans;
+    public Transform AttackRangeDisplayTrans;
     private bool TargetMarkSetActiveFlag;
 
     private void FixedUpdate()
@@ -122,6 +123,7 @@ public class Player : CharacterBase, IHit
             Weapon weapon = obj.GetComponent<Weapon>();
 
             weapon.SetFlyDir(AttackPos.forward);
+            weapon.SetBulletOwner(this);
 
             isAttackable = false;
             isAttack = true;
@@ -151,7 +153,7 @@ public class Player : CharacterBase, IHit
             TargetMarkSetActiveFlag = false;
         }
     }
-    public void OnHit()
+    public void OnHit(CharacterBase bulletOwner)
     {
         Die();
     }
@@ -159,6 +161,7 @@ public class Player : CharacterBase, IHit
     {
         isDead = false;
         CharacterCollider.enabled = true;
+        AttackRangeDisplayTrans.localScale = Vector3.one * ConstValues.VALUE_BASE_ATTACK_RANGE;
     }
     private void SetCharacterRotation()
     {
@@ -167,8 +170,13 @@ public class Player : CharacterBase, IHit
     }
     private void LoadDataFromPlayerPrefs()
     {
-        WeaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG, 1);
-        WeaponSkinTag = (WeaponSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG , 4);
+        WeaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG);
+        WeaponSkinTag = (WeaponSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG);
         PantSkinTag = (PantSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_PANT_SKIN_TAG);
+    }
+    public override void OnKillEnemy()
+    {
+        base.OnKillEnemy();
+        AttackTargetTrans.localScale *= ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
     }
 }

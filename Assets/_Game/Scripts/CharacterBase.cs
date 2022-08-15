@@ -156,6 +156,11 @@ public class CharacterBase : MonoBehaviour
             curAnim = anim;
         }
     }
+    public virtual void OnKillEnemy()
+    {
+        CharaterTrans.localScale *= ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
+        AttackRange *= ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
+    }
     public void SetUpPantSkin()
     {
         PantRenderer.material = ItemStorage.Instance.GetPantSkin(PantSkinTag);
