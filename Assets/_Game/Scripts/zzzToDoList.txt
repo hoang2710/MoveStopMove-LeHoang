@@ -6,3 +6,6 @@ anim triiger like shit
         trigger another state will not play unless trigger multiple time 
 
 weapon shit player on start
+
+inherited character base
+inherited weapon -> bullet
