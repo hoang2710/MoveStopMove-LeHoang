@@ -58,6 +58,7 @@ public class Player : CharacterBase, IHit
             if (MoveDir.sqrMagnitude > 0.01f)
             {
                 Move();
+                SetCharacterRotation();
                 DetectTarget();
             }
             else
@@ -80,57 +81,7 @@ public class Player : CharacterBase, IHit
             Anim.SetTrigger(ConstValues.ANIM_TRIGGER_DEAD);
         }
     }
-    private void Move() //NOTE: optimize later
-    {
-        CharaterTrans.position = Vector3.MoveTowards(CharaterTrans.position, CharaterTrans.position + MoveDir, moveSpeed * Time.deltaTime);
-        SetCharacterRotation();
 
-        Anim.SetTrigger(ConstValues.ANIM_TRIGGER_RUN);
-
-        isAttackable = true;
-        isAttack = false;
-        timer = 0;
-        WeaponPlaceHolder.SetActive(true);
-    }
-    private void Idle() //Optimize later
-    {
-        if (isAttack)
-        {
-            if (timer >= AttackAnimEnd)
-            {
-                isAttack = false;
-                WeaponPlaceHolder.SetActive(true);
-            }
-        }
-        else
-        {
-            Anim.SetTrigger(ConstValues.ANIM_TRIGGER_IDLE);
-            timer = 0;
-        }
-    }
-    private void Attack() //NOTE: optimize later
-    {
-        Anim.SetTrigger(ConstValues.ANIM_TRIGGER_ATTACK);
-
-        Vector3 lookDir = AttackTargetTrans.position - CharaterTrans.position;
-        lookDir.y = 0;
-
-        Quaternion tempRotation = Quaternion.LookRotation(lookDir);
-        CharaterTrans.rotation = tempRotation;
-
-        if (timer > AttackAnimThrow)
-        {
-            WeaponPlaceHolder.SetActive(false);
-
-            GameObject obj = ItemStorage.Instance.PopWeaponFromPool(WeaponTag, WeaponSkinTag, AttackPos.position, tempRotation * WeaponRotation);
-            Weapon weapon = obj.GetComponent<Weapon>();
-
-            weapon.SetFlyDir(AttackPos.forward);
-
-            isAttackable = false;
-            isAttack = true;
-        }
-    }
     private void Die()
     {
         isDead = true;
