@@ -99,8 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponRenderer: {fileID: 1606848824599129133}
   flyingSpeed: 8
-  WeaponType: 2
-  BulletType: 0
+  WeaponTag: 2
+  BulletTag: 0
   WeaponTrans: {fileID: 1532247647228684715}
   WeaponObject: {fileID: 6488665240584564782}
 --- !u!65 &2919856334088602386

@@ -17,7 +17,9 @@ public class CharacterBase : MonoBehaviour
 
     public Transform CharaterTrans;
     public Collider CharacterCollider;
+
     public Animator Anim;
+    protected string curAnim = ConstValues.ANIM_TRIGGER_IDLE;
 
     public Transform AttackPos;
     public Transform AttackTargetTrans;
@@ -75,7 +77,7 @@ public class CharacterBase : MonoBehaviour
                 Collider bestMatch = objs[0];
                 foreach (var item in objs)
                 {
-                    float distSqr = (item.transform.position - CharaterTrans.position).sqrMagnitude;
+                    float distSqr = (item.transform.position - CharaterTrans.position).sqrMagnitude; //NOTE: use transform once -> no need to cache
 
                     if (distSqr < minDistSqr && distSqr > detectOffSetDistance)
                     {
@@ -144,6 +146,14 @@ public class CharacterBase : MonoBehaviour
                     objRen.materials = new Material[] { material, material };
                     break;
             }
+        }
+    }
+    public void ChangeAnimation(string anim)
+    {
+        if (curAnim != anim)
+        {
+            Anim.Play(anim);
+            curAnim = anim;
         }
     }
     public void SetUpPantSkin()

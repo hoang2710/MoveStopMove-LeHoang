@@ -97,10 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f447fc25d54dddf4ab4a646bcb1d8847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponRenderer: {fileID: 525567348935552580, guid: 3556972fde084a946b59159fd5146574, type: 3}
+  WeaponRenderer: {fileID: 1286620820702066875}
   flyingSpeed: 8
-  WeaponType: 1
-  BulletType: 0
+  WeaponTag: 1
+  BulletTag: 0
   WeaponTrans: {fileID: 5987331021826876509}
   WeaponObject: {fileID: 7781565161665100080}
 --- !u!65 &3866269621308687699

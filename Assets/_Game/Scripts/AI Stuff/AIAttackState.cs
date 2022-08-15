@@ -19,6 +19,7 @@ public class AIAttackState : AIState
     public void Exit(AIAgent agent)
     {
         agent.NavAgent.enabled = true;
+        agent.enemyRef.WeaponPlaceHolder.SetActive(true);
     }
     public void Update(AIAgent agent)
     {
@@ -37,7 +38,7 @@ public class AIAttackState : AIState
     }
     private void Attack(AIAgent agent)
     {
-        agent.enemyRef.Anim.SetTrigger(ConstValues.ANIM_TRIGGER_ATTACK);
+        agent.enemyRef.ChangeAnimation(ConstValues.ANIM_PLAY_ATTACK);
 
         Vector3 lookDir = agent.enemyRef.AttackTargetTrans.position - agent.enemyRef.CharaterTrans.position;
         lookDir.y = 0;

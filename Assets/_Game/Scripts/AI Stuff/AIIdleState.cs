@@ -14,7 +14,7 @@ public class AIIdleState : AIState
     {
         agent.NavAgent.enabled = false;
 
-        agent.enemyRef.Anim.SetTrigger(ConstValues.ANIM_TRIGGER_IDLE);
+        agent.enemyRef.ChangeAnimation(ConstValues.ANIM_PLAY_IDLE);
 
         timer = 0;
     }

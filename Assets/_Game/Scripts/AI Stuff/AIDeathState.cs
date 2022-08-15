@@ -18,6 +18,6 @@ public class AIDeathState : AIState
     }
     public void Update(AIAgent agent)
     {
-        agent.enemyRef.Anim.SetTrigger(ConstValues.ANIM_TRIGGER_DEAD);
+        agent.enemyRef.ChangeAnimation(ConstValues.ANIM_PLAY_DEAD);
     }
 }

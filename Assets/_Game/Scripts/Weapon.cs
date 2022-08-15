@@ -9,8 +9,8 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     [SerializeField]
     private float flyingSpeed = 8f;
 
-    public WeaponType WeaponType;
-    public BulletType BulletType;
+    public WeaponType WeaponTag;
+    public BulletType BulletTag;
     public Transform WeaponTrans;
     public GameObject WeaponObject;
     private Vector3 flyDir;
@@ -28,7 +28,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
         if (hit != null)
         {
             hit.OnHit();
-            ItemStorage.Instance.PushWeaponToPool(WeaponType, WeaponObject);
+            ItemStorage.Instance.PushWeaponToPool(WeaponTag, WeaponObject);
         }
     }
     public void Move()
@@ -43,7 +43,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
         }
         else
         {
-            ItemStorage.Instance.PushWeaponToPool(WeaponType, WeaponObject);
+            ItemStorage.Instance.PushWeaponToPool(WeaponTag, WeaponObject);
         }
     }
     public void SetFlyDir(Vector3 dir)
@@ -58,10 +58,17 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     {
         Destroy(this);
     }
-    public void OnPopFromPool(Material skinMaterial)
+    public void OnPopFromPool(Material weaponSkinMaterial)
     {
-        Material[] materials = new Material[] { skinMaterial, skinMaterial };
-        WeaponRenderer.materials = materials;
+        switch (WeaponTag)
+        {
+            case WeaponType.Candy:
+                WeaponRenderer.materials = new Material[] { weaponSkinMaterial, weaponSkinMaterial, weaponSkinMaterial }; //NOTE: Candy weapon have 3 material
+                break;
+            default:
+                WeaponRenderer.materials = new Material[] { weaponSkinMaterial, weaponSkinMaterial };
+                break;
+        }
 
         timer = 0;
     }
