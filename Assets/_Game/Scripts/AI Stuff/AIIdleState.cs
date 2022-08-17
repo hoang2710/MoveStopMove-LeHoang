@@ -24,18 +24,21 @@ public class AIIdleState : AIState
     }
     public void Update(AIAgent agent)
     {
-        if (timer > idleTime)
+        if (agent.enemyRef.IsMovable)
         {
-            agent.stateMachine.ChangeState(AIStateId.PatrolState);
-        }
-        else
-        {
-            timer += Time.deltaTime;
-        }
+            if (timer > idleTime)
+            {
+                agent.stateMachine.ChangeState(AIStateId.PatrolState);
+            }
+            else
+            {
+                timer += Time.deltaTime;
+            }
 
-        if (agent.enemyRef.DetectTarget())
-        {
-            agent.stateMachine.ChangeState(AIStateId.AttackState);
+            if (agent.enemyRef.DetectTarget())
+            {
+                agent.stateMachine.ChangeState(AIStateId.AttackState);
+            }
         }
     }
 }

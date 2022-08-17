@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Enemy : CharacterBase, IPoolCharacter, IHit
 {
     public AIAgent agent;
+    public bool IsMovable;
 
     public void OnInit()
     {
@@ -30,10 +31,12 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
                 agent.stateMachine.ChangeState(AIStateId.IdleState);
                 break;
             case GameState.Playing:
-                agent.stateMachine.ChangeState(AIStateId.PatrolState);
+                IsMovable = true;
+                // agent.stateMachine.ChangeState(AIStateId.PatrolState);
                 break;
-            case GameState.LoadLevel: //NOTE: testing 
-                OnInit();
+            case GameState.Pause:
+                IsMovable = false;
+                agent.stateMachine.ChangeState(AIStateId.IdleState);
                 break;
             default:
                 break;

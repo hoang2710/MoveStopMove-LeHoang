@@ -10,7 +10,7 @@ public class AIAgent : MonoBehaviour
     public NavMeshAgent NavAgent;
     public Enemy enemyRef;
 
-    private void Start()
+    private void Awake()
     {
         stateMachine = new AIStateMachine(this);
         stateMachine.RegisterState(new AIDeathState());
