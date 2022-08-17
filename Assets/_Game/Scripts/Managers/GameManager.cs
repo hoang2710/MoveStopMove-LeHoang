@@ -55,6 +55,7 @@ public class GameManager : Singleton<GameManager>
     private void OnGameStateMainMenu()
     {
         Debug.Log("Main Menu State");
+        UIManager.Instance.OpenUI(UICanvasID.MainMenu);
     }
     private void OnGameStatePlaying()
     {
