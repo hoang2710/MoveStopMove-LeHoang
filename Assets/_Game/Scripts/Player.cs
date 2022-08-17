@@ -20,6 +20,7 @@ public class Player : CharacterBase, IHit
 
     public GameObject TargetMark;
     public Transform TargetMarkTrans;
+    public GameObject AttackRangeDisplay;
     public Transform AttackRangeDisplayTrans;
     private bool TargetMarkSetActiveFlag;
 
@@ -37,7 +38,7 @@ public class Player : CharacterBase, IHit
             case GameState.LoadLevel:
                 SetUpHandWeapon();
                 SetUpPantSkin();
-                SetUpPlayer();
+                SetUpPlayerLoadLevel();
                 break;
             case GameState.MainMenu:
                 if (isShop)
@@ -46,6 +47,9 @@ public class Player : CharacterBase, IHit
                     SetUpHandWeapon();
                     SetUpPantSkin();
                 }
+                break;
+            case GameState.Playing:
+                SetUpPLayerPlaying();
                 break;
             default:
                 break;
@@ -158,11 +162,16 @@ public class Player : CharacterBase, IHit
     {
         Die();
     }
-    private void SetUpPlayer()
+    private void SetUpPlayerLoadLevel()
     {
         isDead = false;
         CharacterCollider.enabled = true;
+        AttackRangeDisplay.SetActive(false);
         AttackRangeDisplayTrans.localScale = Vector3.one * ConstValues.VALUE_BASE_ATTACK_RANGE;
+    }
+    private void SetUpPLayerPlaying()
+    {
+        AttackRangeDisplay.SetActive(true);
     }
     private void SetCharacterRotation()
     {

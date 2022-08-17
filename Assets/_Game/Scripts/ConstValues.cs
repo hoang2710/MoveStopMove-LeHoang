@@ -7,6 +7,10 @@ public class ConstValues
     public const string PLAYER_PREFS_ENUM_WEAPON_TAG = "WeaponTag";
     public const string PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG = "WeaponSkinTag";
     public const string PLAYER_PREFS_ENUM_PANT_SKIN_TAG = "PantSkinTag";
+    public const string PLAYER_PREFS_BOOL_SOUND_SETTING = "Sound Setting";
+    public const string PLAYER_PREFS_BOOL_VIBRATE_SETTING = "Vibrate Setting";
+    public const int PLAYER_PREFS_BOOL_TRUE_VALUE = 1;
+    public const int PLAYER_PREFS_BOOL_FALSE_VALUE = 0;
     public const string TAG_PLAYER = "Player";
     public const string ANIM_TRIGGER_IDLE = "Idle";
     public const string ANIM_TRIGGER_RUN = "Run";

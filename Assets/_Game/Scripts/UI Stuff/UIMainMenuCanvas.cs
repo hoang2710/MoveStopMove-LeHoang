@@ -36,17 +36,21 @@ public class UIMainMenuCanvas : UICanvas
     {
 
     }
-    public void OnClickVibrationButton(bool value) //NOTE: true is on vibration
+    public void OnVibrationToggleValueChange(bool value) //NOTE: true is on vibration
     {
         Debug.Log(value);
+        //NOTE: Audio manager work
+        //..........
     }
-    public void OnClickSoundButton(bool value) //NOTE: true is mute
+    public void OnSoundToggleValueChange(bool value) //NOTE: true is mute
     {
         Debug.Log(value);
+        //NOTE: Audio manager work
+        //..........
     }
     public void ChangeStarIconImageSource(int index)
     {
-        //NOTE: check index status
+        //NOTE: check index status, working on detail
         StarIcon.sprite = StarIconSource[index];
     }
     public void SetCoinNumber(int value)
