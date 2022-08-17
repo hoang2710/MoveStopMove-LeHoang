@@ -5367,6 +5367,7 @@ MonoBehaviour:
   rotateSpeed: 8
   TargetMark: {fileID: 451381978}
   TargetMarkTrans: {fileID: 451381980}
+  AttackRangeDisplay: {fileID: 484005821}
   AttackRangeDisplayTrans: {fileID: 484005822}
 --- !u!195 &400541272
 NavMeshAgent:
@@ -12157,7 +12158,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.34594244, y: -3e-45, z: 1e-45, w: 0.9382558}
+  m_LocalRotation: {x: 0.34594244, y: 1e-45, z: 0, w: 0.9382558}
   m_LocalPosition: {x: 0, y: 15.16, z: -15.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -27156,7 +27157,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035489454}
-  m_LocalRotation: {x: 0.34594244, y: -3e-45, z: 1e-45, w: 0.9382558}
+  m_LocalRotation: {x: 0.34594244, y: 1e-45, z: 0, w: 0.9382558}
   m_LocalPosition: {x: 0, y: 15.16, z: -15.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
