@@ -60,10 +60,12 @@ public class GameManager : Singleton<GameManager>
     private void OnGameStatePlaying()
     {
         Debug.Log("Playing State");
+        Time.timeScale = 1;
     }
     private void OnGameStatePause()
     {
         Debug.Log("Pause State");
+        Time.timeScale = 0;
     }
     private void OnGameStateResultPhase()
     {

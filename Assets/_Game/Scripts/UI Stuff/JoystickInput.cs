@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class JoystickInput : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
+    public UIGamePlayCanvas GamePlayCanvas;
     private Vector2 mouseDownPos;
     private Vector2 mouseUpPos;
     public RectTransform JoystickBackground;
@@ -40,6 +41,7 @@ public class JoystickInput : MonoBehaviour, IDragHandler, IPointerDownHandler, I
             JoystickBackground.anchoredPosition = pos;
             Joystick.SetActive(true);
             OnDrag(eventData);
+            GamePlayCanvas.SetActiveTipPanel(false);
         }
     }
 
