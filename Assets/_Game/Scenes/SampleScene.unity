@@ -1854,6 +1854,7 @@ MonoBehaviour:
   PantRenderer: {fileID: 1071960315}
   agent: {fileID: 166049140}
   IsMovable: 0
+  BotGameObject: {fileID: 0}
 --- !u!95 &166049142
 Animator:
   serializedVersion: 3
@@ -4048,6 +4049,7 @@ MonoBehaviour:
   PantRenderer: {fileID: 242467682}
   agent: {fileID: 386141073}
   IsMovable: 0
+  BotGameObject: {fileID: 0}
 --- !u!95 &386141075
 Animator:
   serializedVersion: 3
@@ -12491,6 +12493,7 @@ MonoBehaviour:
   PantRenderer: {fileID: 1938388657}
   agent: {fileID: 1294161351}
   IsMovable: 0
+  BotGameObject: {fileID: 0}
 --- !u!95 &1294161353
 Animator:
   serializedVersion: 3
@@ -15126,6 +15129,7 @@ MonoBehaviour:
   PantRenderer: {fileID: 342442364}
   agent: {fileID: 1586873070}
   IsMovable: 0
+  BotGameObject: {fileID: 0}
 --- !u!95 &1586873072
 Animator:
   serializedVersion: 3
@@ -16151,6 +16155,7 @@ MonoBehaviour:
   PantRenderer: {fileID: 223247027}
   agent: {fileID: 1697839598}
   IsMovable: 0
+  BotGameObject: {fileID: 0}
 --- !u!95 &1697839600
 Animator:
   serializedVersion: 3
@@ -16949,6 +16954,7 @@ MonoBehaviour:
   PantRenderer: {fileID: 1418683216}
   agent: {fileID: 1782312007}
   IsMovable: 0
+  BotGameObject: {fileID: 0}
 --- !u!95 &1782312009
 Animator:
   serializedVersion: 3
@@ -17141,6 +17147,7 @@ MonoBehaviour:
   PantRenderer: {fileID: 1077491019}
   agent: {fileID: 1790882677}
   IsMovable: 0
+  BotGameObject: {fileID: 0}
 --- !u!95 &1790882679
 Animator:
   serializedVersion: 3
@@ -17861,6 +17868,7 @@ MonoBehaviour:
   PantRenderer: {fileID: 265942207}
   agent: {fileID: 1861283848}
   IsMovable: 0
+  BotGameObject: {fileID: 0}
 --- !u!95 &1861283850
 Animator:
   serializedVersion: 3
@@ -18285,7 +18293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapSpawnOuterRadius: 50
   MapSpawnInnerRadius: 15
-  baseBotToSpawn: 10
+  baseBotToSpawn: 1
   MapSpawnCenter: {fileID: 352531589}
 --- !u!4 &1895798945
 Transform:
@@ -25246,6 +25254,7 @@ MonoBehaviour:
   PantRenderer: {fileID: 8694194341933049628}
   agent: {fileID: 8296172668964482461}
   IsMovable: 0
+  BotGameObject: {fileID: 0}
 --- !u!1 &8404232990381074676
 GameObject:
   m_ObjectHideFlags: 0
