@@ -26,10 +26,11 @@ public class AIDeathState : AIState
         if (timer >= deadTime)
         {
             BotPooling.Instance.PushBotToPool(agent.enemyRef.BotGameObject);
+            LevelManager.Instance.SpawnBotRandomPos();
         }
         else
         {
-            timer += Time.deltaTime; Debug.Log(timer);
+            timer += Time.deltaTime;
         }
     }
 }

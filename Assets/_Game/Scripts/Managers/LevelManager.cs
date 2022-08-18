@@ -7,7 +7,8 @@ public class LevelManager : SingletonMono<LevelManager>
 {
     public float MapSpawnOuterRadius;
     public float MapSpawnInnerRadius;
-    public int baseBotToSpawn;
+    [SerializeField]
+    private int baseBotToSpawn;
     public Transform MapSpawnCenter;
 
     private void Start()
@@ -23,7 +24,8 @@ public class LevelManager : SingletonMono<LevelManager>
         switch (state)
         {
             case GameState.LoadLevel:
-                SpawnBaseBot();
+                Invoke(nameof(SpawnBaseBot), 0.1f); //NOTE: wait for remain bot to be push to pool --> avoid instantiate more bot, may optimize later 
+                // SpawnBaseBot();
                 break;
             default:
                 break;
@@ -34,11 +36,15 @@ public class LevelManager : SingletonMono<LevelManager>
         Debug.Log("Spawn Base Bot");
         for (int i = 0; i < baseBotToSpawn; i++)
         {
-            Vector3 spawnPos;
-            if (GetRandomPos(MapSpawnCenter.position, out spawnPos))
-            {
-                BotPooling.Instance.PopBotFromPool(spawnPos, Quaternion.identity);
-            }
+            SpawnBotRandomPos();
+        }
+    }
+    public void SpawnBotRandomPos()
+    {
+        Vector3 spawnPos;
+        if (GetRandomPos(MapSpawnCenter.position, out spawnPos))
+        {
+            BotPooling.Instance.PopBotFromPool(spawnPos, Quaternion.identity);
         }
     }
     private bool GetRandomPos(Vector3 center, out Vector3 result)

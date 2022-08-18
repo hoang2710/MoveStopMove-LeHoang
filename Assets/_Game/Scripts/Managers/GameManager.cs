@@ -40,6 +40,8 @@ public class GameManager : SingletonMono<GameManager>
                 break;
         }
 
+        AutoSetTimeScale(state);
+
         OnGameStateChange?.Invoke(state);
     }
 
@@ -60,12 +62,10 @@ public class GameManager : SingletonMono<GameManager>
     private void OnGameStatePlaying()
     {
         Debug.Log("Playing State");
-        Time.timeScale = 1;
     }
     private void OnGameStatePause()
     {
         Debug.Log("Pause State");
-        Time.timeScale = 0;
     }
     private void OnGameStateResultPhase()
     {
@@ -79,6 +79,17 @@ public class GameManager : SingletonMono<GameManager>
     {
         yield return new WaitForSeconds(time);
         ChangeGameState(state);
+    }
+    private void AutoSetTimeScale(GameState state)
+    {
+        if (state == GameState.Pause)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 }
 

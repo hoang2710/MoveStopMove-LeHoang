@@ -168,7 +168,10 @@ public class Player : CharacterBase, IHit
         CharacterCollider.enabled = true;
         CharaterTrans.localScale = Vector3.one;
         AttackRangeDisplay.SetActive(false);
-        AttackRangeDisplayTrans.localScale = Vector3.one * ConstValues.VALUE_BASE_ATTACK_RANGE;
+        AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
+        AttackRangeDisplayTrans.localScale = Vector3.one * AttackRange;
+
+        CharaterTrans.position = Vector3.zero;
     }
     private void SetUpPLayerPlaying()
     {

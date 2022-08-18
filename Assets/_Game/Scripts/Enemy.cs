@@ -15,6 +15,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         IsAlive = true;
         CharacterCollider.enabled = true;
         CharaterTrans.localScale = Vector3.one;
+        AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
 
         SetRandomEnumData();
         ResetScore();
@@ -23,7 +24,8 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
     }
     public void OnDespawn()
     {
-
+        AttackTarget = null;
+        AttackTargetTrans = null;
     }
     protected override void GameManagerOnGameStateChange(GameState state)
     {
@@ -39,6 +41,9 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
             case GameState.Pause:
                 IsMovable = false;
                 agent.stateMachine.ChangeState(AIStateId.IdleState);
+                break;
+            case GameState.LoadLevel:
+                BotPooling.Instance.PushBotToPool(BotGameObject);
                 break;
             default:
                 break;

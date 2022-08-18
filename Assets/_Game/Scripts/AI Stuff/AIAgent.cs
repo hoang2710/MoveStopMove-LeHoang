@@ -9,6 +9,8 @@ public class AIAgent : MonoBehaviour
     public AIStateId initState;
     public NavMeshAgent NavAgent;
     public Enemy enemyRef;
+    public AIStateId CurState; //NOTE: for debug
+    public AIStateId PrevState; //NOTE: for debug
 
     private void Awake()
     {
