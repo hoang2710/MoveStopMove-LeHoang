@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : SingletonMono<GameManager>
 {
     public static event Action<GameState> OnGameStateChange;
 
@@ -51,11 +51,11 @@ public class GameManager : Singleton<GameManager>
     private void OnGameStateLoadLevel()
     {
         Debug.Log("Load Level State");
+        StartCoroutine(DelayChangeGameState(GameState.MainMenu, 0.15f));
     }
     private void OnGameStateMainMenu()
     {
         Debug.Log("Main Menu State");
-        UIManager.Instance.OpenUI(UICanvasID.MainMenu);
     }
     private void OnGameStatePlaying()
     {

@@ -50,7 +50,7 @@ public class UIPauseCanvas : UICanvas
     }
     public void OnClickHomeButton()
     {
-        GameManager.Instance.ChangeGameState(GameState.MainMenu);
+        GameManager.Instance.ChangeGameState(GameState.LoadLevel);
         UIManager.Instance.OpenUI(UICanvasID.MainMenu);
 
         Close();
@@ -58,7 +58,8 @@ public class UIPauseCanvas : UICanvas
     public void OnClickContinueButton()
     {
         GameManager.Instance.ChangeGameState(GameState.Playing);
-        UIManager.Instance.OpenUI(UICanvasID.GamePlay);
+        UIGamePlayCanvas canvas = UIManager.Instance.OpenUI<UIGamePlayCanvas>(UICanvasID.GamePlay);
+        canvas.SetActiveTipPanel(false);
 
         Close();
     }

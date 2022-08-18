@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class LevelManager : Singleton<LevelManager>
+public class LevelManager : SingletonMono<LevelManager>
 {
     public float MapSpawnOuterRadius;
     public float MapSpawnInnerRadius;

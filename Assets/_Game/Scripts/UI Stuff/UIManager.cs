@@ -8,7 +8,7 @@ public class UICanvasRef
     public UICanvasID Id;
     public UICanvas Canvas;
 }
-public class UIManager : Singleton<UIManager>
+public class UIManager : SingletonMono<UIManager>
 {
     public Dictionary<UICanvasID, UICanvas> UICanvasReferenceDict = new Dictionary<UICanvasID, UICanvas>();
     [NonReorderable]
@@ -21,6 +21,10 @@ public class UIManager : Singleton<UIManager>
         base.Awake();
 
         InitCanvasData();
+    }
+    private void Start()
+    {
+        OpenUI(UICanvasID.MainMenu);
     }
     private void InitCanvasData()
     {

@@ -1438,7 +1438,7 @@ GameObject:
   - component: {fileID: 3294892474641139643}
   - component: {fileID: 3294892474641139268}
   m_Layer: 6
-  m_Name: Bot v1
+  m_Name: Bot v1.0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1502,6 +1502,8 @@ MonoBehaviour:
   WeaponPlaceHolder: {fileID: 3294892474264917845}
   PantRenderer: {fileID: 6133397531646244263}
   agent: {fileID: 6816235599201566502}
+  IsMovable: 0
+  BotGameObject: {fileID: 6816235599201566503}
 --- !u!114 &6816235599201566502
 MonoBehaviour:
   m_ObjectHideFlags: 0

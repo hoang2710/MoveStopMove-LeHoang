@@ -166,6 +166,7 @@ public class Player : CharacterBase, IHit
     {
         isDead = false;
         CharacterCollider.enabled = true;
+        CharaterTrans.localScale = Vector3.one;
         AttackRangeDisplay.SetActive(false);
         AttackRangeDisplayTrans.localScale = Vector3.one * ConstValues.VALUE_BASE_ATTACK_RANGE;
     }

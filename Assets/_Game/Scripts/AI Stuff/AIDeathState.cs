@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AIDeathState : AIState
 {
+    private float deadTime = ConstValues.VALUE_BOT_DEAD_TIME;
+    private float timer;
     public AIStateId GetId()
     {
         return AIStateId.DeathState;
@@ -12,6 +14,8 @@ public class AIDeathState : AIState
     {
         agent.NavAgent.enabled = false;
         agent.enemyRef.ChangeAnimation(ConstValues.ANIM_TRIGGER_DEAD);
+
+        timer = 0;
     }
     public void Exit(AIAgent agent)
     {
@@ -19,5 +23,13 @@ public class AIDeathState : AIState
     }
     public void Update(AIAgent agent)
     {
+        if (timer >= deadTime)
+        {
+            BotPooling.Instance.PushBotToPool(agent.enemyRef.BotGameObject);
+        }
+        else
+        {
+            timer += Time.deltaTime; Debug.Log(timer);
+        }
     }
 }

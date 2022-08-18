@@ -7,12 +7,14 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
 {
     public AIAgent agent;
     public bool IsMovable;
+    public GameObject BotGameObject;
 
     public void OnInit()
     {
         agent.stateMachine.ChangeState(AIStateId.IdleState);
         IsAlive = true;
         CharacterCollider.enabled = true;
+        CharaterTrans.localScale = Vector3.one;
 
         SetRandomEnumData();
         ResetScore();

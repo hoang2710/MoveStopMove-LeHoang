@@ -29,5 +29,6 @@ public class ConstValues
     public const float VALUE_AI_IDLE_MAX_TIME = 3f;
     public const float VALUE_AI_STOP_DIST_THRESHOLD = 2f;
     public const float VALUE_CHARACTER_UP_SIZE_RATIO = 1.1f;
+    public const float VALUE_BOT_DEAD_TIME = 2f;
     public const int LAYER_MASK_ENEMY = 1 << 6;
 }
