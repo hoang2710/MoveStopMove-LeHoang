@@ -9,6 +9,7 @@ public class UIGamePlayCanvas : UICanvas
     public TMP_Text PlayerAliveCount;
     public GameObject TipPanel;
     private bool TipPanelActiveFlag = true; //NOTE: must set active true on editor 
+    public JoystickInput JoystickInput;
 
     public void OnClickSettingButton()
     {
@@ -33,5 +34,9 @@ public class UIGamePlayCanvas : UICanvas
     protected override void OnOpenCanvas()
     {
         SetActiveTipPanel(true);
+    }
+    protected override void OnCloseCanvas()
+    {
+        JoystickInput.SetBackState();
     }
 }

@@ -22,10 +22,6 @@ public class UIManager : SingletonMono<UIManager>
 
         InitCanvasData();
     }
-    private void Start()
-    {
-        OpenUI(UICanvasID.MainMenu);
-    }
     private void InitCanvasData()
     {
         foreach (var item in UIRefList)

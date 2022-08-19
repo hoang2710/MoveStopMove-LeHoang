@@ -35,7 +35,7 @@ public class CharacterBase : MonoBehaviour
 
     public GameObject WeaponPlaceHolder;
     protected GameObject handWeapon;
-    protected Quaternion handWeaponRotation = Quaternion.Euler(-90f, -90f, 180f); //TODO: understand why this shit not (90, -90, 180)
+    protected Quaternion handWeaponRotation = Quaternion.Euler(90f, -90f, 180f);
 
     public Renderer PantRenderer;
 
@@ -125,8 +125,11 @@ public class CharacterBase : MonoBehaviour
         Transform WeaponPlaceHolderTrans = WeaponPlaceHolder.transform;
         handWeapon = Instantiate(ItemStorage.Instance.GetWeaponType(WeaponTag),
                                 WeaponPlaceHolderTrans.position,
-                                Quaternion.LookRotation(WeaponPlaceHolderTrans.forward) * handWeaponRotation,
+                                Quaternion.identity,
                                 WeaponPlaceHolderTrans);
+
+        Transform handWeaponTrans = handWeapon.transform;
+        handWeaponTrans.localRotation = handWeaponRotation;
 
         Weapon weapon = handWeapon.GetComponent<Weapon>();
         weapon?.DeactiveWeaponScript();

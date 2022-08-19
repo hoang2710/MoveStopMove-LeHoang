@@ -31,19 +31,20 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
     {
         switch (state)
         {
-            case GameState.MainMenu:
-                agent.stateMachine.ChangeState(AIStateId.IdleState);
-                break;
+            // case GameState.MainMenu:
+            //     agent.stateMachine.ChangeState(AIStateId.IdleState);
+            //     break;
             case GameState.Playing:
                 IsMovable = true;
-                // agent.stateMachine.ChangeState(AIStateId.PatrolState);
                 break;
             case GameState.Pause:
                 IsMovable = false;
-                agent.stateMachine.ChangeState(AIStateId.IdleState);
                 break;
             case GameState.LoadLevel:
                 BotPooling.Instance.PushBotToPool(BotGameObject);
+                break;
+            case GameState.ResultPhase:
+                IsMovable = false;
                 break;
             default:
                 break;

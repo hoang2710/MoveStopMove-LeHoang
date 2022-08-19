@@ -195,6 +195,7 @@ MonoBehaviour:
   isDestroyOnClose: 0
   PlayerAliveCount: {fileID: 2955889351956357460}
   TipPanel: {fileID: 2955889350363525772}
+  JoystickInput: {fileID: 2955889350839066243}
 --- !u!114 &2955889350839066243
 MonoBehaviour:
   m_ObjectHideFlags: 0

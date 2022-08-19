@@ -5,11 +5,13 @@ using System;
 
 public class GameManager : SingletonMono<GameManager>
 {
+    public bool isNextZone;
     public static event Action<GameState> OnGameStateChange;
 
     private void Start()
     {
         StartCoroutine(DelayChangeGameState(GameState.LoadGame, 0.15f));
+        UIManager.Instance.OpenUI(UICanvasID.MainMenu);
     }
     public void ChangeGameState(GameState state)
     {
@@ -53,7 +55,15 @@ public class GameManager : SingletonMono<GameManager>
     private void OnGameStateLoadLevel()
     {
         Debug.Log("Load Level State");
-        StartCoroutine(DelayChangeGameState(GameState.MainMenu, 0.15f));
+        if (isNextZone)
+        {
+            StartCoroutine(DelayChangeGameState(GameState.Playing, 0.15f));
+            isNextZone = false;
+        }
+        else
+        {
+            StartCoroutine(DelayChangeGameState(GameState.MainMenu, 0.15f));
+        }
     }
     private void OnGameStateMainMenu()
     {
@@ -70,6 +80,7 @@ public class GameManager : SingletonMono<GameManager>
     private void OnGameStateResultPhase()
     {
         Debug.Log("Result Phase State");
+        UIManager.Instance.OpenUI(UICanvasID.Result);
     }
     private void OnGameStateShopping()
     {

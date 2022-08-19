@@ -16,7 +16,7 @@ public class Player : CharacterBase, IHit
 
     private float timer = 0;
 
-    public static bool isShop;
+    // public static bool isShop;
 
     public GameObject TargetMark;
     public Transform TargetMarkTrans;
@@ -40,14 +40,14 @@ public class Player : CharacterBase, IHit
                 SetUpPantSkin();
                 SetUpPlayerLoadLevel();
                 break;
-            case GameState.MainMenu:
-                if (isShop)
-                {
-                    LoadDataFromPlayerPrefs();
-                    SetUpHandWeapon();
-                    SetUpPantSkin();
-                }
-                break;
+            // case GameState.MainMenu:
+            //     if (isShop)
+            //     {
+            //         LoadDataFromPlayerPrefs();
+            //         SetUpHandWeapon();
+            //         SetUpPantSkin();
+            //     }
+            //     break;
             case GameState.Playing:
                 SetUpPLayerPlaying();
                 break;
@@ -165,6 +165,13 @@ public class Player : CharacterBase, IHit
     private void SetUpPlayerLoadLevel()
     {
         isDead = false;
+        isAttackable = false;
+        isAttack = false;
+        timer = 0;
+
+        AttackTarget = null;
+        AttackTargetTrans = null;
+
         CharacterCollider.enabled = true;
         CharaterTrans.localScale = Vector3.one;
         AttackRangeDisplay.SetActive(false);
