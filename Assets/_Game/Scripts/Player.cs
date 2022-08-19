@@ -39,6 +39,7 @@ public class Player : CharacterBase, IHit
                 SetUpHandWeapon();
                 SetUpPantSkin();
                 SetUpPlayerLoadLevel();
+                RemoveCharacterUI();
                 break;
             // case GameState.MainMenu:
             //     if (isShop)
@@ -50,6 +51,7 @@ public class Player : CharacterBase, IHit
             //     break;
             case GameState.Playing:
                 SetUpPLayerPlaying();
+                DisplayCharacterUI();
                 break;
             default:
                 break;

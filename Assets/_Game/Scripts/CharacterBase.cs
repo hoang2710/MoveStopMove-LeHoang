@@ -10,6 +10,10 @@ public class CharacterBase : MonoBehaviour
     public WeaponSkinType WeaponSkinTag { get; protected set; }
     public PantSkinType PantSkinTag { get; protected set; }
 
+    [HideInInspector]
+    public string CharacterName { get; protected set; }
+    [HideInInspector]
+    public Color CharacterColor { get; protected set; }
     public int Score { get; protected set; }
     public int KillScore { get; protected set; }
     public float AttackRange { get; protected set; }
@@ -22,7 +26,9 @@ public class CharacterBase : MonoBehaviour
     protected string curAnim = ConstValues.ANIM_TRIGGER_IDLE;
 
     public Transform AttackPos;
+    [HideInInspector]
     public Transform AttackTargetTrans;
+    [HideInInspector]
     public CharacterBase AttackTarget;
     private float minorOffset = 1.1f; //NOTE: prevent targetmark blinking due to detect and un-detect at the same time
     private float detectOffSetDistance = 2f;
@@ -37,10 +43,18 @@ public class CharacterBase : MonoBehaviour
     protected GameObject handWeapon;
     protected Quaternion handWeaponRotation = Quaternion.Euler(90f, -90f, 180f);
 
+    public Renderer CharacterRenderer;
     public Renderer PantRenderer;
+
+    public Transform CharacterNameTrans;
+    public Transform CharacterScoreTrans;
+    [HideInInspector]
+    public CharacterInfoDIsplay currentUIDisplay;
 
     private void Awake()
     {
+        CharacterName = ConstValues.VALUE_CHARACTER_DEFAULT_NAME;
+        CharacterColor = ConstValues.VALUE_CHARACTER_DEFAULT_COLOR;
         Score = 0;
         KillScore = 0;
         AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
@@ -168,7 +182,19 @@ public class CharacterBase : MonoBehaviour
     {
         PantRenderer.material = ItemStorage.Instance.GetPantSkin(PantSkinTag);
     }
+    public void DisplayCharacterUI()
+    {
+        CharacterUIPooling.Instance.PopUIFromPool(this);
 
+        currentUIDisplay?.SetUpUI(CharacterName, CharacterColor);
+    }
+    public void RemoveCharacterUI()
+    {
+        if (currentUIDisplay != null)
+        {
+            CharacterUIPooling.Instance.PushUIToPool(currentUIDisplay.CanvasObject);
+        }
+    }
     public void SetWeaponType(WeaponType tag)
     {
         WeaponTag = tag;

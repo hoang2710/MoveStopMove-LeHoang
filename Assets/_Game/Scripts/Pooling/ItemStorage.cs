@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemStorage : Singleton<ItemStorage>
+public class ItemStorage : SingletonMono<ItemStorage>
 {
     [System.Serializable]
     public class WeaponTypeData

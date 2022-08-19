@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Enemy : CharacterBase, IPoolCharacter, IHit
 {
@@ -41,7 +40,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
                 IsMovable = false;
                 break;
             case GameState.LoadLevel:
-                BotPooling.Instance.PushBotToPool(BotGameObject);
+                BotPooling.Instance.PushBotToPool(BotGameObject); 
                 break;
             case GameState.ResultPhase:
                 IsMovable = false;

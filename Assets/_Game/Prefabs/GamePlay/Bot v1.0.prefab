@@ -1500,7 +1500,11 @@ MonoBehaviour:
   AttackTargetTrans: {fileID: 0}
   AttackTarget: {fileID: 0}
   WeaponPlaceHolder: {fileID: 3294892474264917845}
+  CharacterRenderer: {fileID: 3098240155019817156}
   PantRenderer: {fileID: 6133397531646244263}
+  CharacterNameTrans: {fileID: 5685515101749683854}
+  CharacterScoreTrans: {fileID: 7865206910861740254}
+  currentUIDisplay: {fileID: 0}
   agent: {fileID: 6816235599201566502}
   IsMovable: 0
   BotGameObject: {fileID: 6816235599201566503}
@@ -1519,6 +1523,8 @@ MonoBehaviour:
   initState: 2
   NavAgent: {fileID: 3294892474641139268}
   enemyRef: {fileID: 6816235599201566501}
+  CurState: 0
+  PrevState: 0
 --- !u!65 &3294892474641139643
 BoxCollider:
   m_ObjectHideFlags: 0

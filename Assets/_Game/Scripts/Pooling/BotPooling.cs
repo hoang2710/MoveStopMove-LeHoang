@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BotPooling : Singleton<BotPooling>
+public class BotPooling : SingletonMono<BotPooling>
 {
     [System.Serializable]
     public class BotData

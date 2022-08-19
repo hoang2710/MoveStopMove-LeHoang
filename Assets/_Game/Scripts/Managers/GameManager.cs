@@ -5,6 +5,7 @@ using System;
 
 public class GameManager : SingletonMono<GameManager>
 {
+    [HideInInspector]
     public bool isNextZone;
     public static event Action<GameState> OnGameStateChange;
 
