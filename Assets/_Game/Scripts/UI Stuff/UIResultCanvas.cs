@@ -67,14 +67,14 @@ public class UIResultCanvas : UICanvas
         KillerNameText.color = color;
     }
     public void OnClickHomeButton()
-    { Debug.LogWarning("Home button");
+    {
         GameManager.Instance.ChangeGameState(GameState.LoadLevel);
         UIManager.Instance.OpenUI(UICanvasID.MainMenu);
 
         Close();
     }
     public void OnClickNextZoneButton()
-    { Debug.LogWarning("NextLevel button");
+    {
         GameManager.Instance.isNextZone = true;
         GameManager.Instance.ChangeGameState(GameState.LoadLevel);
         UIManager.Instance.OpenUI(UICanvasID.GamePlay);

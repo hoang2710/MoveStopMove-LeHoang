@@ -90,8 +90,28 @@ public class ItemStorage : SingletonMono<ItemStorage>
 
         return obj;
     }
-    public void PushWeaponToPool(WeaponType weaponTag, GameObject obj)
+    public GameObject PopWeaponFromPool(WeaponType weaponTag, WeaponSkinType skinTag, Transform parentTrans, Vector3 localPosition, Quaternion localRotation)
     {
+        GameObject obj = CheckIfHaveWeaponLeftInPool(weaponTag);
+        Transform objTrans = obj.transform;
+
+        obj.SetActive(true);
+        objTrans.SetParent(parentTrans);
+        objTrans.localPosition = localPosition;
+        objTrans.localRotation = localRotation;
+
+        IPooledWeapon weapon = obj.GetComponent<IPooledWeapon>();
+        weapon?.OnPopFromPool(weaponSkins[skinTag]);
+
+        return obj;
+    }
+    public void PushWeaponToPool(WeaponType weaponTag, GameObject obj, bool isHandWeapon = false)
+    {
+        if (isHandWeapon)
+        {
+            obj.transform.SetParent(null); //NOTE: single use no cache
+        }
+
         weaponPool[weaponTag].Push(obj);
 
         IPooledWeapon weapon = obj.GetComponent<IPooledWeapon>();

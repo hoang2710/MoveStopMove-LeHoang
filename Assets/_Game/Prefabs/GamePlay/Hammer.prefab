@@ -103,6 +103,7 @@ MonoBehaviour:
   BulletTag: 0
   WeaponTrans: {fileID: 5987331021826876509}
   WeaponObject: {fileID: 7781565161665100080}
+  WeaponCollider: {fileID: 3866269621308687699}
 --- !u!65 &3866269621308687699
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -40,7 +40,10 @@ public class CharacterBase : MonoBehaviour
     public float AttackAnimEnd { get; protected set; }
 
     public GameObject WeaponPlaceHolder;
+    [HideInInspector]
+    public Transform WeaponPlaceHolderTrans;
     protected GameObject handWeapon;
+    protected WeaponType currentHandWeaponTag;
     protected Quaternion handWeaponRotation = Quaternion.Euler(90f, -90f, 180f);
 
     public Renderer CharacterRenderer;
@@ -64,6 +67,8 @@ public class CharacterBase : MonoBehaviour
 
         AttackAnimThrow = ConstValues.VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT;
         AttackAnimEnd = ConstValues.VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT;
+
+        WeaponPlaceHolderTrans = WeaponPlaceHolder.transform;
     }
     protected virtual void Start()
     {
@@ -131,35 +136,29 @@ public class CharacterBase : MonoBehaviour
     {
         if (handWeapon != null)
         {
-            Destroy(handWeapon);
+            ItemStorage.Instance.PushWeaponToPool(currentHandWeaponTag, handWeapon, true);
         }
 
-        Anim.Play(ConstValues.ANIM_PLAY_DEFAULT_IDLE); //NOTE: make sure character model is in right position for assign hand weapon
-
-        Transform WeaponPlaceHolderTrans = WeaponPlaceHolder.transform;
-        handWeapon = Instantiate(ItemStorage.Instance.GetWeaponType(WeaponTag),
-                                WeaponPlaceHolderTrans.position,
-                                Quaternion.identity,
-                                WeaponPlaceHolderTrans);
-
-        Transform handWeaponTrans = handWeapon.transform;
-        handWeaponTrans.localRotation = handWeaponRotation;
+        currentHandWeaponTag = WeaponTag;
+        handWeapon = ItemStorage.Instance.PopWeaponFromPool(WeaponTag,
+                                                            WeaponSkinTag,
+                                                            WeaponPlaceHolderTrans,
+                                                            Vector3.zero,
+                                                            handWeaponRotation);
 
         Weapon weapon = handWeapon.GetComponent<Weapon>();
-        weapon?.DeactiveWeaponScript();
+        weapon?.SetUpHandWeapon();
 
-        Renderer objRen = handWeapon.GetComponent<Renderer>();
-
+        Renderer objRen = weapon.WeaponRenderer;
         if (objRen != null)
         {
+            Material material = ItemStorage.Instance.GetWeaponSkin(WeaponSkinTag);
             switch (WeaponTag)
             {
                 case WeaponType.Candy:
-                    Material materialCandy = ItemStorage.Instance.GetWeaponSkin(WeaponSkinTag);
-                    objRen.materials = new Material[] { materialCandy, materialCandy, materialCandy }; //NOTE: Candy weapon have 3 material
+                    objRen.materials = new Material[] { material, material, material }; //NOTE: Candy weapon have 3 material
                     break;
                 default:
-                    Material material = ItemStorage.Instance.GetWeaponSkin(WeaponSkinTag);
                     objRen.materials = new Material[] { material, material };
                     break;
             }

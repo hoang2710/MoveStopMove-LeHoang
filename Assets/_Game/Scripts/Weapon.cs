@@ -13,6 +13,8 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     public BulletType BulletTag;
     public Transform WeaponTrans;
     public GameObject WeaponObject;
+    public Collider WeaponCollider;
+    public Vector3 WeaponOffSet;
     private Vector3 flyDir;
     private float lifeTime = ConstValues.VALUE_WEAPON_DEFAULT_LIFE_TIME;
     private float timer = 0;
@@ -55,9 +57,12 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     {
         lifeTime = value;
     }
-    public void DeactiveWeaponScript()
+    public void SetUpHandWeapon()
     {
-        Destroy(this);
+        this.enabled = false;
+        WeaponCollider.enabled = false;
+
+        WeaponTrans.localPosition = WeaponOffSet;
     }
     public void SetBulletOwner(CharacterBase owner)
     {
@@ -83,7 +88,8 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     }
     public void OnPushToPool()
     {
-        // bulletOwner = null;
+        this.enabled = true;
+        WeaponCollider.enabled = true;
     }
 }
 

@@ -28,9 +28,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6488665240584564782}
-  m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 41.690052, y: 41.690052, z: 41.690052}
+  m_LocalRotation: {x: -0.50000006, y: -0.49999997, z: 0.49999997, w: -0.50000006}
+  m_LocalPosition: {x: -0.241, y: 0, z: -0}
+  m_LocalScale: {x: 41.690098, y: 41.69009, z: 41.690067}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -103,6 +103,8 @@ MonoBehaviour:
   BulletTag: 0
   WeaponTrans: {fileID: 1532247647228684715}
   WeaponObject: {fileID: 6488665240584564782}
+  WeaponCollider: {fileID: 2919856334088602386}
+  WeaponOffSet: {x: -0.214, y: 0, z: 0}
 --- !u!65 &2919856334088602386
 BoxCollider:
   m_ObjectHideFlags: 0
