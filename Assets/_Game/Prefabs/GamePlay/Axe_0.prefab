@@ -28,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3549616032071664881}
-  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: -0.5}
+  m_LocalRotation: {x: -0, y: -0.042074088, z: -0, w: 0.9991145}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 39, y: 39, z: 39}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: -4.823, z: 0}
 --- !u!33 &933655683445674438
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -104,6 +104,10 @@ MonoBehaviour:
   WeaponTrans: {fileID: 7873549670704184934}
   WeaponObject: {fileID: 3549616032071664881}
   WeaponCollider: {fileID: -879836866309750688}
+  weaponPositionOffset: {x: 0, y: 0, z: 0}
+  HandRotateOffset: {x: 90, y: -90, z: 180}
+  ThrowRotateOffset: {x: -90, y: 0, z: 90}
+  rotateSpeed: -900
 --- !u!65 &-879836866309750688
 BoxCollider:
   m_ObjectHideFlags: 0

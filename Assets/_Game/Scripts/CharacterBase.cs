@@ -34,8 +34,10 @@ public class CharacterBase : MonoBehaviour
     private float detectOffSetDistance = 2f;
 
     public bool IsAlive { get; protected set; }
+    protected bool isWeaponTripleShot;
+    protected float weaponTripleShotOffset; //NOTE: y axis in quaternion
 
-    public Quaternion WeaponRotation { get; protected set; }
+    public Quaternion ThrowWeaponRotation { get; protected set; }
     public float AttackAnimThrow { get; protected set; }
     public float AttackAnimEnd { get; protected set; }
 
@@ -44,11 +46,8 @@ public class CharacterBase : MonoBehaviour
     public Transform WeaponPlaceHolderTrans;
     protected GameObject handWeapon;
     protected WeaponType currentHandWeaponTag;
-    protected Quaternion handWeaponRotation = Quaternion.Euler(90f, -90f, 180f);
-
     public Renderer CharacterRenderer;
     public Renderer PantRenderer;
-
     public Transform CharacterNameTrans;
     public Transform CharacterScoreTrans;
     [HideInInspector]
@@ -63,7 +62,7 @@ public class CharacterBase : MonoBehaviour
         AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
         AttackRate = ConstValues.VALUE_BASE_ATTACK_RATE;
 
-        WeaponRotation = Quaternion.Euler(-90f, 0, 90f);
+        ThrowWeaponRotation = Quaternion.Euler(-90f, 0, 90f); //NOTE: default value
 
         AttackAnimThrow = ConstValues.VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT;
         AttackAnimEnd = ConstValues.VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT;
@@ -132,6 +131,32 @@ public class CharacterBase : MonoBehaviour
             return true;
         }
     }
+    public void ThrowWeapon(Quaternion curRotation)
+    {
+        if (isWeaponTripleShot)
+        {
+            Quaternion leftOffset = curRotation * Quaternion.Euler(0, -weaponTripleShotOffset, 0);
+            Quaternion rightOffset = curRotation * Quaternion.Euler(0, weaponTripleShotOffset, 0);
+
+            Shoot(leftOffset);
+            Shoot(curRotation);
+            Shoot(rightOffset);
+        }
+        else
+        {
+            Shoot(curRotation);
+        }
+    }
+    private void Shoot(Quaternion curRotation)
+    {
+        Vector3 moveDir = curRotation * Vector3.forward;
+        GameObject obj = ItemStorage.Instance.PopWeaponFromPool(WeaponTag,
+                                                                WeaponSkinTag,
+                                                                AttackPos.position,
+                                                                curRotation * ThrowWeaponRotation);
+        Weapon weapon = obj.GetComponent<Weapon>();
+        weapon?.SetUpThrowWeapon(moveDir, this);
+    }
     public void SetUpHandWeapon()
     {
         if (handWeapon != null)
@@ -144,10 +169,10 @@ public class CharacterBase : MonoBehaviour
                                                             WeaponSkinTag,
                                                             WeaponPlaceHolderTrans,
                                                             Vector3.zero,
-                                                            handWeaponRotation);
+                                                            Quaternion.identity);
 
         Weapon weapon = handWeapon.GetComponent<Weapon>();
-        weapon?.SetUpHandWeapon();
+        weapon?.SetUpHandWeapon(this);
 
         Renderer objRen = weapon.WeaponRenderer;
         if (objRen != null)
@@ -176,6 +201,12 @@ public class CharacterBase : MonoBehaviour
     {
         CharaterTrans.localScale *= ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
         AttackRange *= ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
+    }
+    public void SetUpThrowWeapon(Quaternion rotation, bool isTripleShot, float tripleShotOffset)
+    {
+        ThrowWeaponRotation = rotation;
+        isWeaponTripleShot = isTripleShot;
+        weaponTripleShotOffset = tripleShotOffset;
     }
     public void SetUpPantSkin()
     {

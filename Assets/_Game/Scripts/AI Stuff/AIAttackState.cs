@@ -7,7 +7,7 @@ public class AIAttackState : AIState
     private float timer;
     private bool isAttack;
 
-    Quaternion tempRotation;
+    Quaternion curRotation;
     public AIStateId GetId()
     {
         return AIStateId.AttackState;
@@ -48,15 +48,7 @@ public class AIAttackState : AIState
         {
             agent.enemyRef.WeaponPlaceHolder.SetActive(false);
 
-            GameObject obj = ItemStorage.Instance.PopWeaponFromPool(agent.enemyRef.WeaponTag,
-                                                                    agent.enemyRef.WeaponSkinTag,
-                                                                    agent.enemyRef.AttackPos.position,
-                                                                    tempRotation * agent.enemyRef.WeaponRotation);
-            Weapon weapon = obj.GetComponent<Weapon>();
-
-            weapon.SetFlyDir(agent.enemyRef.AttackPos.forward);
-            weapon.SetBulletOwner(agent.enemyRef);
-            weapon.CalculateLifeTime();
+            agent.enemyRef.ThrowWeapon(curRotation);
 
             isAttack = true;
         }
@@ -68,7 +60,7 @@ public class AIAttackState : AIState
         Vector3 lookDir = agent.enemyRef.AttackTargetTrans.position - agent.enemyRef.CharaterTrans.position;
         lookDir.y = 0;
 
-        tempRotation = Quaternion.LookRotation(lookDir);
-        agent.enemyRef.CharaterTrans.rotation = tempRotation;
+        curRotation = Quaternion.LookRotation(lookDir);
+        agent.enemyRef.CharaterTrans.rotation = curRotation;
     }
 }

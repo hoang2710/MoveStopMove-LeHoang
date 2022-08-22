@@ -104,6 +104,10 @@ MonoBehaviour:
   WeaponTrans: {fileID: 5987331021826876509}
   WeaponObject: {fileID: 7781565161665100080}
   WeaponCollider: {fileID: 3866269621308687699}
+  weaponPositionOffset: {x: 0, y: 0, z: 0}
+  HandRotateOffset: {x: 90, y: -90, z: 180}
+  ThrowRotateOffset: {x: -90, y: 0, z: 90}
+  rotateSpeed: -540
 --- !u!65 &3866269621308687699
 BoxCollider:
   m_ObjectHideFlags: 0

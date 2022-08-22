@@ -8,7 +8,7 @@ public class Player : CharacterBase, IHit
     [SerializeField]
     private float moveSpeed = 1.5f;
     [SerializeField]
-    private float rotateSpeed = 5f;
+    private float rotateSpeed = -180f;
 
     private bool isAttackable = true;
     private bool isAttack;
@@ -118,19 +118,14 @@ public class Player : CharacterBase, IHit
         Vector3 lookDir = AttackTargetTrans.position - CharaterTrans.position;
         lookDir.y = 0;
 
-        Quaternion tempRotation = Quaternion.LookRotation(lookDir);
-        CharaterTrans.rotation = tempRotation;
+        Quaternion curRotation = Quaternion.LookRotation(lookDir);
+        CharaterTrans.rotation = curRotation;
 
         if (timer > AttackAnimThrow)
         {
             WeaponPlaceHolder.SetActive(false);
 
-            GameObject obj = ItemStorage.Instance.PopWeaponFromPool(WeaponTag, WeaponSkinTag, AttackPos.position, tempRotation * WeaponRotation);
-            Weapon weapon = obj.GetComponent<Weapon>();
-
-            weapon.SetFlyDir(AttackPos.forward);
-            weapon.SetBulletOwner(this);
-            weapon.CalculateLifeTime();
+            ThrowWeapon(curRotation);
 
             isAttackable = false;
             isAttack = true;
@@ -193,7 +188,7 @@ public class Player : CharacterBase, IHit
     }
     private void LoadDataFromPlayerPrefs()
     {
-        WeaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG);
+        WeaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG, 1);
         WeaponSkinTag = (WeaponSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG);
         PantSkinTag = (PantSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_PANT_SKIN_TAG);
     }
