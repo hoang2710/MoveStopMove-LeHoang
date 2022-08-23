@@ -12,8 +12,6 @@ public class CharacterBase : MonoBehaviour
 
     [HideInInspector]
     public string CharacterName { get; protected set; }
-    [HideInInspector]
-    public Color CharacterColor { get; protected set; }
     public int Score { get; protected set; }
     public int KillScore { get; protected set; }
     public float AttackRange { get; protected set; }
@@ -56,7 +54,6 @@ public class CharacterBase : MonoBehaviour
     protected virtual void Awake()
     {
         CharacterName = ConstValues.VALUE_CHARACTER_DEFAULT_NAME;
-        CharacterColor = ConstValues.VALUE_CHARACTER_DEFAULT_COLOR;
         Score = 0;
         KillScore = 0;
         AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
@@ -218,7 +215,7 @@ public class CharacterBase : MonoBehaviour
     {
         CharacterUIPooling.Instance.PopUIFromPool(this);
 
-        currentUIDisplay?.SetUpUI(CharacterName, CharacterColor, isPlayer);
+        currentUIDisplay?.SetUpUI(CharacterName, CharacterRenderer.material.color, isPlayer);
     }
     public void RemoveCharacterUI()
     {

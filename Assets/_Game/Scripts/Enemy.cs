@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : CharacterBase, IPoolCharacter, IHit
 {
     public AIAgent agent;
-    public bool IsMovable { get; private set; } 
+    public bool IsMovable { get; private set; }
     private bool isUIEnable;
     public GameObject BotGameObject;
 
@@ -21,6 +21,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         ResetScore();
         SetUpHandWeapon();
         SetUpPantSkin();
+        SetRandomBodySkin();
 
         if (isUIEnable)
         {
@@ -85,6 +86,10 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         }
 
         PantSkinTag = (PantSkinType)Random.Range(0, System.Enum.GetNames(typeof(PantSkinType)).Length);
+    }
+    public void SetRandomBodySkin()
+    {
+        CharacterRenderer.material = ItemStorage.Instance.GetRandomBotMaterial();
     }
 
     private void ResetScore()

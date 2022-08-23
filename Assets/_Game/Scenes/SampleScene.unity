@@ -9273,7 +9273,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.34594244, y: 1e-45, z: -1e-45, w: 0.9382558}
+  m_LocalRotation: {x: 0.34594244, y: -3e-45, z: 1e-45, w: 0.9382558}
   m_LocalPosition: {x: 0, y: 15.16, z: -15.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -19498,6 +19498,15 @@ MonoBehaviour:
     PantMaterial: {fileID: 2100000, guid: 674c15445aab8a344bc1f4d20be7d012, type: 2}
   - PantSkinTag: 8
     PantMaterial: {fileID: 2100000, guid: 8848cb7477927db4a92e4f6ac162000b, type: 2}
+  BotMaterials:
+  - {fileID: 2100000, guid: 5f23c72aa7c1dce4ca3fcd5c74d11ac9, type: 2}
+  - {fileID: 2100000, guid: d1ec4ceac282682469552c100fc5f62f, type: 2}
+  - {fileID: 2100000, guid: fae1f0f8352ee6246962a2a027bfde53, type: 2}
+  - {fileID: 2100000, guid: 78ad4be2b7408b64aacfebb07c8ec4e7, type: 2}
+  - {fileID: 2100000, guid: 7cd0a9dba3daeb74d9ee8e8168b5cb53, type: 2}
+  - {fileID: 2100000, guid: 9db96fa2e51264140a1648800fe69ca7, type: 2}
+  - {fileID: 2100000, guid: ce17d243d115e82419d15b604c36b526, type: 2}
+  - {fileID: 2100000, guid: 29a6538adca07b444b39834ae0705e79, type: 2}
 --- !u!4 &1995170573
 Transform:
   m_ObjectHideFlags: 0
@@ -20222,7 +20231,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035489454}
-  m_LocalRotation: {x: 0.34594244, y: 1e-45, z: -1e-45, w: 0.9382558}
+  m_LocalRotation: {x: 0.34594244, y: -3e-45, z: 1e-45, w: 0.9382558}
   m_LocalPosition: {x: 0, y: 15.16, z: -15.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
