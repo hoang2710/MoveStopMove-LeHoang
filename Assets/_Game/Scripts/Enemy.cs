@@ -5,7 +5,8 @@ using UnityEngine;
 public class Enemy : CharacterBase, IPoolCharacter, IHit
 {
     public AIAgent agent;
-    public bool IsMovable;
+    public bool IsMovable { get; private set; } 
+    private bool isUIEnable;
     public GameObject BotGameObject;
 
     public void OnInit()
@@ -20,11 +21,18 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         ResetScore();
         SetUpHandWeapon();
         SetUpPantSkin();
+
+        if (isUIEnable)
+        {
+            DisplayCharacterUI();
+        }
     }
     public void OnDespawn()
     {
         AttackTarget = null;
         AttackTargetTrans = null;
+
+        RemoveCharacterUI();
     }
     protected override void GameManagerOnGameStateChange(GameState state)
     {
@@ -34,16 +42,20 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
             //     agent.stateMachine.ChangeState(AIStateId.IdleState);
             //     break;
             case GameState.Playing:
+                DisplayCharacterUI();
                 IsMovable = true;
+                isUIEnable = true;
                 break;
             case GameState.Pause:
                 IsMovable = false;
+                isUIEnable = false;
                 break;
             case GameState.LoadLevel:
-                BotPooling.Instance.PushBotToPool(BotGameObject); 
+                BotPooling.Instance.PushBotToPool(BotGameObject);
                 break;
             case GameState.ResultPhase:
                 IsMovable = false;
+                isUIEnable = false;
                 break;
             default:
                 break;
@@ -86,6 +98,8 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         agent.stateMachine.ChangeState(AIStateId.DeathState);
         IsAlive = false;
         CharacterCollider.enabled = false;
+
+        RemoveCharacterUI();
 
         bulletOwner?.OnKillEnemy();
     }

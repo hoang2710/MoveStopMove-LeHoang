@@ -34,6 +34,7 @@ public class CharacterBase : MonoBehaviour
     private float detectOffSetDistance = 2f;
 
     public bool IsAlive { get; protected set; }
+    protected bool isPlayer; //NOTE: use for ui display. moveUI
     protected bool isWeaponTripleShot;
     protected float weaponTripleShotOffset; //NOTE: y axis in quaternion
 
@@ -48,12 +49,11 @@ public class CharacterBase : MonoBehaviour
     protected WeaponType currentHandWeaponTag;
     public Renderer CharacterRenderer;
     public Renderer PantRenderer;
-    public Transform CharacterNameTrans;
-    public Transform CharacterScoreTrans;
+    public Transform CharacterUITransRoot;
     [HideInInspector]
     public CharacterInfoDIsplay currentUIDisplay;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         CharacterName = ConstValues.VALUE_CHARACTER_DEFAULT_NAME;
         CharacterColor = ConstValues.VALUE_CHARACTER_DEFAULT_COLOR;
@@ -199,8 +199,10 @@ public class CharacterBase : MonoBehaviour
     }
     public virtual void OnKillEnemy()
     {
-        CharaterTrans.localScale *= ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
-        AttackRange *= ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
+        CharaterTrans.localScale += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * Vector3.one;
+        AttackRange += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * ConstValues.VALUE_BASE_ATTACK_RANGE;
+
+        currentUIDisplay?.UpdateScore(++Score);
     }
     public void SetUpThrowWeapon(Quaternion rotation, bool isTripleShot, float tripleShotOffset)
     {
@@ -216,13 +218,13 @@ public class CharacterBase : MonoBehaviour
     {
         CharacterUIPooling.Instance.PopUIFromPool(this);
 
-        currentUIDisplay?.SetUpUI(CharacterName, CharacterColor);
+        currentUIDisplay?.SetUpUI(CharacterName, CharacterColor, isPlayer);
     }
     public void RemoveCharacterUI()
     {
         if (currentUIDisplay != null)
         {
-            CharacterUIPooling.Instance.PushUIToPool(currentUIDisplay.CanvasObject);
+            CharacterUIPooling.Instance.PushUIToPool(currentUIDisplay.UIObject);
         }
     }
     public void SetWeaponType(WeaponType tag)

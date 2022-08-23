@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterUIPooling : SingletonMono<CharacterUIPooling>
 {
+    public Transform ParentTransform;
     public GameObject PoolObject;
     public int PoolSize;
     private Stack<GameObject> pool = new Stack<GameObject>();
@@ -16,7 +17,7 @@ public class CharacterUIPooling : SingletonMono<CharacterUIPooling>
     {
         for (int i = 0; i <= PoolSize; i++)
         {
-            GameObject obj = Instantiate(PoolObject);
+            GameObject obj = Instantiate(PoolObject,ParentTransform);
             obj.SetActive(false);
             pool.Push(obj);
         }
@@ -47,7 +48,7 @@ public class CharacterUIPooling : SingletonMono<CharacterUIPooling>
         }
         else
         {
-            GameObject obj = Instantiate(PoolObject);
+            GameObject obj = Instantiate(PoolObject,ParentTransform);
             return obj;
         }
     }

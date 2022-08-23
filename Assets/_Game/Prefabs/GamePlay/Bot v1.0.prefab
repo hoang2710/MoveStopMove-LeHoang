@@ -1051,6 +1051,36 @@ Transform:
   m_Father: {fileID: 8389722555956242499}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4050887422453615787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6813767197451450626}
+  m_Layer: 6
+  m_Name: UI Root
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6813767197451450626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4050887422453615787}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7549013676298145076}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4358002805770464230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,6 +1489,7 @@ Transform:
   - {fileID: 400087203011117924}
   - {fileID: 2340777731896345874}
   - {fileID: 3294892475848216417}
+  - {fileID: 6813767197451450626}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1503,8 +1534,7 @@ MonoBehaviour:
   WeaponPlaceHolderTrans: {fileID: 0}
   CharacterRenderer: {fileID: 3098240155019817156}
   PantRenderer: {fileID: 6133397531646244263}
-  CharacterNameTrans: {fileID: 5685515101749683854}
-  CharacterScoreTrans: {fileID: 7865206910861740254}
+  CharacterUITransRoot: {fileID: 6813767197451450626}
   currentUIDisplay: {fileID: 0}
   agent: {fileID: 6816235599201566502}
   IsMovable: 0

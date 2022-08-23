@@ -8,7 +8,7 @@ public class Player : CharacterBase, IHit
     [SerializeField]
     private float moveSpeed = 1.5f;
     [SerializeField]
-    private float rotateSpeed = -180f;
+    private float rotateSpeed = 8f;
 
     private bool isAttackable = true;
     private bool isAttack;
@@ -23,7 +23,11 @@ public class Player : CharacterBase, IHit
     public GameObject AttackRangeDisplay;
     public Transform AttackRangeDisplayTrans;
     private bool TargetMarkSetActiveFlag;
-
+    protected override void Awake()
+    {
+        base.Awake();
+        isPlayer = true;
+    }
     private void FixedUpdate()
     {
         LogicHandle();
@@ -39,7 +43,7 @@ public class Player : CharacterBase, IHit
                 SetUpHandWeapon();
                 SetUpPantSkin();
                 SetUpPlayerLoadLevel();
-                // RemoveCharacterUI();
+                RemoveCharacterUI();
                 break;
             // case GameState.MainMenu:
             //     if (isShop)
@@ -51,7 +55,7 @@ public class Player : CharacterBase, IHit
             //     break;
             case GameState.Playing:
                 SetUpPLayerPlaying();
-                // DisplayCharacterUI();
+                DisplayCharacterUI();
                 break;
             default:
                 break;
@@ -165,6 +169,7 @@ public class Player : CharacterBase, IHit
         isAttackable = false;
         isAttack = false;
         timer = 0;
+        Score = 0;
 
         AttackTarget = null;
         AttackTargetTrans = null;
@@ -188,7 +193,7 @@ public class Player : CharacterBase, IHit
     }
     private void LoadDataFromPlayerPrefs()
     {
-        WeaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG, 1);
+        WeaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG);
         WeaponSkinTag = (WeaponSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG);
         PantSkinTag = (PantSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_PANT_SKIN_TAG);
     }

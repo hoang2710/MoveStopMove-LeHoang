@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     private bool isRotate;
     private Vector3 rotateDir = Vector3.up;
     [SerializeField]
-    private float rotateSpeed = 5f;
+    private float rotateSpeed = -180f;
     private bool isTripleShot;
     [SerializeField]
     private float tripleShotOffset = 30f;//NOTE: y axis in quaternion
