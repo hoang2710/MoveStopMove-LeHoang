@@ -41,6 +41,10 @@ public class UIManager : SingletonMono<UIManager>
         }
         return UICanvasDict[id];
     }
+    public T GetUICanvas<T>(UICanvasID id) where T : UICanvas
+    {
+        return GetUICanvas(id) as T;
+    }
     public UICanvas OpenUI(UICanvasID id)
     {
         UICanvas canvas = GetUICanvas(id);

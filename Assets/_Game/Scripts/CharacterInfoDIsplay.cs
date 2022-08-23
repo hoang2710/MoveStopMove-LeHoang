@@ -57,7 +57,6 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
             MoveUI();
         }
     }
-    // /*
     private void MoveUI()
     {
         Vector3 pos = curCam.WorldToScreenPoint(currentChar.CharacterUITransRoot.position);
@@ -117,7 +116,39 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
 
         UITrans.position = pos;
     }
-    // /*
+    public void SetUpUI(string name, Color color, bool isPlayer)
+    {
+        ScoreText.text = 0.ToString();
+        NameText.text = name;
+        ScoreImage.color = color;
+        ArrowImage.color = color;
+        NameText.color = color;
+        this.isPlayer = isPlayer;
+
+        MoveUI();
+    }
+    public void UpdateScore(int score)
+    {
+        ScoreText.text = score.ToString();
+        MoveUI(); //NOTE: update player ui when scale up
+    }
+
+    public void OnInit(CharacterBase characterBase)
+    {
+        currentChar = characterBase;
+        currentChar.currentUIDisplay = this;
+        NameText.enabled = true;
+        ArrowImage.enabled = false;
+        enableFlag = true;
+    }
+    public void OnDespawn()
+    {
+        currentChar.currentUIDisplay = null;
+        currentChar = null;
+        isPlayer = false;
+    }
+}
+
     #region old moveUI
     /*
     private void MoveUI()
@@ -173,35 +204,3 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
     }
     */
     #endregion
-    public void SetUpUI(string name, Color color, bool isPlayer)
-    {
-        ScoreText.text = 0.ToString();
-        NameText.text = name;
-        ScoreImage.color = color;
-        ArrowImage.color = color;
-        NameText.color = color;
-        this.isPlayer = isPlayer;
-
-        MoveUI();
-    }
-    public void UpdateScore(int score)
-    {
-        ScoreText.text = score.ToString();
-        MoveUI(); //NOTE: update player ui when scale up
-    }
-
-    public void OnInit(CharacterBase characterBase)
-    {
-        currentChar = characterBase;
-        currentChar.currentUIDisplay = this;
-        NameText.enabled = true;
-        ArrowImage.enabled = false;
-        enableFlag = true;
-    }
-    public void OnDespawn()
-    {
-        currentChar.currentUIDisplay = null;
-        currentChar = null;
-        isPlayer = false;
-    }
-}

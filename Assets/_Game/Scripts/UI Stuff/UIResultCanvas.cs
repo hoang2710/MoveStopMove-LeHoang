@@ -14,6 +14,8 @@ public class UIResultCanvas : UICanvas
     public Image IconLockNextZone;
     public Image IconUnlockNextZone;
     public Image IconSkull;
+    public Image UnlockBackground;
+    public Image ZoneIconUnlock;
     public TMP_Text QuoteText;
     public Slider ProgressBar;
     [Header("Win Panel")]
@@ -25,12 +27,17 @@ public class UIResultCanvas : UICanvas
     public TMP_Text KillerNameText;
     public TMP_Text CoinDisplayTextLose;
 
+    private int playerRank;
+    private float progressPercentage;
+    private int numOfCoinReward;
+
     public void SetActiveResultPanel(bool isWin)
     {
         WinPanel.SetActive(isWin);
         LosePanel.SetActive(!isWin);
     }
-    public void SetProgressBarValue(float value) //NOTE: Range 0 ~ 1.0
+    /// <param name ="value"> Range 0 ~ 1.0</param>
+    public void SetProgressBarValue(float value)
     {
         ProgressBar.value = value;
     }
@@ -47,6 +54,8 @@ public class UIResultCanvas : UICanvas
     {
         IconLockNextZone.enabled = isLock;
         IconUnlockNextZone.enabled = !isLock;
+        UnlockBackground.enabled = !isLock;
+        ZoneIconUnlock.enabled = !isLock;
     }
     public void SetQuoteText(string text)
     {
@@ -89,5 +98,34 @@ public class UIResultCanvas : UICanvas
     protected override void OnOpenCanvas()
     {
         UIManager.Instance.CloseUI(UICanvasID.GamePlay);
+
+        LevelManager.Instance.GetLevelResult(out playerRank, out numOfCoinReward, out progressPercentage);
+
+        if (playerRank > 1)
+        {
+            SetActiveResultPanel(false);
+            LoseResultHandle();
+        }
+        else
+        {
+            SetActiveResultPanel(true);
+            WinResultHandle();
+        }
+    }
+
+    private void LoseResultHandle()
+    {
+        SetRankingLosePanel(playerRank);
+        SetProgressBarValue(progressPercentage);
+        SetCoinValue(numOfCoinReward);
+        SetActiveSkullIcon(true);
+        SetLockZoneState(true);
+    }
+    private void WinResultHandle()
+    {
+        SetProgressBarValue(1f);
+        SetCoinValue(numOfCoinReward);
+        SetActiveSkullIcon(false);
+        SetLockZoneState(false);
     }
 }

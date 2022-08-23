@@ -9273,7 +9273,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.34594244, y: -3e-45, z: 1e-45, w: 0.9382558}
+  m_LocalRotation: {x: 0.34594244, y: 1e-45, z: -1e-45, w: 0.9382558}
   m_LocalPosition: {x: 0, y: 15.16, z: -15.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -18335,8 +18335,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapSpawnOuterRadius: 50
   MapSpawnInnerRadius: 15
-  baseBotToSpawn: 10
   MapSpawnCenter: {fileID: 352531589}
+  numOfBaseBot: 0
 --- !u!4 &1895798945
 Transform:
   m_ObjectHideFlags: 0
@@ -20222,7 +20222,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035489454}
-  m_LocalRotation: {x: 0.34594244, y: -3e-45, z: 1e-45, w: 0.9382558}
+  m_LocalRotation: {x: 0.34594244, y: 1e-45, z: -1e-45, w: 0.9382558}
   m_LocalPosition: {x: 0, y: 15.16, z: -15.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

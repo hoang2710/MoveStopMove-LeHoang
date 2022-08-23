@@ -7,9 +7,13 @@ public class LevelManager : SingletonMono<LevelManager>
 {
     public float MapSpawnOuterRadius;
     public float MapSpawnInnerRadius;
-    [SerializeField]
-    private int baseBotToSpawn;
     public Transform MapSpawnCenter;
+    [SerializeField]
+    private int numOfBaseBot;
+    private int numOfTotalCharacter;
+    private int numOfCurrentCharacter;
+    private int numOfBotToSpawn;
+    private UIGamePlayCanvas gamePlayCanvas;
 
     private void Start()
     {
@@ -24,6 +28,7 @@ public class LevelManager : SingletonMono<LevelManager>
         switch (state)
         {
             case GameState.LoadLevel:
+                SetData();
                 Invoke(nameof(SpawnBaseBot), 0.1f); //NOTE: wait for remain bot to be push to pool --> avoid instantiate more bot, may optimize later 
                 // SpawnBaseBot();
                 break;
@@ -31,10 +36,37 @@ public class LevelManager : SingletonMono<LevelManager>
                 break;
         }
     }
+    private void SetData()
+    {
+        numOfTotalCharacter = 50; //temp
+        numOfBaseBot = 10;  //temp
+        numOfCurrentCharacter = numOfTotalCharacter;
+        numOfBotToSpawn = numOfTotalCharacter - numOfBaseBot - 1;//NOTE: minus player
+        gamePlayCanvas = UIManager.Instance.GetUICanvas<UIGamePlayCanvas>(UICanvasID.GamePlay);
+        gamePlayCanvas.SetPlayerAliveCount(numOfTotalCharacter);
+        gamePlayCanvas.Close();
+    }
+    public void KillHandle()
+    {
+        numOfCurrentCharacter--;
+        gamePlayCanvas.SetPlayerAliveCount(numOfCurrentCharacter);
+        if (numOfCurrentCharacter > 1)
+        {
+            if (numOfBotToSpawn > 0)
+            {
+                SpawnBotRandomPos();
+                numOfBotToSpawn--;
+            }
+        }
+        else
+        {
+            GameManager.Instance.ChangeGameState(GameState.ResultPhase);
+        }
+    }
     private void SpawnBaseBot()
     {
         Debug.Log("Spawn Base Bot");
-        for (int i = 0; i < baseBotToSpawn; i++)
+        for (int i = 0; i < numOfBaseBot; i++)
         {
             SpawnBotRandomPos();
         }
@@ -46,11 +78,15 @@ public class LevelManager : SingletonMono<LevelManager>
         {
             BotPooling.Instance.PopBotFromPool(spawnPos, Quaternion.identity);
         }
+        else
+        {
+            Debug.LogWarning("Failed To Spawn New Bot");
+        }
     }
     private bool GetRandomPos(Vector3 center, out Vector3 result)
     {
         float minDistSqr = MapSpawnInnerRadius * MapSpawnInnerRadius;
-        int numnerOfTries = 30;
+        int numnerOfTries = int.MaxValue;
         for (int i = 0; i < numnerOfTries; i++)
         {
             Vector3 randomPoint = center + Random.insideUnitSphere * MapSpawnOuterRadius;
@@ -72,6 +108,24 @@ public class LevelManager : SingletonMono<LevelManager>
         }
         result = Vector3.zero;
         return false;
+    }
+    public void GetLevelResult(out int rank, out int reward, out float percent)
+    {
+        rank = GetPlayerRanking();
+        reward = GetNumOfCoinReward();
+        percent = GetProgressPercentage();
+    }
+    public int GetPlayerRanking()
+    {
+        return numOfCurrentCharacter;
+    }
+    public int GetNumOfCoinReward()
+    {
+        return (numOfTotalCharacter - numOfCurrentCharacter) * 5; //temp
+    }
+    public float GetProgressPercentage()
+    {
+        return (float)(numOfTotalCharacter - numOfCurrentCharacter) / numOfTotalCharacter;
     }
 }
 
