@@ -135,13 +135,16 @@ public class Player : CharacterBase, IHit
             isAttack = true;
         }
     }
-    private void Die()
+    private void Die(CharacterBase bullOwner)
     {
         isDead = true;
         ChangeAnimation(ConstValues.ANIM_TRIGGER_DEAD);
         CharacterCollider.enabled = false;
 
         GameManager.Instance.ChangeGameState(GameState.ResultPhase);
+        UIResultCanvas resultCanvas = UIManager.Instance.GetUICanvas<UIResultCanvas>(UICanvasID.Result);
+
+        resultCanvas.SetKillerName(bullOwner.CharacterName, bullOwner.CharacterRenderer.material.color);
     }
     private void DispalyTargetMark()
     {
@@ -161,7 +164,7 @@ public class Player : CharacterBase, IHit
     }
     public void OnHit(CharacterBase bulletOwner)
     {
-        Die();
+        Die(bulletOwner);
     }
     private void SetUpPlayerLoadLevel()
     {
@@ -185,6 +188,9 @@ public class Player : CharacterBase, IHit
     private void SetUpPLayerPlaying()
     {
         AttackRangeDisplay.SetActive(true);
+
+        UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.GetUICanvas<UIMainMenuCanvas>(UICanvasID.MainMenu);
+        CharacterName = mainMenuCanvas.GetPlayerName();
     }
     private void SetCharacterRotation()
     {

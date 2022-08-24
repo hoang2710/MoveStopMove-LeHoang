@@ -14,6 +14,8 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
     public RectTransform ArrowAnchorTrans;
     public TMP_Text ScoreText;
     public TMP_Text NameText;
+    public TMP_Text ScorePopUpText;
+    public Animator ScoreTextAnim;
     private CharacterBase currentChar;
     [HideInInspector]
     public Camera curCam;
@@ -102,7 +104,7 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
                 enableFlag = false;
             }
 
-            ArrowAnchorTrans.rotation = Quaternion.Euler(0, 0, angle*Mathf.Rad2Deg);
+            ArrowAnchorTrans.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
         }
         else
         {
@@ -132,6 +134,14 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         ScoreText.text = score.ToString();
         MoveUI(); //NOTE: update player ui when scale up
     }
+    public void TriggerPopupScore(int addedScore)
+    {
+        ScorePopUpText.text = addedScore.ToString();
+        ScorePopUpText.enabled = true;
+
+        ScoreTextAnim.SetTrigger(ConstValues.ANIM_TRIGGER_SCORE_POPUP);
+        StartCoroutine(DelayDisableScorePopupText());
+    }
 
     public void OnInit(CharacterBase characterBase)
     {
@@ -140,6 +150,7 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         NameText.enabled = true;
         ArrowImage.enabled = false;
         enableFlag = true;
+        ScorePopUpText.enabled = false;
     }
     public void OnDespawn()
     {
@@ -147,60 +158,66 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         currentChar = null;
         isPlayer = false;
     }
+
+    public IEnumerator DelayDisableScorePopupText()
+    {
+        yield return new WaitForSeconds(ConstValues.VALUE_SCORE_POPUP_TEXT_ANIMATION_TIME);
+        ScorePopUpText.enabled = false; Debug.LogWarning("disble");
+    }
 }
 
-    #region old moveUI
-    /*
-    private void MoveUI()
+#region old moveUI
+/*
+private void MoveUI()
+{
+    Vector3 pos = curCam.WorldToScreenPoint(currentChar.CharacterUITransRoot.position);
+    if (pos.z <= 0)
     {
-        Vector3 pos = curCam.WorldToScreenPoint(currentChar.CharacterUITransRoot.position);
-        if (pos.z <= 0)
-        {
-            pos *= -1f; //NOTE: if z<0 means UIRootPos is behind camera --> flipped so need to flip back
-        }
-
-        if (pos.x > xAxisMax || pos.x < xAxisMin)
-        {
-            isOutScreen = true;
-        }
-        else if (pos.y > yAxisMax || pos.y < yAxisMin)
-        {
-            isOutScreen = true;
-        }
-        else
-        {
-            isOutScreen = false;
-        }
-
-        if (isOutScreen)
-        {
-            Vector3 truePos = pos;
-
-            pos.x = Mathf.Clamp(pos.x, xAxisMin, xAxisMax);
-            pos.y = Mathf.Clamp(pos.y, yAxisMin, yAxisMax);
-
-            if (enableFlag)
-            {
-                NameText.enabled = false;
-                ArrowImage.enabled = true;
-                enableFlag = false;
-            }
-
-            Vector3 arrowDir = truePos - pos;
-            float angle = Mathf.Atan2(arrowDir.y, arrowDir.x) * Mathf.Rad2Deg;
-            ArrowAnchorTrans.rotation = Quaternion.Euler(0, 0, angle);
-        }
-        else
-        {
-            if (!enableFlag)
-            {
-                NameText.enabled = true;
-                ArrowImage.enabled = false;
-                enableFlag = true;
-            }
-        }
-
-        UITrans.position = pos;
+        pos *= -1f; //NOTE: if z<0 means UIRootPos is behind camera --> flipped so need to flip back
     }
-    */
-    #endregion
+
+    if (pos.x > xAxisMax || pos.x < xAxisMin)
+    {
+        isOutScreen = true;
+    }
+    else if (pos.y > yAxisMax || pos.y < yAxisMin)
+    {
+        isOutScreen = true;
+    }
+    else
+    {
+        isOutScreen = false;
+    }
+
+    if (isOutScreen)
+    {
+        Vector3 truePos = pos;
+
+        pos.x = Mathf.Clamp(pos.x, xAxisMin, xAxisMax);
+        pos.y = Mathf.Clamp(pos.y, yAxisMin, yAxisMax);
+
+        if (enableFlag)
+        {
+            NameText.enabled = false;
+            ArrowImage.enabled = true;
+            enableFlag = false;
+        }
+
+        Vector3 arrowDir = truePos - pos;
+        float angle = Mathf.Atan2(arrowDir.y, arrowDir.x) * Mathf.Rad2Deg;
+        ArrowAnchorTrans.rotation = Quaternion.Euler(0, 0, angle);
+    }
+    else
+    {
+        if (!enableFlag)
+        {
+            NameText.enabled = true;
+            ArrowImage.enabled = false;
+            enableFlag = true;
+        }
+    }
+
+    UITrans.position = pos;
+}
+*/
+#endregion

@@ -31,6 +31,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
     [NonReorderable]
     public List<PantData> PantDatas;
     public List<Material> BotMaterials;
+    public List<string> BotNames;
 
     private Dictionary<WeaponType, GameObject> weaponItems = new Dictionary<WeaponType, GameObject>();
     private Dictionary<WeaponSkinType, Material> weaponSkins = new Dictionary<WeaponSkinType, Material>();
@@ -152,7 +153,11 @@ public class ItemStorage : SingletonMono<ItemStorage>
         int ran = Random.Range(0, BotMaterials.Count);
         return BotMaterials[ran];
     }
-
+    public string GetRandomBotName()
+    {
+        int ran = Random.Range(0, BotNames.Count);
+        return BotNames[ran];
+    }
 }
 
 public enum WeaponType

@@ -22,6 +22,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         SetUpHandWeapon();
         SetUpPantSkin();
         SetRandomBodySkin();
+        SetRandomName();
 
         if (isUIEnable)
         {
@@ -90,6 +91,10 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
     public void SetRandomBodySkin()
     {
         CharacterRenderer.material = ItemStorage.Instance.GetRandomBotMaterial();
+    }
+    public void SetRandomName()
+    {
+        CharacterName = ItemStorage.Instance.GetRandomBotName();
     }
 
     private void ResetScore()

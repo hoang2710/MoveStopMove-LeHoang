@@ -199,7 +199,8 @@ public class CharacterBase : MonoBehaviour
         CharaterTrans.localScale += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * Vector3.one;
         AttackRange += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * ConstValues.VALUE_BASE_ATTACK_RANGE;
 
-        currentUIDisplay?.UpdateScore(++Score);
+        currentUIDisplay?.UpdateScore(++Score);//temp score system
+        currentUIDisplay?.TriggerPopupScore(1);//temp score system
     }
     public void SetUpThrowWeapon(Quaternion rotation, bool isTripleShot, float tripleShotOffset)
     {
