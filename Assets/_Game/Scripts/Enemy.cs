@@ -30,6 +30,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         if (GameManager.Instance.CurrentGameState == GameState.Playing)
         {
             DisplayCharacterUI();
+            IsMovable = true;
         }
         else
         {

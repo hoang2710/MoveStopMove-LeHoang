@@ -36,15 +36,15 @@ public class UIMainMenuCanvas : UICanvas
     {
 
     }
-    public void OnVibrationToggleValueChange(bool value) //NOTE: true is on vibration
+    public void OnVibrationToggleValueChange(bool isVibrOn) //NOTE: true is on vibration
     {
-        Debug.Log(value);
+        Debug.Log(isVibrOn);
         //NOTE: Audio manager work
         //..........
     }
-    public void OnSoundToggleValueChange(bool value) //NOTE: true is mute
+    public void OnSoundToggleValueChange(bool isMute) //NOTE: true is mute
     {
-        Debug.Log(value);
+        Debug.Log(isMute);
         //NOTE: Audio manager work
         //..........
     }
@@ -57,13 +57,18 @@ public class UIMainMenuCanvas : UICanvas
     {
         CoinText.text = value.ToString();
     }
-    public void SetProgressBarValue(float value)
+    public void SetProgressBarValue(int value)
     {
-        PlayerProgressBar.value = value;
+        // int tmp = value % ConstValues.VALUE_EXP_PER_LEVEL;
+        // PlayerProgressBar.value = (float)tmp / ConstValues.VALUE_EXP_PER_LEVEL;
     }
     public string GetPlayerName()
     {
         return PlayerName.text;
     }
-    
+    protected override void OnOpenCanvas()
+    {
+        int currentCoin = PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_COIN);
+        SetCoinNumber(currentCoin);
+    }
 }

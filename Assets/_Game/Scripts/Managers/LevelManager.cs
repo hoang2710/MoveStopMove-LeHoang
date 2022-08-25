@@ -48,7 +48,7 @@ public class LevelManager : SingletonMono<LevelManager>
         numOfBaseBot = 10;  //temp
         numOfCurrentCharacter = numOfTotalCharacter;
         numOfBotToSpawn = numOfTotalCharacter - numOfBaseBot - 1;//NOTE: minus player
-        
+
         gamePlayCanvas = UIManager.Instance.GetUICanvas<UIGamePlayCanvas>(UICanvasID.GamePlay);
         gamePlayCanvas.SetPlayerAliveCount(numOfTotalCharacter);
         gamePlayCanvas.Close();
@@ -148,6 +148,11 @@ public class LevelManager : SingletonMono<LevelManager>
         rank = GetPlayerRanking();
         reward = GetNumOfCoinReward();
         percent = GetProgressPercentage();
+
+        int exp = GetLevelEXP();
+        int curExp = PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_EXP, 0);
+        curExp += exp;
+        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_EXP,curExp);
     }
     public int GetPlayerRanking()
     {
@@ -156,6 +161,10 @@ public class LevelManager : SingletonMono<LevelManager>
     public int GetNumOfCoinReward()
     {
         return (numOfTotalCharacter - numOfCurrentCharacter) * 5; //temp
+    }
+    public int GetLevelEXP()
+    {
+        return (numOfTotalCharacter - numOfCurrentCharacter); //temp
     }
     public float GetProgressPercentage()
     {

@@ -16,8 +16,7 @@ public class Player : CharacterBase, IHit
 
     private float timer = 0;
 
-    // public static bool isShop;
-
+    public GameObject PlayerObj;
     public GameObject TargetMark;
     public Transform TargetMarkTrans;
     public GameObject AttackRangeDisplay;
@@ -46,12 +45,17 @@ public class Player : CharacterBase, IHit
                 RemoveCharacterUI();
                 break;
             // case GameState.MainMenu:
-            //     if (isShop)
+            //     ChangeAnimation(ConstValues.ANIM_TRIGGER_IDLE);
+            //     if (!PlayerObj.activeInHierarchy)
             //     {
-            //         LoadDataFromPlayerPrefs();
-            //         SetUpHandWeapon();
-            //         SetUpPantSkin();
+            //         PlayerObj.SetActive(true);
             //     }
+            //     break;
+            // case GameState.WeaponShop:
+            //     PlayerObj.SetActive(false);
+            //     break;
+            // case GameState.SkinShop:
+            //     ChangeAnimation(ConstValues.ANIM_TRIGGER_DANCE_CHAR_SKIN);
             //     break;
             case GameState.Playing:
                 StartCoroutine(EnterPlayingState());
@@ -199,7 +203,7 @@ public class Player : CharacterBase, IHit
         float tmp = Mathf.Atan2(MoveDir.x, MoveDir.z) * Mathf.Rad2Deg;
         CharaterTrans.rotation = Quaternion.Lerp(CharaterTrans.rotation, Quaternion.Euler(0, tmp, 0), Time.deltaTime * rotateSpeed);
     }
-    private void LoadDataFromPlayerPrefs()
+    public void LoadDataFromPlayerPrefs()
     {
         WeaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG);
         WeaponSkinTag = (WeaponSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG);
@@ -209,7 +213,8 @@ public class Player : CharacterBase, IHit
     public IEnumerator EnterPlayingState()
     {
         SetUpPLayerPlaying();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
         DisplayCharacterUI();
     }
 }

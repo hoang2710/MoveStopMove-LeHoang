@@ -9,6 +9,8 @@ public class ConstValues
     public const string PLAYER_PREFS_ENUM_PANT_SKIN_TAG = "PantSkinTag";
     public const string PLAYER_PREFS_BOOL_SOUND_SETTING = "Sound Setting";
     public const string PLAYER_PREFS_BOOL_VIBRATE_SETTING = "Vibrate Setting";
+    public const string PLAYER_PREFS_INT_PLAYER_COIN = "Player Coin";
+    public const string PLAYER_PREFS_INT_PLAYER_EXP = "Player Exp";
     public const int PLAYER_PREFS_BOOL_TRUE_VALUE = 1;
     public const int PLAYER_PREFS_BOOL_FALSE_VALUE = 0;
     public const string TAG_PLAYER = "Player";
@@ -20,6 +22,7 @@ public class ConstValues
     public const string ANIM_TRIGGER_DEAD = "Dead";
     public const string ANIM_PLAY_DEFAULT_IDLE = "Default Idle";
     public const string ANIM_TRIGGER_SCORE_POPUP = "Score Popup";
+    public const int VALUE_EXP_PER_LEVEL = 100;
     public const float VALUE_BASE_ATTACK_RANGE = 6f;
     public const float VALUE_BASE_ATTACK_RATE = 2f;
     public const float VALUE_WEAPON_DEFAULT_LIFE_TIME = 2f;
@@ -33,6 +36,6 @@ public class ConstValues
     public const float VALUE_BOT_DEAD_TIME = 2f;
     public const float VALUE_SCORE_POPUP_TEXT_ANIMATION_TIME = 0.48f;
     public const string VALUE_CHARACTER_DEFAULT_NAME = "ABCDE";
-    public static Color VALUE_CHARACTER_DEFAULT_COLOR = new Color(119f/255, 231f/255, 84f/255);
+    public static Color VALUE_CHARACTER_DEFAULT_COLOR = new Color(119f / 255, 231f / 255, 84f / 255);
     public const int LAYER_MASK_ENEMY = 1 << 6;
 }

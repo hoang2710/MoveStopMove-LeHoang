@@ -36,8 +36,11 @@ public class GameManager : SingletonMono<GameManager>
             case GameState.ResultPhase:
                 OnGameStateResultPhase();
                 break;
-            case GameState.Shopping:
-                OnGameStateShopping();
+            case GameState.WeaponShop:
+                OnGameStateWeaponShop();
+                break;
+            case GameState.SkinShop:
+                OnGameStateSkinShop();
                 break;
             default:
                 break;
@@ -84,9 +87,13 @@ public class GameManager : SingletonMono<GameManager>
         Debug.Log("Result Phase State");
         UIManager.Instance.OpenUI(UICanvasID.Result);
     }
-    private void OnGameStateShopping()
+    private void OnGameStateWeaponShop()
     {
-        Debug.Log("Shopping State");
+        Debug.Log("Weapon Shop State");
+    }
+    private void OnGameStateSkinShop()
+    {
+        Debug.Log("Skin Shop State");
     }
     private IEnumerator DelayChangeGameState(GameState state, float time)
     {
@@ -108,6 +115,19 @@ public class GameManager : SingletonMono<GameManager>
     {
         this.isNextZone = isNextZone;
     }
+    public void ResetPLayerCoinValue()
+    {
+        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_COIN, 0);
+
+        UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.OpenUI<UIMainMenuCanvas>(UICanvasID.MainMenu);
+        mainMenuCanvas?.SetCoinNumber(0);
+    }
+    public void ResetPlayerEXP(){
+        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_EXP,0);
+
+        UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.OpenUI<UIMainMenuCanvas>(UICanvasID.MainMenu);
+        mainMenuCanvas?.SetCoinNumber(0);
+    }
 }
 
 public enum GameState
@@ -119,7 +139,8 @@ public enum GameState
     Playing,
     Pause,
     ResultPhase,
-    Shopping
+    WeaponShop,
+    SkinShop
 }
 
 
