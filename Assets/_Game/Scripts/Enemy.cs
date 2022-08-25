@@ -6,16 +6,19 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
 {
     public AIAgent agent;
     public bool IsMovable { get; private set; }
-    private bool isUIEnable;
     public GameObject BotGameObject;
 
-    public void OnInit()
+    public void OnSpawn()
     {
         agent.stateMachine.ChangeState(AIStateId.IdleState);
+
         IsAlive = true;
         CharacterCollider.enabled = true;
         CharaterTrans.localScale = Vector3.one;
         AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
+
+        AttackTarget = null;
+        AttackTargetTrans = null;
 
         SetRandomEnumData();
         ResetScore();
@@ -24,40 +27,38 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         SetRandomBodySkin();
         SetRandomName();
 
-        if (isUIEnable)
+        if (GameManager.Instance.CurrentGameState == GameState.Playing)
         {
             DisplayCharacterUI();
+        }
+        else
+        {
+            RemoveCharacterUI();
         }
     }
     public void OnDespawn()
     {
-        AttackTarget = null;
-        AttackTargetTrans = null;
-
         RemoveCharacterUI();
     }
     protected override void GameManagerOnGameStateChange(GameState state)
     {
         switch (state)
         {
-            // case GameState.MainMenu:
-            //     agent.stateMachine.ChangeState(AIStateId.IdleState);
-            //     break;
             case GameState.Playing:
-                DisplayCharacterUI();
+                if (BotGameObject.activeInHierarchy)
+                {
+                    DisplayCharacterUI();
+                }
                 IsMovable = true;
-                isUIEnable = true;
                 break;
             case GameState.Pause:
                 IsMovable = false;
-                isUIEnable = false;
                 break;
             case GameState.LoadLevel:
                 BotPooling.Instance.PushBotToPool(BotGameObject);
                 break;
             case GameState.ResultPhase:
                 IsMovable = false;
-                isUIEnable = false;
                 break;
             default:
                 break;

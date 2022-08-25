@@ -7,5 +7,5 @@ anim triiger like shit
 
 weapon shit player on start
 
-inherited character base
-inherited weapon -> bullet
+bug state machine when instantiate bot too close
+ 

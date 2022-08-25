@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IPoolCharacterUI
 {
-    public void OnInit(CharacterBase characterBase);
+    public void OnSpawn(CharacterBase characterBase);
     public void OnDespawn();
 }

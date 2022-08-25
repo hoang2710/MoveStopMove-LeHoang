@@ -17,7 +17,7 @@ public class CharacterUIPooling : SingletonMono<CharacterUIPooling>
     {
         for (int i = 0; i <= PoolSize; i++)
         {
-            GameObject obj = Instantiate(PoolObject,ParentTransform);
+            GameObject obj = Instantiate(PoolObject, ParentTransform);
             obj.SetActive(false);
             pool.Push(obj);
         }
@@ -28,7 +28,7 @@ public class CharacterUIPooling : SingletonMono<CharacterUIPooling>
         obj.SetActive(true);
 
         IPoolCharacterUI poolCharacterUI = obj.GetComponent<IPoolCharacterUI>();
-        poolCharacterUI?.OnInit(characterBase);
+        poolCharacterUI?.OnSpawn(characterBase);
 
         return obj;
     }
@@ -38,7 +38,11 @@ public class CharacterUIPooling : SingletonMono<CharacterUIPooling>
         poolCharacterUI?.OnDespawn();
 
         obj.SetActive(false);
+
+        if (!pool.Contains(obj))
+        {
         pool.Push(obj);
+        }
     }
     private GameObject CheckIfHaveUILeftInPool()
     {
@@ -48,7 +52,7 @@ public class CharacterUIPooling : SingletonMono<CharacterUIPooling>
         }
         else
         {
-            GameObject obj = Instantiate(PoolObject,ParentTransform);
+            GameObject obj = Instantiate(PoolObject, ParentTransform);
             return obj;
         }
     }

@@ -48,7 +48,7 @@ public class CharacterBase : MonoBehaviour
     public Renderer CharacterRenderer;
     public Renderer PantRenderer;
     public Transform CharacterUITransRoot;
-    [HideInInspector]
+    // [HideInInspector]
     public CharacterInfoDIsplay currentUIDisplay;
 
     protected virtual void Awake()
@@ -214,9 +214,12 @@ public class CharacterBase : MonoBehaviour
     }
     public void DisplayCharacterUI()
     {
-        CharacterUIPooling.Instance.PopUIFromPool(this);
+        if (currentUIDisplay == null)
+        {
+            CharacterUIPooling.Instance.PopUIFromPool(this);
 
-        currentUIDisplay?.SetUpUI(CharacterName, CharacterRenderer.material.color, isPlayer);
+            currentUIDisplay?.SetUpUI(CharacterName, CharacterRenderer.material.color, isPlayer);
+        }
     }
     public void RemoveCharacterUI()
     {

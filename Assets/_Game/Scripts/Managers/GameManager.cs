@@ -5,9 +5,9 @@ using System;
 
 public class GameManager : SingletonMono<GameManager>
 {
-    [HideInInspector]
-    public bool isNextZone;
+    private bool isNextZone;
     public static event Action<GameState> OnGameStateChange;
+    public GameState CurrentGameState { get; private set; } = GameState.InitState;
 
     private void Start()
     {
@@ -44,6 +44,7 @@ public class GameManager : SingletonMono<GameManager>
         }
 
         AutoSetTimeScale(state);
+        CurrentGameState = state;
 
         OnGameStateChange?.Invoke(state);
     }
@@ -103,10 +104,15 @@ public class GameManager : SingletonMono<GameManager>
             Time.timeScale = 1;
         }
     }
+    public void SetBoolIsNextZone(bool isNextZone)
+    {
+        this.isNextZone = isNextZone;
+    }
 }
 
 public enum GameState
 {
+    InitState,
     LoadGame,
     LoadLevel,
     MainMenu,

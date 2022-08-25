@@ -20,7 +20,7 @@ public class BotPooling : SingletonMono<BotPooling>
     }
     private void InitPool()
     {
-        for (int i = 0; i <= BotPoolData.poolSize; i++)
+        for (int i = 0; i < BotPoolData.poolSize; i++)
         {
             GameObject obj = Instantiate(BotPoolData.botPrefab);
             obj.SetActive(false);
@@ -29,6 +29,7 @@ public class BotPooling : SingletonMono<BotPooling>
     }
     public GameObject PopBotFromPool(Vector3 position, Quaternion rotation)
     {
+        Debug.Log(botPool.Count);
         GameObject obj = CheckIfHaveBotLeftInPool();
         Transform objTrans = obj.transform;
 
@@ -37,7 +38,7 @@ public class BotPooling : SingletonMono<BotPooling>
         objTrans.rotation = rotation;
 
         IPoolCharacter poolCharacter = obj.GetComponent<IPoolCharacter>();
-        poolCharacter?.OnInit();
+        poolCharacter?.OnSpawn();
 
         return obj;
     }
@@ -47,7 +48,11 @@ public class BotPooling : SingletonMono<BotPooling>
         poolCharacter?.OnDespawn();
 
         obj.SetActive(false);
+
+        if (!botPool.Contains(obj))
+        {
         botPool.Push(obj);
+        }
     }
     private GameObject CheckIfHaveBotLeftInPool()
     {

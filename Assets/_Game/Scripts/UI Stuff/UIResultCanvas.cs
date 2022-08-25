@@ -84,7 +84,8 @@ public class UIResultCanvas : UICanvas
     }
     public void OnClickNextZoneButton()
     {
-        GameManager.Instance.isNextZone = true;
+        LevelManager.Instance.ChangeLevelToLoad(true);
+        GameManager.Instance.SetBoolIsNextZone(true);
         GameManager.Instance.ChangeGameState(GameState.LoadLevel);
         UIManager.Instance.OpenUI(UICanvasID.GamePlay);
 

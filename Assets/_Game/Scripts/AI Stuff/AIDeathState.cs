@@ -12,6 +12,8 @@ public class AIDeathState : AIState
     }
     public void Enter(AIAgent agent)
     {
+        LevelManager.Instance.KillHandle();
+        
         agent.NavAgent.enabled = false;
         agent.enemyRef.ChangeAnimation(ConstValues.ANIM_TRIGGER_DEAD);
 
@@ -26,7 +28,6 @@ public class AIDeathState : AIState
         if (timer >= deadTime)
         {
             BotPooling.Instance.PushBotToPool(agent.enemyRef.BotGameObject);
-            LevelManager.Instance.KillHandle();
         }
         else
         {

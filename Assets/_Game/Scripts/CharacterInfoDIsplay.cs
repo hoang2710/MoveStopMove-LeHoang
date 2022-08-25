@@ -26,10 +26,10 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
     private float parentCanvasHeight;
     private float UIOffsetXAxis = 96f;
     private float UIOffsetYAxis = 96f;
-    private float xAxisMin;
-    private float xAxisMax;
-    private float yAxisMin;
-    private float yAxisMax;
+    // private float xAxisMin;
+    // private float xAxisMax;
+    // private float yAxisMin;
+    // private float yAxisMax;
     private Vector3 center;
     private float boundX;
     private float boundY;
@@ -41,10 +41,10 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         parentCanvasLength = ParentCanvasTrans.sizeDelta.x;
         parentCanvasHeight = ParentCanvasTrans.sizeDelta.y;
 
-        xAxisMin = UIOffsetXAxis;
-        xAxisMax = parentCanvasLength - UIOffsetXAxis;
-        yAxisMin = UIOffsetYAxis;
-        yAxisMax = parentCanvasHeight - UIOffsetYAxis;
+        // xAxisMin = UIOffsetXAxis;
+        // xAxisMax = parentCanvasLength - UIOffsetXAxis;
+        // yAxisMin = UIOffsetYAxis;
+        // yAxisMax = parentCanvasHeight - UIOffsetYAxis;
 
         center = new Vector3(parentCanvasLength / 2, parentCanvasHeight / 2, 0);
         boundX = (parentCanvasLength - 2 * UIOffsetXAxis) / 2;
@@ -59,7 +59,7 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
             MoveUI();
         }
     }
-    private void MoveUI()
+    public void MoveUI()
     {
         Vector3 pos = curCam.WorldToScreenPoint(currentChar.CharacterUITransRoot.position);
         if (pos.z <= 0)
@@ -143,26 +143,26 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         StartCoroutine(DelayDisableScorePopupText());
     }
 
-    public void OnInit(CharacterBase characterBase)
+    public void OnSpawn(CharacterBase characterBase)
     {
         currentChar = characterBase;
         currentChar.currentUIDisplay = this;
         NameText.enabled = true;
         ArrowImage.enabled = false;
         enableFlag = true;
-        ScorePopUpText.enabled = false;
     }
     public void OnDespawn()
     {
         currentChar.currentUIDisplay = null;
         currentChar = null;
         isPlayer = false;
+        ScorePopUpText.enabled = false;
     }
 
     public IEnumerator DelayDisableScorePopupText()
     {
         yield return new WaitForSeconds(ConstValues.VALUE_SCORE_POPUP_TEXT_ANIMATION_TIME);
-        ScorePopUpText.enabled = false; Debug.LogWarning("disble");
+        ScorePopUpText.enabled = false;
     }
 }
 

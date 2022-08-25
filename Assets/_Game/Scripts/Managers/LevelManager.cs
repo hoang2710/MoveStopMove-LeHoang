@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : SingletonMono<LevelManager>
 {
@@ -14,6 +15,10 @@ public class LevelManager : SingletonMono<LevelManager>
     private int numOfCurrentCharacter;
     private int numOfBotToSpawn;
     private UIGamePlayCanvas gamePlayCanvas;
+
+    private Level currentLevel = Level.Level_1; //temp
+    private Level levelToLoad = Level.Level_1; //temp
+    private bool isFirstLoad = true;
 
     private void Start()
     {
@@ -28,6 +33,7 @@ public class LevelManager : SingletonMono<LevelManager>
         switch (state)
         {
             case GameState.LoadLevel:
+                LoadLevel();
                 SetData();
                 Invoke(nameof(SpawnBaseBot), 0.1f); //NOTE: wait for remain bot to be push to pool --> avoid instantiate more bot, may optimize later 
                 // SpawnBaseBot();
@@ -38,10 +44,11 @@ public class LevelManager : SingletonMono<LevelManager>
     }
     private void SetData()
     {
-        numOfTotalCharacter = 50; //temp
+        numOfTotalCharacter = 25; //temp
         numOfBaseBot = 10;  //temp
         numOfCurrentCharacter = numOfTotalCharacter;
         numOfBotToSpawn = numOfTotalCharacter - numOfBaseBot - 1;//NOTE: minus player
+        
         gamePlayCanvas = UIManager.Instance.GetUICanvas<UIGamePlayCanvas>(UICanvasID.GamePlay);
         gamePlayCanvas.SetPlayerAliveCount(numOfTotalCharacter);
         gamePlayCanvas.Close();
@@ -86,7 +93,7 @@ public class LevelManager : SingletonMono<LevelManager>
     private bool GetRandomPos(Vector3 center, out Vector3 result)
     {
         float minDistSqr = MapSpawnInnerRadius * MapSpawnInnerRadius;
-        int numnerOfTries = int.MaxValue;
+        int numnerOfTries = 30;
         for (int i = 0; i < numnerOfTries; i++)
         {
             Vector3 randomPoint = center + Random.insideUnitSphere * MapSpawnOuterRadius;
@@ -109,6 +116,33 @@ public class LevelManager : SingletonMono<LevelManager>
         result = Vector3.zero;
         return false;
     }
+    public void LoadLevel()
+    {
+        if (isFirstLoad)
+        {
+            SceneManager.LoadScene((int)currentLevel, LoadSceneMode.Additive);
+            isFirstLoad = false;
+            return;
+        }
+        if (levelToLoad != currentLevel)
+        {
+            SceneManager.UnloadSceneAsync((int)currentLevel); //NOTE: ???????
+            currentLevel = levelToLoad;
+            SceneManager.LoadScene((int)currentLevel, LoadSceneMode.Additive);
+        }
+    }
+    public void ChangeLevelToLoad(bool isLoadNextLevel, Level levelToLoad = Level.Level_1)
+    {
+        if (isLoadNextLevel)
+        {
+            this.levelToLoad = (Level)(((int)currentLevel) % 3 + 1);
+        }
+        else
+        {
+            this.levelToLoad = levelToLoad;
+        }
+    }
+
     public void GetLevelResult(out int rank, out int reward, out float percent)
     {
         rank = GetPlayerRanking();
@@ -129,3 +163,9 @@ public class LevelManager : SingletonMono<LevelManager>
     }
 }
 
+public enum Level
+{
+    Level_1 = 1,
+    Level_2 = 2,
+    Level_3 = 3
+}

@@ -54,8 +54,10 @@ public class Player : CharacterBase, IHit
             //     }
             //     break;
             case GameState.Playing:
-                SetUpPLayerPlaying();
-                DisplayCharacterUI();
+                StartCoroutine(EnterPlayingState());
+                break;
+            case GameState.ResultPhase:
+                isAttackable = false;
                 break;
             default:
                 break;
@@ -182,11 +184,11 @@ public class Player : CharacterBase, IHit
         AttackRangeDisplay.SetActive(false);
         AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
         AttackRangeDisplayTrans.localScale = Vector3.one * AttackRange;
-
-        CharaterTrans.position = Vector3.zero;
+        CharaterTrans.position = Vector3.zero; //NOTE: needed to set twice
     }
     private void SetUpPLayerPlaying()
     {
+        CharaterTrans.position = Vector3.zero; //NOTE: needed to set twice
         AttackRangeDisplay.SetActive(true);
 
         UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.GetUICanvas<UIMainMenuCanvas>(UICanvasID.MainMenu);
@@ -202,5 +204,12 @@ public class Player : CharacterBase, IHit
         WeaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG);
         WeaponSkinTag = (WeaponSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG);
         PantSkinTag = (PantSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_PANT_SKIN_TAG);
+    }
+
+    public IEnumerator EnterPlayingState()
+    {
+        SetUpPLayerPlaying();
+        yield return new WaitForSeconds(0.5f);
+        DisplayCharacterUI();
     }
 }
