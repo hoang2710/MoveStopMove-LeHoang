@@ -189,10 +189,12 @@ public class Player : CharacterBase, IHit
         AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
         AttackRangeDisplayTrans.localScale = Vector3.one * AttackRange;
         CharaterTrans.position = Vector3.zero; //NOTE: needed to set twice
+        CharaterTrans.rotation = Quaternion.Euler(0, 180f, 0);
     }
     private void SetUpPLayerPlaying()
     {
         CharaterTrans.position = Vector3.zero; //NOTE: needed to set twice
+        CharaterTrans.rotation = Quaternion.Euler(0, 180f, 0);
         AttackRangeDisplay.SetActive(true);
 
         UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.GetUICanvas<UIMainMenuCanvas>(UICanvasID.MainMenu);

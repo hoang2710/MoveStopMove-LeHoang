@@ -8,7 +8,6 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     [SerializeField]
     private float flyingSpeed = ConstValues.WALUE_WEAPON_DEFAULT_FLY_SPEED;
     public WeaponType WeaponTag;
-    public BulletType BulletTag;
     public Transform WeaponTrans;
     public GameObject WeaponObject;
     public Collider WeaponCollider;
@@ -137,11 +136,4 @@ public class Weapon : MonoBehaviour, IPooledWeapon
         this.enabled = true;
         WeaponCollider.enabled = true;
     }
-}
-
-public enum BulletType
-{
-    Default,
-    Rotate,
-    TripleShot
 }

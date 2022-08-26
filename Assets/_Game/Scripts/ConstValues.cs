@@ -17,8 +17,8 @@ public class ConstValues
     public const string ANIM_TRIGGER_IDLE = "Idle";
     public const string ANIM_TRIGGER_RUN = "Run";
     public const string ANIM_TRIGGER_ATTACK = "Attack";
-    public const string ANIM_TRIGGER_DANCE_WIN = "Dance_Win";
-    public const string ANIM_TRIGGER_DANCE_CHAR_SKIN = "Dance_CharSkin";
+    public const string ANIM_TRIGGER_DANCE_WIN = "Dance Win";
+    public const string ANIM_TRIGGER_DANCE_CHAR_SKIN = "Dance CharSkin";
     public const string ANIM_TRIGGER_DEAD = "Dead";
     public const string ANIM_PLAY_DEFAULT_IDLE = "Default Idle";
     public const string ANIM_TRIGGER_SCORE_POPUP = "Score Popup";
