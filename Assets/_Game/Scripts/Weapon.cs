@@ -115,7 +115,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     }
     public void CalculateLifeTime()
     {
-        lifeTime = bulletOwner.AttackRange / flyingSpeed;
+        lifeTime = (bulletOwner.AttackRange - bulletOwner.AttackPosOffset) / flyingSpeed;
     }
     public void OnPopFromPool(Material weaponSkinMaterial)
     {

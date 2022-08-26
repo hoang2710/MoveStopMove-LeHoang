@@ -22,12 +22,14 @@ public class UIMainMenuCanvas : UICanvas
     }
     public void OnClickWeaponShopButton()
     {
+        GameManager.Instance.ChangeGameState(GameState.WeaponShop);
         UIManager.Instance.OpenUI(UICanvasID.WeaponShop);
 
         Close();
     }
     public void OnClickSkinShopButton()
     {
+        GameManager.Instance.ChangeGameState(GameState.SkinShop);
         UIManager.Instance.OpenUI(UICanvasID.SkinShop);
 
         Close();

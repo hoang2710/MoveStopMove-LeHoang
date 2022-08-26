@@ -28,6 +28,8 @@ public class CharacterBase : MonoBehaviour
     public Transform AttackTargetTrans;
     [HideInInspector]
     public CharacterBase AttackTarget;
+    [HideInInspector]
+    public float AttackPosOffset = 1f; //NOTE: distance from attack pos to character center, use for calculate weapon life time
     private float minorOffset = 1.1f; //NOTE: prevent targetmark blinking due to detect and un-detect at the same time
     private float detectOffSetDistance = 2f;
 
@@ -190,6 +192,7 @@ public class CharacterBase : MonoBehaviour
     {
         if (curAnim != anim)
         {
+            Anim.ResetTrigger(curAnim);
             Anim.SetTrigger(anim);
             curAnim = anim;
         }
@@ -198,6 +201,7 @@ public class CharacterBase : MonoBehaviour
     {
         CharaterTrans.localScale += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * Vector3.one;
         AttackRange += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * ConstValues.VALUE_BASE_ATTACK_RANGE;
+        AttackPosOffset += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
 
         currentUIDisplay?.UpdateScore(++Score);//temp score system
         currentUIDisplay?.TriggerPopupScore(1);//temp score system

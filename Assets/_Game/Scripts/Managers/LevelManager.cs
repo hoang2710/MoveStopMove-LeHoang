@@ -44,8 +44,8 @@ public class LevelManager : SingletonMono<LevelManager>
     }
     private void SetData()
     {
-        numOfTotalCharacter = 25; //temp
-        numOfBaseBot = 10;  //temp
+        numOfTotalCharacter = Random.Range(25, 35); //temp
+        numOfBaseBot = Random.Range(8, 12);  //temp
         numOfCurrentCharacter = numOfTotalCharacter;
         numOfBotToSpawn = numOfTotalCharacter - numOfBaseBot - 1;//NOTE: minus player
 
@@ -152,7 +152,7 @@ public class LevelManager : SingletonMono<LevelManager>
         int exp = GetLevelEXP();
         int curExp = PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_EXP, 0);
         curExp += exp;
-        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_EXP,curExp);
+        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_EXP, curExp);
     }
     public int GetPlayerRanking()
     {

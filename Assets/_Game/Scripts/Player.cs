@@ -152,6 +152,15 @@ public class Player : CharacterBase, IHit
 
         resultCanvas.SetKillerName(bullOwner.CharacterName, bullOwner.CharacterRenderer.material.color);
     }
+    private void SetCharacterRotation()
+    {
+        float tmp = Mathf.Atan2(MoveDir.x, MoveDir.z) * Mathf.Rad2Deg;
+        CharaterTrans.rotation = Quaternion.Lerp(CharaterTrans.rotation, Quaternion.Euler(0, tmp, 0), Time.deltaTime * rotateSpeed);
+    }
+    public void OnHit(CharacterBase bulletOwner)
+    {
+        Die(bulletOwner);
+    }
     private void DispalyTargetMark()
     {
         //NOTE: temp solution, optimize later, or not
@@ -167,10 +176,6 @@ public class Player : CharacterBase, IHit
             TargetMark.SetActive(false);
             TargetMarkSetActiveFlag = false;
         }
-    }
-    public void OnHit(CharacterBase bulletOwner)
-    {
-        Die(bulletOwner);
     }
     private void SetUpPlayerLoadLevel()
     {
@@ -200,10 +205,11 @@ public class Player : CharacterBase, IHit
         UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.GetUICanvas<UIMainMenuCanvas>(UICanvasID.MainMenu);
         CharacterName = mainMenuCanvas.GetPlayerName();
     }
-    private void SetCharacterRotation()
+    public override void OnKillEnemy()
     {
-        float tmp = Mathf.Atan2(MoveDir.x, MoveDir.z) * Mathf.Rad2Deg;
-        CharaterTrans.rotation = Quaternion.Lerp(CharaterTrans.rotation, Quaternion.Euler(0, tmp, 0), Time.deltaTime * rotateSpeed);
+        base.OnKillEnemy();
+
+        CameraManager.Instance.ZoomOutCamera();
     }
     public void LoadDataFromPlayerPrefs()
     {
@@ -215,8 +221,7 @@ public class Player : CharacterBase, IHit
     public IEnumerator EnterPlayingState()
     {
         SetUpPLayerPlaying();
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.55f); //NOTE Wait for camera to transit complete (>0.5f)
         DisplayCharacterUI();
     }
 }

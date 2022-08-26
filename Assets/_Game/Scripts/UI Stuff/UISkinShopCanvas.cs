@@ -18,6 +18,7 @@ public class UISkinShopCanvas : UICanvas
     }
     public void OnCLickExitButton()
     {
+        GameManager.Instance.ChangeGameState(GameState.MainMenu);
         UIManager.Instance.OpenUI(UICanvasID.MainMenu);
 
         Close();

@@ -22,6 +22,9 @@ public class ConstValues
     public const string ANIM_TRIGGER_DEAD = "Dead";
     public const string ANIM_PLAY_DEFAULT_IDLE = "Default Idle";
     public const string ANIM_TRIGGER_SCORE_POPUP = "Score Popup";
+    public const string CINEMACHINE_ANIM_MAIN_MENU = "Main Menu";
+    public const string CINEMACHINE_ANIM_PLAYING = "Playing";
+    public const string CINEMACHINE_ANIM_SHOPPING = "Shopping";
     public const int VALUE_EXP_PER_LEVEL = 100;
     public const float VALUE_BASE_ATTACK_RANGE = 6f;
     public const float VALUE_BASE_ATTACK_RATE = 2f;
