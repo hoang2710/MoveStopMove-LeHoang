@@ -47,10 +47,28 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         // yAxisMax = parentCanvasHeight - UIOffsetYAxis;
 
         center = new Vector3(parentCanvasLength / 2, parentCanvasHeight / 2, 0);
-        boundX = (parentCanvasLength - 2 * UIOffsetXAxis) / 2;
-        boundY = (parentCanvasHeight - 2 * UIOffsetYAxis) / 2;
 
-        enableFlag = NameText.enabled;
+        // float tempXOffset = 0.1f * parentCanvasLength;
+        // float tempYOffset = 0.1f * parentCanvasHeight;
+
+        // if (tempXOffset > UIOffsetXAxis)
+        // {
+            boundX = (parentCanvasLength - 2 * UIOffsetXAxis) / 2;
+        // }
+        // else
+        // {
+        //     boundX = parentCanvasLength * 0.4f;
+        // }
+        // if (tempYOffset > UIOffsetYAxis)
+        // {
+            boundY = (parentCanvasHeight - 2 * UIOffsetYAxis) / 2;
+        // }
+        // else
+        // {
+        //     boundY = parentCanvasHeight * 0.4f;
+        // }
+
+        enableFlag = NameText.enabled; 
     }
     private void LateUpdate()
     {

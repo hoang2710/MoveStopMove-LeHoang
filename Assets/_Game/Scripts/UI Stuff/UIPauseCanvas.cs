@@ -9,10 +9,10 @@ public class UIPauseCanvas : UICanvas
     public Toggle SoundToggle;
     public Toggle VibrateToggle;
 
-    public void OnSoundToggleValueChange(bool value)
+    public void OnSoundToggleValueChange(bool isOn)
     {
         //NOTE: toggle is ON --> hide toggle background
-        if (value)
+        if (isOn)
         {
             SoundToggle.image.color = new Color(1, 1, 1, 0); //NOTE: transparent image
         }
@@ -22,12 +22,12 @@ public class UIPauseCanvas : UICanvas
         }
 
         //NOTE: Audio manager work
-        //..........
+        DataManager.Instance.SaveToggleSetting(DataKeys.SOUND_SETTING, isOn);
     }
-    public void OnVibrateToggleValueChange(bool value)
+    public void OnVibrateToggleValueChange(bool isVibrOn)
     {
         //NOTE: toggle is ON --> hide toggle background
-        if (value)
+        if (isVibrOn)
         {
             VibrateToggle.image.color = new Color(1, 1, 1, 0); //NOTE: transparent image
         }
@@ -37,13 +37,13 @@ public class UIPauseCanvas : UICanvas
         }
 
         //NOTE: Audio manager work
-        //..........
+        DataManager.Instance.SaveToggleSetting(DataKeys.VIBRATE_SETTING, isVibrOn);
     }
     protected override void OnOpenCanvas()
     {
         //NOTE: load audio state from playerPrefs --> change toggle state
-        bool isSoundOn = PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_BOOL_SOUND_SETTING) == ConstValues.PLAYER_PREFS_BOOL_TRUE_VALUE;
-        bool isVibrateOn = PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_BOOL_VIBRATE_SETTING) == ConstValues.PLAYER_PREFS_BOOL_TRUE_VALUE;
+        bool isSoundOn = DataManager.Instance.LoadToggleSetting(DataKeys.SOUND_SETTING);
+        bool isVibrateOn = DataManager.Instance.LoadToggleSetting(DataKeys.VIBRATE_SETTING);
 
         SoundToggle.isOn = isSoundOn;
         VibrateToggle.isOn = isVibrateOn;

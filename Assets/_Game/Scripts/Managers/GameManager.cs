@@ -8,6 +8,7 @@ public class GameManager : SingletonMono<GameManager>
     private bool isNextZone;
     public static event Action<GameState> OnGameStateChange;
     public GameState CurrentGameState { get; private set; } = GameState.InitState;
+    public GameState PrevGameState { get; private set; }
 
     private void Start()
     {
@@ -47,6 +48,7 @@ public class GameManager : SingletonMono<GameManager>
         }
 
         AutoSetTimeScale(state);
+        PrevGameState = CurrentGameState;
         CurrentGameState = state;
 
         OnGameStateChange?.Invoke(state);
@@ -122,8 +124,9 @@ public class GameManager : SingletonMono<GameManager>
         UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.OpenUI<UIMainMenuCanvas>(UICanvasID.MainMenu);
         mainMenuCanvas?.SetCoinNumber(0);
     }
-    public void ResetPlayerEXP(){
-        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_EXP,0);
+    public void ResetPlayerEXP()
+    {
+        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_EXP, 0);
 
         UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.OpenUI<UIMainMenuCanvas>(UICanvasID.MainMenu);
         mainMenuCanvas?.SetCoinNumber(0);

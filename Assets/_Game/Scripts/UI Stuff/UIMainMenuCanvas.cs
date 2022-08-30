@@ -12,6 +12,8 @@ public class UIMainMenuCanvas : UICanvas
     public TMP_InputField PlayerName;
     public Image StarIcon;
     public List<Sprite> StarIconSource;
+    public Toggle SoundToggle;
+    public Toggle VibrateToggle;
 
     public void OnClickPlayButton()
     {
@@ -40,15 +42,11 @@ public class UIMainMenuCanvas : UICanvas
     }
     public void OnVibrationToggleValueChange(bool isVibrOn) //NOTE: true is on vibration
     {
-        Debug.Log(isVibrOn);
-        //NOTE: Audio manager work
-        //..........
+        AudioManager.Instance.SetVibrateStatus(isVibrOn);
     }
     public void OnSoundToggleValueChange(bool isMute) //NOTE: true is mute
     {
-        Debug.Log(isMute);
-        //NOTE: Audio manager work
-        //..........
+        AudioManager.Instance.SetAudioStatus(isMute);
     }
     public void ChangeStarIconImageSource(int index)
     {
@@ -66,11 +64,30 @@ public class UIMainMenuCanvas : UICanvas
     }
     public string GetPlayerName()
     {
+        //NOTE: Save player name when enter playing mode
+        SavePlayerName();
         return PlayerName.text;
+    }
+    public void SavePlayerName()
+    {
+        DataManager.Instance.SaveData(DataKeys.PLAYER_NAME, PlayerName.text);
     }
     protected override void OnOpenCanvas()
     {
         int currentCoin = PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_COIN);
         SetCoinNumber(currentCoin);
+
+        //NOTE: load audio state from playerPrefs --> change toggle state
+        bool isSoundOn = DataManager.Instance.LoadToggleSetting(DataKeys.SOUND_SETTING);
+        bool isVibrateOn = DataManager.Instance.LoadToggleSetting(DataKeys.VIBRATE_SETTING);
+
+        SoundToggle.isOn = !isSoundOn; //NOTE: Icon display when sound on is MuteSound Icon
+        VibrateToggle.isOn = isVibrateOn;
+
+        string name;
+        if (DataManager.Instance.LoadData(DataKeys.PLAYER_NAME, out name))
+        {
+            PlayerName.text = name;
+        }
     }
 }

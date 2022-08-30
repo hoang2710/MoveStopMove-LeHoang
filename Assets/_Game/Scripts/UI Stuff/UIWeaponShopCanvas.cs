@@ -12,8 +12,8 @@ public class UIWeaponShopCanvas : UICanvas
     private int currentPanelIndex = 0;
     public void OnClickWeaponButton(ButtonData data)
     {
-        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG, (int)data.WeaponTag);
-        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG, (int)data.WeaponSkinTag);
+        DataManager.Instance.SaveData(DataKeys.PLAYER_WEAPON_TYPE_ENUM, (int)data.WeaponTag);
+        DataManager.Instance.SaveData(DataKeys.PLAYER_WEAPON_SKIN_ENUM, (int)data.WeaponSkinTag);
 
         playerRef.LoadDataFromPlayerPrefs();
         playerRef.SetUpHandWeapon();

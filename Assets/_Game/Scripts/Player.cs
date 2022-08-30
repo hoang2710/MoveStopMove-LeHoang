@@ -13,6 +13,7 @@ public class Player : CharacterBase, IHit
     private bool isAttackable = true;
     private bool isAttack;
     private bool isDead;
+    private bool isShop;
 
     private float timer = 0;
 
@@ -44,21 +45,20 @@ public class Player : CharacterBase, IHit
                 SetUpPlayerLoadLevel();
                 RemoveCharacterUI();
                 break;
-            // case GameState.MainMenu:
-            //     ChangeAnimation(ConstValues.ANIM_TRIGGER_IDLE);
-            //     if (!PlayerObj.activeInHierarchy)
-            //     {
-            //         PlayerObj.SetActive(true);
-            //     }
-            //     break;
+            case GameState.MainMenu:
+                isShop = false;
+                break;
             // case GameState.WeaponShop:
             //     PlayerObj.SetActive(false);
             //     break;
-            // case GameState.SkinShop:
-            //     ChangeAnimation(ConstValues.ANIM_TRIGGER_DANCE_CHAR_SKIN);
-            //     break;
+            case GameState.SkinShop:
+                isShop = true;
+                break;
             case GameState.Playing:
-                StartCoroutine(EnterPlayingState());
+                if (GameManager.Instance.PrevGameState != GameState.Pause)
+                {
+                    StartCoroutine(EnterPlayingState());
+                }
                 break;
             case GameState.ResultPhase:
                 isAttackable = false;
@@ -69,7 +69,7 @@ public class Player : CharacterBase, IHit
     }
     private void LogicHandle() //NOTE: optimize later or not
     {
-        if (!isDead)
+        if (!isDead && !isShop)
         {
             DispalyTargetMark();
             if (MoveDir.sqrMagnitude > 0.01f)
@@ -213,9 +213,11 @@ public class Player : CharacterBase, IHit
     }
     public void LoadDataFromPlayerPrefs()
     {
-        WeaponTag = (WeaponType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_TAG);
-        WeaponSkinTag = (WeaponSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_WEAPON_SKIN_TAG);
-        PantSkinTag = (PantSkinType)PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_ENUM_PANT_SKIN_TAG);
+        PlayerInGameData playerInGameData = DataManager.Instance.LoadPlayerInGameData();
+
+        WeaponTag = playerInGameData.WeaponTag;
+        WeaponSkinTag = playerInGameData.WeaponSkinTag;
+        PantSkinTag = playerInGameData.PantSkinTag;
     }
 
     public IEnumerator EnterPlayingState()

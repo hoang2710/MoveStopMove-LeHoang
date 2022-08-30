@@ -194,7 +194,7 @@ public class CharacterBase : MonoBehaviour
         {
             Anim.ResetTrigger(curAnim);
             Anim.SetTrigger(anim);
-            curAnim = anim;
+            curAnim = anim; 
         }
     }
     public virtual void OnKillEnemy()

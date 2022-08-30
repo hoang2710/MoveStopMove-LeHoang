@@ -11,7 +11,7 @@ public class UISkinShopCanvas : UICanvas
 
     public void OnClickPantSkinButton(ButtonData data)
     {
-        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_ENUM_PANT_SKIN_TAG, (int)data.PantSkinTag);
+        DataManager.Instance.SaveData(DataKeys.PLAYER_PANT_SKIN_ENUM, (int)data.PantSkinTag);
 
         playerRef?.LoadDataFromPlayerPrefs();
         playerRef?.SetUpPantSkin();
