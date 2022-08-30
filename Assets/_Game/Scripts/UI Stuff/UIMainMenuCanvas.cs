@@ -15,8 +15,11 @@ public class UIMainMenuCanvas : UICanvas
     public Toggle SoundToggle;
     public Toggle VibrateToggle;
 
+    private bool isLoadUI;
+
     public void OnClickPlayButton()
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
         GameManager.Instance.ChangeGameState(GameState.Playing);
         UIManager.Instance.OpenUI(UICanvasID.GamePlay);
 
@@ -24,6 +27,7 @@ public class UIMainMenuCanvas : UICanvas
     }
     public void OnClickWeaponShopButton()
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
         GameManager.Instance.ChangeGameState(GameState.WeaponShop);
         UIManager.Instance.OpenUI(UICanvasID.WeaponShop);
 
@@ -31,6 +35,7 @@ public class UIMainMenuCanvas : UICanvas
     }
     public void OnClickSkinShopButton()
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
         GameManager.Instance.ChangeGameState(GameState.SkinShop);
         UIManager.Instance.OpenUI(UICanvasID.SkinShop);
 
@@ -38,15 +43,23 @@ public class UIMainMenuCanvas : UICanvas
     }
     public void OnClickRemoveAds()
     {
-
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
     }
     public void OnVibrationToggleValueChange(bool isVibrOn) //NOTE: true is on vibration
     {
         AudioManager.Instance.SetVibrateStatus(isVibrOn);
+        if (!isLoadUI)
+        {
+            AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+        }
     }
     public void OnSoundToggleValueChange(bool isMute) //NOTE: true is mute
     {
         AudioManager.Instance.SetAudioStatus(isMute);
+        if (!isLoadUI)
+        {
+            AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+        }
     }
     public void ChangeStarIconImageSource(int index)
     {
@@ -74,6 +87,8 @@ public class UIMainMenuCanvas : UICanvas
     }
     protected override void OnOpenCanvas()
     {
+        isLoadUI = true; //NOTE: prevent audio play on load UI
+
         int currentCoin = PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_COIN);
         SetCoinNumber(currentCoin);
 
@@ -89,5 +104,7 @@ public class UIMainMenuCanvas : UICanvas
         {
             PlayerName.text = name;
         }
+
+        isLoadUI = false; //NOTE: prevent audio play on load UI
     }
 }

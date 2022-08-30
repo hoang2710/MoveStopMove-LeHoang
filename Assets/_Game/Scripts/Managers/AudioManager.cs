@@ -45,7 +45,16 @@ public class AudioData
 }
 public enum AudioType
 {
-    Attack,
-    LevelUp,
-    MainMusic, //etc....
+    ButtonClick,
+    Lose,
+    Win,
+    CountDown,
+    Die1,
+    Die2,
+    Die3,
+    Die4,
+    DieExplode,
+    Hit,
+    ThrowWeapon,
+    SizeUp
 }

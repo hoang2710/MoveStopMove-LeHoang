@@ -53,7 +53,7 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
 
         // if (tempXOffset > UIOffsetXAxis)
         // {
-            boundX = (parentCanvasLength - 2 * UIOffsetXAxis) / 2;
+        boundX = (parentCanvasLength - 2 * UIOffsetXAxis) / 2;
         // }
         // else
         // {
@@ -61,14 +61,14 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         // }
         // if (tempYOffset > UIOffsetYAxis)
         // {
-            boundY = (parentCanvasHeight - 2 * UIOffsetYAxis) / 2;
+        boundY = (parentCanvasHeight - 2 * UIOffsetYAxis) / 2;
         // }
         // else
         // {
         //     boundY = parentCanvasHeight * 0.4f;
         // }
 
-        enableFlag = NameText.enabled; 
+        enableFlag = NameText.enabled;
     }
     private void LateUpdate()
     {
@@ -120,6 +120,7 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
                 NameText.enabled = false;
                 ArrowImage.enabled = true;
                 enableFlag = false;
+                currentChar.IsAudioPlayable = false;
             }
 
             ArrowAnchorTrans.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
@@ -131,6 +132,7 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
                 NameText.enabled = true;
                 ArrowImage.enabled = false;
                 enableFlag = true;
+                currentChar.IsAudioPlayable = true;
             }
         }
 
@@ -144,6 +146,11 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         ArrowImage.color = color;
         NameText.color = color;
         this.isPlayer = isPlayer;
+
+        if (isPlayer)
+        {
+            currentChar.IsAudioPlayable = true;
+        }
 
         MoveUI();
     }

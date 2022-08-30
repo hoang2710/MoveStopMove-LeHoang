@@ -105,11 +105,18 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         KillScore = 0;
     }
 
-    public void OnHit(CharacterBase bulletOwner)
+    public void OnHit(CharacterBase bulletOwner, Weapon weapon)
     {
         agent.stateMachine.ChangeState(AIStateId.DeathState);
         IsAlive = false;
         CharacterCollider.enabled = false;
+
+        ItemStorage.Instance.PushWeaponToPool(weapon.WeaponTag, weapon.WeaponObject);
+
+        ParticlePooling.Instance.PopParticleFromPool(ParticleType.HitCharacter,
+                                                    CharaterTrans.position,
+                                                    Quaternion.Euler(0, 180f, 0) * Quaternion.LookRotation(weapon.WeaponTrans.forward),
+                                                    this);
 
         RemoveCharacterUI();
 

@@ -157,9 +157,15 @@ public class Player : CharacterBase, IHit
         float tmp = Mathf.Atan2(MoveDir.x, MoveDir.z) * Mathf.Rad2Deg;
         CharaterTrans.rotation = Quaternion.Lerp(CharaterTrans.rotation, Quaternion.Euler(0, tmp, 0), Time.deltaTime * rotateSpeed);
     }
-    public void OnHit(CharacterBase bulletOwner)
+    public void OnHit(CharacterBase bulletOwner, Weapon weapon)
     {
         Die(bulletOwner);
+
+        ItemStorage.Instance.PushWeaponToPool(weapon.WeaponTag, weapon.WeaponObject);
+
+        //NOTE: temp solution for random enum option
+        int ran = Random.Range(4, 8);
+        PlayAudioWithCondition((AudioType)ran); //NOTE: Die1 ~ Die 4 Audio
     }
     private void DispalyTargetMark()
     {

@@ -85,6 +85,7 @@ public class UIResultCanvas : UICanvas
     {
         GameManager.Instance.ChangeGameState(GameState.LoadLevel);
         UIManager.Instance.OpenUI(UICanvasID.MainMenu);
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
 
         Close();
     }
@@ -94,6 +95,7 @@ public class UIResultCanvas : UICanvas
         GameManager.Instance.SetBoolIsNextZone(true);
         GameManager.Instance.ChangeGameState(GameState.LoadLevel);
         UIManager.Instance.OpenUI(UICanvasID.GamePlay);
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
 
         Close();
     }
@@ -124,6 +126,8 @@ public class UIResultCanvas : UICanvas
 
     private void LoseResultHandle()
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.Lose);
+
         SetRankingLosePanel(playerRank);
         SetProgressBarValue(progressPercentage);
         SetCoinValue(numOfCoinReward);
@@ -132,6 +136,8 @@ public class UIResultCanvas : UICanvas
     }
     private void WinResultHandle()
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.Win);
+
         SetProgressBarValue(1f);
         SetCoinValue(numOfCoinReward);
         SetActiveSkullIcon(false);

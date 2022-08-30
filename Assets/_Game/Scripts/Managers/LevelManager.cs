@@ -16,7 +16,9 @@ public class LevelManager : SingletonMono<LevelManager>
     private int numOfBotToSpawn;
     private UIGamePlayCanvas gamePlayCanvas;
 
+    [SerializeField]
     private Level currentLevel = Level.Level_1; //temp
+    [SerializeField]
     private Level levelToLoad = Level.Level_1; //temp
     private bool isFirstLoad = true;
 

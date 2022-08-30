@@ -12,6 +12,8 @@ public class UIWeaponShopCanvas : UICanvas
     private int currentPanelIndex = 0;
     public void OnClickWeaponButton(ButtonData data)
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+
         DataManager.Instance.SaveData(DataKeys.PLAYER_WEAPON_TYPE_ENUM, (int)data.WeaponTag);
         DataManager.Instance.SaveData(DataKeys.PLAYER_WEAPON_SKIN_ENUM, (int)data.WeaponSkinTag);
 
@@ -20,6 +22,7 @@ public class UIWeaponShopCanvas : UICanvas
     }
     public void OnCLickExitButton()
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
         GameManager.Instance.ChangeGameState(GameState.MainMenu);
         UIManager.Instance.OpenUI(UICanvasID.MainMenu);
 
@@ -32,10 +35,12 @@ public class UIWeaponShopCanvas : UICanvas
     public void OnClickNextWeaponPanel()
     {
         OpenWeaponPanel(currentPanelIndex + 1);
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
     }
     public void OnClickPreviousWeaponPanel()
     {
         OpenWeaponPanel(currentPanelIndex - 1);
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
     }
     public void OpenWeaponPanel(int index)
     {

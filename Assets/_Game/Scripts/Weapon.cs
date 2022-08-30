@@ -63,11 +63,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     private void WeaponHitHandle(Collider other)
     {
         IHit hit = other.GetComponent<IHit>();
-        if (hit != null)
-        {
-            hit.OnHit(bulletOwner);
-            ItemStorage.Instance.PushWeaponToPool(WeaponTag, WeaponObject);
-        }
+        hit?.OnHit(bulletOwner, this);
     }
     public void Move()
     {
@@ -78,7 +74,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
             WeaponTrans.Rotate(rotateDir * rotateSpeed * Time.deltaTime, Space.World);
         }
     }
-    public void CheckLifeTime()
+    public void CheckLifeTime() //NOTE: aware of double push to pool bug when onHit and lifeTime trigger at once 
     {
         if (timer <= lifeTime)
         {
@@ -116,6 +112,10 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     public void CalculateLifeTime()
     {
         lifeTime = (bulletOwner.AttackRange - bulletOwner.AttackPosOffset) / flyingSpeed;
+    }
+    public float GetRemainLifeTime()
+    {
+        return lifeTime - timer;
     }
     public void OnPopFromPool(Material weaponSkinMaterial)
     {

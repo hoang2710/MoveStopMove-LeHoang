@@ -46,12 +46,14 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector]
     public Transform WeaponPlaceHolderTrans;
     protected GameObject handWeapon;
+    protected Transform handWeaponTrans;
     protected WeaponType currentHandWeaponTag;
     public Renderer CharacterRenderer;
     public Renderer PantRenderer;
     public Transform CharacterUITransRoot;
-    // [HideInInspector]
+    [HideInInspector]
     public CharacterInfoDIsplay currentUIDisplay;
+    public bool IsAudioPlayable { get; set; } //NOTE: If character is out screen --> cant play audio, set value in character info display script (temp maybe)
 
     protected virtual void Awake()
     {
@@ -145,6 +147,8 @@ public class CharacterBase : MonoBehaviour
         {
             Shoot(curRotation);
         }
+
+        PlayAudioWithCondition(AudioType.ThrowWeapon);
     }
     private void Shoot(Quaternion curRotation)
     {
@@ -160,7 +164,7 @@ public class CharacterBase : MonoBehaviour
     {
         if (handWeapon != null)
         {
-            ItemStorage.Instance.PushWeaponToPool(currentHandWeaponTag, handWeapon, true);
+            ItemStorage.Instance.PushWeaponToPool(currentHandWeaponTag, handWeapon, handWeaponTrans);
         }
 
         currentHandWeaponTag = WeaponTag;
@@ -172,6 +176,7 @@ public class CharacterBase : MonoBehaviour
 
         Weapon weapon = handWeapon.GetComponent<Weapon>();
         weapon?.SetUpHandWeapon(this);
+        handWeaponTrans = weapon?.WeaponTrans;
 
         Renderer objRen = weapon.WeaponRenderer;
         if (objRen != null)
@@ -194,7 +199,14 @@ public class CharacterBase : MonoBehaviour
         {
             Anim.ResetTrigger(curAnim);
             Anim.SetTrigger(anim);
-            curAnim = anim; 
+            curAnim = anim;
+        }
+    }
+    public void PlayAudioWithCondition(AudioType audioType)
+    {
+        if (IsAudioPlayable)
+        {
+            AudioManager.Instance.PlayAudioClip(audioType);
         }
     }
     public virtual void OnKillEnemy()
@@ -205,6 +217,13 @@ public class CharacterBase : MonoBehaviour
 
         currentUIDisplay?.UpdateScore(++Score);//temp score system
         currentUIDisplay?.TriggerPopupScore(1);//temp score system
+
+        ParticlePooling.Instance.PopParticleFromPool(ParticleType.Upgrade,
+                                                    CharaterTrans.position,
+                                                    ConstValues.VALUE_PARTICLE_UPGRADE_DEFAULT_ROTATION,
+                                                    this);
+
+        PlayAudioWithCondition(AudioType.SizeUp);
     }
     public void SetUpThrowWeapon(Quaternion rotation, bool isTripleShot, float tripleShotOffset)
     {

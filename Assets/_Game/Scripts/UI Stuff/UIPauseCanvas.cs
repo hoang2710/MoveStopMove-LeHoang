@@ -9,6 +9,8 @@ public class UIPauseCanvas : UICanvas
     public Toggle SoundToggle;
     public Toggle VibrateToggle;
 
+    private bool isLoadUI;
+
     public void OnSoundToggleValueChange(bool isOn)
     {
         //NOTE: toggle is ON --> hide toggle background
@@ -23,6 +25,10 @@ public class UIPauseCanvas : UICanvas
 
         //NOTE: Audio manager work
         DataManager.Instance.SaveToggleSetting(DataKeys.SOUND_SETTING, isOn);
+        if (!isLoadUI)
+        {
+            AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+        }
     }
     public void OnVibrateToggleValueChange(bool isVibrOn)
     {
@@ -38,18 +44,26 @@ public class UIPauseCanvas : UICanvas
 
         //NOTE: Audio manager work
         DataManager.Instance.SaveToggleSetting(DataKeys.VIBRATE_SETTING, isVibrOn);
+        if (!isLoadUI)
+        {
+            AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+        }
     }
     protected override void OnOpenCanvas()
     {
+        isLoadUI = true; //NOTE: prevent audio play on load UI
         //NOTE: load audio state from playerPrefs --> change toggle state
         bool isSoundOn = DataManager.Instance.LoadToggleSetting(DataKeys.SOUND_SETTING);
         bool isVibrateOn = DataManager.Instance.LoadToggleSetting(DataKeys.VIBRATE_SETTING);
 
         SoundToggle.isOn = isSoundOn;
         VibrateToggle.isOn = isVibrateOn;
+
+        isLoadUI = false; //NOTE: prevent audio play on load UI
     }
     public void OnClickHomeButton()
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
         GameManager.Instance.ChangeGameState(GameState.LoadLevel);
         UIManager.Instance.OpenUI(UICanvasID.MainMenu);
 
@@ -57,6 +71,7 @@ public class UIPauseCanvas : UICanvas
     }
     public void OnClickContinueButton()
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
         GameManager.Instance.ChangeGameState(GameState.Playing);
         UIGamePlayCanvas canvas = UIManager.Instance.OpenUI<UIGamePlayCanvas>(UICanvasID.GamePlay);
         canvas.SetActiveTipPanel(false);

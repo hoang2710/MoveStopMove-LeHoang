@@ -107,19 +107,22 @@ public class ItemStorage : SingletonMono<ItemStorage>
 
         return obj;
     }
-    public void PushWeaponToPool(WeaponType weaponTag, GameObject obj, bool isHandWeapon = false)
+    public void PushWeaponToPool(WeaponType weaponTag, GameObject obj)
     {
-        if (isHandWeapon)
-        {
-            obj.transform.SetParent(null); //NOTE: single use no cache
-        }
-
         weaponPool[weaponTag].Push(obj);
 
         IPooledWeapon weapon = obj.GetComponent<IPooledWeapon>();
         weapon?.OnPushToPool();
 
         obj.SetActive(false);
+    }
+    /// <summary>
+    /// Use to push onHand Weapon to pool
+    /// </summary>
+    public void PushWeaponToPool(WeaponType weaponTag, GameObject obj, Transform objTrans)
+    {
+        objTrans.SetParent(null);
+        PushWeaponToPool(weaponTag, obj);
     }
     private GameObject CheckIfHaveWeaponLeftInPool(WeaponType tag)
     {

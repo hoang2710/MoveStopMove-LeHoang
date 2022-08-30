@@ -40,5 +40,7 @@ public class ConstValues
     public const float VALUE_SCORE_POPUP_TEXT_ANIMATION_TIME = 0.48f;
     public const string VALUE_CHARACTER_DEFAULT_NAME = "ABCDE";
     public static Color VALUE_CHARACTER_DEFAULT_COLOR = new Color(119f / 255, 231f / 255, 84f / 255);
+    public static Quaternion VALUE_PARTICLE_UPGRADE_DEFAULT_ROTATION = Quaternion.Euler(-90f, 0, 0);
+    public static Vector3 VALUE_PARTICLE_UPGRADE_DEFAULT_LOCAL_SCALE = Vector3.one * 2.5f;
     public const int LAYER_MASK_ENEMY = 1 << 6;
 }

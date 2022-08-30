@@ -13,6 +13,7 @@ public class UIGamePlayCanvas : UICanvas
 
     public void OnClickSettingButton()
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
         GameManager.Instance.ChangeGameState(GameState.Pause);
         UIManager.Instance.OpenUI(UICanvasID.Setting);
 

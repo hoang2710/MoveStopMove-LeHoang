@@ -4,5 +4,8 @@ using UnityEngine;
 
 public interface IHit
 {
-    public void OnHit(CharacterBase bulletOwner);
+    /// <summary>
+    /// Must implement push weapon to pool in this method
+    /// </summary>
+    public void OnHit(CharacterBase bulletOwner, Weapon weapon);
 }

@@ -8,9 +8,12 @@ public class UISkinShopCanvas : UICanvas
     private Player playerRef;
 
     public TMP_Text CoinDisplay;
+    public List<GameObject> ItemPanel;
 
     public void OnClickPantSkinButton(ButtonData data)
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+
         DataManager.Instance.SaveData(DataKeys.PLAYER_PANT_SKIN_ENUM, (int)data.PantSkinTag);
 
         playerRef?.LoadDataFromPlayerPrefs();
@@ -18,6 +21,7 @@ public class UISkinShopCanvas : UICanvas
     }
     public void OnCLickExitButton()
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
         GameManager.Instance.ChangeGameState(GameState.MainMenu);
         UIManager.Instance.OpenUI(UICanvasID.MainMenu);
 

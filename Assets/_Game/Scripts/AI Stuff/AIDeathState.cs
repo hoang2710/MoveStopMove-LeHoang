@@ -13,11 +13,15 @@ public class AIDeathState : AIState
     public void Enter(AIAgent agent)
     {
         LevelManager.Instance.KillHandle();
-        
+
         agent.NavAgent.enabled = false;
         agent.enemyRef.ChangeAnimation(ConstValues.ANIM_TRIGGER_DEAD);
 
         timer = 0;
+
+        //NOTE: temp solution for random enum option
+        int ran = Random.Range(4, 8);
+        agent.enemyRef.PlayAudioWithCondition((AudioType)ran); //NOTE: Die1 ~ Die 4 Audio
     }
     public void Exit(AIAgent agent)
     {
@@ -28,6 +32,12 @@ public class AIDeathState : AIState
         if (timer >= deadTime)
         {
             BotPooling.Instance.PushBotToPool(agent.enemyRef.BotGameObject);
+            ParticlePooling.Instance.PopParticleFromPool(ParticleType.Death,
+                                                        agent.enemyRef.CharaterTrans.position,
+                                                        Quaternion.identity,
+                                                        agent.enemyRef);
+
+            agent.enemyRef.PlayAudioWithCondition(AudioType.DieExplode);
         }
         else
         {
