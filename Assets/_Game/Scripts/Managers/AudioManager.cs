@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : SingletonMono<AudioManager>
+public class AudioManager : SingletonMono<AudioManager>, IDataHandler
 {
     public AudioSource AudioSource;
 
     public List<AudioData> AudioDatas;
     private Dictionary<AudioType, AudioClip> AudioDictionary = new Dictionary<AudioType, AudioClip>();
 
+    public bool IsSoundOn { get; private set; }
+    public bool IsVibrateOn { get; private set; }
+
     private void Start()
     {
         InitAudioData();
+        DataManager.Instance.AssignDataHandler(this);
     }
 
     private void InitAudioData()
@@ -27,13 +31,26 @@ public class AudioManager : SingletonMono<AudioManager>
     }
     public void SetAudioStatus(bool isMute)
     {
+        IsSoundOn = !isMute;
         AudioSource.enabled = !isMute;
-
-        DataManager.Instance.SaveToggleSetting(DataKeys.SOUND_SETTING, !isMute);
     }
     public void SetVibrateStatus(bool isOn)
     {
-        DataManager.Instance.SaveToggleSetting(DataKeys.VIBRATE_SETTING, isOn);
+        IsVibrateOn = isOn;
+    }
+
+    public void LoadData(GameData data)
+    {
+        IsSoundOn = data.IsSoundOn;
+        IsVibrateOn = data.IsVibrateOn;
+
+        AudioSource.enabled = IsSoundOn;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.IsSoundOn = IsSoundOn;
+        data.IsVibrateOn = IsVibrateOn;
     }
 }
 

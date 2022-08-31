@@ -29,7 +29,6 @@ public class BotPooling : SingletonMono<BotPooling>
     }
     public GameObject PopBotFromPool(Vector3 position, Quaternion rotation)
     {
-        Debug.Log(botPool.Count);
         GameObject obj = CheckIfHaveBotLeftInPool();
         Transform objTrans = obj.transform;
 

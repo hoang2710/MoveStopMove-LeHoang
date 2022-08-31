@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : CharacterBase, IHit
+public class Player : CharacterBase, IHit, IDataHandler
 {
     public static Vector3 MoveDir;
     [SerializeField]
@@ -22,11 +22,19 @@ public class Player : CharacterBase, IHit
     public Transform TargetMarkTrans;
     public GameObject AttackRangeDisplay;
     public Transform AttackRangeDisplayTrans;
+
     private bool TargetMarkSetActiveFlag;
+
     protected override void Awake()
     {
         base.Awake();
         isPlayer = true;
+    }
+    protected override void Start()
+    {
+        base.Start();
+
+        DataManager.Instance.AssignDataHandler(this);
     }
     private void FixedUpdate()
     {
@@ -37,7 +45,6 @@ public class Player : CharacterBase, IHit
         switch (state)
         {
             case GameState.LoadGame:
-                LoadDataFromPlayerPrefs();
                 break;
             case GameState.LoadLevel:
                 SetUpHandWeapon();
@@ -48,9 +55,6 @@ public class Player : CharacterBase, IHit
             case GameState.MainMenu:
                 isShop = false;
                 break;
-            // case GameState.WeaponShop:
-            //     PlayerObj.SetActive(false);
-            //     break;
             case GameState.SkinShop:
                 isShop = true;
                 break;
@@ -217,19 +221,28 @@ public class Player : CharacterBase, IHit
 
         CameraManager.Instance.ZoomOutCamera();
     }
-    public void LoadDataFromPlayerPrefs()
-    {
-        PlayerInGameData playerInGameData = DataManager.Instance.LoadPlayerInGameData();
-
-        WeaponTag = playerInGameData.WeaponTag;
-        WeaponSkinTag = playerInGameData.WeaponSkinTag;
-        PantSkinTag = playerInGameData.PantSkinTag;
-    }
-
     public IEnumerator EnterPlayingState()
     {
         SetUpPLayerPlaying();
         yield return new WaitForSeconds(0.55f); //NOTE Wait for camera to transit complete (>0.5f)
         DisplayCharacterUI();
+    }
+
+    public void LoadData(GameData data)
+    {
+        WeaponTag = data.WeaponTag;
+        WeaponSkinTag = data.WeaponSkinTag;
+        PantSkinTag = data.PantSkinTag;
+
+        CharacterName = data.PlayerName;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.WeaponTag = WeaponTag;
+        data.WeaponSkinTag = WeaponSkinTag;
+        data.PantSkinTag = PantSkinTag;
+
+        data.PlayerName = CharacterName;
     }
 }

@@ -10,14 +10,13 @@ public class UIWeaponShopCanvas : UICanvas
     public TMP_Text CoinDisplay;
     public List<GameObject> PanelList;
     private int currentPanelIndex = 0;
+
     public void OnClickWeaponButton(ButtonData data)
     {
         AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
 
-        DataManager.Instance.SaveData(DataKeys.PLAYER_WEAPON_TYPE_ENUM, (int)data.WeaponTag);
-        DataManager.Instance.SaveData(DataKeys.PLAYER_WEAPON_SKIN_ENUM, (int)data.WeaponSkinTag);
-
-        playerRef.LoadDataFromPlayerPrefs();
+        playerRef.SetWeaponType(data.WeaponTag);
+        playerRef.SetWeaponSkin(data.WeaponSkinTag);
         playerRef.SetUpHandWeapon();
     }
     public void OnCLickExitButton()
@@ -58,7 +57,7 @@ public class UIWeaponShopCanvas : UICanvas
             playerRef = GameObject.FindGameObjectWithTag(ConstValues.TAG_PLAYER).GetComponent<Player>();
         }
 
-        int currentCoin = PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_COIN, 0);
+        int currentCoin = DataManager.Instance.Coin;
         SetCoinValue(currentCoin);
 
         playerRef?.PlayerObj.SetActive(false);

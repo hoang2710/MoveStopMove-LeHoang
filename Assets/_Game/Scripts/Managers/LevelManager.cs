@@ -151,10 +151,10 @@ public class LevelManager : SingletonMono<LevelManager>
         reward = GetNumOfCoinReward();
         percent = GetProgressPercentage();
 
-        int exp = GetLevelEXP();
-        int curExp = PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_EXP, 0);
-        curExp += exp;
-        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_EXP, curExp);
+        float exp = GetLevelEXP();
+
+        DataManager.Instance.Coin += reward;
+        DataManager.Instance.PlayerExp += exp;
     }
     public int GetPlayerRanking()
     {
@@ -164,9 +164,9 @@ public class LevelManager : SingletonMono<LevelManager>
     {
         return (numOfTotalCharacter - numOfCurrentCharacter) * 5; //temp
     }
-    public int GetLevelEXP()
+    public float GetLevelEXP()
     {
-        return (numOfTotalCharacter - numOfCurrentCharacter); //temp
+        return (numOfTotalCharacter - numOfCurrentCharacter) * 2.5f; //temp
     }
     public float GetProgressPercentage()
     {

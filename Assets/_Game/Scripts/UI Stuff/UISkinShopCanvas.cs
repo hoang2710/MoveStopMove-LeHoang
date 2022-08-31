@@ -14,9 +14,7 @@ public class UISkinShopCanvas : UICanvas
     {
         AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
 
-        DataManager.Instance.SaveData(DataKeys.PLAYER_PANT_SKIN_ENUM, (int)data.PantSkinTag);
-
-        playerRef?.LoadDataFromPlayerPrefs();
+        playerRef?.SetPantSkin(data.PantSkinTag);
         playerRef?.SetUpPantSkin();
     }
     public void OnCLickExitButton()
@@ -39,7 +37,7 @@ public class UISkinShopCanvas : UICanvas
             playerRef = GameObject.FindGameObjectWithTag(ConstValues.TAG_PLAYER).GetComponent<Player>();
         }
 
-        int currentCoin = PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_COIN, 0);
+        int currentCoin = DataManager.Instance.Coin;
         SetCoinValue(currentCoin);
 
         playerRef?.ChangeAnimation(ConstValues.ANIM_TRIGGER_DANCE_CHAR_SKIN);

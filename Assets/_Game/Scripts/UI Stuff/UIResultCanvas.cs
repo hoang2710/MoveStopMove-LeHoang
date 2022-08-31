@@ -75,12 +75,6 @@ public class UIResultCanvas : UICanvas
         KillerNameText.text = name;
         KillerNameText.color = color;
     }
-    public void UpdatePlayerCoinData(int addedCoinValue)
-    {
-        int currentCoin = PlayerPrefs.GetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_COIN, 0);
-        currentCoin += addedCoinValue;
-        PlayerPrefs.SetInt(ConstValues.PLAYER_PREFS_INT_PLAYER_COIN, currentCoin);
-    }
     public void OnClickHomeButton()
     {
         GameManager.Instance.ChangeGameState(GameState.LoadLevel);
@@ -120,8 +114,6 @@ public class UIResultCanvas : UICanvas
             SetActiveResultPanel(true);
             WinResultHandle();
         }
-
-        UpdatePlayerCoinData(numOfCoinReward);
     }
 
     private void LoseResultHandle()
