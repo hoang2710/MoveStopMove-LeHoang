@@ -145,9 +145,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonType: 0
   WeaponTag: 3
   WeaponSkinTag: 6
   PantSkinTag: 0
+  HatTag: 0
+  ItemCost: 0
+  IsUnlock: 0
+  PanelTag: 0
+  ButtonImage: {fileID: 0}
+  IconImage: {fileID: 0}
+  LockIcon: {fileID: 0}
 --- !u!1 &845492836995210100
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,9 +301,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonType: 0
   WeaponTag: 3
   WeaponSkinTag: 7
   PantSkinTag: 0
+  HatTag: 0
+  ItemCost: 0
+  IsUnlock: 0
+  PanelTag: 0
+  ButtonImage: {fileID: 0}
+  IconImage: {fileID: 0}
+  LockIcon: {fileID: 0}
 --- !u!1 &1321282691871993291
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,9 +591,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonType: 0
   WeaponTag: 1
   WeaponSkinTag: 5
   PantSkinTag: 0
+  HatTag: 0
+  ItemCost: 0
+  IsUnlock: 0
+  PanelTag: 0
+  ButtonImage: {fileID: 0}
+  IconImage: {fileID: 0}
+  LockIcon: {fileID: 0}
 --- !u!1 &1632543560940914743
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,9 +747,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonType: 0
   WeaponTag: 0
   WeaponSkinTag: 3
   PantSkinTag: 0
+  HatTag: 0
+  ItemCost: 0
+  IsUnlock: 0
+  PanelTag: 0
+  ButtonImage: {fileID: 0}
+  IconImage: {fileID: 0}
+  LockIcon: {fileID: 0}
 --- !u!1 &1644907362742313705
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,9 +903,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonType: 0
   WeaponTag: 2
   WeaponSkinTag: 9
   PantSkinTag: 0
+  HatTag: 0
+  ItemCost: 0
+  IsUnlock: 0
+  PanelTag: 0
+  ButtonImage: {fileID: 0}
+  IconImage: {fileID: 0}
+  LockIcon: {fileID: 0}
 --- !u!1 &2198102247410891879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,9 +1059,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonType: 0
   WeaponTag: 0
   WeaponSkinTag: 0
   PantSkinTag: 0
+  HatTag: 0
+  ItemCost: 0
+  IsUnlock: 0
+  PanelTag: 0
+  ButtonImage: {fileID: 0}
+  IconImage: {fileID: 0}
+  LockIcon: {fileID: 0}
 --- !u!1 &2304616059090698990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,9 +1290,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonType: 0
   WeaponTag: 2
   WeaponSkinTag: 8
   PantSkinTag: 0
+  HatTag: 0
+  ItemCost: 0
+  IsUnlock: 0
+  PanelTag: 0
+  ButtonImage: {fileID: 0}
+  IconImage: {fileID: 0}
+  LockIcon: {fileID: 0}
 --- !u!1 &2963425046083359345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,9 +1682,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonType: 0
   WeaponTag: 0
   WeaponSkinTag: 2
   PantSkinTag: 0
+  HatTag: 0
+  ItemCost: 0
+  IsUnlock: 0
+  PanelTag: 0
+  ButtonImage: {fileID: 0}
+  IconImage: {fileID: 0}
+  LockIcon: {fileID: 0}
 --- !u!1 &3376967935033062844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,9 +2050,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonType: 0
   WeaponTag: 0
   WeaponSkinTag: 1
   PantSkinTag: 0
+  HatTag: 0
+  ItemCost: 0
+  IsUnlock: 0
+  PanelTag: 0
+  ButtonImage: {fileID: 0}
+  IconImage: {fileID: 0}
+  LockIcon: {fileID: 0}
 --- !u!1 &6121081046548853702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,7 +2618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8012656594225285222
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3460,6 +3532,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonType: 0
   WeaponTag: 1
   WeaponSkinTag: 4
   PantSkinTag: 0
+  HatTag: 0
+  ItemCost: 0
+  IsUnlock: 0
+  PanelTag: 0
+  ButtonImage: {fileID: 0}
+  IconImage: {fileID: 0}
+  LockIcon: {fileID: 0}

@@ -115,11 +115,13 @@ public class UISkinShopCanvas : UICanvas
                 DataManager.Instance.Coin -= currentHatButtonData.ItemCost;
                 DataManager.Instance.HatUnlockState[currentHatButtonData.HatTag] = true;
                 ItemUnlockHandle(currentHatButtonData);
+                currentHatButtonData.LockIcon.SetActive(false);
                 break;
             case 1:
                 DataManager.Instance.Coin -= currentPantButtonData.ItemCost;
                 DataManager.Instance.PantSkinUnlockState[currentPantButtonData.PantSkinTag] = true;
                 ItemUnlockHandle(currentPantButtonData);
+                currentPantButtonData.LockIcon.SetActive(false);
                 break;
             default:
                 break;
