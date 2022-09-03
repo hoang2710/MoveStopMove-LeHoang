@@ -25,10 +25,13 @@ public class Player : CharacterBase, IHit, IDataHandler
 
     private bool TargetMarkSetActiveFlag;
 
+    public static Player PlayerGlobalReference;
+
     protected override void Awake()
     {
         base.Awake();
         isPlayer = true;
+        PlayerGlobalReference = this;
     }
     protected override void Start()
     {
@@ -49,6 +52,7 @@ public class Player : CharacterBase, IHit, IDataHandler
             case GameState.LoadLevel:
                 SetUpHandWeapon();
                 SetUpPantSkin();
+                SetUpHat();
                 SetUpPlayerLoadLevel();
                 RemoveCharacterUI();
                 break;
@@ -233,6 +237,7 @@ public class Player : CharacterBase, IHit, IDataHandler
         WeaponTag = data.WeaponTag;
         WeaponSkinTag = data.WeaponSkinTag;
         PantSkinTag = data.PantSkinTag;
+        HatTag = data.HatTag;
 
         CharacterName = data.PlayerName;
     }
@@ -242,6 +247,7 @@ public class Player : CharacterBase, IHit, IDataHandler
         data.WeaponTag = WeaponTag;
         data.WeaponSkinTag = WeaponSkinTag;
         data.PantSkinTag = PantSkinTag;
+        data.HatTag = HatTag;
 
         data.PlayerName = CharacterName;
     }

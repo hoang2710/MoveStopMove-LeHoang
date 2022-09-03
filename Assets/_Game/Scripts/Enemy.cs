@@ -24,6 +24,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         ResetScore();
         SetUpHandWeapon();
         SetUpPantSkin();
+        SetUpHat();
         SetRandomBodySkin();
         SetRandomName();
 
@@ -89,6 +90,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         }
 
         PantSkinTag = (PantSkinType)Random.Range(0, System.Enum.GetNames(typeof(PantSkinType)).Length);
+        HatTag = (HatType)Random.Range(0, System.Enum.GetNames(typeof(HatType)).Length);
     }
     public void SetRandomBodySkin()
     {

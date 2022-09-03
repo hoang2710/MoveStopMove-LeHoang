@@ -9,6 +9,7 @@ public class CharacterBase : MonoBehaviour
     public WeaponType WeaponTag { get; protected set; }
     public WeaponSkinType WeaponSkinTag { get; protected set; }
     public PantSkinType PantSkinTag { get; protected set; }
+    public HatType HatTag { get; protected set; }
 
     [HideInInspector]
     public string CharacterName { get; protected set; }
@@ -43,11 +44,14 @@ public class CharacterBase : MonoBehaviour
     public float AttackAnimEnd { get; protected set; }
 
     public GameObject WeaponPlaceHolder;
-    [HideInInspector]
     public Transform WeaponPlaceHolderTrans;
+    public GameObject HatPlaceHolder;
+    public Transform HatPLaceHolderTrans;
     protected GameObject handWeapon;
     protected Transform handWeaponTrans;
     protected WeaponType currentHandWeaponTag;
+    protected GameObject hatObject;
+    protected HatType currentHatTag;
     public Renderer CharacterRenderer;
     public Renderer PantRenderer;
     public Transform CharacterUITransRoot;
@@ -67,8 +71,6 @@ public class CharacterBase : MonoBehaviour
 
         AttackAnimThrow = ConstValues.VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT;
         AttackAnimEnd = ConstValues.VALUE_PLAYER_ATTACK_ANIM_END_TIME_POINT;
-
-        WeaponPlaceHolderTrans = WeaponPlaceHolder.transform;
     }
     protected virtual void Start()
     {
@@ -193,6 +195,16 @@ public class CharacterBase : MonoBehaviour
             }
         }
     }
+    public void SetUpHat()
+    {
+        if (hatObject != null)
+        {
+            ItemStorage.Instance.PushHatToPool(currentHatTag, hatObject);
+        }
+
+        currentHatTag = HatTag;
+        hatObject = ItemStorage.Instance.PopHatFromPool(HatTag, HatPLaceHolderTrans);
+    }
     public void ChangeAnimation(string anim)
     {
         if (curAnim != anim)
@@ -262,6 +274,10 @@ public class CharacterBase : MonoBehaviour
     public void SetPantSkin(PantSkinType tag)
     {
         PantSkinTag = tag;
+    }
+    public void SetHat(HatType tag)
+    {
+        HatTag = tag;
     }
 
 }

@@ -6,26 +6,26 @@ using System.IO;
 
 public class DataConvert
 {
-    private string dataDirPath = "";
-    private string dataFileName = "";
+    private string path;
     public DataConvert(string dataDirPath, string dataFileName)
     {
-        this.dataDirPath = dataDirPath;
-        this.dataFileName = dataFileName;
+        path = Path.Combine(dataDirPath, dataFileName);
+    }
+    public string GetPath()
+    {
+        return path;
     }
 
     public GameData Load()
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
-
         GameData gameData = null;
 
-        if (File.Exists(fullPath))
+        if (File.Exists(path))
         {
             try
             {
                 string data = "";
-                using (FileStream stream = new FileStream(fullPath, FileMode.Open))
+                using (FileStream stream = new FileStream(path, FileMode.Open))
                 {
                     using (StreamReader reader = new StreamReader(stream))
                     {
@@ -37,7 +37,7 @@ public class DataConvert
             }
             catch (Exception e)
             {
-                Debug.LogError("Error Load Data with path: " + fullPath + "\n" + e);
+                Debug.LogError("Error Load Data with path: " + path + "\n" + e);
             }
         }
 
@@ -46,15 +46,13 @@ public class DataConvert
 
     public void Save(GameData gameData)
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
-
         try
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
 
             string data = JsonUtility.ToJson(gameData, true);
 
-            using (FileStream stream = new FileStream(fullPath, FileMode.Create))
+            using (FileStream stream = new FileStream(path, FileMode.Create))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
@@ -64,7 +62,15 @@ public class DataConvert
         }
         catch (Exception e)
         {
-            Debug.LogError("Error Save Data with path: " + fullPath + "\n" + e);
+            Debug.LogError("Error Save Data with path: " + path + "\n" + e);
+        }
+    }
+
+    public void DeleteData()
+    {
+        if (File.Exists(path))
+        {
+            File.Delete(path);
         }
     }
 }

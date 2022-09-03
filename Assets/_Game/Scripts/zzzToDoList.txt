@@ -10,3 +10,5 @@ weapon shit player on start
 bug state machine when instantiate bot too close
  
 save player Nameeeeeeeeeeeeeeeeeeeeeeeeeee
+
+save cur level, level work

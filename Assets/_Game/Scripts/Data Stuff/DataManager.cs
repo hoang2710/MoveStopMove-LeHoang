@@ -13,6 +13,10 @@ public class DataManager : SingletonMono<DataManager>
     //NOTE: Global Game Data
     public int Coin { get; set; }
     public float PlayerExp { get; set; }
+    public Dictionary<WeaponType, bool> WeaponUnlockState;
+    public Dictionary<WeaponSkinType, bool> WeaponSkinUnlockState;
+    public Dictionary<PantSkinType, bool> PantSkinUnlockState;
+    public Dictionary<HatType, bool> HatUnlockState;
 
     private void Start()
     {
@@ -67,6 +71,11 @@ public class DataManager : SingletonMono<DataManager>
     {
         Coin = gameData.Coin;
         PlayerExp = gameData.PlayerExp;
+
+        WeaponUnlockState = gameData.WeaponUnlockState;
+        WeaponSkinUnlockState = gameData.WeaponSkinUnlockState;
+        PantSkinUnlockState = gameData.PantSkinUnlockState;
+        HatUnlockState = gameData.HatUnlockState;
     }
     private void SaveGlobalData(GameData gameData)
     {
@@ -74,4 +83,8 @@ public class DataManager : SingletonMono<DataManager>
         gameData.PlayerExp = PlayerExp;
     }
 
+    public void DeleteData()
+    {
+        dataConvert.DeleteData();
+    }
 }

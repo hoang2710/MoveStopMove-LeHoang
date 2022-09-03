@@ -2302,6 +2302,8 @@ MonoBehaviour:
   AttackPosOffset: 1
   WeaponPlaceHolder: {fileID: 399754623}
   WeaponPlaceHolderTrans: {fileID: 0}
+  HatPlaceHolder: {fileID: 0}
+  HatPLaceHolderTrans: {fileID: 0}
   CharacterRenderer: {fileID: 0}
   PantRenderer: {fileID: 1071960315}
   CharacterUITransRoot: {fileID: 0}
@@ -4585,6 +4587,8 @@ MonoBehaviour:
   AttackPosOffset: 1
   WeaponPlaceHolder: {fileID: 1616614311}
   WeaponPlaceHolderTrans: {fileID: 0}
+  HatPlaceHolder: {fileID: 0}
+  HatPLaceHolderTrans: {fileID: 0}
   CharacterRenderer: {fileID: 0}
   PantRenderer: {fileID: 242467682}
   CharacterUITransRoot: {fileID: 0}
@@ -4722,7 +4726,9 @@ MonoBehaviour:
   AttackTarget: {fileID: 0}
   AttackPosOffset: 1
   WeaponPlaceHolder: {fileID: 2125164831}
-  WeaponPlaceHolderTrans: {fileID: 0}
+  WeaponPlaceHolderTrans: {fileID: 2125164832}
+  HatPlaceHolder: {fileID: 1290759074}
+  HatPLaceHolderTrans: {fileID: 1290759075}
   CharacterRenderer: {fileID: 524359562781567476}
   PantRenderer: {fileID: 8694194342936063127}
   CharacterUITransRoot: {fileID: 1035476829}
@@ -12344,7 +12350,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226000545}
-  m_LocalRotation: {x: 0.23712535, y: 0.000000028952336, z: -0.0000000070668866, w: 0.9714791}
+  m_LocalRotation: {x: 0.23712537, y: 1.5622612e-15, z: -4.6824156e-16, w: 0.97147906}
   m_LocalPosition: {x: -540, y: -938.57, z: -13.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -12969,6 +12975,36 @@ Transform:
   m_Father: {fileID: 451736236}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1290759074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1290759075}
+  m_Layer: 0
+  m_Name: Hat Place Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1290759075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290759074}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5422904700783033462}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1291801186
 GameObject:
   m_ObjectHideFlags: 0
@@ -13142,6 +13178,8 @@ MonoBehaviour:
   AttackPosOffset: 1
   WeaponPlaceHolder: {fileID: 85434721}
   WeaponPlaceHolderTrans: {fileID: 0}
+  HatPlaceHolder: {fileID: 0}
+  HatPLaceHolderTrans: {fileID: 0}
   CharacterRenderer: {fileID: 0}
   PantRenderer: {fileID: 1938388657}
   CharacterUITransRoot: {fileID: 0}
@@ -15736,6 +15774,8 @@ MonoBehaviour:
   AttackPosOffset: 1
   WeaponPlaceHolder: {fileID: 2144265727}
   WeaponPlaceHolderTrans: {fileID: 0}
+  HatPlaceHolder: {fileID: 0}
+  HatPLaceHolderTrans: {fileID: 0}
   CharacterRenderer: {fileID: 0}
   PantRenderer: {fileID: 342442364}
   CharacterUITransRoot: {fileID: 0}
@@ -16768,6 +16808,8 @@ MonoBehaviour:
   AttackPosOffset: 1
   WeaponPlaceHolder: {fileID: 118145105}
   WeaponPlaceHolderTrans: {fileID: 0}
+  HatPlaceHolder: {fileID: 0}
+  HatPLaceHolderTrans: {fileID: 0}
   CharacterRenderer: {fileID: 0}
   PantRenderer: {fileID: 223247027}
   CharacterUITransRoot: {fileID: 0}
@@ -17573,6 +17615,8 @@ MonoBehaviour:
   AttackPosOffset: 1
   WeaponPlaceHolder: {fileID: 1147158417}
   WeaponPlaceHolderTrans: {fileID: 0}
+  HatPlaceHolder: {fileID: 0}
+  HatPLaceHolderTrans: {fileID: 0}
   CharacterRenderer: {fileID: 0}
   PantRenderer: {fileID: 1418683216}
   CharacterUITransRoot: {fileID: 0}
@@ -17772,6 +17816,8 @@ MonoBehaviour:
   AttackPosOffset: 1
   WeaponPlaceHolder: {fileID: 1289386528}
   WeaponPlaceHolderTrans: {fileID: 0}
+  HatPlaceHolder: {fileID: 0}
+  HatPLaceHolderTrans: {fileID: 0}
   CharacterRenderer: {fileID: 0}
   PantRenderer: {fileID: 1077491019}
   CharacterUITransRoot: {fileID: 0}
@@ -18494,6 +18540,8 @@ MonoBehaviour:
   AttackPosOffset: 1
   WeaponPlaceHolder: {fileID: 1328839067}
   WeaponPlaceHolderTrans: {fileID: 0}
+  HatPlaceHolder: {fileID: 0}
+  HatPLaceHolderTrans: {fileID: 0}
   CharacterRenderer: {fileID: 0}
   PantRenderer: {fileID: 265942207}
   CharacterUITransRoot: {fileID: 0}
@@ -20088,6 +20136,42 @@ MonoBehaviour:
     PantMaterial: {fileID: 2100000, guid: 674c15445aab8a344bc1f4d20be7d012, type: 2}
   - PantSkinTag: 8
     PantMaterial: {fileID: 2100000, guid: 8848cb7477927db4a92e4f6ac162000b, type: 2}
+  - PantSkinTag: 9
+    PantMaterial: {fileID: 2100000, guid: 266f6f9acdda30e4f8303b6714142e12, type: 2}
+  HatDatas:
+  - HatTag: 1
+    HatPrefabs: {fileID: 6042589602980300648, guid: b491ed06418f99f44945cc2041df2819, type: 3}
+    poolSize: 2
+  - HatTag: 2
+    HatPrefabs: {fileID: 6697264268448391798, guid: ac39303cb953580488373d99bfa1a57d, type: 3}
+    poolSize: 2
+  - HatTag: 3
+    HatPrefabs: {fileID: 2205729906524229176, guid: 3bc5872672e2b64419cec5a34d049f22, type: 3}
+    poolSize: 2
+  - HatTag: 4
+    HatPrefabs: {fileID: 6531702766755918909, guid: 2aa80f906f627e048ab6a2f597094375, type: 3}
+    poolSize: 2
+  - HatTag: 5
+    HatPrefabs: {fileID: 1060202117688293469, guid: f040c456f568aa540b26e2517053dbed, type: 3}
+    poolSize: 2
+  - HatTag: 6
+    HatPrefabs: {fileID: 1538787713130483476, guid: 38dbba3ff5af37a448e17ecb4f9687c6, type: 3}
+    poolSize: 2
+  - HatTag: 7
+    HatPrefabs: {fileID: 8974345966323817301, guid: e121e7f397059ff48837f84b448efb43, type: 3}
+    poolSize: 2
+  - HatTag: 8
+    HatPrefabs: {fileID: 4348096812185447581, guid: fb8e05597e55fe741aaa3fa10da1ed19, type: 3}
+    poolSize: 2
+  - HatTag: 9
+    HatPrefabs: {fileID: 2919488848567977776, guid: cb45fbc6633804e45b28dac72d018f53, type: 3}
+    poolSize: 2
+  - HatTag: 10
+    HatPrefabs: {fileID: 4708442440563622203, guid: 91a8fa43215347a4f8180651679d14ef, type: 3}
+    poolSize: 2
+  - HatTag: 0
+    HatPrefabs: {fileID: 6042589602980300648, guid: 3359f5db12ef2f94aa40ef99adbffb4c, type: 3}
+    poolSize: 2
   BotMaterials:
   - {fileID: 2100000, guid: 5f23c72aa7c1dce4ca3fcd5c74d11ac9, type: 2}
   - {fileID: 2100000, guid: d1ec4ceac282682469552c100fc5f62f, type: 2}
@@ -20832,7 +20916,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035489454}
-  m_LocalRotation: {x: 0.34594244, y: 1e-45, z: -0, w: 0.9382558}
+  m_LocalRotation: {x: 0.34594244, y: -3e-45, z: 1e-45, w: 0.9382558}
   m_LocalPosition: {x: -540, y: -926.84, z: -15.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -24422,6 +24506,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.99999994, z: 0.99999994}
   m_Children:
   - {fileID: 4656470486253736430}
+  - {fileID: 1290759075}
   m_Father: {fileID: 2989701456878842611}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -25701,6 +25786,8 @@ MonoBehaviour:
   AttackPosOffset: 1
   WeaponPlaceHolder: {fileID: 914507246}
   WeaponPlaceHolderTrans: {fileID: 0}
+  HatPlaceHolder: {fileID: 0}
+  HatPLaceHolderTrans: {fileID: 0}
   CharacterRenderer: {fileID: 0}
   PantRenderer: {fileID: 8694194341933049628}
   CharacterUITransRoot: {fileID: 0}
@@ -25956,7 +26043,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b194bfc7c5736bd41a51541450b0f237, type: 2}
+  - {fileID: 2100000, guid: 266f6f9acdda30e4f8303b6714142e12, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

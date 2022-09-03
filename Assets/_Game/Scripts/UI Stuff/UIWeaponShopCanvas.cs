@@ -54,7 +54,7 @@ public class UIWeaponShopCanvas : UICanvas
     {
         if (playerRef == null)
         {
-            playerRef = GameObject.FindGameObjectWithTag(ConstValues.TAG_PLAYER).GetComponent<Player>();
+            playerRef = Player.PlayerGlobalReference;
         }
 
         int currentCoin = DataManager.Instance.Coin;

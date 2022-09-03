@@ -135,16 +135,22 @@ public class GameManager : SingletonMono<GameManager>
     public void ResetPLayerCoinValue()
     {
         DataManager.Instance.Coin = 0;
-
-        UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.OpenUI<UIMainMenuCanvas>(UICanvasID.MainMenu);
-        mainMenuCanvas?.SetCoinNumber(0);
     }
     public void ResetPlayerEXP()
     {
         DataManager.Instance.PlayerExp = 0f;
-
-        UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.OpenUI<UIMainMenuCanvas>(UICanvasID.MainMenu);
-        mainMenuCanvas?.SetCoinNumber(0);
+    }
+    public void ResetGameData()
+    {
+        DataManager.Instance.DeleteData();
+    }
+    public void AddCoin()
+    {
+        DataManager.Instance.Coin += 200;
+    }
+    public void MinusCoin()
+    {
+        DataManager.Instance.Coin -= 200;
     }
 }
 
@@ -178,6 +184,18 @@ public class GameManagerEditor : Editor
         if (GUILayout.Button("Reset Exp"))
         {
             script.ResetPlayerEXP();
+        }
+        if (GUILayout.Button("Reset Game Data"))
+        {
+            script.ResetGameData();
+        }
+        if (GUILayout.Button("Add more coin"))
+        {
+            script.AddCoin();
+        }
+        if (GUILayout.Button("Minus coin"))
+        {
+            script.MinusCoin();
         }
     }
 }

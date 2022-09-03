@@ -23,6 +23,13 @@ public class ItemStorage : SingletonMono<ItemStorage>
         public PantSkinType PantSkinTag;
         public Material PantMaterial;
     }
+    [System.Serializable]
+    public class HatData
+    {
+        public HatType HatTag;
+        public GameObject HatPrefabs;
+        public int poolSize;
+    }
 
     [NonReorderable]
     public List<WeaponTypeData> WeaponTypeDatas;
@@ -30,15 +37,19 @@ public class ItemStorage : SingletonMono<ItemStorage>
     public List<WeaponSkinData> WeaponSkinDatas;
     [NonReorderable]
     public List<PantData> PantDatas;
+    public List<HatData> HatDatas;
     public List<Material> BotMaterials;
     public List<string> BotNames;
 
     private Dictionary<WeaponType, GameObject> weaponItems = new Dictionary<WeaponType, GameObject>();
     private Dictionary<WeaponSkinType, Material> weaponSkins = new Dictionary<WeaponSkinType, Material>();
     private Dictionary<PantSkinType, Material> pantSkins = new Dictionary<PantSkinType, Material>();
+    private Dictionary<HatType, GameObject> hatItems = new Dictionary<HatType, GameObject>();
 
     //Pool of weapon
     private Dictionary<WeaponType, Stack<GameObject>> weaponPool = new Dictionary<WeaponType, Stack<GameObject>>();
+    //Pool of Hat
+    private Dictionary<HatType, Stack<GameObject>> hatPool = new Dictionary<HatType, Stack<GameObject>>();
 
     private void Start()
     {
@@ -59,10 +70,12 @@ public class ItemStorage : SingletonMono<ItemStorage>
         {
             pantSkins.Add(item.PantSkinTag, item.PantMaterial);
         }
-
-        Debug.Log(weaponItems.Count + "  " + weaponSkins.Count + "   " + pantSkins.Count);
+        foreach (var item in HatDatas)
+        {
+            hatItems.Add(item.HatTag, item.HatPrefabs);
+        }
     }
-    private void InitPool()
+    private void InitPool() //NOTE: might optimize later or not
     {
         foreach (var item in WeaponTypeDatas)
         {
@@ -75,7 +88,21 @@ public class ItemStorage : SingletonMono<ItemStorage>
                 tmpObj.SetActive(false);
             }
 
-            weaponPool.Add(item.WeaponTag, tmpStack); Debug.Log("Pool " + item.WeaponTag + "  " + tmpStack.Count);
+            weaponPool.Add(item.WeaponTag, tmpStack);
+        }
+
+        foreach (var item in HatDatas)
+        {
+            Stack<GameObject> tmpStack = new Stack<GameObject>();
+            for (int i = 0; i < item.poolSize; i++)
+            {
+                GameObject tmpObj = Instantiate(item.HatPrefabs);
+                tmpStack.Push(tmpObj);
+
+                tmpObj.SetActive(false);
+            }
+
+            hatPool.Add(item.HatTag, tmpStack);
         }
     }
     public GameObject PopWeaponFromPool(WeaponType weaponTag, WeaponSkinType skinTag, Vector3 position, Quaternion rotation)
@@ -128,14 +155,38 @@ public class ItemStorage : SingletonMono<ItemStorage>
     {
         if (weaponPool[tag].Count > 0)
         {
-            GameObject obj = weaponPool[tag].Peek();
-            weaponPool[tag].Pop();
-            return obj;
+            return weaponPool[tag].Pop();
         }
         else
         {
-            GameObject obj = Instantiate(weaponItems[tag]);
-            return obj;
+            return Instantiate(weaponItems[tag]);
+        }
+    }
+    public GameObject PopHatFromPool(HatType hatTag, Transform parentTrans)
+    {
+        GameObject obj = CheckIfHaveHatLeftInPool(hatTag);
+
+        obj.SetActive(true);
+
+        IPooledHat pooledHat = obj.GetComponent<IPooledHat>();
+        pooledHat?.OnSpawn(parentTrans);
+
+        return obj;
+    }
+    public void PushHatToPool(HatType hatTag, GameObject obj)
+    {
+        hatPool[hatTag].Push(obj); Debug.Log(hatPool[hatTag].Count);
+        obj.SetActive(false);
+    }
+    private GameObject CheckIfHaveHatLeftInPool(HatType tag)
+    {
+        if (hatPool[tag].Count > 0)
+        {
+            return hatPool[tag].Pop();
+        }
+        else
+        {
+            return Instantiate(hatItems[tag]);
         }
     }
 
@@ -193,5 +244,20 @@ public enum PantSkinType
     Pokemon,
     Rainbow,
     Skull,
-    Vantim
+    Vantim,
+    Invisible
+}
+public enum HatType
+{
+    None,
+    Arrow,
+    Cowboy,
+    Crown,
+    Ear,
+    Hat,
+    Cap,
+    StrawHat,
+    HeadPhone,
+    Horn,
+    Beard
 }
