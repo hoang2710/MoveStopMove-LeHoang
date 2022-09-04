@@ -62,7 +62,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     }
     private void WeaponHitHandle(Collider other)
     {
-        IHit hit = other.GetComponent<IHit>();
+        IHit hit = CacheIHit.Get(other);
         hit?.OnHit(bulletOwner, this);
     }
     public void Move()

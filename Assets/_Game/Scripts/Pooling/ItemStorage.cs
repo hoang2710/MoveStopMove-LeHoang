@@ -105,41 +105,44 @@ public class ItemStorage : SingletonMono<ItemStorage>
             hatPool.Add(item.HatTag, tmpStack);
         }
     }
-    public GameObject PopWeaponFromPool(WeaponType weaponTag, WeaponSkinType skinTag, Vector3 position, Quaternion rotation)
+    public GameObject PopWeaponFromPool(WeaponType weaponTag, WeaponSkinType skinTag, Vector3 position, Quaternion rotation, out Weapon weapon)
     {
         GameObject obj = CheckIfHaveWeaponLeftInPool(weaponTag);
         Transform objTrans = obj.transform;
+        weapon = CacheWeapon.Get(obj);
 
         obj.SetActive(true);
         objTrans.position = position;
         objTrans.rotation = rotation;
 
-        IPooledWeapon weapon = obj.GetComponent<IPooledWeapon>();
-        weapon?.OnPopFromPool(weaponSkins[skinTag]);
+        IPooledWeapon pooledWeapon = CacheIpooledWeapon.Get(obj);
+        pooledWeapon?.OnPopFromPool(weaponSkins[skinTag]);
 
         return obj;
     }
-    public GameObject PopWeaponFromPool(WeaponType weaponTag, WeaponSkinType skinTag, Transform parentTrans, Vector3 localPosition, Quaternion localRotation)
+    public GameObject PopWeaponFromPool(WeaponType weaponTag, WeaponSkinType skinTag, Transform parentTrans, Vector3 localPosition, Quaternion localRotation, out Weapon weapon)
     {
         GameObject obj = CheckIfHaveWeaponLeftInPool(weaponTag);
         Transform objTrans = obj.transform;
+        weapon = CacheWeapon.Get(obj);
 
         obj.SetActive(true);
         objTrans.SetParent(parentTrans);
         objTrans.localPosition = localPosition;
         objTrans.localRotation = localRotation;
 
-        IPooledWeapon weapon = obj.GetComponent<IPooledWeapon>();
-        weapon?.OnPopFromPool(weaponSkins[skinTag]);
+        IPooledWeapon pooledWeapon = CacheIpooledWeapon.Get(obj);
+        pooledWeapon?.OnPopFromPool(weaponSkins[skinTag]);
 
         return obj;
     }
+
     public void PushWeaponToPool(WeaponType weaponTag, GameObject obj)
     {
         weaponPool[weaponTag].Push(obj);
 
-        IPooledWeapon weapon = obj.GetComponent<IPooledWeapon>();
-        weapon?.OnPushToPool();
+        IPooledWeapon pooledWeapon = CacheIpooledWeapon.Get(obj);
+        pooledWeapon?.OnPushToPool();
 
         obj.SetActive(false);
     }
@@ -168,14 +171,14 @@ public class ItemStorage : SingletonMono<ItemStorage>
 
         obj.SetActive(true);
 
-        IPooledHat pooledHat = obj.GetComponent<IPooledHat>();
+        IPooledHat pooledHat = CacheIpooledHat.Get(obj);
         pooledHat?.OnSpawn(parentTrans);
 
         return obj;
     }
     public void PushHatToPool(HatType hatTag, GameObject obj)
     {
-        hatPool[hatTag].Push(obj); Debug.Log(hatPool[hatTag].Count);
+        hatPool[hatTag].Push(obj);
         obj.SetActive(false);
     }
     private GameObject CheckIfHaveHatLeftInPool(HatType tag)

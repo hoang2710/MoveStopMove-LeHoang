@@ -46,7 +46,7 @@ public class ParticlePooling : SingletonMono<ParticlePooling>
         objTrans.position = position;
         objTrans.rotation = rotation;
 
-        IPoolParticle poolParticle = obj.GetComponent<IPoolParticle>();
+        IPoolParticle poolParticle = CacheIppoledParticle.Get(obj);
         poolParticle?.OnSpawn(characterBase);
 
         return obj;

@@ -36,21 +36,21 @@ public class BotPooling : SingletonMono<BotPooling>
         objTrans.position = position;
         objTrans.rotation = rotation;
 
-        IPoolCharacter poolCharacter = obj.GetComponent<IPoolCharacter>();
+        IPoolCharacter poolCharacter = CacheIpooledCharacter.Get(obj);
         poolCharacter?.OnSpawn();
 
         return obj;
     }
     public void PushBotToPool(GameObject obj)
     {
-        IPoolCharacter poolCharacter = obj.GetComponent<IPoolCharacter>();
+        IPoolCharacter poolCharacter = CacheIpooledCharacter.Get(obj);
         poolCharacter?.OnDespawn();
 
         obj.SetActive(false);
 
         if (!botPool.Contains(obj))
         {
-        botPool.Push(obj);
+            botPool.Push(obj);
         }
     }
     private GameObject CheckIfHaveBotLeftInPool()

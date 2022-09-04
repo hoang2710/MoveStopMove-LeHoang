@@ -27,14 +27,14 @@ public class CharacterUIPooling : SingletonMono<CharacterUIPooling>
         GameObject obj = CheckIfHaveUILeftInPool();
         obj.SetActive(true);
 
-        IPoolCharacterUI poolCharacterUI = obj.GetComponent<IPoolCharacterUI>();
+        IPoolCharacterUI poolCharacterUI = CacheIpooledCharacterUI.Get(obj);
         poolCharacterUI?.OnSpawn(characterBase);
 
         return obj;
     }
     public void PushUIToPool(GameObject obj)
     {
-        IPoolCharacterUI poolCharacterUI = obj.GetComponent<IPoolCharacterUI>();
+        IPoolCharacterUI poolCharacterUI = CacheIpooledCharacterUI.Get(obj);
         poolCharacterUI?.OnDespawn();
 
         obj.SetActive(false);

@@ -59,6 +59,13 @@ public class CharacterBase : MonoBehaviour
     public CharacterInfoDIsplay currentUIDisplay;
     public bool IsAudioPlayable { get; set; } //NOTE: If character is out screen --> cant play audio, set value in character info display script (temp maybe)
 
+    //NOTE: use for detect enemy
+    private Collider[] colliders = new Collider[10];
+    private Collider bestMatch;
+    private int numofColliderFound;
+    private float minDistSqr;
+    private float distSqr;
+
     protected virtual void Awake()
     {
         CharacterName = ConstValues.VALUE_CHARACTER_DEFAULT_NAME;
@@ -88,31 +95,29 @@ public class CharacterBase : MonoBehaviour
     {
         if (AttackTargetTrans == null)
         {
-            Collider[] objs = Physics.OverlapSphere(CharaterTrans.position, AttackRange, ConstValues.LAYER_MASK_ENEMY);
+            numofColliderFound = Physics.OverlapSphereNonAlloc(CharaterTrans.position, AttackRange, colliders, ConstValues.LAYER_MASK_ENEMY, QueryTriggerInteraction.Ignore);
 
-            if (objs.Length > 1)
+            if (numofColliderFound > 1)
             {
-
-
-                float minDistSqr = float.MaxValue;
-                Collider bestMatch = objs[0];
-                foreach (var item in objs)
+                minDistSqr = float.MaxValue;
+                bestMatch = colliders[0];
+                for (int i = 0; i < numofColliderFound; i++)
                 {
-                    float distSqr = (item.transform.position - CharaterTrans.position).sqrMagnitude; //NOTE: use transform once -> no need to cache
+                    distSqr = (CacheCharTrans.Get(colliders[i]).position - CharaterTrans.position).sqrMagnitude;
 
                     if (distSqr < minDistSqr && distSqr > detectOffSetDistance)
                     {
                         minDistSqr = distSqr;
-                        bestMatch = item;
+                        bestMatch = colliders[i];
                     }
                 }
                 AttackTargetTrans = bestMatch.transform;
-                AttackTarget = AttackTargetTrans.GetComponent<CharacterBase>();
+                AttackTarget = CacheCharBAse.Get(AttackTargetTrans);
 
                 return true;
             }
 
-            return false; //NOTE: objs.Length = 1 --> detect self
+            return false; //NOTE: numOfColliderFound = 1 --> detect self
         }
         else
         {
@@ -155,11 +160,12 @@ public class CharacterBase : MonoBehaviour
     private void Shoot(Quaternion curRotation)
     {
         Vector3 moveDir = curRotation * Vector3.forward;
-        GameObject obj = ItemStorage.Instance.PopWeaponFromPool(WeaponTag,
-                                                                WeaponSkinTag,
-                                                                AttackPos.position,
-                                                                curRotation * ThrowWeaponRotation);
-        Weapon weapon = obj.GetComponent<Weapon>();
+        Weapon weapon;
+        ItemStorage.Instance.PopWeaponFromPool(WeaponTag,
+                                               WeaponSkinTag,
+                                               AttackPos.position,
+                                               curRotation * ThrowWeaponRotation,
+                                               out weapon);
         weapon?.SetUpThrowWeapon(moveDir, this);
     }
     public void SetUpHandWeapon()
@@ -170,13 +176,13 @@ public class CharacterBase : MonoBehaviour
         }
 
         currentHandWeaponTag = WeaponTag;
+        Weapon weapon;
         handWeapon = ItemStorage.Instance.PopWeaponFromPool(WeaponTag,
                                                             WeaponSkinTag,
                                                             WeaponPlaceHolderTrans,
                                                             Vector3.zero,
-                                                            Quaternion.identity);
-
-        Weapon weapon = handWeapon.GetComponent<Weapon>();
+                                                            Quaternion.identity,
+                                                            out weapon);
         weapon?.SetUpHandWeapon(this);
         handWeaponTrans = weapon?.WeaponTrans;
 
