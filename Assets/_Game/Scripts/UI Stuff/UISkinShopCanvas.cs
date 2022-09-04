@@ -23,6 +23,7 @@ public class UISkinShopCanvas : UICanvas
     public GameObject BottomUnlockStateObj;
     public GameObject SelectedButtonObj;
     public GameObject EquipButtonObj;
+    public RectTransform SelectedFrame; //NOTE: display current selected item
 
     [SerializeField] private ButtonData currentHatButtonData; //NOTE: assign first item in hat panel
     [SerializeField] private ButtonData currentPantButtonData; //NOTE: assign first item in pant panel
@@ -30,6 +31,9 @@ public class UISkinShopCanvas : UICanvas
 
     public List<ButtonData> HatButtonDatas; //NOTE: use for setting item lock icon
     public List<ButtonData> PantButtonDatas; //NOTE: use for setting item lock icon
+
+    private HatType finalHatTag; //NOTE: use for decide which hat is equip when out shop
+    private PantSkinType finalPantSkinTag; //NOTE: use for decide which pant is equip when out shop
 
     private void Start() //NOTE: setting lock icon for each item
     {
@@ -53,23 +57,49 @@ public class UISkinShopCanvas : UICanvas
             ItemPanels[(int)currentPanel].SetActive(false);
             SetCategoryButtonState(false, currentCategoryButton);
 
+            SetBackItemOnSwitchPanel();
+
             currentPanel = buttonData.PanelTag;
             currentCategoryButton = CategoryButtons[(int)currentPanel];
 
             ItemPanels[(int)currentPanel].SetActive(true);
             SetCategoryButtonState(true, currentCategoryButton);
 
-            switch ((int)currentPanel)
-            {
-                case 0:
-                    ItemStateHandler(DataManager.Instance.HatUnlockState[currentHatButtonData.HatTag], currentHatButtonData);
-                    break;
-                case 1:
-                    ItemStateHandler(DataManager.Instance.PantSkinUnlockState[currentPantButtonData.PantSkinTag], currentPantButtonData);
-                    break;
-                default:
-                    break;
-            }
+            CategoryPanelHandle();
+        }
+    }
+    private void SetBackItemOnSwitchPanel()
+    {
+        switch ((int)currentPanel)
+        {
+            case 0:
+                SetBackHat();
+                break;
+            case 1:
+                SetBackPant();
+                break;
+            default:
+                break;
+        }
+    }
+    private void CategoryPanelHandle()
+    {
+        switch ((int)currentPanel)
+        {
+            case 0:
+                ItemStateHandler(DataManager.Instance.HatUnlockState[currentHatButtonData.HatTag], currentHatButtonData);
+                SetSelectedFrame(currentHatButtonData.RectTrans);
+                playerRef.SetHat(currentHatButtonData.HatTag);
+                playerRef.SetUpHat();
+                break;
+            case 1:
+                ItemStateHandler(DataManager.Instance.PantSkinUnlockState[currentPantButtonData.PantSkinTag], currentPantButtonData);
+                SetSelectedFrame(currentPantButtonData.RectTrans);
+                playerRef.SetPantSkin(currentPantButtonData.PantSkinTag);
+                playerRef.SetUpPantSkin();
+                break;
+            default:
+                break;
         }
     }
     public void OnClickHatItemButton(ButtonData buttonData)
@@ -79,6 +109,11 @@ public class UISkinShopCanvas : UICanvas
         if (currentHatButtonData != buttonData)
         {
             currentHatButtonData = buttonData;
+
+            playerRef.SetHat(currentHatButtonData.HatTag);
+            playerRef.SetUpHat();
+
+            SetSelectedFrame(buttonData.RectTrans);
 
             ItemStateHandler(DataManager.Instance.HatUnlockState[buttonData.HatTag], buttonData);
         }
@@ -90,6 +125,11 @@ public class UISkinShopCanvas : UICanvas
         if (currentPantButtonData != buttonData)
         {
             currentPantButtonData = buttonData;
+
+            playerRef.SetPantSkin(currentPantButtonData.PantSkinTag);
+            playerRef.SetUpPantSkin();
+
+            SetSelectedFrame(buttonData.RectTrans);
 
             ItemStateHandler(DataManager.Instance.PantSkinUnlockState[buttonData.PantSkinTag], buttonData);
         }
@@ -153,10 +193,28 @@ public class UISkinShopCanvas : UICanvas
         switch ((int)currentPanel)
         {
             case 0:
-                EquipHandler(buttonData.HatTag == playerRef.HatTag);
+                EquipHandler(buttonData.HatTag == finalHatTag);
                 break;
             case 1:
-                EquipHandler(buttonData.PantSkinTag == playerRef.PantSkinTag);
+                EquipHandler(buttonData.PantSkinTag == finalPantSkinTag);
+                break;
+            default:
+                break;
+        }
+    }
+    public void OnClickEquipButton()
+    {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+
+        switch ((int)currentPanel)
+        {
+            case 0:
+                finalHatTag = currentHatButtonData.HatTag;
+                EquipHandler(true);
+                break;
+            case 1:
+                finalPantSkinTag = currentPantButtonData.PantSkinTag;
+                EquipHandler(true);
                 break;
             default:
                 break;
@@ -173,26 +231,6 @@ public class UISkinShopCanvas : UICanvas
         {
             EquipButtonObj.SetActive(false);
             SelectedButtonObj.SetActive(true);
-        }
-    }
-    public void OnClickEquipButton()
-    {
-        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
-
-        switch ((int)currentPanel)
-        {
-            case 0:
-                playerRef?.SetHat(currentHatButtonData.HatTag);
-                playerRef?.SetUpHat();
-                EquipHandler(true);
-                break;
-            case 1:
-                playerRef?.SetPantSkin(currentPantButtonData.PantSkinTag);
-                playerRef?.SetUpPantSkin();
-                EquipHandler(true);
-                break;
-            default:
-                break;
         }
     }
     public void OnClickHollowButton() //NOTE: the button display when not have enough coin
@@ -242,28 +280,39 @@ public class UISkinShopCanvas : UICanvas
             playerRef = Player.PlayerGlobalReference;
         }
 
-        SetCoinValue(DataManager.Instance.Coin);
+        playerRef.ChangeAnimation(ConstValues.ANIM_TRIGGER_DANCE_CHAR_SKIN);
 
-        playerRef?.ChangeAnimation(ConstValues.ANIM_TRIGGER_DANCE_CHAR_SKIN);
+        finalHatTag = playerRef.HatTag;
+        finalPantSkinTag = playerRef.PantSkinTag;
+
+        SetCoinValue(DataManager.Instance.Coin);
 
         currentCategoryButton = CategoryButtons[(int)currentPanel];
 
-        switch ((int)currentPanel)
-        {
-            case 0:
-                ItemStateHandler(DataManager.Instance.HatUnlockState[currentHatButtonData.HatTag], currentHatButtonData);
-                break;
-            case 1:
-                ItemStateHandler(DataManager.Instance.PantSkinUnlockState[currentPantButtonData.PantSkinTag], currentPantButtonData);
-                break;
-            default:
-                break;
-        }
+        CategoryPanelHandle();
     }
 
     protected override void OnCloseCanvas()
     {
-        playerRef?.ChangeAnimation(ConstValues.ANIM_TRIGGER_IDLE);
+        playerRef.ChangeAnimation(ConstValues.ANIM_TRIGGER_IDLE);
+
+        SetBackHat();
+        SetBackPant();
+    }
+    private void SetBackHat()
+    {
+        playerRef.SetHat(finalHatTag);
+        playerRef.SetUpHat();
+    }
+    private void SetBackPant()
+    {
+        playerRef.SetPantSkin(finalPantSkinTag);
+        playerRef.SetUpPantSkin();
+    }
+    private void SetSelectedFrame(RectTransform parentButton)
+    {
+        SelectedFrame.position = parentButton.position;
+        SelectedFrame.SetParent(parentButton);
     }
 }
 

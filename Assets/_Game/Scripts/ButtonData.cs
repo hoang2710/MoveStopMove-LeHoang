@@ -18,6 +18,7 @@ public class ButtonData : MonoBehaviour
     [HideInInspector] public Image ButtonImage;
     [HideInInspector] public Image IconImage;
     [HideInInspector] public GameObject LockIcon;
+    [HideInInspector] public RectTransform RectTrans;
 }
 
 #if UNITY_EDITOR
@@ -43,6 +44,7 @@ public class ButtonDataGUI : Editor
     SerializedProperty ButtonImage;
     SerializedProperty IconImage;
     SerializedProperty LockIcon;
+    SerializedProperty RectTrans;
 
     private void OnEnable()
     {
@@ -56,6 +58,7 @@ public class ButtonDataGUI : Editor
         ButtonImage = serializedObject.FindProperty("ButtonImage");
         IconImage = serializedObject.FindProperty("IconImage");
         LockIcon = serializedObject.FindProperty("LockIcon");
+        RectTrans = serializedObject.FindProperty("RectTrans");
     }
     public override void OnInspectorGUI()
     {
@@ -99,6 +102,7 @@ public class ButtonDataGUI : Editor
         EditorGUILayout.PropertyField(PantSkinTag, new GUIContent("Pant Skin Tag"));
         EditorGUILayout.PropertyField(ItemCost, new GUIContent("Item Cost"));
         EditorGUILayout.PropertyField(LockIcon, new GUIContent("Lock Icon"));
+        EditorGUILayout.PropertyField(RectTrans, new GUIContent("RectTransform"));
 
         serializedObject.ApplyModifiedProperties();
     }
@@ -108,6 +112,7 @@ public class ButtonDataGUI : Editor
         EditorGUILayout.PropertyField(HatTag, new GUIContent("Hat Tag"));
         EditorGUILayout.PropertyField(ItemCost, new GUIContent("Item Cost"));
         EditorGUILayout.PropertyField(LockIcon, new GUIContent("Lock Icon"));
+        EditorGUILayout.PropertyField(RectTrans, new GUIContent("RectTransform"));
 
         serializedObject.ApplyModifiedProperties();
     }
