@@ -8,16 +8,118 @@ public class UIWeaponShopCanvas : UICanvas
     private Player playerRef;
 
     public TMP_Text CoinDisplay;
-    public List<GameObject> PanelList;
-    private int currentPanelIndex = 0;
+    public List<WeaponPanel> WeaponPanelList;
+    public WeaponPanel CurrentPanel; //NOTE: assign fisrt panel in list pls
+    private int currentPanelIndex = 0; //NOTE: shop start with axe panel as first panel in panel list
 
-    public void OnClickWeaponButton(ButtonData data)
+    public GameObject BuyButton;
+    public GameObject EquipButton;
+    public GameObject SelectedButton;
+    public TMP_Text ItemCostText;
+
+    private bool isFirstLoad = true;
+
+    public void OnClickWeaponButton(ButtonData buttonData)
     {
         AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
 
-        playerRef.SetWeaponType(data.WeaponTag);
-        playerRef.SetWeaponSkin(data.WeaponSkinTag);
+        WeaponButtonClickHandle(buttonData);
+    }
+    private void WeaponButtonClickHandle(ButtonData buttonData)
+    {
+        bool isBuyButtonVisible = SetBottomPartState(buttonData.IsUnlock,
+                                                     buttonData.WeaponSkinTag == playerRef.WeaponSkinTag);
+
+        if (isBuyButtonVisible)
+        {
+            SetItemCost(buttonData.ItemCost);
+        }
+
+        CurrentPanel.SetItemFrame(buttonData);
+        CurrentPanel.SetCurrentButtonData(buttonData);
+        CurrentPanel.SetWeaponDisplay(buttonData);
+    }
+    private bool SetBottomPartState(bool isBought, bool isEquip) //NOTE: return if is need to display buy button
+    {
+        if (!isBought)
+        {
+            BuyButton.SetActive(true);
+            EquipButton.SetActive(false);
+            SelectedButton.SetActive(false);
+
+            return true;
+        }
+        else if (!isEquip)
+        {
+            BuyButton.SetActive(false);
+            EquipButton.SetActive(true);
+            SelectedButton.SetActive(false);
+        }
+        else
+        {
+            BuyButton.SetActive(false);
+            EquipButton.SetActive(false);
+            SelectedButton.SetActive(true);
+        }
+
+        return false;
+    }
+    public void OnClickBuyButton()
+    {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+
+        if (DataManager.Instance.Coin > CurrentPanel.currentButtonData.ItemCost) //NOTE: optimize later or not
+        {
+            CurrentPanel.BuyWeaponHandle();
+            SetCoinValue(DataManager.Instance.Coin);
+
+            SetBottomPartState(true, false);
+        }
+    }
+    public void OnClickEquipButton()
+    {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+
+        playerRef.SetWeaponType(CurrentPanel.currentButtonData.WeaponTag);
+        playerRef.SetWeaponSkin(CurrentPanel.currentButtonData.WeaponSkinTag);
         playerRef.SetUpHandWeapon();
+
+        SetBottomPartState(true, true);
+    }
+    public void OnClickSelectedButton()
+    {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+    }
+    public void SetItemCost(int itemCost)
+    {
+        ItemCostText.text = itemCost.ToString();
+    }
+    public void SetCoinValue(int value)
+    {
+        CoinDisplay.text = value.ToString();
+    }
+    public void OnClickNextWeaponPanel()
+    {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+        OpenWeaponPanel(currentPanelIndex + 1);
+    }
+    public void OnClickPreviousWeaponPanel()
+    {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+        OpenWeaponPanel(currentPanelIndex - 1);
+    }
+    public void OpenWeaponPanel(int index)
+    {
+        if (index >= 0 && index < WeaponPanelList.Count)
+        {
+            CurrentPanel.SetActive(false);
+            currentPanelIndex = index;
+            CurrentPanel = WeaponPanelList[currentPanelIndex];
+            CurrentPanel.SetActive(true);
+
+            CurrentPanel.SetUpPanel();
+            WeaponButtonClickHandle(CurrentPanel.currentButtonData);
+        }
     }
     public void OnCLickExitButton()
     {
@@ -27,29 +129,6 @@ public class UIWeaponShopCanvas : UICanvas
 
         Close();
     }
-    public void SetCoinValue(int value)
-    {
-        CoinDisplay.text = value.ToString();
-    }
-    public void OnClickNextWeaponPanel()
-    {
-        OpenWeaponPanel(currentPanelIndex + 1);
-        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
-    }
-    public void OnClickPreviousWeaponPanel()
-    {
-        OpenWeaponPanel(currentPanelIndex - 1);
-        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
-    }
-    public void OpenWeaponPanel(int index)
-    {
-        if (index >= 0 && index < PanelList.Count)
-        {
-            PanelList[currentPanelIndex].SetActive(false);
-            currentPanelIndex = index;
-            PanelList[currentPanelIndex].SetActive(true);
-        }
-    }
     protected override void OnOpenCanvas()
     {
         if (playerRef == null)
@@ -57,14 +136,21 @@ public class UIWeaponShopCanvas : UICanvas
             playerRef = Player.PlayerGlobalReference;
         }
 
-        int currentCoin = DataManager.Instance.Coin;
-        SetCoinValue(currentCoin);
+        SetCoinValue(DataManager.Instance.Coin);
 
-        playerRef?.PlayerObj.SetActive(false);
+        playerRef.PlayerObj.SetActive(false);
+
+        if (isFirstLoad)
+        {
+            CurrentPanel.SetUpPanel();
+            WeaponButtonClickHandle(CurrentPanel.currentButtonData);
+
+            isFirstLoad = false;
+        }
     }
     protected override void OnCloseCanvas()
     {
-        playerRef?.PlayerObj.SetActive(true);
+        playerRef.PlayerObj.SetActive(true);
     }
 }
 

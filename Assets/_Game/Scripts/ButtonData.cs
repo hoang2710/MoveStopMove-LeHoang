@@ -17,7 +17,7 @@ public class ButtonData : MonoBehaviour
     [HideInInspector] public PanelType PanelTag;
     [HideInInspector] public Image ButtonImage;
     [HideInInspector] public Image IconImage;
-    [HideInInspector] public GameObject LockIcon;
+    [HideInInspector] public GameObject LockIcon; //NOTE: default is set active true
     [HideInInspector] public RectTransform RectTrans;
 }
 
@@ -27,8 +27,7 @@ public enum ButtonType
     WeaponItem,
     PantItem,
     HatItem,
-    SkinShopCategory,
-    SkinShopItem
+    SkinShopCategory
 }
 
 [CustomEditor(typeof(ButtonData))]
@@ -80,9 +79,6 @@ public class ButtonDataGUI : Editor
             case ButtonType.SkinShopCategory:
                 DisplaySkinShopCategory();
                 break;
-            case ButtonType.SkinShopItem:
-                DisplaySkinShopItem();
-                break;
             default:
                 break;
         }
@@ -93,6 +89,9 @@ public class ButtonDataGUI : Editor
         EditorGUILayout.Space();
         EditorGUILayout.PropertyField(WeaponTag, new GUIContent("Weapon Tag"));
         EditorGUILayout.PropertyField(WeaponSkinTag, new GUIContent("Weapon Skin Tag"));
+        EditorGUILayout.PropertyField(ItemCost, new GUIContent("Item Cost"));
+        EditorGUILayout.PropertyField(LockIcon, new GUIContent("Lock Icon"));
+        EditorGUILayout.PropertyField(RectTrans, new GUIContent("RectTransform"));
 
         serializedObject.ApplyModifiedProperties();
     }
@@ -122,13 +121,6 @@ public class ButtonDataGUI : Editor
         EditorGUILayout.PropertyField(PanelTag, new GUIContent("Panel Tag"));
         EditorGUILayout.PropertyField(ButtonImage, new GUIContent("Button Image"));
         EditorGUILayout.PropertyField(IconImage, new GUIContent("Icon Image"));
-
-        serializedObject.ApplyModifiedProperties();
-    }
-    private void DisplaySkinShopItem()
-    {
-        EditorGUILayout.Space();
-        EditorGUILayout.PropertyField(IsUnlock, new GUIContent("Is Item Unlocked"));
 
         serializedObject.ApplyModifiedProperties();
     }
