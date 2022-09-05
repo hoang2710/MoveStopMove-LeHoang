@@ -20,12 +20,12 @@ public class UIResultCanvas : UICanvas
     public Slider ProgressBar;
     [Header("Win Panel")]
     public GameObject WinPanel;
-    public TMP_Text CoinDisplayTextWin;
     [Header("Lose Panel")]
     public GameObject LosePanel;
     public TMP_Text RankingText;
     public TMP_Text KillerNameText;
-    public TMP_Text CoinDisplayTextLose;
+    [Header("Bottom Part")]
+    public TMP_Text CoinDisplayText;
 
     private int playerRank;
     private float progressPercentage;
@@ -63,8 +63,7 @@ public class UIResultCanvas : UICanvas
     }
     public void SetCoinValue(int value)
     {
-        CoinDisplayTextWin.text = value.ToString();
-        CoinDisplayTextLose.text = value.ToString();
+        CoinDisplayText.text = value.ToString();
     }
     public void SetRankingLosePanel(int rank)
     {

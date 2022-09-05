@@ -24,12 +24,10 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
     private bool enableFlag;
     private float parentCanvasLength;
     private float parentCanvasHeight;
+    private float targetParentCanvasLength = 1080f;
+    private float targetParentCanvasHeight = 1920f;
     private float UIOffsetXAxis = 96f;
     private float UIOffsetYAxis = 96f;
-    // private float xAxisMin;
-    // private float xAxisMax;
-    // private float yAxisMin;
-    // private float yAxisMax;
     private Vector3 center;
     private float boundX;
     private float boundY;
@@ -41,34 +39,15 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         parentCanvasLength = ParentCanvasTrans.sizeDelta.x;
         parentCanvasHeight = ParentCanvasTrans.sizeDelta.y;
 
-        // xAxisMin = UIOffsetXAxis;
-        // xAxisMax = parentCanvasLength - UIOffsetXAxis;
-        // yAxisMin = UIOffsetYAxis;
-        // yAxisMax = parentCanvasHeight - UIOffsetYAxis;
+        UIOffsetXAxis *= parentCanvasLength / targetParentCanvasLength;
+        UIOffsetYAxis *= parentCanvasHeight / targetParentCanvasHeight;
 
         center = new Vector3(parentCanvasLength / 2, parentCanvasHeight / 2, 0);
 
-        // float tempXOffset = 0.1f * parentCanvasLength;
-        // float tempYOffset = 0.1f * parentCanvasHeight;
-
-        // if (tempXOffset > UIOffsetXAxis)
-        // {
         boundX = (parentCanvasLength - 2 * UIOffsetXAxis) / 2;
-        // }
-        // else
-        // {
-        //     boundX = parentCanvasLength * 0.4f;
-        // }
-        // if (tempYOffset > UIOffsetYAxis)
-        // {
         boundY = (parentCanvasHeight - 2 * UIOffsetYAxis) / 2;
-        // }
-        // else
-        // {
-        //     boundY = parentCanvasHeight * 0.4f;
-        // }
 
-        enableFlag = NameText.enabled;
+        enableFlag = NameText.enabled; Debug.Log(UITrans.sizeDelta + "  " + parentCanvasLength + "  " + parentCanvasHeight);
     }
     private void LateUpdate()
     {
