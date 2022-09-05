@@ -36,8 +36,8 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
     {
         curCam = Camera.main; //NOTE: Temp 
         ParentCanvasTrans = (RectTransform)CharacterUIPooling.Instance.ParentTransform;
-        parentCanvasLength = ParentCanvasTrans.sizeDelta.x;
-        parentCanvasHeight = ParentCanvasTrans.sizeDelta.y;
+        parentCanvasLength = ParentCanvasTrans.sizeDelta.x * ParentCanvasTrans.localScale.x;
+        parentCanvasHeight = ParentCanvasTrans.sizeDelta.y * ParentCanvasTrans.localScale.y;
 
         UIOffsetXAxis *= parentCanvasLength / targetParentCanvasLength;
         UIOffsetYAxis *= parentCanvasHeight / targetParentCanvasHeight;

@@ -111,8 +111,8 @@ public class CharacterBase : MonoBehaviour
                         bestMatch = colliders[i];
                     }
                 }
-                AttackTargetTrans = bestMatch.transform;
-                AttackTarget = CacheCharBAse.Get(AttackTargetTrans);
+                AttackTarget = CacheCharBAse.Get(bestMatch);
+                AttackTargetTrans = AttackTarget.CharaterTrans;
 
                 return true;
             }

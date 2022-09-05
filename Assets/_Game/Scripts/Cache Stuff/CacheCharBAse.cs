@@ -2,6 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CacheCharBAse : Cache<Transform, CharacterBase>
+public class CacheCharBAse : Cache<Collider, CharacterBase>
 {
 }
