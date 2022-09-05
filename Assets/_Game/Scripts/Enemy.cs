@@ -74,16 +74,16 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         switch (WeaponTag)
         {
             case WeaponType.Axe:
-                WeaponSkinTag = (WeaponSkinType)Random.Range(0, 4);
+                WeaponSkinTag = (WeaponSkinType)Random.Range((int)WeaponSkinType.Axe_0, (int)WeaponSkinType.Axe_1_2 + 1);
                 break;
             case WeaponType.Knife:
-                WeaponSkinTag = (WeaponSkinType)Random.Range(8, 10);
+                WeaponSkinTag = (WeaponSkinType)Random.Range((int)WeaponSkinType.Knife_1, (int)WeaponSkinType.Knife_2 + 1);
                 break;
             case WeaponType.Candy:
-                WeaponSkinTag = (WeaponSkinType)Random.Range(6, 8);
+                WeaponSkinTag = (WeaponSkinType)Random.Range((int)WeaponSkinType.Candy_1, (int)WeaponSkinType.Candy_2 + 1);
                 break;
             case WeaponType.Hammer:
-                WeaponSkinTag = (WeaponSkinType)Random.Range(4, 6);
+                WeaponSkinTag = (WeaponSkinType)Random.Range((int)WeaponSkinType.Hammer_1, (int)WeaponSkinType.Hammer_2 + 1);
                 break;
             default:
                 break;

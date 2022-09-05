@@ -12380,7 +12380,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226000545}
-  m_LocalRotation: {x: 0.23712535, y: 0.000000028952336, z: -0.0000000070668866, w: 0.9714791}
+  m_LocalRotation: {x: 0.23712535, y: -0.000000011992453, z: 0.0000000029272016, w: 0.97147906}
   m_LocalPosition: {x: -540, y: -938.57, z: -13.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -19003,7 +19003,9 @@ MonoBehaviour:
   MapSpawnOuterRadius: 50
   MapSpawnInnerRadius: 15
   MapSpawnCenter: {fileID: 352531589}
-  numOfBaseBot: 0
+  numOfBaseBot: 10
+  minCharater: 25
+  maxCharacter: 35
   currentLevel: 1
   levelToLoad: 1
 --- !u!4 &1895798945
@@ -20946,7 +20948,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035489454}
-  m_LocalRotation: {x: 0.34594244, y: -3e-45, z: 1e-45, w: 0.9382558}
+  m_LocalRotation: {x: 0.34594244, y: 1e-45, z: -0, w: 0.9382558}
   m_LocalPosition: {x: -540, y: -926.84, z: -15.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

@@ -4,27 +4,28 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : SingletonMono<LevelManager>
+public class LevelManager : SingletonMono<LevelManager>, IDataHandler
 {
     public float MapSpawnOuterRadius;
     public float MapSpawnInnerRadius;
     public Transform MapSpawnCenter;
-    [SerializeField]
-    private int numOfBaseBot;
+    [SerializeField] private int numOfBaseBot = 10;
+    [SerializeField] private int minCharater = 25;
+    [SerializeField] private int maxCharacter = 35;
     private int numOfTotalCharacter;
     private int numOfCurrentCharacter;
     private int numOfBotToSpawn;
     private UIGamePlayCanvas gamePlayCanvas;
 
-    [SerializeField]
-    private Level currentLevel = Level.Level_1; //temp
-    [SerializeField]
-    private Level levelToLoad = Level.Level_1; //temp
+    [SerializeField] private Level currentLevel = Level.Level_1; //temp
+    [SerializeField] private Level levelToLoad = Level.Level_1; //temp
     private bool isFirstLoad = true;
 
     private void Start()
     {
         GameManager.OnGameStateChange += GameManagerOnGameStateChange;
+
+        DataManager.Instance.AssignDataHandler(this);
     }
     private void OnDestroy()
     {
@@ -46,8 +47,7 @@ public class LevelManager : SingletonMono<LevelManager>
     }
     private void SetData()
     {
-        numOfTotalCharacter = Random.Range(25, 35); //temp
-        numOfBaseBot = Random.Range(8, 12);  //temp
+        numOfTotalCharacter = Random.Range(minCharater, maxCharacter);
         numOfCurrentCharacter = numOfTotalCharacter;
         numOfBotToSpawn = numOfTotalCharacter - numOfBaseBot - 1;//NOTE: minus player
 
@@ -171,6 +171,16 @@ public class LevelManager : SingletonMono<LevelManager>
     public float GetProgressPercentage()
     {
         return (float)(numOfTotalCharacter - numOfCurrentCharacter) / numOfTotalCharacter;
+    }
+
+    public void LoadData(GameData data)
+    {
+        currentLevel = data.CurrentLevel;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.CurrentLevel = currentLevel;
     }
 }
 
