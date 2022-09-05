@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7802415571459319871}
   m_Layer: 5
-  m_Name: 'Bottom Part '
+  m_Name: 'Win Bottom Part '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1096,7 +1096,7 @@ GameObject:
   m_Component:
   - component: {fileID: 612168497697948144}
   m_Layer: 5
-  m_Name: Bottom Part
+  m_Name: Lose Bottom Part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2166,6 +2166,8 @@ MonoBehaviour:
   RankingText: {fileID: 2361095893272846103}
   KillerNameText: {fileID: 4933721651771151870}
   CoinDisplayText: {fileID: 103021529866569355}
+  LoseBottomPart: {fileID: 612168497697948147}
+  WinBottomPart: {fileID: 449712504912405505}
 --- !u!1 &612168498140431178
 GameObject:
   m_ObjectHideFlags: 0

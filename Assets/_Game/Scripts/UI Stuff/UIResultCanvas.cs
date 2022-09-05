@@ -26,6 +26,8 @@ public class UIResultCanvas : UICanvas
     public TMP_Text KillerNameText;
     [Header("Bottom Part")]
     public TMP_Text CoinDisplayText;
+    public GameObject LoseBottomPart;
+    public GameObject WinBottomPart;
 
     private int playerRank;
     private float progressPercentage;
@@ -74,6 +76,19 @@ public class UIResultCanvas : UICanvas
         KillerNameText.text = name;
         KillerNameText.color = color;
     }
+    public void SetUpBottomPartState(bool isWin)
+    {
+        if (isWin)
+        {
+            WinBottomPart.SetActive(true);
+            LoseBottomPart.SetActive(false);
+        }
+        else
+        {
+            WinBottomPart.SetActive(false);
+            LoseBottomPart.SetActive(true);
+        }
+    }
     public void OnClickHomeButton()
     {
         GameManager.Instance.ChangeGameState(GameState.LoadLevel);
@@ -106,11 +121,13 @@ public class UIResultCanvas : UICanvas
         if (playerRank > 1)
         {
             SetActiveResultPanel(false);
+            SetUpBottomPartState(false);
             LoseResultHandle();
         }
         else
         {
             SetActiveResultPanel(true);
+            SetUpBottomPartState(true);
             WinResultHandle();
         }
     }
