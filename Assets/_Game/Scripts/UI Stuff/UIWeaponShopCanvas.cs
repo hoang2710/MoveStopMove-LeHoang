@@ -68,14 +68,23 @@ public class UIWeaponShopCanvas : UICanvas
     {
         AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
 
+        if (!CurrentPanel.CheckPreviousWeaponUnlockState())
+        {
+            return;
+        }
+
         if (DataManager.Instance.Coin > CurrentPanel.currentButtonData.ItemCost) //NOTE: optimize later or not
         {
             CurrentPanel.BuyWeaponHandle();
             SetCoinValue(DataManager.Instance.Coin);
 
             SetBottomPartState(true, false);
+
+            DataManager.Instance.WeaponUnlockState[CurrentPanel.WeaponTag] = true;
+            CurrentPanel.WeaponUnlockStateHandle();
         }
     }
+    
     public void OnClickEquipButton()
     {
         AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);

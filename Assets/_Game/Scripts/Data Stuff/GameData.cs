@@ -37,6 +37,10 @@ public class GameData
         InitDictionaryData<WeaponSkinType>(out WeaponSkinUnlockState);
         InitDictionaryData<PantSkinType>(out PantSkinUnlockState);
         InitDictionaryData<HatType>(out HatUnlockState);
+
+        //NOTE: unlock some default item
+        WeaponUnlockState[WeaponType.Axe] = true;
+        WeaponSkinUnlockState[WeaponSkinType.Axe_0] = true;
     }
 
     private void InitDictionaryData<T>(out SerializableDictionary<T, bool> dict) where T : System.Enum

@@ -99,8 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponRenderer: {fileID: 1606848824599129133}
   flyingSpeed: 8
-  WeaponTag: 2
-  BulletTag: 0
+  WeaponTag: 3
   WeaponTrans: {fileID: 1532247647228684715}
   WeaponObject: {fileID: 6488665240584564782}
   WeaponCollider: {fileID: 2919856334088602386}
@@ -108,6 +107,7 @@ MonoBehaviour:
   HandRotateOffset: {x: 90, y: -90, z: 180}
   ThrowRotateOffset: {x: -90, y: 0, z: 0}
   rotateSpeed: 0
+  tripleShotOffset: 30
 --- !u!65 &2919856334088602386
 BoxCollider:
   m_ObjectHideFlags: 0

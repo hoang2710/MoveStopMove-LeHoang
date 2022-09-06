@@ -221,8 +221,8 @@ public enum WeaponType
 {
     Axe,
     Hammer,
-    Knife,
-    Candy
+    Candy,
+    Knife
 }
 public enum WeaponSkinType
 {

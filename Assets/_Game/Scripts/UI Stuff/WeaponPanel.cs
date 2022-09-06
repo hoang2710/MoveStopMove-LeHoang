@@ -6,9 +6,13 @@ using TMPro;
 public class WeaponPanel : MonoBehaviour
 {
     public GameObject PanelObj;
-    public WeaponType WewaponTag { get; }
+    public WeaponType WeaponTag;
     public TMP_Text WeaponNameText;
     public Renderer WeaponDisplay;
+    public GameObject NoteTextObj;
+    public TMP_Text NoteText;
+    private string note_1 = "Unlock previous weapon to buy";
+    private string note_2 = "Cheap weapon buy buy";
     public GameObject ItemButtonGroup; //NOTE: use for set active all item button when weapon is bought or not
     public List<ButtonData> ItemButtons; //NOTE: assign button in right order pls
     public Transform ItemFrame;
@@ -37,6 +41,35 @@ public class WeaponPanel : MonoBehaviour
 
             isFirstLoad = false;
         }
+
+        WeaponUnlockStateHandle();
+    }
+    public void WeaponUnlockStateHandle()
+    {
+        if (DataManager.Instance.WeaponUnlockState[WeaponTag])
+        {
+            ItemButtonGroup.SetActive(true);
+            NoteTextObj.SetActive(false);
+        }
+        else
+        {
+            ItemButtonGroup.SetActive(false);
+            NoteTextObj.SetActive(true);
+            CheckPreviousWeaponUnlockState();
+        }
+    }
+    public bool CheckPreviousWeaponUnlockState()
+    {
+        int index = (int)WeaponTag - 1;
+
+        if (index >= 0 && DataManager.Instance.WeaponUnlockState[(WeaponType)index])
+        {
+            NoteText.text = note_2;
+            return true;
+        }
+
+        NoteText.text = note_1;
+        return false;
     }
 
     public void SetItemFrame(ButtonData buttonData)
