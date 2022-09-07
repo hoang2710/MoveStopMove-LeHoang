@@ -68,7 +68,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
     }
     private void SetRandomEnumData()
     {
-        WeaponTag = (WeaponType)Random.Range(0, System.Enum.GetNames(typeof(WeaponType)).Length);
+        WeaponTag = (WeaponType)Random.Range((int)WeaponType.Axe, (int)WeaponType.Knife + 1);
 
         //NOTE: Optimize later, dont rush
         switch (WeaponTag)
@@ -89,8 +89,8 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
                 break;
         }
 
-        PantSkinTag = (PantSkinType)Random.Range(0, System.Enum.GetNames(typeof(PantSkinType)).Length);
-        HatTag = (HatType)Random.Range(0, System.Enum.GetNames(typeof(HatType)).Length);
+        PantSkinTag = (PantSkinType)Random.Range((int)PantSkinType.Batman, (int)PantSkinType.Vantim + 1);
+        HatTag = (HatType)Random.Range((int)HatType.Arrow, (int)HatType.Beard + 1);
     }
     public void SetRandomBodySkin()
     {

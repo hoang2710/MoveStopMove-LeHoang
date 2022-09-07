@@ -30,6 +30,12 @@ public class ItemStorage : SingletonMono<ItemStorage>
         public GameObject HatPrefabs;
         public int poolSize;
     }
+    [System.Serializable]
+    public class ColorData
+    {
+        public CustomColor CustomColor;
+        public Material Color;
+    }
 
     [NonReorderable]
     public List<WeaponTypeData> WeaponTypeDatas;
@@ -38,6 +44,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
     [NonReorderable]
     public List<PantData> PantDatas;
     public List<HatData> HatDatas;
+    public List<ColorData> ColorDatas;
     public List<Material> BotMaterials;
     public List<string> BotNames;
 
@@ -45,6 +52,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
     private Dictionary<WeaponSkinType, Material> weaponSkins = new Dictionary<WeaponSkinType, Material>();
     private Dictionary<PantSkinType, Material> pantSkins = new Dictionary<PantSkinType, Material>();
     private Dictionary<HatType, GameObject> hatItems = new Dictionary<HatType, GameObject>();
+    private Dictionary<CustomColor, Material> customColors = new Dictionary<CustomColor, Material>();
 
     //Pool of weapon
     private Dictionary<WeaponType, Stack<GameObject>> weaponPool = new Dictionary<WeaponType, Stack<GameObject>>();
@@ -73,6 +81,10 @@ public class ItemStorage : SingletonMono<ItemStorage>
         foreach (var item in HatDatas)
         {
             hatItems.Add(item.HatTag, item.HatPrefabs);
+        }
+        foreach (var item in ColorDatas)
+        {
+            customColors.Add(item.CustomColor, item.Color);
         }
     }
     private void InitPool() //NOTE: might optimize later or not
@@ -205,6 +217,14 @@ public class ItemStorage : SingletonMono<ItemStorage>
     {
         return pantSkins[tag];
     }
+    public Material GetCustomColoreMaterial(CustomColor tag)
+    {
+        return customColors[tag];
+    }
+    public Color GetCustomColor(CustomColor tag)
+    {
+        return customColors[tag].color;
+    }
     public Material GetRandomBotMaterial()
     {
         int ran = Random.Range(0, BotMaterials.Count);
@@ -214,6 +234,27 @@ public class ItemStorage : SingletonMono<ItemStorage>
     {
         int ran = Random.Range(0, BotNames.Count);
         return BotNames[ran];
+    }
+    public Material[] GetCustomMaterials(CustomColor color1, CustomColor color2)
+    {
+        Material[] materials = new Material[]
+        {
+            GetCustomColoreMaterial(color1),
+            GetCustomColoreMaterial(color2)
+        };
+
+        return materials;
+    }
+    public Material[] GetCustomMaterials(CustomColor color1, CustomColor color2, CustomColor color3) //NOTE: for candy
+    {
+        Material[] materials = new Material[]
+        {
+            GetCustomColoreMaterial(color1),
+            GetCustomColoreMaterial(color2),
+            GetCustomColoreMaterial(color3)
+        };
+
+        return materials;
     }
 }
 
@@ -235,7 +276,11 @@ public enum WeaponSkinType
     Candy_1,
     Candy_2,
     Knife_1,
-    Knife_2
+    Knife_2,
+    CustomAxe,
+    CustomHammer,
+    CustomCany,
+    Cu
 }
 public enum PantSkinType
 {
@@ -263,4 +308,27 @@ public enum HatType
     HeadPhone,
     Horn,
     Beard
+}
+public enum CustomColor
+{
+    Melon,
+    Red,
+    Flamingo,
+    BubbleGum,
+    Orange,
+    Tangerine,
+    SunShine,
+    Banana,
+    Green,
+    Lime,
+    Aqua,
+    Tropical,
+    Royal,
+    Blue,
+    SugarPlum,
+    Lavender,
+    Storm,
+    Smoke,
+    Brown,
+    Nutmeg
 }

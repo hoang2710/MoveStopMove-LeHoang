@@ -186,20 +186,20 @@ public class CharacterBase : MonoBehaviour
         weapon?.SetUpHandWeapon(this);
         handWeaponTrans = weapon?.WeaponTrans;
 
-        Renderer objRen = weapon.WeaponRenderer;
-        if (objRen != null)
-        {
-            Material material = ItemStorage.Instance.GetWeaponSkin(WeaponSkinTag);
-            switch (WeaponTag)
-            {
-                case WeaponType.Candy:
-                    objRen.materials = new Material[] { material, material, material }; //NOTE: Candy weapon have 3 material
-                    break;
-                default:
-                    objRen.materials = new Material[] { material, material };
-                    break;
-            }
-        }
+        // Renderer objRen = weapon.WeaponRenderer;
+        // if (objRen != null)
+        // {
+        //     Material material = ItemStorage.Instance.GetWeaponSkin(WeaponSkinTag);
+        //     switch (WeaponTag)
+        //     {
+        //         case WeaponType.Candy:
+        //             objRen.materials = new Material[] { material, material, material }; //NOTE: Candy weapon have 3 material
+        //             break;
+        //         default:
+        //             objRen.materials = new Material[] { material, material };
+        //             break;
+        //     }
+        // }
     }
     public void SetUpHat()
     {

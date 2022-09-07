@@ -17,6 +17,7 @@ public class WeaponPanel : MonoBehaviour
     public List<ButtonData> ItemButtons; //NOTE: assign button in right order pls
     public Transform ItemFrame;
     public ButtonData currentButtonData; //NOTE: assign prefer button to auto chose when first time enter the panel
+    public Renderer CustomWeaponRenderer;
 
     private bool isFirstLoad = true;
 

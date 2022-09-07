@@ -6,16 +6,25 @@ using TMPro;
 
 public class UIMainMenuCanvas : UICanvas
 {
+    private Player playerRef;
+
+    public RectTransform CanvasRectTrans;
     public Slider PlayerProgressBar;
     public TMP_Text RecordText;
     public TMP_Text CoinText;
     public TMP_InputField PlayerName;
+    public RectTransform PlayerNameTrans;
     public Image StarIcon;
     public List<Sprite> StarIconSource;
     public Toggle SoundToggle;
     public Toggle VibrateToggle;
+    private Camera curCam;
+    [SerializeField] private float InputFieldYAxisOffset;
+    private float curScreenHeight;
+    private float targetScreenHeight = 1920f;
 
     private bool isLoadUI;
+    private bool isFirstLoad = true; //NOTE: replace start method
 
     public void OnClickPlayButton()
     {
@@ -79,9 +88,31 @@ public class UIMainMenuCanvas : UICanvas
     {
         return PlayerName.text;
     }
+    public void SetupPlayerNameInputField()
+    {
+        Vector3 pos = curCam.WorldToScreenPoint(playerRef.CharaterTrans.position);
+        pos += new Vector3(0, InputFieldYAxisOffset * curScreenHeight / targetScreenHeight, 0);
+
+        PlayerNameTrans.position = pos;
+    }
     protected override void OnOpenCanvas()
     {
         isLoadUI = true; //NOTE: prevent audio play on load UI
+
+        if (isFirstLoad)
+        {
+            curCam = Camera.main;
+
+            if (playerRef == null)
+            {
+                playerRef = Player.PlayerGlobalReference;
+            }
+
+            curScreenHeight = CanvasRectTrans.sizeDelta.y * CanvasRectTrans.localScale.y;
+            SetupPlayerNameInputField();
+
+            isFirstLoad = false;
+        }
 
         int currentCoin = DataManager.Instance.Coin;
         SetCoinNumber(currentCoin);
@@ -93,7 +124,7 @@ public class UIMainMenuCanvas : UICanvas
         SoundToggle.isOn = !isSoundOn; //NOTE: Icon display when sound on is MuteSound Icon
         VibrateToggle.isOn = isVibrateOn;
 
-        PlayerName.text = DataManager.Instance.GetGameData().PlayerName;
+        PlayerName.text = playerRef.CharacterName;
 
         isLoadUI = false; //NOTE: prevent audio play on load UI
     }

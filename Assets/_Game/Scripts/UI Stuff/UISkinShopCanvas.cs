@@ -24,6 +24,8 @@ public class UISkinShopCanvas : UICanvas
     public GameObject SelectedButtonObj;
     public GameObject EquipButtonObj;
     public RectTransform SelectedFrame; //NOTE: display current selected item
+    public RectTransform EquipedText; //NOTE: display currnet equiped item
+    public GameObject EquipedTextObj; //NOTE: use for disable text 
 
     [SerializeField] private ButtonData currentHatButtonData; //NOTE: assign first item in hat panel
     [SerializeField] private ButtonData currentPantButtonData; //NOTE: assign first item in pant panel
@@ -64,6 +66,8 @@ public class UISkinShopCanvas : UICanvas
 
             ItemPanels[(int)currentPanel].SetActive(true);
             SetCategoryButtonState(true, currentCategoryButton);
+
+            SetupEquipedMark(currentPanel);
 
             CategoryPanelHandle();
         }
@@ -210,10 +214,12 @@ public class UISkinShopCanvas : UICanvas
         {
             case 0:
                 finalHatTag = currentHatButtonData.HatTag;
+                SetEquipedMark(currentHatButtonData);
                 EquipHandler(true);
                 break;
             case 1:
                 finalPantSkinTag = currentPantButtonData.PantSkinTag;
+                SetEquipedMark(currentPantButtonData);
                 EquipHandler(true);
                 break;
             default:
@@ -232,6 +238,12 @@ public class UISkinShopCanvas : UICanvas
             EquipButtonObj.SetActive(false);
             SelectedButtonObj.SetActive(true);
         }
+    }
+    private void SetEquipedMark(ButtonData buttonData)
+    {
+        EquipedTextObj.SetActive(true);
+        EquipedText.SetParent(buttonData.RectTrans);
+        EquipedText.position = buttonData.RectTrans.position;
     }
     public void OnClickHollowButton() //NOTE: the button display when not have enough coin
     {
@@ -285,10 +297,11 @@ public class UISkinShopCanvas : UICanvas
         finalHatTag = playerRef.HatTag;
         finalPantSkinTag = playerRef.PantSkinTag;
 
+        SetupEquipedMark(currentPanel);
+
         SetCoinValue(DataManager.Instance.Coin);
 
         currentCategoryButton = CategoryButtons[(int)currentPanel];
-
         CategoryPanelHandle();
     }
 
@@ -313,6 +326,62 @@ public class UISkinShopCanvas : UICanvas
     {
         SelectedFrame.position = parentButton.position;
         SelectedFrame.SetParent(parentButton);
+    }
+    private void SetupEquipedMark(PanelType panelType)
+    {
+        switch (panelType)
+        {
+            case PanelType.HatPanel:
+                SetupEquipedMarkHatPanel();
+                break;
+            case PanelType.PantPanel:
+                SetupEquipedMarkPantPanel();
+                break;
+            default:
+                break;
+        }
+    }
+    private void SetupEquipedMarkHatPanel()
+    {
+        if (finalHatTag == HatType.None)
+        {
+            EquipedTextObj.SetActive(false);
+        }
+        else
+        {
+            for (int i = 0; i < HatButtonDatas.Count; i++)
+            {
+                if (HatButtonDatas[i].HatTag == finalHatTag)
+                {
+                    SetEquipedMark(HatButtonDatas[i]);
+                    break;
+                }
+            }
+        }
+    }
+    private void SetupEquipedMarkPantPanel()
+    {
+        if (finalPantSkinTag == PantSkinType.Invisible)
+        {
+            EquipedTextObj.SetActive(false);
+        }
+        else
+        {
+            for (int i = 0; i < PantButtonDatas.Count; i++)
+            {
+                if (PantButtonDatas[i].PantSkinTag == finalPantSkinTag)
+                {
+                    SetEquipedMark(PantButtonDatas[i]);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        playerRef.SetHat(finalHatTag);
+        playerRef.SetPantSkin(finalPantSkinTag);
     }
 }
 

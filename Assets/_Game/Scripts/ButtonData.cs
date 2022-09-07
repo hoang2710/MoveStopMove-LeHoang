@@ -19,6 +19,9 @@ public class ButtonData : MonoBehaviour
     [HideInInspector] public Image IconImage;
     [HideInInspector] public GameObject LockIcon; //NOTE: default is set active true
     [HideInInspector] public RectTransform RectTrans;
+    [HideInInspector] public CustomColor CustomColor;
+    [HideInInspector] public RectTransform Trans;
+    [HideInInspector] public GameObject Object;
 }
 
 #if UNITY_EDITOR
@@ -27,7 +30,9 @@ public enum ButtonType
     WeaponItem,
     PantItem,
     HatItem,
-    SkinShopCategory
+    SkinShopCategory,
+    ColorItem,
+    ColorPartItem
 }
 
 [CustomEditor(typeof(ButtonData))]
@@ -44,6 +49,8 @@ public class ButtonDataGUI : Editor
     SerializedProperty IconImage;
     SerializedProperty LockIcon;
     SerializedProperty RectTrans;
+    SerializedProperty CustomColor;
+    SerializedProperty Object;
 
     private void OnEnable()
     {
@@ -58,6 +65,8 @@ public class ButtonDataGUI : Editor
         IconImage = serializedObject.FindProperty("IconImage");
         LockIcon = serializedObject.FindProperty("LockIcon");
         RectTrans = serializedObject.FindProperty("RectTrans");
+        CustomColor = serializedObject.FindProperty("CustomColor");
+        Object = serializedObject.FindProperty("Object");
     }
     public override void OnInspectorGUI()
     {
@@ -78,6 +87,12 @@ public class ButtonDataGUI : Editor
                 break;
             case ButtonType.SkinShopCategory:
                 DisplaySkinShopCategory();
+                break;
+            case ButtonType.ColorItem:
+                DisplayColorButton();
+                break;
+            case ButtonType.ColorPartItem:
+                DisplayColorPartButton();
                 break;
             default:
                 break;
@@ -121,6 +136,23 @@ public class ButtonDataGUI : Editor
         EditorGUILayout.PropertyField(PanelTag, new GUIContent("Panel Tag"));
         EditorGUILayout.PropertyField(ButtonImage, new GUIContent("Button Image"));
         EditorGUILayout.PropertyField(IconImage, new GUIContent("Icon Image"));
+
+        serializedObject.ApplyModifiedProperties();
+    }
+    private void DisplayColorButton()
+    {
+        EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(CustomColor, new GUIContent("Custom Color"));
+        EditorGUILayout.PropertyField(ButtonImage, new GUIContent("Button Image"));
+
+        serializedObject.ApplyModifiedProperties();
+    }
+    private void DisplayColorPartButton()
+    {
+        EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(ButtonImage, new GUIContent("Button Image"));
+        EditorGUILayout.PropertyField(RectTrans, new GUIContent("RectTransform"));
+        EditorGUILayout.PropertyField(Object, new GUIContent("Object"));
 
         serializedObject.ApplyModifiedProperties();
     }

@@ -4960,36 +4960,6 @@ Transform:
   m_Father: {fileID: 451468509}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &429052194
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 429052195}
-  m_Layer: 0
-  m_Name: '!!!  3/4 done Weapon shop'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &429052195
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 429052194}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 968502581}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &437992221
 GameObject:
   m_ObjectHideFlags: 0
@@ -10075,7 +10045,6 @@ Transform:
   - {fileID: 551231489}
   - {fileID: 256255099}
   - {fileID: 1326518865}
-  - {fileID: 429052195}
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12568,7 +12537,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226000545}
-  m_LocalRotation: {x: 0.23712537, y: 1.5622612e-15, z: -4.6824156e-16, w: 0.97147906}
+  m_LocalRotation: {x: 0.23712537, y: -1.5622612e-15, z: 4.6824156e-16, w: 0.97147906}
   m_LocalPosition: {x: -540, y: -938.57, z: -13.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -20452,6 +20421,47 @@ MonoBehaviour:
   - HatTag: 0
     HatPrefabs: {fileID: 6042589602980300648, guid: 3359f5db12ef2f94aa40ef99adbffb4c, type: 3}
     poolSize: 2
+  ColorDatas:
+  - CustomColor: 0
+    Color: {fileID: 2100000, guid: 69b1f3b56418a8848a842a3ff372cf59, type: 2}
+  - CustomColor: 1
+    Color: {fileID: 2100000, guid: e1950363964c46147a7e4f3aa57a698b, type: 2}
+  - CustomColor: 2
+    Color: {fileID: 2100000, guid: d596efc94b497544a9f0456e47a7a473, type: 2}
+  - CustomColor: 3
+    Color: {fileID: 2100000, guid: 561a0be3bae9032459f89e85c4a32f6c, type: 2}
+  - CustomColor: 4
+    Color: {fileID: 2100000, guid: b289a2549d1a89b4390a880d101f9e06, type: 2}
+  - CustomColor: 5
+    Color: {fileID: 2100000, guid: 1e1ad1d64fddbd84cb079759001d63e9, type: 2}
+  - CustomColor: 6
+    Color: {fileID: 2100000, guid: d0fc9c0cabba2874b87a1188f87be514, type: 2}
+  - CustomColor: 7
+    Color: {fileID: 2100000, guid: ee16b279bc4e8254aacedad768cda770, type: 2}
+  - CustomColor: 8
+    Color: {fileID: 2100000, guid: a09d32f7c6fc6fe42b25821802cecad8, type: 2}
+  - CustomColor: 9
+    Color: {fileID: 2100000, guid: 26bf575db6ae5584a9ce4d68aa667893, type: 2}
+  - CustomColor: 10
+    Color: {fileID: 2100000, guid: f49905144523bf2438105c0b69ba18f5, type: 2}
+  - CustomColor: 11
+    Color: {fileID: 2100000, guid: 943b7b9396ec1534580d037351486cf8, type: 2}
+  - CustomColor: 12
+    Color: {fileID: 2100000, guid: e11bdf93a78f11245957afa1adb7161a, type: 2}
+  - CustomColor: 13
+    Color: {fileID: 2100000, guid: e9fca848b93bd454abd700722a3b960d, type: 2}
+  - CustomColor: 14
+    Color: {fileID: 2100000, guid: b1176610eaf939a4e99d1efd167d482b, type: 2}
+  - CustomColor: 15
+    Color: {fileID: 2100000, guid: 9c6b405542f9f6548a6e01eee18232bd, type: 2}
+  - CustomColor: 16
+    Color: {fileID: 2100000, guid: 1d8cfa3c3d744674c8c9a776ae7146aa, type: 2}
+  - CustomColor: 17
+    Color: {fileID: 2100000, guid: b0c6ea0af9f875f47a41c79f7b8a1eb3, type: 2}
+  - CustomColor: 18
+    Color: {fileID: 2100000, guid: 7a54e9918f8019c4682c992d1343348d, type: 2}
+  - CustomColor: 19
+    Color: {fileID: 2100000, guid: ebc42705130d7474780bf9a5051bdadc, type: 2}
   BotMaterials:
   - {fileID: 2100000, guid: 5f23c72aa7c1dce4ca3fcd5c74d11ac9, type: 2}
   - {fileID: 2100000, guid: d1ec4ceac282682469552c100fc5f62f, type: 2}
@@ -21196,7 +21206,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035489454}
-  m_LocalRotation: {x: 0.34594244, y: 1e-45, z: -0, w: 0.9382558}
+  m_LocalRotation: {x: 0.34594244, y: 1e-45, z: -1e-45, w: 0.9382558}
   m_LocalPosition: {x: -540, y: -926.84, z: -15.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

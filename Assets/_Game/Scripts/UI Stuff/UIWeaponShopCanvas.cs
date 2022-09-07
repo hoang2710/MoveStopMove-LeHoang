@@ -17,6 +17,13 @@ public class UIWeaponShopCanvas : UICanvas
     public GameObject SelectedButton;
     public TMP_Text ItemCostText;
 
+    public List<ButtonData> ColorButtons;
+    public GameObject ColorPallet;
+    public GameObject EquipCustomButton;
+    public ButtonData firstCustomButton;
+    public ButtonData secondCustomButton;
+    public ButtonData thirdCustomButton;
+
     private bool isFirstLoad = true;
 
     public void OnClickWeaponButton(ButtonData buttonData)
@@ -84,7 +91,7 @@ public class UIWeaponShopCanvas : UICanvas
             CurrentPanel.WeaponUnlockStateHandle();
         }
     }
-    
+
     public void OnClickEquipButton()
     {
         AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
@@ -138,6 +145,38 @@ public class UIWeaponShopCanvas : UICanvas
 
         Close();
     }
+
+    public void OnClickColorButton(ButtonData buttonData)
+    {
+
+    }
+    public void OnClickColorPartButton(ButtonData buttonData)
+    {
+
+    }
+    public void OnClickEquipCustomButton()
+    {
+        
+    }
+    private void SetupColorPartButton(WeaponPanel weaponPanel)
+    {
+        if (weaponPanel.WeaponTag == WeaponType.Candy)
+        {
+            thirdCustomButton.Object.SetActive(true);
+        }
+        else
+        {
+            thirdCustomButton.Object.SetActive(false);
+        }
+    }
+    private void SetupColorButton()
+    {
+        foreach (ButtonData item in ColorButtons)
+        {
+            item.ButtonImage.color = ItemStorage.Instance.GetCustomColor(item.CustomColor);
+        }
+    }
+
     protected override void OnOpenCanvas()
     {
         if (playerRef == null)
@@ -153,6 +192,8 @@ public class UIWeaponShopCanvas : UICanvas
         {
             CurrentPanel.SetUpPanel();
             WeaponButtonClickHandle(CurrentPanel.currentButtonData);
+
+            SetupColorButton();
 
             isFirstLoad = false;
         }
