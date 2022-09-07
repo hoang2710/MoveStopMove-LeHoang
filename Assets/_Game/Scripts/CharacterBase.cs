@@ -25,19 +25,14 @@ public class CharacterBase : MonoBehaviour
     protected string curAnim = ConstValues.ANIM_TRIGGER_IDLE;
 
     public Transform AttackPos;
-    [HideInInspector]
-    public Transform AttackTargetTrans;
-    [HideInInspector]
-    public CharacterBase AttackTarget;
-    [HideInInspector]
-    public float AttackPosOffset = 1f; //NOTE: distance from attack pos to character center, use for calculate weapon life time
+    [HideInInspector] public Transform AttackTargetTrans;
+    [HideInInspector] public CharacterBase AttackTarget;
+    [HideInInspector] public float AttackPosOffset = 1f; //NOTE: distance from attack pos to character center, use for calculate weapon life time
     private float minorOffset = 1.1f; //NOTE: prevent targetmark blinking due to detect and un-detect at the same time
     private float detectOffSetDistance = 2f;
 
     public bool IsAlive { get; protected set; }
     protected bool isPlayer; //NOTE: use for ui display. moveUI
-    protected bool isWeaponTripleShot;
-    protected float weaponTripleShotOffset; //NOTE: y axis in quaternion
 
     public Quaternion ThrowWeaponRotation { get; protected set; }
     public float AttackAnimThrow { get; protected set; }
@@ -141,24 +136,8 @@ public class CharacterBase : MonoBehaviour
     }
     public void ThrowWeapon(Quaternion curRotation)
     {
-        if (isWeaponTripleShot)
-        {
-            Quaternion leftOffset = curRotation * Quaternion.Euler(0, -weaponTripleShotOffset, 0);
-            Quaternion rightOffset = curRotation * Quaternion.Euler(0, weaponTripleShotOffset, 0);
-
-            Shoot(leftOffset);
-            Shoot(curRotation);
-            Shoot(rightOffset);
-        }
-        else
-        {
-            Shoot(curRotation);
-        }
-
         PlayAudioWithCondition(AudioType.ThrowWeapon);
-    }
-    private void Shoot(Quaternion curRotation)
-    {
+
         Vector3 moveDir = curRotation * Vector3.forward;
         Weapon weapon;
         ItemStorage.Instance.PopWeaponFromPool(WeaponTag,
@@ -185,21 +164,6 @@ public class CharacterBase : MonoBehaviour
                                                             out weapon);
         weapon?.SetUpHandWeapon(this);
         handWeaponTrans = weapon?.WeaponTrans;
-
-        // Renderer objRen = weapon.WeaponRenderer;
-        // if (objRen != null)
-        // {
-        //     Material material = ItemStorage.Instance.GetWeaponSkin(WeaponSkinTag);
-        //     switch (WeaponTag)
-        //     {
-        //         case WeaponType.Candy:
-        //             objRen.materials = new Material[] { material, material, material }; //NOTE: Candy weapon have 3 material
-        //             break;
-        //         default:
-        //             objRen.materials = new Material[] { material, material };
-        //             break;
-        //     }
-        // }
     }
     public void SetUpHat()
     {
@@ -243,11 +207,9 @@ public class CharacterBase : MonoBehaviour
 
         PlayAudioWithCondition(AudioType.SizeUp);
     }
-    public void SetUpThrowWeapon(Quaternion rotation, bool isTripleShot, float tripleShotOffset)
+    public void SetUpThrowWeapon(Quaternion rotation)
     {
         ThrowWeaponRotation = rotation;
-        isWeaponTripleShot = isTripleShot;
-        weaponTripleShotOffset = tripleShotOffset;
     }
     public void SetUpPantSkin()
     {

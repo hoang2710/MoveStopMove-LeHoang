@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1532247647228684715}
   - component: {fileID: 5206038033033314283}
   - component: {fileID: 1606848824599129133}
-  - component: {fileID: 4205647812721900063}
   - component: {fileID: 2919856334088602386}
   - component: {fileID: 898862086964468068}
+  - component: {fileID: 7596065641767412479}
   m_Layer: 0
   m_Name: knife
   m_TagString: Untagged
@@ -85,29 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4205647812721900063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6488665240584564782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f447fc25d54dddf4ab4a646bcb1d8847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponRenderer: {fileID: 1606848824599129133}
-  flyingSpeed: 8
-  WeaponTag: 3
-  WeaponTrans: {fileID: 1532247647228684715}
-  WeaponObject: {fileID: 6488665240584564782}
-  WeaponCollider: {fileID: 2919856334088602386}
-  weaponPositionOffset: {x: -0.241, y: 0, z: 0}
-  HandRotateOffset: {x: 90, y: -90, z: 180}
-  ThrowRotateOffset: {x: -90, y: 0, z: 0}
-  rotateSpeed: 0
-  tripleShotOffset: 30
 --- !u!65 &2919856334088602386
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -137,3 +114,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7596065641767412479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6488665240584564782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d04066fb7f34184881b2718903f198d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponRenderer: {fileID: 1606848824599129133}
+  flyingSpeed: 8
+  WeaponTag: 3
+  WeaponTrans: {fileID: 1532247647228684715}
+  WeaponObject: {fileID: 6488665240584564782}
+  WeaponCollider: {fileID: 2919856334088602386}
+  weaponPositionOffset: {x: -0.241, y: 0, z: 0}
+  HandRotateOffset: {x: 90, y: -90, z: 180}
+  ThrowRotateOffset: {x: -90, y: 0, z: 0}
+  rotateSpeed: 0
+  tripleShotOffset: 30

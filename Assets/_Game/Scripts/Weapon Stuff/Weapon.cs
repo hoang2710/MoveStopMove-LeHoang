@@ -6,30 +6,29 @@ public class Weapon : MonoBehaviour, IPooledWeapon
 {
     public Renderer WeaponRenderer;
     [SerializeField]
-    private float flyingSpeed = ConstValues.WALUE_WEAPON_DEFAULT_FLY_SPEED;
+    protected float flyingSpeed = ConstValues.WALUE_WEAPON_DEFAULT_FLY_SPEED;
     public WeaponType WeaponTag;
     public Transform WeaponTrans;
     public GameObject WeaponObject;
     public Collider WeaponCollider;
     [SerializeField]
-    private Vector3 weaponPositionOffset;
+    protected Vector3 weaponPositionOffset;
     public Vector3 HandRotateOffset; //NOTE: use this X,Y,Z of Vector to set up Quaternion only
-    private Quaternion weaponHandRotationOffset;
+    protected Quaternion weaponHandRotationOffset;
     public Vector3 ThrowRotateOffset; //NOTE: use this X,Y,Z of Vector to set up Quaternion only
-    private Quaternion weaponThrowRotationOffset;
-    private Vector3 flyDir;
-    private float lifeTime = ConstValues.VALUE_WEAPON_DEFAULT_LIFE_TIME;
-    private float timer = 0;
-    private CharacterBase bulletOwner;
-    private bool isRotate;
-    private Vector3 rotateDir = Vector3.up;
+    protected Quaternion weaponThrowRotationOffset;
+    protected Vector3 flyDir;
+    protected float lifeTime = ConstValues.VALUE_WEAPON_DEFAULT_LIFE_TIME;
+    protected float timer = 0;
+    protected CharacterBase bulletOwner;
+    protected bool isRotate;
+    protected Vector3 rotateDir = Vector3.up;
     [SerializeField]
-    private float rotateSpeed = -180f;
-    private bool isTripleShot;
-    [SerializeField]
-    private float tripleShotOffset = 30f;//NOTE: y axis in quaternion
+    protected float rotateSpeed = -180f;
+    protected bool isTripleShot;
 
-    private void Awake()
+
+    protected virtual void Awake()
     {
         weaponHandRotationOffset = Quaternion.Euler(HandRotateOffset.x, HandRotateOffset.y, HandRotateOffset.z);
         weaponThrowRotationOffset = Quaternion.Euler(ThrowRotateOffset.x, ThrowRotateOffset.y, ThrowRotateOffset.z);
@@ -51,16 +50,16 @@ public class Weapon : MonoBehaviour, IPooledWeapon
                 break;
         }
     }
-    private void Update()
+    protected virtual void Update()
     {
         Move();
         CheckLifeTime();
     }
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         WeaponHitHandle(other);
     }
-    private void WeaponHitHandle(Collider other)
+    protected void WeaponHitHandle(Collider other)
     {
         IHit hit = CacheIHit.Get(other);
         hit?.OnHit(bulletOwner, this);
@@ -68,11 +67,6 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     public void Move()
     {
         WeaponTrans.position = Vector3.MoveTowards(WeaponTrans.position, WeaponTrans.position + flyDir, flyingSpeed * Time.deltaTime);
-
-        if (isRotate)
-        {
-            WeaponTrans.Rotate(rotateDir * rotateSpeed * Time.deltaTime, Space.World);
-        }
     }
     public void CheckLifeTime() //NOTE: aware of double push to pool bug when onHit and lifeTime trigger at once 
     {
@@ -93,13 +87,14 @@ public class Weapon : MonoBehaviour, IPooledWeapon
         WeaponTrans.localPosition = weaponPositionOffset;
         WeaponTrans.localRotation = weaponHandRotationOffset;
 
-        owner?.SetUpThrowWeapon(weaponThrowRotationOffset, isTripleShot, tripleShotOffset);
+        owner?.SetUpThrowWeapon(weaponThrowRotationOffset);
     }
     public void SetUpThrowWeapon(Vector3 dir, CharacterBase owner)
     {
         SetFlyDir(dir);
         SetBulletOwner(owner);
         CalculateLifeTime();
+        InheritedThrowHandle();
     }
     public void SetFlyDir(Vector3 dir)
     {
@@ -117,21 +112,33 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     {
         return lifeTime - timer;
     }
-    public void OnPopFromPool(Material weaponSkinMaterial)
+    protected virtual void InheritedThrowHandle() //NOTE: use for set up weapon behaviour for each type of weapon when throw weapon
     {
-        switch (WeaponTag)
+
+    }
+    public virtual void OnPopFromPool(WeaponSkinType weaponSkinTag)
+    {
+        if (weaponSkinTag != WeaponSkinType.Custom)
         {
-            case WeaponType.Candy:
-                WeaponRenderer.materials = new Material[] { weaponSkinMaterial, weaponSkinMaterial, weaponSkinMaterial }; //NOTE: Candy weapon have 3 material
-                break;
-            default:
-                WeaponRenderer.materials = new Material[] { weaponSkinMaterial, weaponSkinMaterial };
-                break;
+            Material weaponSkinMaterial = ItemStorage.Instance.GetWeaponSkin(weaponSkinTag);
+            switch (WeaponTag)
+            {
+                case WeaponType.Candy:
+                    WeaponRenderer.materials = new Material[] { weaponSkinMaterial, weaponSkinMaterial, weaponSkinMaterial }; //NOTE: Candy weapon have 3 material
+                    break;
+                default:
+                    WeaponRenderer.materials = new Material[] { weaponSkinMaterial, weaponSkinMaterial };
+                    break;
+            }
+        }
+        else
+        {
+
         }
 
         timer = 0;
     }
-    public void OnPushToPool()
+    public virtual void OnPushToPool()
     {
         this.enabled = true;
         WeaponCollider.enabled = true;

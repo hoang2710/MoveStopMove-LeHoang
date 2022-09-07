@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IPooledWeapon
 {
-    public void OnPopFromPool(Material skinMaterial);
+    public void OnPopFromPool(WeaponSkinType weaponSkinTag);
     public void OnPushToPool();
 }

@@ -117,26 +117,26 @@ public class ItemStorage : SingletonMono<ItemStorage>
             hatPool.Add(item.HatTag, tmpStack);
         }
     }
-    public GameObject PopWeaponFromPool(WeaponType weaponTag, WeaponSkinType skinTag, Vector3 position, Quaternion rotation, out Weapon weapon)
+    public GameObject PopWeaponFromPool<T>(WeaponType weaponTag, WeaponSkinType skinTag, Vector3 position, Quaternion rotation, out T weapon) where T : Weapon
     {
         GameObject obj = CheckIfHaveWeaponLeftInPool(weaponTag);
         Transform objTrans = obj.transform;
-        weapon = CacheWeapon.Get(obj);
+        weapon = CacheWeapon.Get(obj) as T;
 
         obj.SetActive(true);
         objTrans.position = position;
         objTrans.rotation = rotation;
 
         IPooledWeapon pooledWeapon = CacheIpooledWeapon.Get(obj);
-        pooledWeapon?.OnPopFromPool(weaponSkins[skinTag]);
+        pooledWeapon?.OnPopFromPool(skinTag);
 
         return obj;
     }
-    public GameObject PopWeaponFromPool(WeaponType weaponTag, WeaponSkinType skinTag, Transform parentTrans, Vector3 localPosition, Quaternion localRotation, out Weapon weapon)
+    public GameObject PopWeaponFromPool<T>(WeaponType weaponTag, WeaponSkinType skinTag, Transform parentTrans, Vector3 localPosition, Quaternion localRotation, out T weapon) where T : Weapon
     {
         GameObject obj = CheckIfHaveWeaponLeftInPool(weaponTag);
         Transform objTrans = obj.transform;
-        weapon = CacheWeapon.Get(obj);
+        weapon = CacheWeapon.Get(obj) as T;
 
         obj.SetActive(true);
         objTrans.SetParent(parentTrans);
@@ -144,7 +144,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
         objTrans.localRotation = localRotation;
 
         IPooledWeapon pooledWeapon = CacheIpooledWeapon.Get(obj);
-        pooledWeapon?.OnPopFromPool(weaponSkins[skinTag]);
+        pooledWeapon?.OnPopFromPool(skinTag);
 
         return obj;
     }
@@ -277,10 +277,7 @@ public enum WeaponSkinType
     Candy_2,
     Knife_1,
     Knife_2,
-    CustomAxe,
-    CustomHammer,
-    CustomCany,
-    Cu
+    Custom
 }
 public enum PantSkinType
 {
