@@ -113,7 +113,16 @@ public class Weapon : MonoBehaviour, IPooledWeapon
         }
         else
         {
-
+            List<CustomColor> colorList = DataManager.Instance.CustomColorDict[WeaponTag];
+            switch (WeaponTag)
+            {
+                case WeaponType.Candy:
+                    WeaponRenderer.materials = ItemStorage.Instance.GetCustomMaterials(colorList[0], colorList[1], colorList[2]); ; //NOTE: Candy weapon have 3 material
+                    break;
+                default:
+                    WeaponRenderer.materials = ItemStorage.Instance.GetCustomMaterials(colorList[0], colorList[1]);
+                    break;
+            }
         }
 
         timer = 0;

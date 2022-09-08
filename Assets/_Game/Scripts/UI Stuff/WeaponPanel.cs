@@ -18,6 +18,7 @@ public class WeaponPanel : MonoBehaviour
     public Transform ItemFrame;
     public ButtonData currentButtonData; //NOTE: assign prefer button to auto chose when first time enter the panel
     public Renderer CustomWeaponRenderer;
+    public List<CustomColor> CustomColors;
 
     private bool isFirstLoad = true;
 
@@ -40,9 +41,12 @@ public class WeaponPanel : MonoBehaviour
 
             ItemFrame.position = currentButtonData.RectTrans.position;
 
+            SetupDefaultColorList();
+
             isFirstLoad = false;
         }
 
+        SetupDefaultCustomWeaponColor();
         WeaponUnlockStateHandle();
     }
     public void WeaponUnlockStateHandle()
@@ -83,15 +87,31 @@ public class WeaponPanel : MonoBehaviour
     }
     public void SetWeaponDisplay(ButtonData buttonData)
     {
-        Material material = ItemStorage.Instance.GetWeaponSkin(buttonData.WeaponSkinTag);
-
-        if (buttonData.WeaponTag == WeaponType.Candy)
+        if (buttonData.WeaponSkinTag != WeaponSkinType.Custom)
         {
-            WeaponDisplay.materials = new Material[] { material, material, material }; //NOTE: Candy have 3 material, else have 2
+            Material weaponSkinMaterial = ItemStorage.Instance.GetWeaponSkin(buttonData.WeaponSkinTag);
+            switch (WeaponTag)
+            {
+                case WeaponType.Candy:
+                    WeaponDisplay.materials = new Material[] { weaponSkinMaterial, weaponSkinMaterial, weaponSkinMaterial }; //NOTE: Candy weapon have 3 material
+                    break;
+                default:
+                    WeaponDisplay.materials = new Material[] { weaponSkinMaterial, weaponSkinMaterial };
+                    break;
+            }
         }
         else
         {
-            WeaponDisplay.materials = new Material[] { material, material };
+            List<CustomColor> colorList = DataManager.Instance.CustomColorDict[WeaponTag];
+            switch (WeaponTag)
+            {
+                case WeaponType.Candy:
+                    WeaponDisplay.materials = ItemStorage.Instance.GetCustomMaterials(colorList[0], colorList[1], colorList[2]); ; //NOTE: Candy weapon have 3 material
+                    break;
+                default:
+                    WeaponDisplay.materials = ItemStorage.Instance.GetCustomMaterials(colorList[0], colorList[1]);
+                    break;
+            }
         }
     }
     public void BuyWeaponHandle()
@@ -102,6 +122,32 @@ public class WeaponPanel : MonoBehaviour
         currentButtonData.IsUnlock = true;
         currentButtonData.LockIcon.SetActive(false);
     }
-
+    public void SetupDefaultColorList()
+    {
+        Debug.LogWarning(DataManager.Instance.CustomColorDict[WeaponTag].Count);
+        if (DataManager.Instance.CustomColorDict[WeaponTag].Count == 0)
+        {
+            foreach (CustomColor item in CustomColors)
+            {
+                DataManager.Instance.CustomColorDict[WeaponTag].Add(item);
+            }
+        }
+    }
+    public void SetupDefaultCustomWeaponColor()
+    {
+        List<CustomColor> colorList = DataManager.Instance.CustomColorDict[WeaponTag];
+        Material[] materials;
+        switch (WeaponTag)
+        {
+            case WeaponType.Candy:
+                materials = ItemStorage.Instance.GetCustomMaterials(colorList[0], colorList[1], colorList[2]); ; //NOTE: Candy weapon have 3 material
+                CustomWeaponRenderer.materials = materials;
+                break;
+            default:
+                materials = ItemStorage.Instance.GetCustomMaterials(colorList[0], colorList[1]);
+                CustomWeaponRenderer.materials = materials;
+                break;
+        }
+    }
 }
 

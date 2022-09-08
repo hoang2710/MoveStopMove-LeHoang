@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DataManager : SingletonMono<DataManager>
 {
+    public int DataVersion = 10004;
+
     [SerializeField]
     private string fileName;
     private DataConvert dataConvert;
@@ -17,6 +19,7 @@ public class DataManager : SingletonMono<DataManager>
     public Dictionary<WeaponSkinType, bool> WeaponSkinUnlockState;
     public Dictionary<PantSkinType, bool> PantSkinUnlockState;
     public Dictionary<HatType, bool> HatUnlockState;
+    public Dictionary<WeaponType, List<CustomColor>> CustomColorDict;
 
     private void Start()
     {
@@ -39,7 +42,7 @@ public class DataManager : SingletonMono<DataManager>
     {
         gameData = dataConvert.Load();
 
-        if (gameData == null)
+        if (gameData == null || gameData.DataVersion != DataVersion)
         {
             NewGame();
         }
@@ -76,6 +79,7 @@ public class DataManager : SingletonMono<DataManager>
         WeaponSkinUnlockState = gameData.WeaponSkinUnlockState;
         PantSkinUnlockState = gameData.PantSkinUnlockState;
         HatUnlockState = gameData.HatUnlockState;
+        CustomColorDict = gameData.CustomColorDict;
     }
     private void SaveGlobalData(GameData gameData)
     {

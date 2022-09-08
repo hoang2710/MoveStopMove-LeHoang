@@ -35,6 +35,20 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
     private void Awake()
     {
         curCam = Camera.main; //NOTE: Temp 
+
+        CalculateOffset();
+        
+        enableFlag = NameText.enabled; Debug.Log(UITrans.sizeDelta + "  " + parentCanvasLength + "  " + parentCanvasHeight);
+    }
+    private void LateUpdate()
+    {
+        if (!isPlayer)
+        {
+            MoveUI();
+        }
+    }
+    private void CalculateOffset()
+    {
         ParentCanvasTrans = (RectTransform)CharacterUIPooling.Instance.ParentTransform;
         parentCanvasLength = ParentCanvasTrans.sizeDelta.x * ParentCanvasTrans.localScale.x;
         parentCanvasHeight = ParentCanvasTrans.sizeDelta.y * ParentCanvasTrans.localScale.y;
@@ -44,17 +58,10 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
 
         center = new Vector3(parentCanvasLength / 2, parentCanvasHeight / 2, 0);
 
-        boundX = (parentCanvasLength - 2 * UIOffsetXAxis) / 2;
+        boundX = (parentCanvasLength - 2 * UIOffsetXAxis) / 2; 
         boundY = (parentCanvasHeight - 2 * UIOffsetYAxis) / 2;
 
-        enableFlag = NameText.enabled; Debug.Log(UITrans.sizeDelta + "  " + parentCanvasLength + "  " + parentCanvasHeight);
-    }
-    private void LateUpdate()
-    {
-        if (!isPlayer)
-        {
-            MoveUI();
-        }
+        Debug.Log(parentCanvasHeight + "   "  + parentCanvasLength + "   " + UIOffsetXAxis + "   "  + UIOffsetYAxis);
     }
     public void MoveUI()
     {
@@ -169,59 +176,3 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         ScorePopUpText.enabled = false;
     }
 }
-
-#region old moveUI
-/*
-private void MoveUI()
-{
-    Vector3 pos = curCam.WorldToScreenPoint(currentChar.CharacterUITransRoot.position);
-    if (pos.z <= 0)
-    {
-        pos *= -1f; //NOTE: if z<0 means UIRootPos is behind camera --> flipped so need to flip back
-    }
-
-    if (pos.x > xAxisMax || pos.x < xAxisMin)
-    {
-        isOutScreen = true;
-    }
-    else if (pos.y > yAxisMax || pos.y < yAxisMin)
-    {
-        isOutScreen = true;
-    }
-    else
-    {
-        isOutScreen = false;
-    }
-
-    if (isOutScreen)
-    {
-        Vector3 truePos = pos;
-
-        pos.x = Mathf.Clamp(pos.x, xAxisMin, xAxisMax);
-        pos.y = Mathf.Clamp(pos.y, yAxisMin, yAxisMax);
-
-        if (enableFlag)
-        {
-            NameText.enabled = false;
-            ArrowImage.enabled = true;
-            enableFlag = false;
-        }
-
-        Vector3 arrowDir = truePos - pos;
-        float angle = Mathf.Atan2(arrowDir.y, arrowDir.x) * Mathf.Rad2Deg;
-        ArrowAnchorTrans.rotation = Quaternion.Euler(0, 0, angle);
-    }
-    else
-    {
-        if (!enableFlag)
-        {
-            NameText.enabled = true;
-            ArrowImage.enabled = false;
-            enableFlag = true;
-        }
-    }
-
-    UITrans.position = pos;
-}
-*/
-#endregion

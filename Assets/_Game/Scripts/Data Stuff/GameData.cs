@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    public int DataVersion;
+
     public WeaponType WeaponTag;
     public WeaponSkinType WeaponSkinTag;
     public PantSkinType PantSkinTag;
@@ -19,9 +21,12 @@ public class GameData
     public SerializableDictionary<WeaponSkinType, bool> WeaponSkinUnlockState;
     public SerializableDictionary<PantSkinType, bool> PantSkinUnlockState;
     public SerializableDictionary<HatType, bool> HatUnlockState;
+    public SerializableCustomColorDictionary<WeaponType, List<CustomColor>> CustomColorDict;
 
     public GameData()
     {
+        DataVersion = 10004;
+
         WeaponTag = WeaponType.Axe;
         WeaponSkinTag = WeaponSkinType.Axe_0;
         PantSkinTag = PantSkinType.Invisible;
@@ -41,6 +46,8 @@ public class GameData
         //NOTE: unlock some default item
         WeaponUnlockState[WeaponType.Axe] = true;
         WeaponSkinUnlockState[WeaponSkinType.Axe_0] = true;
+
+        InitCustomColorListData();
     }
 
     private void InitDictionaryData<T>(out SerializableDictionary<T, bool> dict) where T : System.Enum
@@ -52,5 +59,15 @@ public class GameData
         {
             dict.Add((T)item, false);
         }
+    }
+    private void InitCustomColorListData()
+    {
+        CustomColorDict = new SerializableCustomColorDictionary<WeaponType, List<CustomColor>>();
+        foreach (WeaponType item in System.Enum.GetValues(typeof(WeaponType)))
+        {
+            List<CustomColor> temp = new List<CustomColor>();
+            CustomColorDict.Add(item, temp);
+        }
+        Debug.LogWarning(CustomColorDict.Count + "   " + CustomColorDict[WeaponType.Axe].Count + " AAAAAAA");
     }
 }

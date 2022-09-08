@@ -370,7 +370,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 3774868873337528034}
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -407,6 +407,7 @@ MonoBehaviour:
   CustomColor: 11
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &410385468425870571
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +720,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &608604644493689389
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,6 +883,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &710737125146492270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,7 +1082,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 6229191722656114357}
@@ -1103,7 +1106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -1116,6 +1119,7 @@ MonoBehaviour:
   CustomColor: 19
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &788707328589830740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,6 +1303,7 @@ RectTransform:
   m_Children:
   - {fileID: 3761458641189151796}
   - {fileID: 6859755793804487976}
+  - {fileID: 1880374888296265362}
   m_Father: {fileID: 3273983531525307844}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1391,7 +1396,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnClickWeaponButton
+        m_MethodName: OnCLickCustomWeapon
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8315318934973487527}
@@ -1415,7 +1420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 0
   WeaponTag: 2
-  WeaponSkinTag: 6
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 343
@@ -1428,6 +1433,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &884707349710086057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,7 +1557,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 5106577825891063630}
@@ -1575,7 +1581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -1588,6 +1594,7 @@ MonoBehaviour:
   CustomColor: 6
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &1370793988677630672
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,6 +2027,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &1965900957044138902
 GameObject:
   m_ObjectHideFlags: 0
@@ -2092,6 +2100,7 @@ RectTransform:
   m_Children:
   - {fileID: 4272662429154727901}
   - {fileID: 5676192895143815090}
+  - {fileID: 281250033493644340}
   m_Father: {fileID: 4797956760303827065}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2184,7 +2193,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnClickWeaponButton
+        m_MethodName: OnCLickCustomWeapon
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 7096454256988496082}
@@ -2208,7 +2217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 0
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 343
@@ -2221,81 +2230,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
---- !u!1 &2304616059090698990
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2806133687435270502}
-  - component: {fileID: 4932640242735145041}
-  - component: {fileID: 1548337360257246761}
-  m_Layer: 5
-  m_Name: Icon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2806133687435270502
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2304616059090698990}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8012656594718996078}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 56, y: 92}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &4932640242735145041
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2304616059090698990}
-  m_CullTransparentMesh: 1
---- !u!114 &1548337360257246761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2304616059090698990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 58cd51cb90cb5b34f8d9675586040f2b, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  CustomPartIndex: 0
 --- !u!1 &2330639408162837048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2553,7 +2488,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 7052744006778175940}
@@ -2577,7 +2512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -2590,6 +2525,7 @@ MonoBehaviour:
   CustomColor: 9
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &2369148819164456551
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,7 +2672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonType: 4
+  ButtonType: 5
   WeaponTag: 0
   WeaponSkinTag: 0
   PantSkinTag: 0
@@ -2747,10 +2683,11 @@ MonoBehaviour:
   ButtonImage: {fileID: 4972854628238760113}
   IconImage: {fileID: 0}
   LockIcon: {fileID: 0}
-  RectTrans: {fileID: 0}
+  RectTrans: {fileID: 9018563831514208581}
   CustomColor: 0
   Trans: {fileID: 0}
-  Object: {fileID: 0}
+  Object: {fileID: 2369148819164456551}
+  CustomPartIndex: 2
 --- !u!1 &2411783414148708105
 GameObject:
   m_ObjectHideFlags: 0
@@ -3158,7 +3095,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1347806411816861537}
@@ -3182,7 +3119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -3195,6 +3132,7 @@ MonoBehaviour:
   CustomColor: 12
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &2685647078590016279
 GameObject:
   m_ObjectHideFlags: 0
@@ -3356,7 +3294,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnClickEquipButton
+        m_MethodName: OnClickEquipCustomButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3564,6 +3502,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &2963425046083359345
 GameObject:
   m_ObjectHideFlags: 0
@@ -3671,7 +3610,8 @@ MonoBehaviour:
   - {fileID: 3453215660199264918}
   ItemFrame: {fileID: 7959032920315624970}
   currentButtonData: {fileID: 144209862368643584}
-  CustomWeaponRenderer: {fileID: 0}
+  CustomWeaponRenderer: {fileID: 1898729287405346304}
+  CustomColors: 0600000011000000
 --- !u!1 &3011175082924575332
 GameObject:
   m_ObjectHideFlags: 0
@@ -3795,7 +3735,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 6325634746157036222}
@@ -3819,7 +3759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -3832,6 +3772,7 @@ MonoBehaviour:
   CustomColor: 17
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &3020591873654012358
 GameObject:
   m_ObjectHideFlags: 0
@@ -4075,7 +4016,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1904802121007860092}
@@ -4099,7 +4040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -4112,6 +4053,7 @@ MonoBehaviour:
   CustomColor: 15
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &3049560404337067890
 GameObject:
   m_ObjectHideFlags: 0
@@ -4862,7 +4804,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 7888726318998105247}
@@ -4886,7 +4828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -4899,6 +4841,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &3344246368384325626
 GameObject:
   m_ObjectHideFlags: 0
@@ -5136,6 +5079,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &3364292718969958502
 GameObject:
   m_ObjectHideFlags: 0
@@ -5241,7 +5185,8 @@ MonoBehaviour:
   - {fileID: 4406141109558774151}
   ItemFrame: {fileID: 1683598473660574217}
   currentButtonData: {fileID: 8542675015256579332}
-  CustomWeaponRenderer: {fileID: 0}
+  CustomWeaponRenderer: {fileID: 548378178040407116}
+  CustomColors: 0b00000008000000
 --- !u!1 &3373462564720314998
 GameObject:
   m_ObjectHideFlags: 0
@@ -5479,7 +5424,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 6801776321648265608}
@@ -5503,7 +5448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -5516,6 +5461,7 @@ MonoBehaviour:
   CustomColor: 10
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &4057323215725695713
 GameObject:
   m_ObjectHideFlags: 0
@@ -5678,6 +5624,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &4124807935346505085
 GameObject:
   m_ObjectHideFlags: 0
@@ -5801,7 +5748,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 649971401335066943}
@@ -5825,7 +5772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -5838,6 +5785,7 @@ MonoBehaviour:
   CustomColor: 16
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &4168771198310094792
 GameObject:
   m_ObjectHideFlags: 0
@@ -6359,6 +6307,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &4692921251822947766
 GameObject:
   m_ObjectHideFlags: 0
@@ -6557,7 +6506,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 6775819194788677358}
@@ -6581,7 +6530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -6594,6 +6543,7 @@ MonoBehaviour:
   CustomColor: 7
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &4803129453521889084
 GameObject:
   m_ObjectHideFlags: 0
@@ -6717,7 +6667,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 7791970279034104611}
@@ -6741,7 +6691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -6754,6 +6704,7 @@ MonoBehaviour:
   CustomColor: 8
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &4809664320962777725
 GameObject:
   m_ObjectHideFlags: 0
@@ -6859,7 +6810,8 @@ MonoBehaviour:
   - {fileID: 3544790048791318681}
   ItemFrame: {fileID: 5152331446776927049}
   currentButtonData: {fileID: 3429079673666876326}
-  CustomWeaponRenderer: {fileID: 0}
+  CustomWeaponRenderer: {fileID: 5037715079582173243}
+  CustomColors: 0b0000000d00000006000000
 --- !u!1 &4851248637762751797
 GameObject:
   m_ObjectHideFlags: 0
@@ -7266,7 +7218,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 615531227432117462}
@@ -7290,7 +7242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -7303,6 +7255,7 @@ MonoBehaviour:
   CustomColor: 18
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &5338348191704208307
 GameObject:
   m_ObjectHideFlags: 0
@@ -7426,7 +7379,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2818533664062196676}
@@ -7450,7 +7403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -7463,6 +7416,7 @@ MonoBehaviour:
   CustomColor: 14
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &5413399329501760392
 GameObject:
   m_ObjectHideFlags: 0
@@ -7625,6 +7579,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &5572970634276472857
 GameObject:
   m_ObjectHideFlags: 0
@@ -7730,7 +7685,8 @@ MonoBehaviour:
   - {fileID: 7369352870083100116}
   ItemFrame: {fileID: 6252834494766119348}
   currentButtonData: {fileID: 854764781920220836}
-  CustomWeaponRenderer: {fileID: 0}
+  CustomWeaponRenderer: {fileID: 7198300423791941742}
+  CustomColors: 0800000013000000
 --- !u!1 &5720300416464622967
 GameObject:
   m_ObjectHideFlags: 0
@@ -7854,7 +7810,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 704012997415143937}
@@ -7878,7 +7834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -7891,6 +7847,7 @@ MonoBehaviour:
   CustomColor: 2
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &6233632576138799173
 GameObject:
   m_ObjectHideFlags: 0
@@ -8074,7 +8031,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7249653720144408378}
   - component: {fileID: 4728242773669266520}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Shop Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8249,10 +8206,10 @@ RectTransform:
   m_Father: {fileID: 2786060459700778753}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: -980, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6512292653770116027
 GameObject:
@@ -8436,7 +8393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonType: 4
+  ButtonType: 5
   WeaponTag: 0
   WeaponSkinTag: 0
   PantSkinTag: 0
@@ -8447,10 +8404,11 @@ MonoBehaviour:
   ButtonImage: {fileID: 6483580085998887185}
   IconImage: {fileID: 0}
   LockIcon: {fileID: 0}
-  RectTrans: {fileID: 0}
+  RectTrans: {fileID: 6967751958557895250}
   CustomColor: 0
   Trans: {fileID: 0}
-  Object: {fileID: 0}
+  Object: {fileID: 6522348539082154682}
+  CustomPartIndex: 0
 --- !u!1 &6528063987247607502
 GameObject:
   m_ObjectHideFlags: 0
@@ -8747,7 +8705,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 448948075990287897}
@@ -8771,7 +8729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -8784,6 +8742,7 @@ MonoBehaviour:
   CustomColor: 5
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &6606846242557757925
 GameObject:
   m_ObjectHideFlags: 0
@@ -9064,7 +9023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603b6cf2f501604a8f3c59a29976de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonType: 4
+  ButtonType: 5
   WeaponTag: 0
   WeaponSkinTag: 0
   PantSkinTag: 0
@@ -9075,10 +9034,11 @@ MonoBehaviour:
   ButtonImage: {fileID: 8159393166244949056}
   IconImage: {fileID: 0}
   LockIcon: {fileID: 0}
-  RectTrans: {fileID: 0}
+  RectTrans: {fileID: 468810936553169731}
   CustomColor: 0
   Trans: {fileID: 0}
-  Object: {fileID: 0}
+  Object: {fileID: 6653122891703784186}
+  CustomPartIndex: 1
 --- !u!1 &6692523292709740474
 GameObject:
   m_ObjectHideFlags: 0
@@ -9486,6 +9446,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &7090675354005213419
 GameObject:
   m_ObjectHideFlags: 0
@@ -9728,6 +9689,7 @@ RectTransform:
   m_Children:
   - {fileID: 1902704564206642812}
   - {fileID: 8507611617351890999}
+  - {fileID: 4994914244024023210}
   m_Father: {fileID: 4116343618646728732}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9820,7 +9782,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnClickWeaponButton
+        m_MethodName: OnCLickCustomWeapon
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 3055395251975669824}
@@ -9844,7 +9806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 0
   WeaponTag: 1
-  WeaponSkinTag: 4
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 343
@@ -9857,6 +9819,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &7321825670328556818
 GameObject:
   m_ObjectHideFlags: 0
@@ -10055,7 +10018,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4212332674187204497}
@@ -10079,7 +10042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -10092,6 +10055,7 @@ MonoBehaviour:
   CustomColor: 1
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &7603043608047688528
 GameObject:
   m_ObjectHideFlags: 0
@@ -10634,7 +10598,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 6039818301522733398}
@@ -10658,7 +10622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -10671,6 +10635,7 @@ MonoBehaviour:
   CustomColor: 13
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &8012656593723963813
 GameObject:
   m_ObjectHideFlags: 0
@@ -10847,7 +10812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
+  m_IgnoreReversedGraphics: 0
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
@@ -10873,6 +10838,7 @@ MonoBehaviour:
   - {fileID: 8278109504879779654}
   - {fileID: 2962402907225141797}
   CurrentPanel: {fileID: 8190383536312684789}
+  BottomButtons: {fileID: 2685647078590016279}
   BuyButton: {fileID: 1494698588308305960}
   EquipButton: {fileID: 7680796516270106496}
   SelectedButton: {fileID: 5110232503589176490}
@@ -10898,11 +10864,13 @@ MonoBehaviour:
   - {fileID: 6325634746157036222}
   - {fileID: 615531227432117462}
   - {fileID: 6229191722656114357}
-  ColorPallet: {fileID: 3020591873654012358}
-  EquipCustomButton: {fileID: 0}
-  firstCustomButton: {fileID: 0}
-  secondCustomButton: {fileID: 0}
-  thirdCustomButton: {fileID: 0}
+  CustomColorGroup: {fileID: 6528063987247607502}
+  EquipCustomButton: {fileID: 2685982148822845112}
+  ColorPartButtons:
+  - {fileID: 7433554223531136257}
+  - {fileID: 8331236631542471496}
+  - {fileID: 8214978376398749473}
+  SelectMark: {fileID: 3883422109832511964}
 --- !u!1 &8012656594611932183
 GameObject:
   m_ObjectHideFlags: 0
@@ -11062,14 +11030,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8012656594718996079}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2806133687435270502}
+  m_Children: []
   m_Father: {fileID: 8012656593723963812}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 100, y: 0}
@@ -11096,15 +11063,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 58cd51cb90cb5b34f8d9675586040f2b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11602,6 +11569,7 @@ RectTransform:
   m_Children:
   - {fileID: 5585812883433738167}
   - {fileID: 7382785113190516231}
+  - {fileID: 6983551930763828712}
   m_Father: {fileID: 7476010303451011762}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11694,7 +11662,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnClickWeaponButton
+        m_MethodName: OnCLickCustomWeapon
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 6613373951251814495}
@@ -11718,7 +11686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 0
   WeaponTag: 3
-  WeaponSkinTag: 8
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 343
@@ -11731,6 +11699,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &8144073337453770981
 GameObject:
   m_ObjectHideFlags: 0
@@ -11758,15 +11727,15 @@ RectTransform:
   m_GameObject: {fileID: 8144073337453770981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 100}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 3883422109832511964}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -266}
-  m_SizeDelta: {x: 200, y: 232}
+  m_AnchoredPosition: {x: 0, y: -219}
+  m_SizeDelta: {x: 56, y: 46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5175052115859164212
 CanvasRenderer:
@@ -11796,7 +11765,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 452c9c8d1e2f2084d9c8d3becbf0b296, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd4ff4824eb12654a86660bccc512c6b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11929,7 +11898,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 7828341484351417111}
@@ -11953,7 +11922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -11966,6 +11935,7 @@ MonoBehaviour:
   CustomColor: 4
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &8232145148041957407
 GameObject:
   m_ObjectHideFlags: 0
@@ -12542,7 +12512,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2490054920609249873}
         m_TargetAssemblyTypeName: UIWeaponShopCanvas, Assembly-CSharp
-        m_MethodName: OnCLickColorButton
+        m_MethodName: OnClickColorButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 5752449292616784778}
@@ -12566,7 +12536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   WeaponTag: 0
-  WeaponSkinTag: 0
+  WeaponSkinTag: 10
   PantSkinTag: 0
   HatTag: 0
   ItemCost: 0
@@ -12579,6 +12549,7 @@ MonoBehaviour:
   CustomColor: 3
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &9108364813108396353
 GameObject:
   m_ObjectHideFlags: 0
@@ -12741,6 +12712,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1001 &95641239037883810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12884,14 +12856,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cf2da686c025364db2011e92c8df2ac, type: 3}
---- !u!23 &1799638959747898581 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1286620820702066875, guid: 6cf2da686c025364db2011e92c8df2ac, type: 3}
-  m_PrefabInstance: {fileID: 658480782916674670}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6499856579523870771 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5987331021826876509, guid: 6cf2da686c025364db2011e92c8df2ac, type: 3}
+  m_PrefabInstance: {fileID: 658480782916674670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1799638959747898581 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1286620820702066875, guid: 6cf2da686c025364db2011e92c8df2ac, type: 3}
   m_PrefabInstance: {fileID: 658480782916674670}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &809707778229582431
@@ -12967,6 +12939,92 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5987331021826876509, guid: 6cf2da686c025364db2011e92c8df2ac, type: 3}
   m_PrefabInstance: {fileID: 809707778229582431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1605187874380963063
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5803705636713766667}
+    m_Modifications:
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.29538134
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.34794486
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.16126509
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.8750302
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 29.195
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 36.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 152.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 7781565161665100080, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_Name
+      value: Hammer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7781565161665100080, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8362357097267058059, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+    - {fileID: 3866269621308687699, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+    - {fileID: -7505619764595277138, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+--- !u!4 &4994914244024023210 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5987331021826876509, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+  m_PrefabInstance: {fileID: 1605187874380963063}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &548378178040407116 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1286620820702066875, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+  m_PrefabInstance: {fileID: 1605187874380963063}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1967301008831465582
 PrefabInstance:
@@ -13417,6 +13475,92 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6393652879197049069, guid: 6718bd6a3d0f8d3498f055bab0e13dc7, type: 3}
   m_PrefabInstance: {fileID: 3634459597089688836}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4801610797870950015
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5883860743160077958}
+    m_Modifications:
+    - target: {fileID: 3269093494425163855, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_Name
+      value: candy_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269093494425163855, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.29538134
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.34794486
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.16126509
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.8750302
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 29.195
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 36.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 152.38
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -8368871308194977347, guid: 3556972fde084a946b59159fd5146574, type: 3}
+    - {fileID: -8595112021109224785, guid: 3556972fde084a946b59159fd5146574, type: 3}
+    - {fileID: -5840765899892526846, guid: 3556972fde084a946b59159fd5146574, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 3556972fde084a946b59159fd5146574, type: 3}
+--- !u!23 &5037715079582173243 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 525567348935552580, guid: 3556972fde084a946b59159fd5146574, type: 3}
+  m_PrefabInstance: {fileID: 4801610797870950015}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1880374888296265362 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6393652879197049069, guid: 3556972fde084a946b59159fd5146574, type: 3}
+  m_PrefabInstance: {fileID: 4801610797870950015}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5056068985940027132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13708,15 +13852,101 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d139d36361a0ee4597c421ddfd93026, type: 3}
+--- !u!4 &295438402425953032 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7873549670704184934, guid: 4d139d36361a0ee4597c421ddfd93026, type: 3}
+  m_PrefabInstance: {fileID: 7592484155278812526}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &2136690812510146876 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8429296930566108242, guid: 4d139d36361a0ee4597c421ddfd93026, type: 3}
   m_PrefabInstance: {fileID: 7592484155278812526}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &295438402425953032 stripped
+--- !u!1001 &7972291494117894738
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 881341506064343548}
+    m_Modifications:
+    - target: {fileID: 3549616032071664881, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_Name
+      value: Axe_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3549616032071664881, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.29538134
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.34794486
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.16126509
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.8750302
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 29.195
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 36.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 152.38
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -879836866309750688, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+    - {fileID: -6654169746174933108, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+    - {fileID: -5928349166518778811, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+--- !u!4 &281250033493644340 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7873549670704184934, guid: 4d139d36361a0ee4597c421ddfd93026, type: 3}
-  m_PrefabInstance: {fileID: 7592484155278812526}
+  m_CorrespondingSourceObject: {fileID: 7873549670704184934, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+  m_PrefabInstance: {fileID: 7972291494117894738}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1898729287405346304 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8429296930566108242, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+  m_PrefabInstance: {fileID: 7972291494117894738}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8208964510734804555
 PrefabInstance:
@@ -13787,13 +14017,99 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6718bd6a3d0f8d3498f055bab0e13dc7, type: 3}
+--- !u!4 &2978789007511746214 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6393652879197049069, guid: 6718bd6a3d0f8d3498f055bab0e13dc7, type: 3}
+  m_PrefabInstance: {fileID: 8208964510734804555}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &8549847510027995151 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 525567348935552580, guid: 6718bd6a3d0f8d3498f055bab0e13dc7, type: 3}
   m_PrefabInstance: {fileID: 8208964510734804555}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2978789007511746214 stripped
+--- !u!1001 &8478356594249544771
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4096968698305435888}
+    m_Modifications:
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.29538134
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.34794486
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.16126509
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.8750302
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 29.195
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 36.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 152.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488665240584564782, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_Name
+      value: knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488665240584564782, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2919856334088602386, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+    - {fileID: 898862086964468068, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+    - {fileID: 7596065641767412479, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+--- !u!23 &7198300423791941742 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1606848824599129133, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+  m_PrefabInstance: {fileID: 8478356594249544771}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6983551930763828712 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 6393652879197049069, guid: 6718bd6a3d0f8d3498f055bab0e13dc7, type: 3}
-  m_PrefabInstance: {fileID: 8208964510734804555}
+  m_CorrespondingSourceObject: {fileID: 1532247647228684715, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+  m_PrefabInstance: {fileID: 8478356594249544771}
   m_PrefabAsset: {fileID: 0}

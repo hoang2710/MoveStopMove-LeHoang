@@ -20,8 +20,8 @@ public class AIDeathState : AIState
         timer = 0;
 
         //NOTE: temp solution for random enum option
-        int ran = Random.Range(4, 8);
-        agent.enemyRef.PlayAudioWithCondition((AudioType)ran); //NOTE: Die1 ~ Die 4 Audio
+        int ran = Random.Range((int)AudioType.Die1, (int)AudioType.Die4 + 1);
+        agent.enemyRef.PlayAudioWithCondition((AudioType)ran);
     }
     public void Exit(AIAgent agent)
     {

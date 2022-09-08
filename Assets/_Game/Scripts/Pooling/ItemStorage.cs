@@ -217,7 +217,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
     {
         return pantSkins[tag];
     }
-    public Material GetCustomColoreMaterial(CustomColor tag)
+    public Material GetCustomColorMaterial(CustomColor tag)
     {
         return customColors[tag];
     }
@@ -239,8 +239,8 @@ public class ItemStorage : SingletonMono<ItemStorage>
     {
         Material[] materials = new Material[]
         {
-            GetCustomColoreMaterial(color1),
-            GetCustomColoreMaterial(color2)
+            GetCustomColorMaterial(color1),
+            GetCustomColorMaterial(color2)
         };
 
         return materials;
@@ -249,9 +249,9 @@ public class ItemStorage : SingletonMono<ItemStorage>
     {
         Material[] materials = new Material[]
         {
-            GetCustomColoreMaterial(color1),
-            GetCustomColoreMaterial(color2),
-            GetCustomColoreMaterial(color3)
+            GetCustomColorMaterial(color1),
+            GetCustomColorMaterial(color2),
+            GetCustomColorMaterial(color3)
         };
 
         return materials;

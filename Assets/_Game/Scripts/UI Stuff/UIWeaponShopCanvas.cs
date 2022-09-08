@@ -12,17 +12,18 @@ public class UIWeaponShopCanvas : UICanvas
     public WeaponPanel CurrentPanel; //NOTE: assign fisrt panel in list pls
     private int currentPanelIndex = 0; //NOTE: shop start with axe panel as first panel in panel list
 
+    public GameObject BottomButtons;
     public GameObject BuyButton;
     public GameObject EquipButton;
     public GameObject SelectedButton;
     public TMP_Text ItemCostText;
 
     public List<ButtonData> ColorButtons;
-    public GameObject ColorPallet;
+    public GameObject CustomColorGroup;
     public GameObject EquipCustomButton;
-    public ButtonData firstCustomButton;
-    public ButtonData secondCustomButton;
-    public ButtonData thirdCustomButton;
+    public List<ButtonData> ColorPartButtons; //NOTE: Must assign all 3 button in this
+    private ButtonData currentCustomButtonData;
+    public RectTransform SelectMark;
 
     private bool isFirstLoad = true;
 
@@ -41,6 +42,8 @@ public class UIWeaponShopCanvas : UICanvas
         {
             SetItemCost(buttonData.ItemCost);
         }
+
+        SetBottomCustomPartState(false);
 
         CurrentPanel.SetItemFrame(buttonData);
         CurrentPanel.SetCurrentButtonData(buttonData);
@@ -70,6 +73,31 @@ public class UIWeaponShopCanvas : UICanvas
         }
 
         return false;
+    }
+    private void SetBottomCustomPartState(bool isCustom)
+    {
+        if (isCustom)
+        {
+            BottomButtons.SetActive(false);
+            CustomColorGroup.SetActive(true);
+
+            switch (CurrentPanel.WeaponTag)
+            {
+                case WeaponType.Candy:
+                    ColorPartButtons[2].Object.SetActive(true);
+                    break;
+                default:
+                    ColorPartButtons[2].Object.SetActive(false);
+                    break;
+            }
+
+            currentCustomButtonData = ColorPartButtons[0];
+        }
+        else
+        {
+            BottomButtons.SetActive(true);
+            CustomColorGroup.SetActive(false);
+        }
     }
     public void OnClickBuyButton()
     {
@@ -145,28 +173,61 @@ public class UIWeaponShopCanvas : UICanvas
 
         Close();
     }
+    public void OnCLickCustomWeapon(ButtonData buttonData)
+    {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
 
+        SetBottomCustomPartState(true);
+        SetupCustomPartButton();
+        CurrentPanel.SetItemFrame(buttonData);
+        CurrentPanel.SetWeaponDisplay(buttonData);
+        StartCoroutine(DelaySetSelectMark());
+    }
     public void OnClickColorButton(ButtonData buttonData)
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
 
+        SetPartButtonColor(buttonData.CustomColor);
+
+        int index = currentCustomButtonData.CustomPartIndex;
+        DataManager.Instance.CustomColorDict[CurrentPanel.WeaponTag][index] = buttonData.CustomColor;
+
+        CurrentPanel.SetWeaponDisplay(buttonData);
+        CurrentPanel.SetupDefaultCustomWeaponColor();
+    }
+    private void SetPartButtonColor(CustomColor color)
+    {
+        currentCustomButtonData.ButtonImage.color = ItemStorage.Instance.GetCustomColor(color);
     }
     public void OnClickColorPartButton(ButtonData buttonData)
     {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
 
+        currentCustomButtonData = buttonData;
+        SelectMark.position = currentCustomButtonData.RectTrans.position;
     }
     public void OnClickEquipCustomButton()
     {
-        
+        playerRef.SetWeaponType(CurrentPanel.currentButtonData.WeaponTag);
+        playerRef.SetWeaponSkin(WeaponSkinType.Custom);
+        playerRef.SetUpHandWeapon();
+
+        OnCLickExitButton(); //NOTE: have play audio func in this, no need play more
     }
-    private void SetupColorPartButton(WeaponPanel weaponPanel)
+    private void SetupCustomPartButton()
     {
-        if (weaponPanel.WeaponTag == WeaponType.Candy)
+        List<CustomColor> colors = DataManager.Instance.CustomColorDict[CurrentPanel.WeaponTag];
+        switch (CurrentPanel.WeaponTag)
         {
-            thirdCustomButton.Object.SetActive(true);
-        }
-        else
-        {
-            thirdCustomButton.Object.SetActive(false);
+            case WeaponType.Candy:
+                ColorPartButtons[0].ButtonImage.color = ItemStorage.Instance.GetCustomColor(colors[0]);
+                ColorPartButtons[1].ButtonImage.color = ItemStorage.Instance.GetCustomColor(colors[1]);
+                ColorPartButtons[2].ButtonImage.color = ItemStorage.Instance.GetCustomColor(colors[2]);
+                break;
+            default:
+                ColorPartButtons[0].ButtonImage.color = ItemStorage.Instance.GetCustomColor(colors[0]);
+                ColorPartButtons[1].ButtonImage.color = ItemStorage.Instance.GetCustomColor(colors[1]);
+                break;
         }
     }
     private void SetupColorButton()
@@ -201,6 +262,12 @@ public class UIWeaponShopCanvas : UICanvas
     protected override void OnCloseCanvas()
     {
         playerRef.PlayerObj.SetActive(true);
+    }
+
+    public IEnumerator DelaySetSelectMark() //NOTE: Wait for grid layout update when disable or enable child 
+    {
+        yield return null;
+        SelectMark.position = currentCustomButtonData.RectTrans.position;
     }
 }
 

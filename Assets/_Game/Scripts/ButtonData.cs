@@ -22,9 +22,9 @@ public class ButtonData : MonoBehaviour
     [HideInInspector] public CustomColor CustomColor;
     [HideInInspector] public RectTransform Trans;
     [HideInInspector] public GameObject Object;
+    [HideInInspector] public int CustomPartIndex;
 }
 
-#if UNITY_EDITOR
 public enum ButtonType
 {
     WeaponItem,
@@ -34,6 +34,7 @@ public enum ButtonType
     ColorItem,
     ColorPartItem
 }
+#if UNITY_EDITOR
 
 [CustomEditor(typeof(ButtonData))]
 public class ButtonDataGUI : Editor
@@ -51,6 +52,7 @@ public class ButtonDataGUI : Editor
     SerializedProperty RectTrans;
     SerializedProperty CustomColor;
     SerializedProperty Object;
+    SerializedProperty CustomPartIndex;
 
     private void OnEnable()
     {
@@ -67,6 +69,7 @@ public class ButtonDataGUI : Editor
         RectTrans = serializedObject.FindProperty("RectTrans");
         CustomColor = serializedObject.FindProperty("CustomColor");
         Object = serializedObject.FindProperty("Object");
+        CustomPartIndex = serializedObject.FindProperty("CustomPartIndex");
     }
     public override void OnInspectorGUI()
     {
@@ -144,6 +147,7 @@ public class ButtonDataGUI : Editor
         EditorGUILayout.Space();
         EditorGUILayout.PropertyField(CustomColor, new GUIContent("Custom Color"));
         EditorGUILayout.PropertyField(ButtonImage, new GUIContent("Button Image"));
+        EditorGUILayout.PropertyField(WeaponSkinTag, new GUIContent("Weapon Skin Tag"));
 
         serializedObject.ApplyModifiedProperties();
     }
@@ -153,6 +157,7 @@ public class ButtonDataGUI : Editor
         EditorGUILayout.PropertyField(ButtonImage, new GUIContent("Button Image"));
         EditorGUILayout.PropertyField(RectTrans, new GUIContent("RectTransform"));
         EditorGUILayout.PropertyField(Object, new GUIContent("Object"));
+        EditorGUILayout.PropertyField(CustomPartIndex, new GUIContent("Part Button Index"));
 
         serializedObject.ApplyModifiedProperties();
     }
