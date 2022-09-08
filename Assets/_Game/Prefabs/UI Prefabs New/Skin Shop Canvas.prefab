@@ -444,6 +444,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &380224023203044594
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,6 +686,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &472100462198235896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,6 +1073,8 @@ MonoBehaviour:
   LockIcon: {fileID: 8802825191017940197}
   RectTrans: {fileID: 3889447251378611499}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &627419204362099983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1312,8 @@ MonoBehaviour:
   LockIcon: {fileID: 313466538700900881}
   RectTrans: {fileID: 6137139487975353689}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &1004852129914032721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1542,6 +1550,8 @@ MonoBehaviour:
   LockIcon: {fileID: 6871279229899274281}
   RectTrans: {fileID: 8034486338110184275}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &1053687778631110051
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,6 +1863,8 @@ MonoBehaviour:
   LockIcon: {fileID: 4412367324993009320}
   RectTrans: {fileID: 2820357429384255090}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &1215401348041627355
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,6 +2256,8 @@ MonoBehaviour:
   LockIcon: {fileID: 1004852129914032721}
   RectTrans: {fileID: 3599932423726297947}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &1508437325400241455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,6 +2524,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &1653906077666657246
 GameObject:
   m_ObjectHideFlags: 0
@@ -2776,6 +2792,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &1787292842885109467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2935,6 +2953,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &1823168587440179754
 GameObject:
   m_ObjectHideFlags: 0
@@ -3596,6 +3616,8 @@ MonoBehaviour:
   LockIcon: {fileID: 6707394817228671842}
   RectTrans: {fileID: 7791050033794045078}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &2409264524075058461
 GameObject:
   m_ObjectHideFlags: 0
@@ -3837,6 +3859,8 @@ MonoBehaviour:
   LockIcon: {fileID: 3720350525175393033}
   RectTrans: {fileID: 2008634830829616104}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &2426381872000259841
 GameObject:
   m_ObjectHideFlags: 0
@@ -4666,6 +4690,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &3208694958013297916
 GameObject:
   m_ObjectHideFlags: 0
@@ -5103,6 +5129,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &3336862247723103134
 GameObject:
   m_ObjectHideFlags: 0
@@ -5338,6 +5366,8 @@ MonoBehaviour:
   LockIcon: {fileID: 2840761355125036813}
   RectTrans: {fileID: 7068622372022117500}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &3352733888697361402
 GameObject:
   m_ObjectHideFlags: 0
@@ -5784,6 +5814,8 @@ MonoBehaviour:
   LockIcon: {fileID: 8769620341626859417}
   RectTrans: {fileID: 7328000445300479022}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &4412367324993009320
 GameObject:
   m_ObjectHideFlags: 0
@@ -6094,6 +6126,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &4593005606595201495
 GameObject:
   m_ObjectHideFlags: 0
@@ -6689,6 +6723,8 @@ MonoBehaviour:
   LockIcon: {fileID: 5378898072625940592}
   RectTrans: {fileID: 3778267889762484674}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &4868222088689632803
 GameObject:
   m_ObjectHideFlags: 0
@@ -6849,6 +6885,8 @@ MonoBehaviour:
   LockIcon: {fileID: 4593005606595201495}
   RectTrans: {fileID: 1694423261601819494}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &4886000928073781874
 GameObject:
   m_ObjectHideFlags: 0
@@ -7375,6 +7413,8 @@ MonoBehaviour:
   LockIcon: {fileID: 8429049561818686665}
   RectTrans: {fileID: 2986725597245927614}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &5378898072625940592
 GameObject:
   m_ObjectHideFlags: 0
@@ -8001,7 +8041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanvasObj: {fileID: 5541398255255012355}
-  isDestroyOnClose: 0
+  isDestroyOnClose: 1
   CoinDisplay: {fileID: 5725777833643133542}
   ItemPanels:
   - {fileID: 5613140380221362779}
@@ -8207,6 +8247,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &5613140380043605475
 GameObject:
   m_ObjectHideFlags: 0
@@ -8485,6 +8527,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &5613140380221362779
 GameObject:
   m_ObjectHideFlags: 0
@@ -8751,6 +8795,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &5613140380415045842
 GameObject:
   m_ObjectHideFlags: 0
@@ -9288,6 +9334,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &5613140381110784290
 GameObject:
   m_ObjectHideFlags: 0
@@ -9683,6 +9731,8 @@ MonoBehaviour:
   LockIcon: {fileID: 7036463228785792635}
   RectTrans: {fileID: 3184363959337982149}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &6389607797690115770
 GameObject:
   m_ObjectHideFlags: 0
@@ -9993,6 +10043,8 @@ MonoBehaviour:
   LockIcon: {fileID: 3352733888697361402}
   RectTrans: {fileID: 6805428721506013812}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &6699445537426002489
 GameObject:
   m_ObjectHideFlags: 0
@@ -10304,6 +10356,8 @@ MonoBehaviour:
   LockIcon: {fileID: 5414310820590813187}
   RectTrans: {fileID: 2992911512526058243}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &6733116719806860459
 GameObject:
   m_ObjectHideFlags: 0
@@ -10645,6 +10699,8 @@ MonoBehaviour:
   LockIcon: {fileID: 0}
   RectTrans: {fileID: 0}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &6985254122764575115
 GameObject:
   m_ObjectHideFlags: 0
@@ -10886,6 +10942,8 @@ MonoBehaviour:
   LockIcon: {fileID: 1104419214578798370}
   RectTrans: {fileID: 5190228188325167195}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &7036463228785792635
 GameObject:
   m_ObjectHideFlags: 0
@@ -11426,6 +11484,8 @@ MonoBehaviour:
   LockIcon: {fileID: 217303171389880940}
   RectTrans: {fileID: 4098460201735320720}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &7943911590210231866
 GameObject:
   m_ObjectHideFlags: 0
@@ -11661,6 +11721,8 @@ MonoBehaviour:
   LockIcon: {fileID: 4909902110952047243}
   RectTrans: {fileID: 6500789144673184581}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &8195316799156026383
 GameObject:
   m_ObjectHideFlags: 0
@@ -12410,6 +12472,8 @@ MonoBehaviour:
   LockIcon: {fileID: 4755680408604700046}
   RectTrans: {fileID: 5965453157019736656}
   CustomColor: 0
+  Trans: {fileID: 0}
+  Object: {fileID: 0}
 --- !u!1 &9069935042806527191
 GameObject:
   m_ObjectHideFlags: 0

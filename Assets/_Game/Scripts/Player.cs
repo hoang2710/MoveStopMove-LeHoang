@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player : CharacterBase, IHit, IDataHandler
 {
@@ -26,6 +27,8 @@ public class Player : CharacterBase, IHit, IDataHandler
     private bool TargetMarkSetActiveFlag;
 
     public static Player PlayerGlobalReference;
+
+    public NavMeshAgent NavMeshAgent;
 
     protected override void Awake()
     {
@@ -154,6 +157,7 @@ public class Player : CharacterBase, IHit, IDataHandler
         isDead = true;
         ChangeAnimation(ConstValues.ANIM_TRIGGER_DEAD);
         CharacterCollider.enabled = false;
+        NavMeshAgent.enabled = false; //NOTE: set false to prevent a frame delay when set back to default position for new level in SetPLaying method 
 
         GameManager.Instance.ChangeGameState(GameState.ResultPhase);
         UIResultCanvas resultCanvas = UIManager.Instance.GetUICanvas<UIResultCanvas>(UICanvasID.Result);
@@ -207,12 +211,13 @@ public class Player : CharacterBase, IHit, IDataHandler
         AttackRangeDisplay.SetActive(false);
         AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
         AttackRangeDisplayTrans.localScale = Vector3.one * AttackRange;
-        CharaterTrans.position = Vector3.zero; //NOTE: needed to set twice
+        CharaterTrans.position = Vector3.zero;
         CharaterTrans.rotation = Quaternion.Euler(0, 180f, 0);
     }
     private void SetUpPLayerPlaying()
     {
-        CharaterTrans.position = Vector3.zero; //NOTE: needed to set twice
+        NavMeshAgent.enabled = true; //NOTE: set back just that
+        CharaterTrans.position = Vector3.zero;
         CharaterTrans.rotation = Quaternion.Euler(0, 180f, 0);
         AttackRangeDisplay.SetActive(true);
 

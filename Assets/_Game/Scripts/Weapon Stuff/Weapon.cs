@@ -21,34 +21,14 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     protected float lifeTime = ConstValues.VALUE_WEAPON_DEFAULT_LIFE_TIME;
     protected float timer = 0;
     protected CharacterBase bulletOwner;
-    protected bool isRotate;
     protected Vector3 rotateDir = Vector3.up;
     [SerializeField]
     protected float rotateSpeed = -180f;
-    protected bool isTripleShot;
-
 
     protected virtual void Awake()
     {
         weaponHandRotationOffset = Quaternion.Euler(HandRotateOffset.x, HandRotateOffset.y, HandRotateOffset.z);
         weaponThrowRotationOffset = Quaternion.Euler(ThrowRotateOffset.x, ThrowRotateOffset.y, ThrowRotateOffset.z);
-
-        switch (WeaponTag)
-        {
-            case WeaponType.Axe:
-                isRotate = true;
-                break;
-            case WeaponType.Hammer:
-                isRotate = true;
-                break;
-            case WeaponType.Knife:
-                isTripleShot = true;
-                break;
-            case WeaponType.Candy:
-                break;
-            default:
-                break;
-        }
     }
     protected virtual void Update()
     {
@@ -94,7 +74,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
         SetFlyDir(dir);
         SetBulletOwner(owner);
         CalculateLifeTime();
-        InheritedThrowHandle();
+        OnThrowHandle();
     }
     public void SetFlyDir(Vector3 dir)
     {
@@ -112,7 +92,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     {
         return lifeTime - timer;
     }
-    protected virtual void InheritedThrowHandle() //NOTE: use for set up weapon behaviour for each type of weapon when throw weapon
+    protected virtual void OnThrowHandle() //NOTE: use for set up weapon behaviour for each type of weapon when throw weapon
     {
 
     }

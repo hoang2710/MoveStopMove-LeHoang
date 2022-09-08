@@ -21,7 +21,7 @@ public class TripleShotWeapon : Weapon
         isClone = false;
     }
 
-    protected override void InheritedThrowHandle()
+    protected override void OnThrowHandle()
     {
         ThrowClone(weaponSkinTag);
     }
@@ -47,7 +47,7 @@ public class TripleShotWeapon : Weapon
                                                rotation * weaponThrowRotationOffset,
                                                out weapon);
 
-        weapon?.CloneSetup(); //NOTE: NEver put this line under setupThrowWeapon
+        weapon?.CloneSetup(); //NOTE: NEver put this line under setupThrowWeapon, may optimize later or not
         weapon?.SetUpThrowWeapon(moveDir, bulletOwner);
     }
     private void CloneSetup()

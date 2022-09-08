@@ -9,6 +9,7 @@ public class Obstacle : MonoBehaviour, IHit
     {
         targetTime = weapon.GetRemainLifeTime();
         weapon.enabled = false;
+        weapon.WeaponCollider.enabled = false;
 
         StartCoroutine(FreezeWeapon(targetTime, weapon));
     }

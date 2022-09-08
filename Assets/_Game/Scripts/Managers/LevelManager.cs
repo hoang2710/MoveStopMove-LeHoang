@@ -38,7 +38,7 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
             case GameState.LoadLevel:
                 LoadLevel();
                 SetData();
-                Invoke(nameof(SpawnBaseBot), 0.1f); //NOTE: wait for remain bot to be push to pool --> avoid instantiate more bot, may optimize later 
+                StartCoroutine(DelaySpawnBot()); //NOTE: wait for remain bot to be push to pool --> avoid instantiate more bot, may optimize later 
                 // SpawnBaseBot();
                 break;
             default:
@@ -181,6 +181,14 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
     public void SaveData(GameData data)
     {
         data.CurrentLevel = currentLevel;
+    }
+
+    public IEnumerator DelaySpawnBot()
+    {
+        yield return null;
+        yield return null;
+        yield return null;
+        SpawnBaseBot();
     }
 }
 
