@@ -20,6 +20,7 @@ public class DataManager : SingletonMono<DataManager>
     public Dictionary<PantSkinType, bool> PantSkinUnlockState;
     public Dictionary<HatType, bool> HatUnlockState;
     public Dictionary<WeaponType, List<CustomColor>> CustomColorDict;
+    public int HighestRank;
 
     private void Start()
     {
@@ -74,6 +75,7 @@ public class DataManager : SingletonMono<DataManager>
     {
         Coin = gameData.Coin;
         PlayerExp = gameData.PlayerExp;
+        HighestRank = gameData.HighestRank;
 
         WeaponUnlockState = gameData.WeaponUnlockState;
         WeaponSkinUnlockState = gameData.WeaponSkinUnlockState;
@@ -85,6 +87,7 @@ public class DataManager : SingletonMono<DataManager>
     {
         gameData.Coin = Coin;
         gameData.PlayerExp = PlayerExp;
+        gameData.HighestRank = HighestRank;
     }
 
     public void DeleteData()

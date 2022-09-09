@@ -104,7 +104,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
     private void ResetScore()
     {
         Score = 0;
-        KillScore = 0;
+        KillScore = defaultKillScore;
     }
 
     public void OnHit(CharacterBase bulletOwner, Weapon weapon)
@@ -122,6 +122,6 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
 
         RemoveCharacterUI();
 
-        bulletOwner?.OnKillEnemy();
+        bulletOwner?.OnKillEnemy(KillScore);
     }
 }

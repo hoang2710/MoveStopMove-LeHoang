@@ -104,7 +104,7 @@ public class UIWeaponShopCanvas : UICanvas
         AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
 
         if (!CurrentPanel.CheckPreviousWeaponUnlockState())
-        {
+        {Debug.Log("AAAAAAAAAAA   " );
             return;
         }
 

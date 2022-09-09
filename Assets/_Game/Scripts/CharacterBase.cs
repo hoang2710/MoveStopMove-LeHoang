@@ -11,10 +11,15 @@ public class CharacterBase : MonoBehaviour
     public PantSkinType PantSkinTag { get; protected set; }
     public HatType HatTag { get; protected set; }
 
-    [HideInInspector]
     public string CharacterName { get; protected set; }
     public int Score { get; protected set; }
     public int KillScore { get; protected set; }
+    private int PlayerLevel = 1;
+    protected int defaultKillScore = 5;
+    private int scoreStep = 8;
+    private float scoreStepMultipler = 1.1f;
+    protected bool isSizeUp;
+
     public float AttackRange { get; protected set; }
     public float AttackRate { get; protected set; }
 
@@ -65,7 +70,7 @@ public class CharacterBase : MonoBehaviour
     {
         CharacterName = ConstValues.VALUE_CHARACTER_DEFAULT_NAME;
         Score = 0;
-        KillScore = 0;
+        KillScore = 5;
         AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
         AttackRate = ConstValues.VALUE_BASE_ATTACK_RATE;
 
@@ -119,7 +124,7 @@ public class CharacterBase : MonoBehaviour
             if (AttackTarget.IsAlive)
             {
                 float distSqr = (AttackTargetTrans.position - CharaterTrans.position).sqrMagnitude;
-                if (distSqr > AttackRange * AttackRange * minorOffset * minorOffset) //NOTE: optimize later or not
+                if (distSqr > AttackRange * AttackRange * minorOffset) //NOTE: optimize later or not
                 {
                     AttackTargetTrans = null;
                     return false;
@@ -191,21 +196,39 @@ public class CharacterBase : MonoBehaviour
             AudioManager.Instance.PlayAudioClip(audioType);
         }
     }
-    public virtual void OnKillEnemy()
+    public virtual void OnKillEnemy(int gainedScore)
     {
-        CharaterTrans.localScale += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * Vector3.one;
-        AttackRange += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * ConstValues.VALUE_BASE_ATTACK_RANGE;
-        AttackPosOffset += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
+        isSizeUp = CalculateScore(gainedScore);
+        if (isSizeUp)
+        {
+            CharaterTrans.localScale += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * Vector3.one;
+            AttackRange += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * ConstValues.VALUE_BASE_ATTACK_RANGE;
+            AttackPosOffset += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
 
-        currentUIDisplay?.UpdateScore(++Score);//temp score system
-        currentUIDisplay?.TriggerPopupScore(1);//temp score system
+            ParticlePooling.Instance.PopParticleFromPool(ParticleType.Upgrade,
+                                                        CharaterTrans.position,
+                                                        ConstValues.VALUE_PARTICLE_UPGRADE_DEFAULT_ROTATION,
+                                                        this);
 
-        ParticlePooling.Instance.PopParticleFromPool(ParticleType.Upgrade,
-                                                    CharaterTrans.position,
-                                                    ConstValues.VALUE_PARTICLE_UPGRADE_DEFAULT_ROTATION,
-                                                    this);
+            PlayAudioWithCondition(AudioType.SizeUp);
+        }
+    }
+    private bool CalculateScore(int gainedScore)
+    {
+        Score += gainedScore;
+        KillScore = Score / 2;
 
-        PlayAudioWithCondition(AudioType.SizeUp);
+        currentUIDisplay?.UpdateScore(Score);
+        currentUIDisplay?.TriggerPopupScore(gainedScore);
+
+        Debug.LogWarning(Score + "   " + KillScore +  "   " + ((float)Score / scoreStep * Mathf.Pow(scoreStepMultipler, (Score / scoreStep))) + "   " + PlayerLevel);
+        if (((float)Score / (scoreStep * Mathf.Pow(scoreStepMultipler, ((float)Score / scoreStep)))) > PlayerLevel)
+        {
+            PlayerLevel++;
+            return true;
+        }
+
+        return false;
     }
     public void SetUpThrowWeapon(Quaternion rotation)
     {

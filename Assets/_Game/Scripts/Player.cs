@@ -8,6 +8,7 @@ public class Player : CharacterBase, IHit, IDataHandler
     public static Vector3 MoveDir;
     [SerializeField]
     private float moveSpeed = 1.5f;
+    private float defaultMoveSpeed;
     [SerializeField]
     private float rotateSpeed = 8f;
 
@@ -35,6 +36,7 @@ public class Player : CharacterBase, IHit, IDataHandler
         base.Awake();
         isPlayer = true;
         PlayerGlobalReference = this;
+        defaultMoveSpeed = moveSpeed;
     }
     protected override void Start()
     {
@@ -176,8 +178,8 @@ public class Player : CharacterBase, IHit, IDataHandler
         ItemStorage.Instance.PushWeaponToPool(weapon.WeaponTag, weapon.WeaponObject);
 
         //NOTE: temp solution for random enum option
-        int ran = Random.Range(4, 8);
-        PlayAudioWithCondition((AudioType)ran); //NOTE: Die1 ~ Die 4 Audio
+        int ran = Random.Range((int)AudioType.Die1, (int)AudioType.Die4 + 1);
+        PlayAudioWithCondition((AudioType)ran);
     }
     private void DispalyTargetMark()
     {
@@ -202,6 +204,8 @@ public class Player : CharacterBase, IHit, IDataHandler
         isAttack = false;
         timer = 0;
         Score = 0;
+        KillScore = defaultKillScore;
+        moveSpeed = defaultMoveSpeed;
 
         AttackTarget = null;
         AttackTargetTrans = null;
@@ -224,11 +228,16 @@ public class Player : CharacterBase, IHit, IDataHandler
         UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.GetUICanvas<UIMainMenuCanvas>(UICanvasID.MainMenu);
         CharacterName = mainMenuCanvas.GetPlayerName();
     }
-    public override void OnKillEnemy()
+    public override void OnKillEnemy(int gainedScore)
     {
-        base.OnKillEnemy();
+        base.OnKillEnemy(gainedScore);
 
-        CameraManager.Instance.ZoomOutCamera();
+        if (isSizeUp)
+        {
+            CameraManager.Instance.ZoomOutCamera();
+
+            moveSpeed += defaultMoveSpeed * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
+        }
     }
     public IEnumerator EnterPlayingState()
     {

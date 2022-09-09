@@ -65,16 +65,21 @@ public class WeaponPanel : MonoBehaviour
     }
     public bool CheckPreviousWeaponUnlockState()
     {
-        int index = (int)WeaponTag - 1;
-
-        if (index >= 0 && DataManager.Instance.WeaponUnlockState[(WeaponType)index])
+        if (WeaponTag != WeaponType.Axe)
         {
-            NoteText.text = note_2;
-            return true;
+            int index = (int)WeaponTag - 1;
+
+            if (index >= 0 && DataManager.Instance.WeaponUnlockState[(WeaponType)index])
+            {
+                NoteText.text = note_2;
+                return true;
+            }
+
+            NoteText.text = note_1;
+            return false;
         }
 
-        NoteText.text = note_1;
-        return false;
+        return true;
     }
 
     public void SetItemFrame(ButtonData buttonData)
@@ -124,7 +129,6 @@ public class WeaponPanel : MonoBehaviour
     }
     public void SetupDefaultColorList()
     {
-        Debug.LogWarning(DataManager.Instance.CustomColorDict[WeaponTag].Count);
         if (DataManager.Instance.CustomColorDict[WeaponTag].Count == 0)
         {
             foreach (CustomColor item in CustomColors)

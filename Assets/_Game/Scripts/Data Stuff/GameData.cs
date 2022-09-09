@@ -14,6 +14,7 @@ public class GameData
     public string PlayerName;
     public float PlayerExp;
     public Level CurrentLevel;
+    public int HighestRank;
     public int Coin;
     public bool IsSoundOn;
     public bool IsVibrateOn;
@@ -34,6 +35,7 @@ public class GameData
         PlayerName = "Anon";
         PlayerExp = 0f;
         CurrentLevel = Level.Level_1;
+        HighestRank = 150;
         Coin = 0;
         IsSoundOn = true;
         IsVibrateOn = true;
