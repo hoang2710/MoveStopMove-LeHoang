@@ -14,10 +14,10 @@ public class CharacterBase : MonoBehaviour
     public string CharacterName { get; protected set; }
     public int Score { get; protected set; }
     public int KillScore { get; protected set; }
-    private int PlayerLevel = 1;
+    protected int PlayerLevel = 1;
     protected int defaultKillScore = 5;
-    private int scoreStep = 8;
-    private float scoreStepMultipler = 1.1f;
+    protected int scoreStep = 8;
+    protected float scoreStepMultipler = 1.1f;
     protected bool isSizeUp;
 
     public float AttackRange { get; protected set; }
@@ -221,8 +221,7 @@ public class CharacterBase : MonoBehaviour
         currentUIDisplay?.UpdateScore(Score);
         currentUIDisplay?.TriggerPopupScore(gainedScore);
 
-        Debug.LogWarning(Score + "   " + KillScore +  "   " + ((float)Score / scoreStep * Mathf.Pow(scoreStepMultipler, (Score / scoreStep))) + "   " + PlayerLevel);
-        if (((float)Score / (scoreStep * Mathf.Pow(scoreStepMultipler, ((float)Score / scoreStep)))) > PlayerLevel)
+        if (((float)Score / (scoreStep * Mathf.Pow(scoreStepMultipler, (Score / scoreStep)))) > PlayerLevel)
         {
             PlayerLevel++;
             return true;

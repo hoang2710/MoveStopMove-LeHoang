@@ -26,6 +26,7 @@ public class UIResultCanvas : UICanvas
     public TMP_Text KillerNameText;
     [Header("Bottom Part")]
     public TMP_Text CoinDisplayText;
+    public TMP_Text SubCoinDisPlayText;
     public GameObject LoseBottomPart;
     public GameObject WinBottomPart;
 
@@ -66,6 +67,7 @@ public class UIResultCanvas : UICanvas
     public void SetCoinValue(int value)
     {
         CoinDisplayText.text = value.ToString();
+        SubCoinDisPlayText.text = value.ToString();
     }
     public void SetRankingLosePanel(int rank)
     {

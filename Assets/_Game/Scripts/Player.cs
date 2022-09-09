@@ -206,6 +206,7 @@ public class Player : CharacterBase, IHit, IDataHandler
         Score = 0;
         KillScore = defaultKillScore;
         moveSpeed = defaultMoveSpeed;
+        PlayerLevel = 1;
 
         AttackTarget = null;
         AttackTargetTrans = null;
@@ -220,10 +221,10 @@ public class Player : CharacterBase, IHit, IDataHandler
     }
     private void SetUpPLayerPlaying()
     {
-        NavMeshAgent.enabled = true; //NOTE: set back just that
         CharaterTrans.position = Vector3.zero;
         CharaterTrans.rotation = Quaternion.Euler(0, 180f, 0);
         AttackRangeDisplay.SetActive(true);
+        NavMeshAgent.enabled = true; //NOTE: set back just that
 
         UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.GetUICanvas<UIMainMenuCanvas>(UICanvasID.MainMenu);
         CharacterName = mainMenuCanvas.GetPlayerName();
@@ -237,6 +238,7 @@ public class Player : CharacterBase, IHit, IDataHandler
             CameraManager.Instance.ZoomOutCamera();
 
             moveSpeed += defaultMoveSpeed * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
+            currentUIDisplay?.MoveUI();
         }
     }
     public IEnumerator EnterPlayingState()

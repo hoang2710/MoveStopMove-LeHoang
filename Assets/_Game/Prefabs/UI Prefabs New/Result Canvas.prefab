@@ -2166,6 +2166,7 @@ MonoBehaviour:
   RankingText: {fileID: 2361095893272846103}
   KillerNameText: {fileID: 4933721651771151870}
   CoinDisplayText: {fileID: 103021529866569355}
+  SubCoinDisPlayText: {fileID: 612168497912267541}
   LoseBottomPart: {fileID: 612168497697948147}
   WinBottomPart: {fileID: 449712504912405505}
 --- !u!1 &612168498140431178

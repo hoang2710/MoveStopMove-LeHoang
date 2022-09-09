@@ -26,8 +26,8 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
     private float parentCanvasHeight;
     private float targetParentCanvasLength = 1080f;
     private float targetParentCanvasHeight = 1920f;
-    private float UIOffsetXAxis = 96f;
-    private float UIOffsetYAxis = 96f;
+    private float UIOffsetXAxis = 64f;
+    private float UIOffsetYAxis = 64f;
     private Vector3 center;
     private float boundX;
     private float boundY;
@@ -37,10 +37,10 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         curCam = Camera.main; //NOTE: Temp 
 
         CalculateOffset();
-        
+
         enableFlag = NameText.enabled; Debug.Log(UITrans.sizeDelta + "  " + parentCanvasLength + "  " + parentCanvasHeight);
     }
-    private void LateUpdate()
+    private void Update()
     {
         if (!isPlayer)
         {
@@ -58,10 +58,10 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
 
         center = new Vector3(parentCanvasLength / 2, parentCanvasHeight / 2, 0);
 
-        boundX = (parentCanvasLength - 2 * UIOffsetXAxis) / 2; 
+        boundX = (parentCanvasLength - 2 * UIOffsetXAxis) / 2;
         boundY = (parentCanvasHeight - 2 * UIOffsetYAxis) / 2;
 
-        Debug.Log(parentCanvasHeight + "   "  + parentCanvasLength + "   " + UIOffsetXAxis + "   "  + UIOffsetYAxis);
+        Debug.Log(parentCanvasHeight + "   " + parentCanvasLength + "   " + UIOffsetXAxis + "   " + UIOffsetYAxis);
     }
     public void MoveUI()
     {
@@ -131,6 +131,7 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         ScoreImage.color = color;
         ArrowImage.color = color;
         NameText.color = color;
+        enableFlag = CheckOutScreen();
         this.isPlayer = isPlayer;
 
         if (isPlayer)
@@ -139,6 +140,17 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         }
 
         MoveUI();
+    }
+    private bool CheckOutScreen()
+    {
+        Vector3 pos = curCam.WorldToScreenPoint(currentChar.CharacterUITransRoot.position);
+        pos -= center;
+
+        if (pos.x > boundX || pos.x < -boundX || pos.y > boundY || pos.y < -boundY)
+        {
+            return true;
+        }
+        return false;
     }
     public void UpdateScore(int score)
     {

@@ -10,10 +10,15 @@ public class CameraManager : SingletonMono<CameraManager>
     public CinemachineVirtualCamera PlayingCamera;
     private CinemachineTransposer transposer;
     private Vector3 defaultCameraOffset;
+    private Camera mainCam;
+    private int defaultCullingMask;
 
     private void Start()
     {
         GameManager.OnGameStateChange += GameManagerOnGameStateChange;
+
+        mainCam = Camera.main;
+        defaultCullingMask = mainCam.cullingMask;
 
         transposer = PlayingCamera.GetCinemachineComponent<CinemachineTransposer>();
         defaultCameraOffset = transposer.m_FollowOffset;
