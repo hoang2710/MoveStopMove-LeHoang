@@ -194,6 +194,8 @@ public class UIWeaponShopCanvas : UICanvas
 
         CurrentPanel.SetWeaponDisplay(buttonData);
         CurrentPanel.SetupDefaultCustomWeaponColor();
+
+        playerRef.SetUpHandWeapon(); //NOTE: change color when click color button with out cilck equip button
     }
     private void SetPartButtonColor(CustomColor color)
     {

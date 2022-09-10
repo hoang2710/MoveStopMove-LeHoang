@@ -29,6 +29,13 @@ public class AudioManager : SingletonMono<AudioManager>, IDataHandler
     {
         AudioSource.PlayOneShot(AudioDictionary[audioType]);
     }
+    public void MakeVibration()
+    {
+        if (IsVibrateOn)
+        {
+            Handheld.Vibrate();
+        }
+    }
     public void SetAudioStatus(bool isMute)
     {
         IsSoundOn = !isMute;

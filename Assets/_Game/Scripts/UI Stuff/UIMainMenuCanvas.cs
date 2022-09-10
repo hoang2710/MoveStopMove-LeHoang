@@ -88,6 +88,10 @@ public class UIMainMenuCanvas : UICanvas
     {
         return PlayerName.text;
     }
+    public void SetPlayerName(TMP_InputField inputField)
+    {
+        playerRef?.SetPlayerName(inputField.text);
+    }
     public void SetupPlayerNameInputField()
     {
         Vector3 pos = curCam.WorldToScreenPoint(playerRef.CharaterTrans.position);
@@ -110,6 +114,8 @@ public class UIMainMenuCanvas : UICanvas
 
             curScreenHeight = CanvasRectTrans.sizeDelta.y * CanvasRectTrans.localScale.y;
             SetupPlayerNameInputField();
+
+            PlayerName.onEndEdit.AddListener(delegate { SetPlayerName(PlayerName); });
 
             isFirstLoad = false;
         }

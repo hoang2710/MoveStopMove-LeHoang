@@ -225,9 +225,10 @@ public class Player : CharacterBase, IHit, IDataHandler
         CharaterTrans.rotation = Quaternion.Euler(0, 180f, 0);
         AttackRangeDisplay.SetActive(true);
         NavMeshAgent.enabled = true; //NOTE: set back just that
-
-        UIMainMenuCanvas mainMenuCanvas = UIManager.Instance.GetUICanvas<UIMainMenuCanvas>(UICanvasID.MainMenu);
-        CharacterName = mainMenuCanvas.GetPlayerName();
+    }
+    public void SetPlayerName(string name)
+    {
+        CharacterName = name;
     }
     public override void OnKillEnemy(int gainedScore)
     {
@@ -239,6 +240,8 @@ public class Player : CharacterBase, IHit, IDataHandler
 
             moveSpeed += defaultMoveSpeed * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
             currentUIDisplay?.MoveUI();
+
+            AudioManager.Instance.MakeVibration();
         }
     }
     public IEnumerator EnterPlayingState()
