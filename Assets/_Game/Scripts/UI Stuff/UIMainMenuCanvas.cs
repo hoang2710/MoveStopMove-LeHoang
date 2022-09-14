@@ -79,10 +79,20 @@ public class UIMainMenuCanvas : UICanvas
     {
         CoinText.text = value.ToString();
     }
-    public void SetProgressBarValue(int value)
+    public void SetPlayerEXPBarValue(float value)
     {
-        // int tmp = value % ConstValues.VALUE_EXP_PER_LEVEL;
-        // PlayerProgressBar.value = (float)tmp / ConstValues.VALUE_EXP_PER_LEVEL;
+        int index = (int)value / ConstValues.VALUE_EXP_PER_LEVEL;
+        if (index > 2)
+        {
+            index = 2;
+            PlayerProgressBar.value = 1f;
+        }
+        else
+        {
+            PlayerProgressBar.value = (value % ConstValues.VALUE_EXP_PER_LEVEL) / ConstValues.VALUE_EXP_PER_LEVEL;
+        }
+
+        ChangeStarIconImageSource(index);
     }
     public string GetPlayerName()
     {
@@ -98,6 +108,10 @@ public class UIMainMenuCanvas : UICanvas
         pos += new Vector3(0, InputFieldYAxisOffset * curScreenHeight / targetScreenHeight, 0);
 
         PlayerNameTrans.position = pos;
+    }
+    public void SetupRecordText()
+    {
+        RecordText.text = "Zone: " + (int)LevelManager.Instance.GetCurrentnLevel() + " - Best: #" + DataManager.Instance.HighestRank;
     }
     protected override void OnOpenCanvas()
     {
@@ -122,6 +136,11 @@ public class UIMainMenuCanvas : UICanvas
 
         int currentCoin = DataManager.Instance.Coin;
         SetCoinNumber(currentCoin);
+
+        float playerEXP = DataManager.Instance.PlayerExp;
+        SetPlayerEXPBarValue(playerEXP);
+
+        SetupRecordText();
 
         //NOTE: load audio state from AudioManager --> change toggle state
         bool isSoundOn = AudioManager.Instance.IsSoundOn;

@@ -44,6 +44,9 @@ public class GameManager : SingletonMono<GameManager>
             case GameState.SkinShop:
                 OnGameStateSkinShop();
                 break;
+            case GameState.ReviveOption:
+                OnGameStateReviveOption();
+                break;
             default:
                 break;
         }
@@ -104,6 +107,10 @@ public class GameManager : SingletonMono<GameManager>
     {
         Debug.Log("Skin Shop State");
     }
+    private void OnGameStateReviveOption()
+    {
+        Debug.Log("Revive Option State");
+    }
     private IEnumerator DelayChangeGameState(GameState state, float time)
     {
         yield return new WaitForSeconds(time);
@@ -152,6 +159,10 @@ public class GameManager : SingletonMono<GameManager>
     {
         DataManager.Instance.Coin -= 200;
     }
+    public void AddEXP()
+    {
+        DataManager.Instance.PlayerExp += 200f;
+    }
 }
 
 public enum GameState
@@ -164,7 +175,8 @@ public enum GameState
     Pause,
     ResultPhase,
     WeaponShop,
-    SkinShop
+    SkinShop,
+    ReviveOption
 }
 
 #if UNITY_EDITOR
@@ -196,6 +208,10 @@ public class GameManagerEditor : Editor
         if (GUILayout.Button("Minus coin"))
         {
             script.MinusCoin();
+        }
+        if (GUILayout.Button("Add EXP"))
+        {
+            script.AddEXP();
         }
     }
 }

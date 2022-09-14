@@ -20,7 +20,7 @@ public class DataManager : SingletonMono<DataManager>
     public Dictionary<PantSkinType, bool> PantSkinUnlockState;
     public Dictionary<HatType, bool> HatUnlockState;
     public Dictionary<WeaponType, List<CustomColor>> CustomColorDict;
-    public int HighestRank;
+    public int HighestRank { get; set; }
 
     private void Start()
     {
@@ -66,7 +66,14 @@ public class DataManager : SingletonMono<DataManager>
 
         dataConvert.Save(gameData);
     }
-    private void OnApplicationQuit()
+    private void OnApplicationPause(bool isPause) // NOTE: for android
+    {
+        if (isPause)
+        {
+            SaveGame(); Debug.Log("Onpause Workkkkkkkk");
+        }
+    }
+    private void OnApplicationQuit() // NOTE: for window
     {
         SaveGame();
     }

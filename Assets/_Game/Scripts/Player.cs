@@ -16,6 +16,7 @@ public class Player : CharacterBase, IHit, IDataHandler
     private bool isAttack;
     private bool isDead;
     private bool isShop;
+    private bool isRevivable = true;
 
     private float timer = 0;
 
@@ -68,7 +69,11 @@ public class Player : CharacterBase, IHit, IDataHandler
                 isShop = true;
                 break;
             case GameState.Playing:
-                if (GameManager.Instance.PrevGameState != GameState.Pause)
+                if (GameManager.Instance.PrevGameState == GameState.ReviveOption)
+                {
+                    SetUpPlayerOnRevive();
+                }
+                else if (GameManager.Instance.PrevGameState != GameState.Pause)
                 {
                     StartCoroutine(EnterPlayingState());
                 }
@@ -154,17 +159,14 @@ public class Player : CharacterBase, IHit, IDataHandler
             isAttack = true;
         }
     }
-    private void Die(CharacterBase bullOwner)
+    private void Die(CharacterBase bulletOwner)
     {
         isDead = true;
         ChangeAnimation(ConstValues.ANIM_TRIGGER_DEAD);
         CharacterCollider.enabled = false;
         NavMeshAgent.enabled = false; //NOTE: set false to prevent a frame delay when set back to default position for new level in SetPLaying method 
 
-        GameManager.Instance.ChangeGameState(GameState.ResultPhase);
-        UIResultCanvas resultCanvas = UIManager.Instance.GetUICanvas<UIResultCanvas>(UICanvasID.Result);
-
-        resultCanvas.SetKillerName(bullOwner.CharacterName, bullOwner.CharacterRenderer.material.color);
+        StartCoroutine(DelayDieHandle(bulletOwner));
     }
     private void SetCharacterRotation()
     {
@@ -202,6 +204,7 @@ public class Player : CharacterBase, IHit, IDataHandler
         isDead = false;
         isAttackable = false;
         isAttack = false;
+        isRevivable = true;
         timer = 0;
         Score = 0;
         KillScore = defaultKillScore;
@@ -226,6 +229,26 @@ public class Player : CharacterBase, IHit, IDataHandler
         AttackRangeDisplay.SetActive(true);
         NavMeshAgent.enabled = true; //NOTE: set back just that
     }
+    private void SetUpPlayerOnRevive()
+    {
+        isDead = false;
+        isAttackable = false;
+        isAttack = false;
+        timer = 0;
+
+        ChangeAnimation(ConstValues.ANIM_TRIGGER_IDLE);
+
+        AttackTarget = null;
+        AttackTargetTrans = null;
+
+        CharacterCollider.enabled = true;
+        NavMeshAgent.enabled = true;
+
+        Vector3 newPos;
+        LevelManager.Instance.GetRandomPos(CharaterTrans.position, out newPos);
+
+        CharaterTrans.position = newPos;
+    }
     public void SetPlayerName(string name)
     {
         CharacterName = name;
@@ -249,6 +272,24 @@ public class Player : CharacterBase, IHit, IDataHandler
         SetUpPLayerPlaying();
         yield return new WaitForSeconds(0.55f); //NOTE Wait for camera to transit complete (>0.5f)
         DisplayCharacterUI();
+    }
+    public IEnumerator DelayDieHandle(CharacterBase bulletOwner)
+    {
+        UIResultCanvas resultCanvas = UIManager.Instance.GetUICanvas<UIResultCanvas>(UICanvasID.Result);
+        resultCanvas.CanvasObj.SetActive(false);
+        resultCanvas.SetKillerName(bulletOwner.CharacterName, bulletOwner.CharacterRenderer.material.color);
+
+        yield return new WaitForSeconds(1.5f);
+
+        if (isRevivable)
+        {
+            GameManager.Instance.ChangeGameState(GameState.ReviveOption);
+            isRevivable = false;
+        }
+        else
+        {
+            GameManager.Instance.ChangeGameState(GameState.ResultPhase);
+        }
     }
 
     public void LoadData(GameData data)

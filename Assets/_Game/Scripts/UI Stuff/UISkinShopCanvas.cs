@@ -21,7 +21,7 @@ public class UISkinShopCanvas : UICanvas
     public TMP_Text ItemCostSubText;
     public GameObject HollowButton; //NOTE: use this button to block buy button and display gray state of buy button
     public GameObject BottomUnlockStateObj;
-    public GameObject SelectedButtonObj;
+    public GameObject UnequipButtonObj;
     public GameObject EquipButtonObj;
     public RectTransform SelectedFrame; //NOTE: display current selected item
     public RectTransform EquipedText; //NOTE: display currnet equiped item
@@ -231,12 +231,12 @@ public class UISkinShopCanvas : UICanvas
         if (!isEquiped)
         {
             EquipButtonObj.SetActive(true);
-            SelectedButtonObj.SetActive(false);
+            UnequipButtonObj.SetActive(false);
         }
         else
         {
             EquipButtonObj.SetActive(false);
-            SelectedButtonObj.SetActive(true);
+            UnequipButtonObj.SetActive(true);
         }
     }
     private void SetEquipedMark(ButtonData buttonData)
@@ -249,9 +249,25 @@ public class UISkinShopCanvas : UICanvas
     {
         AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
     }
-    public void OnClickSelectedButton()
+    public void OnClickUnequipButton()
     {
         AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+
+        switch ((int)currentPanel)
+        {
+            case 0:
+                finalHatTag = HatType.None;
+                EquipedTextObj.SetActive(false);
+                EquipHandler(false);
+                break;
+            case 1:
+                finalPantSkinTag = PantSkinType.Invisible;
+                EquipedTextObj.SetActive(false);
+                EquipHandler(false);
+                break;
+            default:
+                break;
+        }
     }
     public void OnCLickExitButton()
     {
@@ -378,7 +394,15 @@ public class UISkinShopCanvas : UICanvas
         }
     }
 
-    private void OnApplicationQuit()
+    private void OnApplicationPause(bool isPause) //NOTE: Set back player setting when quit on skin shop ui, for android
+    {
+        if (isPause)
+        {
+            playerRef.SetHat(finalHatTag);
+            playerRef.SetPantSkin(finalPantSkinTag);
+        }
+    }
+    private void OnApplicationQuit() //NOTE: for window
     {
         playerRef.SetHat(finalHatTag);
         playerRef.SetPantSkin(finalPantSkinTag);

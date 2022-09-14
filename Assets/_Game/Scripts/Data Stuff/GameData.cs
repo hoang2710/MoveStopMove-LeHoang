@@ -54,8 +54,6 @@ public class GameData
 
     private void InitDictionaryData<T>(out SerializableDictionary<T, bool> dict) where T : System.Enum
     {
-        if (!typeof(T).IsEnum) throw new System.ArgumentException("T must be an enumerated type");
-
         dict = new SerializableDictionary<T, bool>();
         foreach (var item in System.Enum.GetValues(typeof(T)))
         {

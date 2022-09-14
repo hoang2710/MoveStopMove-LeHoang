@@ -36,8 +36,8 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
         switch (state)
         {
             case GameState.LoadLevel:
-                LoadLevel();
                 SetData();
+                LoadLevel();
                 StartCoroutine(DelaySpawnBot()); //NOTE: wait for remain bot to be push to pool --> avoid instantiate more bot, may optimize later 
                 // SpawnBaseBot();
                 break;
@@ -53,7 +53,7 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
 
         gamePlayCanvas = UIManager.Instance.GetUICanvas<UIGamePlayCanvas>(UICanvasID.GamePlay);
         gamePlayCanvas.SetPlayerAliveCount(numOfTotalCharacter);
-        gamePlayCanvas.Close();
+        gamePlayCanvas.CanvasObj.SetActive(false);
     }
     public void KillHandle()
     {
@@ -92,7 +92,7 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
             Debug.LogWarning("Failed To Spawn New Bot");
         }
     }
-    private bool GetRandomPos(Vector3 center, out Vector3 result)
+    public bool GetRandomPos(Vector3 center, out Vector3 result)
     {
         float minDistSqr = MapSpawnInnerRadius * MapSpawnInnerRadius;
         int numnerOfTries = 30;
@@ -153,6 +153,7 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
 
         float exp = GetLevelEXP();
 
+        DataManager.Instance.HighestRank = rank;
         DataManager.Instance.Coin += reward;
         DataManager.Instance.PlayerExp += exp;
     }
@@ -171,6 +172,10 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
     public float GetProgressPercentage()
     {
         return (float)(numOfTotalCharacter - numOfCurrentCharacter) / numOfTotalCharacter;
+    }
+    public Level GetCurrentnLevel()
+    {
+        return currentLevel;
     }
 
     public void LoadData(GameData data)

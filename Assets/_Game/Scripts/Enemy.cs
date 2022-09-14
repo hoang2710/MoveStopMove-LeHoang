@@ -53,7 +53,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
                 }
                 IsMovable = true;
                 break;
-            case GameState.Pause:
+            case GameState.ReviveOption:
                 IsMovable = false;
                 break;
             case GameState.LoadLevel:

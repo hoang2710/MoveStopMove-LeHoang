@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6961502785757576248
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: -758}
+  m_AnchoredPosition: {x: 0, y: -758}
   m_SizeDelta: {x: 450, y: 156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3601873703092559472
@@ -446,6 +446,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &380224023203044594
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +689,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &472100462198235896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,6 +1077,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &627419204362099983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1314,6 +1317,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &1004852129914032721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1552,6 +1556,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &1053687778631110051
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,6 +1870,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &1215401348041627355
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,6 +2264,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &1508437325400241455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,6 +2533,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &1653906077666657246
 GameObject:
   m_ObjectHideFlags: 0
@@ -2616,7 +2624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3028981369609890336
 Transform:
   m_ObjectHideFlags: 0
@@ -2794,6 +2802,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &1787292842885109467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2955,6 +2964,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &1823168587440179754
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,7 +3187,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Selected
+  m_text: Unequip
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3186,8 +3196,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280450790
-  m_fontColor: {r: 0.90196085, g: 0.49411768, b: 0.13333334, a: 1}
+    rgba: 4286609522
+  m_fontColor: {r: 0.4457547, g: 0.46986374, b: 0.5, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3618,6 +3628,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &2409264524075058461
 GameObject:
   m_ObjectHideFlags: 0
@@ -3861,6 +3872,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &2426381872000259841
 GameObject:
   m_ObjectHideFlags: 0
@@ -4692,6 +4704,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &3208694958013297916
 GameObject:
   m_ObjectHideFlags: 0
@@ -4705,7 +4718,7 @@ GameObject:
   - component: {fileID: 7720346326393540076}
   - component: {fileID: 2956299687464589329}
   m_Layer: 0
-  m_Name: Selected Button
+  m_Name: Unequip Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4728,7 +4741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: -758}
+  m_AnchoredPosition: {x: 0, y: -758}
   m_SizeDelta: {x: 450, y: 156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7679130115381614173
@@ -4759,7 +4772,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a48cd42c5f205924eb2d8b344d633157, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e1732a753a36ceb46b74d69c3fc9f553, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4815,7 +4828,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5429919400521608714}
         m_TargetAssemblyTypeName: UISkinShopCanvas, Assembly-CSharp
-        m_MethodName: OnClickSelectedButton
+        m_MethodName: OnClickUnequipButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5131,6 +5144,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &3336862247723103134
 GameObject:
   m_ObjectHideFlags: 0
@@ -5368,6 +5382,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &3352733888697361402
 GameObject:
   m_ObjectHideFlags: 0
@@ -5816,6 +5831,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &4412367324993009320
 GameObject:
   m_ObjectHideFlags: 0
@@ -6128,6 +6144,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &4593005606595201495
 GameObject:
   m_ObjectHideFlags: 0
@@ -6725,6 +6742,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &4868222088689632803
 GameObject:
   m_ObjectHideFlags: 0
@@ -6887,6 +6905,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &4886000928073781874
 GameObject:
   m_ObjectHideFlags: 0
@@ -7415,6 +7434,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &5378898072625940592
 GameObject:
   m_ObjectHideFlags: 0
@@ -8060,7 +8080,7 @@ MonoBehaviour:
   ItemCostSubText: {fileID: 5015221179942370178}
   HollowButton: {fileID: 5444759823230887049}
   BottomUnlockStateObj: {fileID: 1716045689595976056}
-  SelectedButtonObj: {fileID: 3208694958013297916}
+  UnequipButtonObj: {fileID: 3208694958013297916}
   EquipButtonObj: {fileID: 84142345876105722}
   SelectedFrame: {fileID: 1605543476541545369}
   EquipedText: {fileID: 2162802699124051921}
@@ -8249,6 +8269,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &5613140380043605475
 GameObject:
   m_ObjectHideFlags: 0
@@ -8529,6 +8550,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &5613140380221362779
 GameObject:
   m_ObjectHideFlags: 0
@@ -8797,6 +8819,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &5613140380415045842
 GameObject:
   m_ObjectHideFlags: 0
@@ -9336,6 +9359,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &5613140381110784290
 GameObject:
   m_ObjectHideFlags: 0
@@ -9733,6 +9757,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &6389607797690115770
 GameObject:
   m_ObjectHideFlags: 0
@@ -10045,6 +10070,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &6699445537426002489
 GameObject:
   m_ObjectHideFlags: 0
@@ -10358,6 +10384,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &6733116719806860459
 GameObject:
   m_ObjectHideFlags: 0
@@ -10701,6 +10728,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &6985254122764575115
 GameObject:
   m_ObjectHideFlags: 0
@@ -10944,6 +10972,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &7036463228785792635
 GameObject:
   m_ObjectHideFlags: 0
@@ -11486,6 +11515,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &7943911590210231866
 GameObject:
   m_ObjectHideFlags: 0
@@ -11723,6 +11753,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &8195316799156026383
 GameObject:
   m_ObjectHideFlags: 0
@@ -12474,6 +12505,7 @@ MonoBehaviour:
   CustomColor: 0
   Trans: {fileID: 0}
   Object: {fileID: 0}
+  CustomPartIndex: 0
 --- !u!1 &9069935042806527191
 GameObject:
   m_ObjectHideFlags: 0
@@ -12860,7 +12892,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2361185665938903155
 RectTransform:
   m_ObjectHideFlags: 0
