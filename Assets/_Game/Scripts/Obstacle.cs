@@ -5,6 +5,46 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour, IHit
 {
     private float targetTime;
+    public Transform ObstacleTrans;
+    public Transform DetectRangeTrans;
+    public Renderer ObstacleRenderer;
+    private Material defaultMat;
+    private Material transMat;
+    [SerializeField] private float minorOffset = 1.2f;
+
+    private void Start()
+    {
+        Player.OnPlayerSizeUp += PlayerOnPlayerSizeUp;
+
+        defaultMat = ItemStorage.Instance.ObstacleMaterial[0];
+        transMat = ItemStorage.Instance.ObstacleMaterial[1];
+
+        ObstacleRenderer.material = defaultMat;
+
+        DetectRangeTrans.localScale = (Vector3.one * ConstValues.VALUE_BASE_ATTACK_RANGE / ObstacleTrans.localScale.x) * minorOffset; //NOTE: or y or z will work
+    }
+    private void OnDestroy()
+    {
+        Player.OnPlayerSizeUp -= PlayerOnPlayerSizeUp;
+    }
+    private void PlayerOnPlayerSizeUp(Player player)
+    {
+        DetectRangeTrans.localScale = (player.CharaterTrans.localScale * ConstValues.VALUE_BASE_ATTACK_RANGE / ObstacleTrans.localScale.x) * minorOffset; //NOTE: or y or z will work
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(ConstValues.TAG_PLAYER))
+        {
+            ObstacleRenderer.material = transMat;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(ConstValues.TAG_PLAYER))
+        {
+            ObstacleRenderer.material = defaultMat;
+        }
+    }
     public void OnHit(CharacterBase bulletOwner, Weapon weapon)
     {
         targetTime = weapon.GetRemainLifeTime();

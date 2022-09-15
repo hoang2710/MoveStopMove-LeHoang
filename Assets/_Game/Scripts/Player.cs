@@ -29,6 +29,7 @@ public class Player : CharacterBase, IHit, IDataHandler
     private bool TargetMarkSetActiveFlag;
 
     public static Player PlayerGlobalReference;
+    public static event System.Action<Player> OnPlayerSizeUp;
 
     public NavMeshAgent NavMeshAgent;
 
@@ -260,11 +261,12 @@ public class Player : CharacterBase, IHit, IDataHandler
         if (isSizeUp)
         {
             CameraManager.Instance.ZoomOutCamera();
+            AudioManager.Instance.MakeVibration();
 
             moveSpeed += defaultMoveSpeed * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
             currentUIDisplay?.MoveUI();
 
-            AudioManager.Instance.MakeVibration();
+            OnPlayerSizeUp?.Invoke(this);
         }
     }
     public IEnumerator EnterPlayingState()

@@ -26,7 +26,7 @@ public class GameData
 
     public GameData()
     {
-        DataVersion = 10004;
+        DataVersion = 10008;
 
         WeaponTag = WeaponType.Axe;
         WeaponSkinTag = WeaponSkinType.Axe_0;
@@ -36,7 +36,7 @@ public class GameData
         PlayerExp = 0f;
         CurrentLevel = Level.Level_1;
         HighestRank = 150;
-        Coin = 0;
+        Coin = 70000;
         IsSoundOn = true;
         IsVibrateOn = true;
 

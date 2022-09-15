@@ -17,6 +17,7 @@ public class ConstValues
     public const string CINEMACHINE_ANIM_PLAYING = "Playing";
     public const string CINEMACHINE_ANIM_SHOPPING = "Shopping";
     public const int VALUE_EXP_PER_LEVEL = 1000;
+    public const float VALUE_PERCENTAGE_OF_TRIPLE_REWARD = 72f;
     public const float VALUE_BASE_ATTACK_RANGE = 6f;
     public const float VALUE_BASE_ATTACK_RATE = 2f;
     public const float VALUE_WEAPON_DEFAULT_LIFE_TIME = 2f;

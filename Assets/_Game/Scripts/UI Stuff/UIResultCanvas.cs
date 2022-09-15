@@ -26,14 +26,21 @@ public class UIResultCanvas : UICanvas
     public TMP_Text KillerNameText;
     [Header("Bottom Part")]
     public TMP_Text CoinDisplayText;
-    public TMP_Text SubCoinDisPlayText;
-    public GameObject LoseBottomPart;
-    public GameObject WinBottomPart;
+    public GameObject NextZoneButton;
+    public GameObject HomeButton;
+    public Transform CoinDisplay;
+    public Transform Holder;
+    public GameObject TripleRewardButton;
+    private Vector3 defaultCoinDisplayPosition;
 
     private int playerRank;
     private float progressPercentage;
     private int numOfCoinReward;
 
+    private void Start()
+    {
+        defaultCoinDisplayPosition = CoinDisplay.position;
+    }
     public void SetActiveResultPanel(bool isWin)
     {
         WinPanel.SetActive(isWin);
@@ -67,7 +74,6 @@ public class UIResultCanvas : UICanvas
     public void SetCoinValue(int value)
     {
         CoinDisplayText.text = value.ToString();
-        SubCoinDisPlayText.text = value.ToString();
     }
     public void SetRankingLosePanel(int rank)
     {
@@ -78,17 +84,30 @@ public class UIResultCanvas : UICanvas
         KillerNameText.text = name;
         KillerNameText.color = color;
     }
-    public void SetUpBottomPartState(bool isWin)
+    public void SetUpBottomButtons(bool isWin)
     {
         if (isWin)
         {
-            WinBottomPart.SetActive(true);
-            LoseBottomPart.SetActive(false);
+            NextZoneButton.SetActive(true);
+            HomeButton.SetActive(false);
         }
         else
         {
-            WinBottomPart.SetActive(false);
-            LoseBottomPart.SetActive(true);
+            NextZoneButton.SetActive(false);
+            HomeButton.SetActive(true);
+        }
+    }
+    private void SetupTripleRewardButton(bool isDisplay)
+    {
+        if (isDisplay)
+        {
+            CoinDisplay.position = defaultCoinDisplayPosition;
+            TripleRewardButton.SetActive(true);
+        }
+        else
+        {
+            CoinDisplay.position = Holder.position;
+            TripleRewardButton.SetActive(false);
         }
     }
     public void OnClickHomeButton()
@@ -113,6 +132,14 @@ public class UIResultCanvas : UICanvas
     {
         //NOTE: empty
     }
+    public void OnClickTripleRewardButton()
+    {
+        //NOTE: gain 2 time the reward coin, the one third is obtain on default
+        DataManager.Instance.Coin += numOfCoinReward;
+
+        SetupTripleRewardButton(false);
+        SetCoinValue(numOfCoinReward * 3);
+    }
 
     protected override void OnOpenCanvas()
     {
@@ -120,16 +147,25 @@ public class UIResultCanvas : UICanvas
 
         LevelManager.Instance.GetLevelResult(out playerRank, out numOfCoinReward, out progressPercentage);
 
+        int curzone = (int)LevelManager.Instance.GetCurrentnLevel();
+        SetZoneText(curzone, curzone + 1);
+
+        float ran = Random.Range(0f, 100f);
+        if (ran > ConstValues.VALUE_PERCENTAGE_OF_TRIPLE_REWARD)
+        {
+            SetupTripleRewardButton(true);
+        }
+
         if (playerRank > 1)
         {
             SetActiveResultPanel(false);
-            SetUpBottomPartState(false);
+            SetUpBottomButtons(false);
             LoseResultHandle();
         }
         else
         {
             SetActiveResultPanel(true);
-            SetUpBottomPartState(true);
+            SetUpBottomButtons(true);
             WinResultHandle();
         }
     }

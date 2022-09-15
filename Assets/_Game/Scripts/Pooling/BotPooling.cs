@@ -43,13 +43,13 @@ public class BotPooling : SingletonMono<BotPooling>
     }
     public void PushBotToPool(GameObject obj)
     {
-        IPoolCharacter poolCharacter = CacheIpooledCharacter.Get(obj);
-        poolCharacter?.OnDespawn();
-
-        obj.SetActive(false);
-
         if (!botPool.Contains(obj))
         {
+            IPoolCharacter poolCharacter = CacheIpooledCharacter.Get(obj);
+            poolCharacter?.OnDespawn();
+
+            obj.SetActive(false);
+
             botPool.Push(obj);
         }
     }

@@ -47,6 +47,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
     public List<ColorData> ColorDatas;
     public List<Material> BotMaterials;
     public List<string> BotNames;
+    public List<Material> ObstacleMaterial; //NOTE: assign trans material on second element 
 
     private Dictionary<WeaponType, GameObject> weaponItems = new Dictionary<WeaponType, GameObject>();
     private Dictionary<WeaponSkinType, Material> weaponSkins = new Dictionary<WeaponSkinType, Material>();

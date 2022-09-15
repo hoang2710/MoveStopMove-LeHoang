@@ -60,14 +60,14 @@ public class UIGamePlayCanvas : UICanvas
     }
     public void OnClickRevivePanelExitButton()
     {
-        StopCoroutine(coroutine);
+        StopCountDown();
         GameManager.Instance.ChangeGameState(GameState.ResultPhase);
     }
     public void OnClickBuyWithCoinButton()
     {
         if (DataManager.Instance.Coin >= NumOfCoinToRevive)
         {
-            StopCoroutine(coroutine);
+            StopCountDown();
             DataManager.Instance.Coin -= NumOfCoinToRevive;
             GameManager.Instance.ChangeGameState(GameState.Playing);
             RevivePanel.SetActive(false);
@@ -75,7 +75,7 @@ public class UIGamePlayCanvas : UICanvas
     }
     public void OnClickBuyWithAdsButton()
     {
-        StopCoroutine(coroutine);
+        StopCountDown();
         GameManager.Instance.ChangeGameState(GameState.Playing);
         RevivePanel.SetActive(false);
     }
@@ -91,7 +91,7 @@ public class UIGamePlayCanvas : UICanvas
     {
         JoystickInput.SetBackState();
 
-        StopCoroutine(coroutine);
+        StopCountDown();
     }
 
     public IEnumerator CountDown(int second)
@@ -104,5 +104,12 @@ public class UIGamePlayCanvas : UICanvas
         }
 
         GameManager.Instance.ChangeGameState(GameState.ResultPhase);
+    }
+    private void StopCountDown()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
     }
 }

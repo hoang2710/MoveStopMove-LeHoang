@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DataManager : SingletonMono<DataManager>
 {
-    public int DataVersion = 10004;
+    public int DataVersion;
 
     [SerializeField]
     private string fileName;
@@ -25,6 +25,7 @@ public class DataManager : SingletonMono<DataManager>
     private void Start()
     {
         dataConvert = new DataConvert(Application.persistentDataPath, fileName);
+        DataVersion = 10008;
     }
     public void AssignDataHandler(IDataHandler dataHandler)
     {
