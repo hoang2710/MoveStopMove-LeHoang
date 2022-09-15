@@ -10,7 +10,7 @@ public class Obstacle : MonoBehaviour, IHit
     public Renderer ObstacleRenderer;
     private Material defaultMat;
     private Material transMat;
-    [SerializeField] private float minorOffset = 1.2f;
+    [SerializeField] private float ObstacleDistOffset = 0.1f;
 
     private void Start()
     {
@@ -21,7 +21,7 @@ public class Obstacle : MonoBehaviour, IHit
 
         ObstacleRenderer.material = defaultMat;
 
-        DetectRangeTrans.localScale = (Vector3.one * ConstValues.VALUE_BASE_ATTACK_RANGE / ObstacleTrans.localScale.x) * minorOffset; //NOTE: or y or z will work
+        DetectRangeTrans.localScale = Vector3.one * (ConstValues.VALUE_BASE_ATTACK_RANGE / ObstacleTrans.localScale.x + ObstacleDistOffset); //NOTE: or y or z will work
     }
     private void OnDestroy()
     {
@@ -29,21 +29,25 @@ public class Obstacle : MonoBehaviour, IHit
     }
     private void PlayerOnPlayerSizeUp(Player player)
     {
-        DetectRangeTrans.localScale = (player.CharaterTrans.localScale * ConstValues.VALUE_BASE_ATTACK_RANGE / ObstacleTrans.localScale.x) * minorOffset; //NOTE: or y or z will work
+        DetectRangeTrans.localScale = player.CharaterTrans.localScale * (ConstValues.VALUE_BASE_ATTACK_RANGE / ObstacleTrans.localScale.x + ObstacleDistOffset); //NOTE: or y or z will work
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(ConstValues.TAG_PLAYER))
         {
-            ObstacleRenderer.material = transMat;
+            ChangeMat(transMat);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(ConstValues.TAG_PLAYER))
         {
-            ObstacleRenderer.material = defaultMat;
+            ChangeMat(defaultMat);
         }
+    }
+    private void ChangeMat(Material mat)
+    {
+        ObstacleRenderer.material = mat;
     }
     public void OnHit(CharacterBase bulletOwner, Weapon weapon)
     {

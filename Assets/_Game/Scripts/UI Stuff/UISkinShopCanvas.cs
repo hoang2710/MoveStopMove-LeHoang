@@ -13,8 +13,9 @@ public class UISkinShopCanvas : UICanvas
 
     public List<ButtonData> CategoryButtons; //NOTE: place in right order pls
     private ButtonData currentCategoryButton;
-    public Color ButtonBackgroundColor; //NOTE: category button
-    public Color PanelBackgroungColor;
+    public Color ButtonOnDeselectColor; //NOTE: category button
+    public Color ButtonOnSelectColor;
+    public Color IconOnDeselectColor;
 
     public GameObject BottomLockStateObj;
     public TMP_Text ItemCostText;
@@ -285,13 +286,13 @@ public class UISkinShopCanvas : UICanvas
     {
         if (isSelected)
         {
-            buttonData.ButtonImage.color = PanelBackgroungColor;
+            buttonData.ButtonImage.color = ButtonOnSelectColor;
             buttonData.IconImage.color = Color.white;
         }
         else
         {
-            buttonData.ButtonImage.color = ButtonBackgroundColor;
-            buttonData.IconImage.color = PanelBackgroungColor;
+            buttonData.ButtonImage.color = ButtonOnDeselectColor;
+            buttonData.IconImage.color = IconOnDeselectColor;
         }
     }
     public void SetItemCost(int value)

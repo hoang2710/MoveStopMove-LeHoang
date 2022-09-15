@@ -145,7 +145,7 @@ MonoBehaviour:
   ObstacleTrans: {fileID: 8254304265256853917}
   DetectRangeTrans: {fileID: 8254304264490221951}
   ObstacleRenderer: {fileID: 8254304265256853919}
-  minorOffset: 1.2
+  ObstacleDistOffset: 0.1
 --- !u!64 &8254304265256853916
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8254304265256853889}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -170,7 +170,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.04, y: 0.04, z: 0.04}
+  m_Extents: {x: 0.04, y: 0.2, z: 0.04}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
