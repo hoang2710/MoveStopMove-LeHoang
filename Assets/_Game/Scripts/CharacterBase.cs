@@ -33,7 +33,7 @@ public class CharacterBase : MonoBehaviour
     public Transform AttackPos;
     [HideInInspector] public Transform AttackTargetTrans;
     [HideInInspector] public CharacterBase AttackTarget;
-    [HideInInspector] public float AttackPosOffset = 1.2f; //NOTE: distance from attack pos to character center, use for calculate weapon life time
+    [HideInInspector] public float AttackPosOffset = 0.95f; //NOTE: distance from attack pos to character center, use for calculate weapon life time
     protected float minorOffset = 1.1f; //NOTE: prevent targetmark blinking due to detect and un-detect at the same time
     protected float detectOffSetDistance = 2f;
 

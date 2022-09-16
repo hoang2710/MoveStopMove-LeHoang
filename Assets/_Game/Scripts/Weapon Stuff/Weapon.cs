@@ -23,8 +23,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     protected float timer = 0;
     protected CharacterBase bulletOwner;
     protected Vector3 rotateDir = Vector3.up;
-    [SerializeField]
-    protected float rotateSpeed = -180f;
+    [SerializeField] protected float rotateSpeed = -180f;
 
     protected virtual void Awake()
     {
@@ -64,6 +63,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     {
         this.enabled = false;
         WeaponCollider.enabled = false;
+        WeaponTrans.localScale = DefaultScale * Vector3.one;
 
         WeaponTrans.localPosition = weaponPositionOffset;
         WeaponTrans.localRotation = weaponHandRotationOffset;

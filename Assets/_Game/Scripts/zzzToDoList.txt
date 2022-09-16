@@ -19,3 +19,6 @@ save cur level, level work
 // big weapon 
 // speed
 // invicible
+
+2 player alive no enemy
+spawn in cup

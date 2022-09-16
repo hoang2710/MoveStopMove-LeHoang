@@ -28,7 +28,7 @@ public class GameData
 
     public GameData()
     {
-        DataVersion = 10009;
+        DataVersion = 10010;
 
         WeaponTag = WeaponType.Axe;
         WeaponSkinTag = WeaponSkinType.Axe_0;

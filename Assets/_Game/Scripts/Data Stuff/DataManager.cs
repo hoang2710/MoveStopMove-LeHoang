@@ -26,7 +26,7 @@ public class DataManager : SingletonMono<DataManager>
     private void Start()
     {
         dataConvert = new DataConvert(Application.persistentDataPath, fileName);
-        DataVersion = 10009;
+        DataVersion = 10010;
     }
     public void AssignDataHandler(IDataHandler dataHandler)
     {

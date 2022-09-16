@@ -96,5 +96,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Object: {fileID: 5628145850911271956}
   Trans: {fileID: 8665041191444766215}
-  PositionOffSet: {x: 0, y: 0, z: 0}
-  RotationOffset: {x: 0, y: 0, z: 0}
+  PositionOffSet: {x: -0.149, y: -0.015, z: -0.066}
+  RotationOffset: {x: -65.612, y: -18.538, z: 31.397}
