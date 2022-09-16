@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DataManager : SingletonMono<DataManager>
 {
-    public int DataVersion;
+    public int DataVersion { get; set; }
 
     [SerializeField]
     private string fileName;
@@ -19,13 +19,14 @@ public class DataManager : SingletonMono<DataManager>
     public Dictionary<WeaponSkinType, bool> WeaponSkinUnlockState;
     public Dictionary<PantSkinType, bool> PantSkinUnlockState;
     public Dictionary<HatType, bool> HatUnlockState;
+    public Dictionary<ShieldType, bool> ShieldUnlockState;
     public Dictionary<WeaponType, List<CustomColor>> CustomColorDict;
     public int HighestRank { get; set; }
 
     private void Start()
     {
         dataConvert = new DataConvert(Application.persistentDataPath, fileName);
-        DataVersion = 10008;
+        DataVersion = 10009;
     }
     public void AssignDataHandler(IDataHandler dataHandler)
     {
@@ -71,7 +72,7 @@ public class DataManager : SingletonMono<DataManager>
     {
         if (isPause)
         {
-            SaveGame(); Debug.Log("Onpause Workkkkkkkk");
+            SaveGame();
         }
     }
     private void OnApplicationQuit() // NOTE: for window
@@ -89,6 +90,7 @@ public class DataManager : SingletonMono<DataManager>
         WeaponSkinUnlockState = gameData.WeaponSkinUnlockState;
         PantSkinUnlockState = gameData.PantSkinUnlockState;
         HatUnlockState = gameData.HatUnlockState;
+        ShieldUnlockState = gameData.ShieldUnlockState;
         CustomColorDict = gameData.CustomColorDict;
     }
     private void SaveGlobalData(GameData gameData)

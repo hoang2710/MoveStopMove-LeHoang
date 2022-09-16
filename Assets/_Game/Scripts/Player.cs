@@ -60,6 +60,7 @@ public class Player : CharacterBase, IHit, IDataHandler
                 SetUpHandWeapon();
                 SetUpPantSkin();
                 SetUpHat();
+                SetUpShield();
                 SetUpPlayerLoadLevel();
                 RemoveCharacterUI();
                 break;
@@ -300,6 +301,7 @@ public class Player : CharacterBase, IHit, IDataHandler
         WeaponSkinTag = data.WeaponSkinTag;
         PantSkinTag = data.PantSkinTag;
         HatTag = data.HatTag;
+        ShieldTag = data.ShieldTag;
 
         CharacterName = data.PlayerName;
     }
@@ -310,6 +312,7 @@ public class Player : CharacterBase, IHit, IDataHandler
         data.WeaponSkinTag = WeaponSkinTag;
         data.PantSkinTag = PantSkinTag;
         data.HatTag = HatTag;
+        data.ShieldTag = ShieldTag;
 
         data.PlayerName = CharacterName;
     }

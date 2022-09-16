@@ -69,6 +69,8 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
         }
         else
         {
+            //NOTE: if num = 1 mean player win --> change to next level
+            ChangeLevelToLoad(true);
             GameManager.Instance.ChangeGameState(GameState.ResultPhase);
         }
     }
@@ -185,13 +187,11 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
 
     public void SaveData(GameData data)
     {
-        data.CurrentLevel = currentLevel;
+        data.CurrentLevel = levelToLoad;
     }
 
     public IEnumerator DelaySpawnBot()
     {
-        yield return null;
-        yield return null;
         yield return null;
         SpawnBaseBot();
     }

@@ -17,6 +17,8 @@ public class UIResultCanvas : UICanvas
     public Image UnlockBackground;
     public Image ZoneIconUnlock;
     public TMP_Text QuoteText;
+    public List<string> WinText;
+    public List<string> LoseText;
     public Slider ProgressBar;
     [Header("Win Panel")]
     public GameObject WinPanel;
@@ -31,16 +33,15 @@ public class UIResultCanvas : UICanvas
     public Transform CoinDisplay;
     public Transform Holder;
     public GameObject TripleRewardButton;
+    public TMP_Text NextZoneButtonText;
     private Vector3 defaultCoinDisplayPosition;
 
     private int playerRank;
     private float progressPercentage;
     private int numOfCoinReward;
 
-    private void Start()
-    {
-        defaultCoinDisplayPosition = CoinDisplay.position;
-    }
+    private bool isFisrtLoad = true;
+
     public void SetActiveResultPanel(bool isWin)
     {
         WinPanel.SetActive(isWin);
@@ -67,9 +68,24 @@ public class UIResultCanvas : UICanvas
         UnlockBackground.enabled = !isLock;
         ZoneIconUnlock.enabled = !isLock;
     }
-    public void SetQuoteText(string text)
+    public void SetQuoteText(bool isWin)
     {
-        QuoteText.text = text;
+        if (isWin)
+        {
+            if (WinText.Count > 0)
+            {
+                int ran = Random.Range(0, WinText.Count);
+                QuoteText.text = WinText[ran];
+            }
+        }
+        else
+        {
+            if (LoseText.Count > 0)
+            {
+                int ran = Random.Range(0, LoseText.Count);
+                QuoteText.text = LoseText[ran];
+            }
+        }
     }
     public void SetCoinValue(int value)
     {
@@ -110,6 +126,10 @@ public class UIResultCanvas : UICanvas
             TripleRewardButton.SetActive(false);
         }
     }
+    private void SetNextZoneButtonText()
+    {
+        NextZoneButtonText.text = "Play Zone " + ((int)LevelManager.Instance.GetCurrentnLevel() + 1);
+    }
     public void OnClickHomeButton()
     {
         GameManager.Instance.ChangeGameState(GameState.LoadLevel);
@@ -120,7 +140,6 @@ public class UIResultCanvas : UICanvas
     }
     public void OnClickNextZoneButton()
     {
-        LevelManager.Instance.ChangeLevelToLoad(true);
         GameManager.Instance.SetBoolIsNextZone(true);
         GameManager.Instance.ChangeGameState(GameState.LoadLevel);
         UIManager.Instance.OpenUI(UICanvasID.GamePlay);
@@ -143,6 +162,13 @@ public class UIResultCanvas : UICanvas
 
     protected override void OnOpenCanvas()
     {
+        if (isFisrtLoad)
+        {
+            defaultCoinDisplayPosition = CoinDisplay.position;
+
+            isFisrtLoad = false;
+        }
+
         UIManager.Instance.CloseUI(UICanvasID.GamePlay);
 
         LevelManager.Instance.GetLevelResult(out playerRank, out numOfCoinReward, out progressPercentage);
@@ -179,6 +205,7 @@ public class UIResultCanvas : UICanvas
         SetCoinValue(numOfCoinReward);
         SetActiveSkullIcon(true);
         SetLockZoneState(true);
+        SetQuoteText(false);
     }
     private void WinResultHandle()
     {
@@ -188,5 +215,7 @@ public class UIResultCanvas : UICanvas
         SetCoinValue(numOfCoinReward);
         SetActiveSkullIcon(false);
         SetLockZoneState(false);
+        SetNextZoneButtonText();
+        SetQuoteText(true);
     }
 }

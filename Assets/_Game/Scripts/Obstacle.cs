@@ -15,6 +15,7 @@ public class Obstacle : MonoBehaviour, IHit
     private void Start()
     {
         Player.OnPlayerSizeUp += PlayerOnPlayerSizeUp;
+        GameManager.OnGameStateChange += GameManagerOnGameStateChange;
 
         defaultMat = ItemStorage.Instance.ObstacleMaterial[0];
         transMat = ItemStorage.Instance.ObstacleMaterial[1];
@@ -26,26 +27,38 @@ public class Obstacle : MonoBehaviour, IHit
     private void OnDestroy()
     {
         Player.OnPlayerSizeUp -= PlayerOnPlayerSizeUp;
+        GameManager.OnGameStateChange -= GameManagerOnGameStateChange;
     }
     private void PlayerOnPlayerSizeUp(Player player)
     {
         DetectRangeTrans.localScale = player.CharaterTrans.localScale * (ConstValues.VALUE_BASE_ATTACK_RANGE / ObstacleTrans.localScale.x + ObstacleDistOffset); //NOTE: or y or z will work
     }
+    private void GameManagerOnGameStateChange(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.LoadLevel:
+                SetMat(defaultMat);
+                break;
+            default:
+                break;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(ConstValues.TAG_PLAYER))
         {
-            ChangeMat(transMat);
+            SetMat(transMat);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(ConstValues.TAG_PLAYER))
         {
-            ChangeMat(defaultMat);
+            SetMat(defaultMat);
         }
     }
-    private void ChangeMat(Material mat)
+    private void SetMat(Material mat)
     {
         ObstacleRenderer.material = mat;
     }

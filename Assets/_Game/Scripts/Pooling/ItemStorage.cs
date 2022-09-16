@@ -31,6 +31,13 @@ public class ItemStorage : SingletonMono<ItemStorage>
         public int poolSize;
     }
     [System.Serializable]
+    public class ShieldData
+    {
+        public ShieldType ShieldTag;
+        public GameObject ShieldPrefabs;
+        public int poolSize;
+    }
+    [System.Serializable]
     public class ColorData
     {
         public CustomColor CustomColor;
@@ -44,6 +51,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
     [NonReorderable]
     public List<PantData> PantDatas;
     public List<HatData> HatDatas;
+    public List<ShieldData> ShieldDatas;
     public List<ColorData> ColorDatas;
     public List<Material> BotMaterials;
     public List<string> BotNames;
@@ -53,42 +61,59 @@ public class ItemStorage : SingletonMono<ItemStorage>
     private Dictionary<WeaponSkinType, Material> weaponSkins = new Dictionary<WeaponSkinType, Material>();
     private Dictionary<PantSkinType, Material> pantSkins = new Dictionary<PantSkinType, Material>();
     private Dictionary<HatType, GameObject> hatItems = new Dictionary<HatType, GameObject>();
+    private Dictionary<ShieldType, GameObject> shieldItems = new Dictionary<ShieldType, GameObject>();
     private Dictionary<CustomColor, Material> customColors = new Dictionary<CustomColor, Material>();
 
     //Pool of weapon
     private Dictionary<WeaponType, Stack<GameObject>> weaponPool = new Dictionary<WeaponType, Stack<GameObject>>();
     //Pool of Hat
     private Dictionary<HatType, Stack<GameObject>> hatPool = new Dictionary<HatType, Stack<GameObject>>();
+    //Pool of Shield
+    private Dictionary<ShieldType, Stack<GameObject>> shieldPool = new Dictionary<ShieldType, Stack<GameObject>>();
 
     private void Start()
     {
-        DataToDictionary();
-        InitPool();
+        StartCoroutine(DataToDictionary());
+        StartCoroutine(InitPool());
     }
-    private void DataToDictionary()
+    private IEnumerator DataToDictionary()
     {
         foreach (var item in WeaponTypeDatas)
         {
             weaponItems.Add(item.WeaponTag, item.WeaponPrefab);
         }
+        yield return null;
+
         foreach (var item in WeaponSkinDatas)
         {
             weaponSkins.Add(item.WeaponSkinTag, item.WeaponSkinMaterial);
         }
+        yield return null;
+
         foreach (var item in PantDatas)
         {
             pantSkins.Add(item.PantSkinTag, item.PantMaterial);
         }
+        yield return null;
+
         foreach (var item in HatDatas)
         {
             hatItems.Add(item.HatTag, item.HatPrefabs);
         }
+        yield return null;
+
+        foreach (var item in ShieldDatas)
+        {
+            shieldItems.Add(item.ShieldTag, item.ShieldPrefabs);
+        }
+        yield return null;
+
         foreach (var item in ColorDatas)
         {
             customColors.Add(item.CustomColor, item.Color);
         }
     }
-    private void InitPool() //NOTE: might optimize later or not
+    private IEnumerator InitPool() //NOTE: might optimize later or not
     {
         foreach (var item in WeaponTypeDatas)
         {
@@ -103,6 +128,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
 
             weaponPool.Add(item.WeaponTag, tmpStack);
         }
+        yield return null;
 
         foreach (var item in HatDatas)
         {
@@ -116,6 +142,21 @@ public class ItemStorage : SingletonMono<ItemStorage>
             }
 
             hatPool.Add(item.HatTag, tmpStack);
+        }
+        yield return null;
+
+        foreach (var item in ShieldDatas)
+        {
+            Stack<GameObject> tmpStack = new Stack<GameObject>();
+            for (int i = 0; i < item.poolSize; i++)
+            {
+                GameObject tmpObj = Instantiate(item.ShieldPrefabs);
+                tmpStack.Push(tmpObj);
+
+                tmpObj.SetActive(false);
+            }
+
+            shieldPool.Add(item.ShieldTag, tmpStack);
         }
     }
     public GameObject PopWeaponFromPool<T>(WeaponType weaponTag, WeaponSkinType skinTag, Vector3 position, Quaternion rotation, out T weapon) where T : Weapon
@@ -203,6 +244,34 @@ public class ItemStorage : SingletonMono<ItemStorage>
         else
         {
             return Instantiate(hatItems[tag]);
+        }
+    }
+
+    public GameObject PopShieldFromPool(ShieldType shieldTag, Transform parentTrans)
+    {
+        GameObject obj = CheckIfHaveShieldLeftInPool(shieldTag);
+
+        obj.SetActive(true);
+
+        IPooledShield pooledShield = CacheIPooledShield.Get(obj);
+        pooledShield?.OnSpawn(parentTrans);
+
+        return obj;
+    }
+    public void PushShieldToPool(ShieldType shieldTag, GameObject obj)
+    {
+        shieldPool[shieldTag].Push(obj);
+        obj.SetActive(false);
+    }
+    private GameObject CheckIfHaveShieldLeftInPool(ShieldType tag)
+    {
+        if (shieldPool[tag].Count > 0)
+        {
+            return shieldPool[tag].Pop();
+        }
+        else
+        {
+            return Instantiate(shieldItems[tag]);
         }
     }
 
@@ -306,6 +375,12 @@ public enum HatType
     HeadPhone,
     Horn,
     Beard
+}
+public enum ShieldType
+{
+    None,
+    Star,
+    Knight
 }
 public enum CustomColor
 {

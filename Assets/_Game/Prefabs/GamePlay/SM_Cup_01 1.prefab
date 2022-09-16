@@ -145,7 +145,7 @@ MonoBehaviour:
   ObstacleTrans: {fileID: 8254304265256853917}
   DetectRangeTrans: {fileID: 8254304264490221951}
   ObstacleRenderer: {fileID: 8254304265256853919}
-  ObstacleDistOffset: 0.1
+  ObstacleDistOffset: 0.05
 --- !u!64 &8254304265256853916
 MeshCollider:
   m_ObjectHideFlags: 0

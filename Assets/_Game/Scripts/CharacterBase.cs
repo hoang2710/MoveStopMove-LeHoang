@@ -10,6 +10,7 @@ public class CharacterBase : MonoBehaviour
     public WeaponSkinType WeaponSkinTag { get; protected set; }
     public PantSkinType PantSkinTag { get; protected set; }
     public HatType HatTag { get; protected set; }
+    public ShieldType ShieldTag { get; protected set; }
 
     public string CharacterName { get; protected set; }
     public int Score { get; protected set; }
@@ -45,13 +46,15 @@ public class CharacterBase : MonoBehaviour
 
     public GameObject WeaponPlaceHolder;
     public Transform WeaponPlaceHolderTrans;
-    public GameObject HatPlaceHolder;
     public Transform HatPLaceHolderTrans;
+    public Transform ShieldPlaceHolderTrans;
     protected GameObject handWeapon;
     protected Transform handWeaponTrans;
     protected WeaponType currentHandWeaponTag;
     protected GameObject hatObject;
     protected HatType currentHatTag;
+    protected GameObject shieldObject;
+    protected ShieldType currentShieldTag;
     public Renderer CharacterRenderer;
     public Renderer PantRenderer;
     public Transform CharacterUITransRoot;
@@ -180,6 +183,16 @@ public class CharacterBase : MonoBehaviour
         currentHatTag = HatTag;
         hatObject = ItemStorage.Instance.PopHatFromPool(HatTag, HatPLaceHolderTrans);
     }
+    public void SetUpShield()
+    {
+        if (shieldObject != null)
+        {
+            ItemStorage.Instance.PushShieldToPool(currentShieldTag, shieldObject);
+        }
+
+        currentShieldTag = ShieldTag;
+        shieldObject = ItemStorage.Instance.PopShieldFromPool(ShieldTag, ShieldPlaceHolderTrans);
+    }
     public void ChangeAnimation(string anim)
     {
         if (curAnim != anim)
@@ -268,6 +281,10 @@ public class CharacterBase : MonoBehaviour
     public void SetHat(HatType tag)
     {
         HatTag = tag;
+    }
+    public void SetShield(ShieldType tag)
+    {
+        ShieldTag = tag;
     }
 
 }

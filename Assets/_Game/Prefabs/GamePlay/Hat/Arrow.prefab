@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9311cf282930ecd429e915c6143daea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HatObject: {fileID: 6042589602980300648}
-  HatTrans: {fileID: 7314073266896434555}
+  Object: {fileID: 6042589602980300648}
+  Trans: {fileID: 7314073266896434555}
   PositionOffSet: {x: 0, y: 0, z: 0}
   RotationOffset: {x: 0, y: 0, z: 0}

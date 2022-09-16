@@ -30,24 +30,40 @@ public class UISkinShopCanvas : UICanvas
 
     [SerializeField] private ButtonData currentHatButtonData; //NOTE: assign first item in hat panel
     [SerializeField] private ButtonData currentPantButtonData; //NOTE: assign first item in pant panel
+    [SerializeField] private ButtonData curretnShieldButtonData; //NOTE: assign first item in shield panel
     private ButtonData currentButtonData; //NOTE: use for set cost value when re enter skin shop panel, assign first item of hat panel
 
-    public List<ButtonData> HatButtonDatas; //NOTE: use for setting item lock icon
     public List<ButtonData> PantButtonDatas; //NOTE: use for setting item lock icon
+    public List<ButtonData> HatButtonDatas; //NOTE: use for setting item lock icon
+    public List<ButtonData> ShieldButtonDatas; //NOTE: use for setting item lock icon
 
-    private HatType finalHatTag; //NOTE: use for decide which hat is equip when out shop
     private PantSkinType finalPantSkinTag; //NOTE: use for decide which pant is equip when out shop
+    private HatType finalHatTag; //NOTE: use for decide which hat is equip when out shop
+    private ShieldType finalShieldTag; //NOTE: use for decide which hat is equip when out shop
 
     private void Start() //NOTE: setting lock icon for each item
+    {
+        StartCoroutine(SetLockIcon());
+    }
+    private IEnumerator SetLockIcon()
     {
         foreach (ButtonData item in HatButtonDatas)
         {
             bool isUnlock = DataManager.Instance.HatUnlockState[item.HatTag];
             item.LockIcon.SetActive(!isUnlock);
         }
+        yield return null;
+
         foreach (ButtonData item in PantButtonDatas)
         {
             bool isUnlock = DataManager.Instance.PantSkinUnlockState[item.PantSkinTag];
+            item.LockIcon.SetActive(!isUnlock);
+        }
+        yield return null;
+
+        foreach (ButtonData item in ShieldButtonDatas)
+        {
+            bool isUnlock = DataManager.Instance.ShieldUnlockState[item.ShieldTag];
             item.LockIcon.SetActive(!isUnlock);
         }
     }
@@ -83,6 +99,11 @@ public class UISkinShopCanvas : UICanvas
             case 1:
                 SetBackPant();
                 break;
+            case 2:
+                SetBackShield();
+                break;
+            case 3:
+                break;
             default:
                 break;
         }
@@ -102,6 +123,14 @@ public class UISkinShopCanvas : UICanvas
                 SetSelectedFrame(currentPantButtonData.RectTrans);
                 playerRef.SetPantSkin(currentPantButtonData.PantSkinTag);
                 playerRef.SetUpPantSkin();
+                break;
+            case 2:
+                ItemStateHandler(DataManager.Instance.ShieldUnlockState[curretnShieldButtonData.ShieldTag], curretnShieldButtonData);
+                SetSelectedFrame(curretnShieldButtonData.RectTrans);
+                playerRef.SetShield(curretnShieldButtonData.ShieldTag);
+                playerRef.SetUpShield();
+                break;
+            case 3:
                 break;
             default:
                 break;
@@ -139,6 +168,22 @@ public class UISkinShopCanvas : UICanvas
             ItemStateHandler(DataManager.Instance.PantSkinUnlockState[buttonData.PantSkinTag], buttonData);
         }
     }
+    public void OnClickShieldButton(ButtonData buttonData)
+    {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+
+        if (curretnShieldButtonData != buttonData)
+        {
+            curretnShieldButtonData = buttonData;
+
+            playerRef.SetShield(curretnShieldButtonData.ShieldTag);
+            playerRef.SetUpShield();
+
+            SetSelectedFrame(buttonData.RectTrans);
+
+            ItemStateHandler(DataManager.Instance.ShieldUnlockState[buttonData.ShieldTag], buttonData);
+        }
+    }
     private void ItemStateHandler(bool isUnlock, ButtonData buttonData)
     {
         if (isUnlock)
@@ -167,6 +212,14 @@ public class UISkinShopCanvas : UICanvas
                 DataManager.Instance.PantSkinUnlockState[currentPantButtonData.PantSkinTag] = true;
                 ItemUnlockHandle(currentPantButtonData);
                 currentPantButtonData.LockIcon.SetActive(false);
+                break;
+            case 2:
+                DataManager.Instance.Coin -= curretnShieldButtonData.ItemCost;
+                DataManager.Instance.ShieldUnlockState[curretnShieldButtonData.ShieldTag] = true;
+                ItemUnlockHandle(curretnShieldButtonData);
+                curretnShieldButtonData.LockIcon.SetActive(false);
+                break;
+            case 3:
                 break;
             default:
                 break;
@@ -203,6 +256,11 @@ public class UISkinShopCanvas : UICanvas
             case 1:
                 EquipHandler(buttonData.PantSkinTag == finalPantSkinTag);
                 break;
+            case 2:
+                EquipHandler(buttonData.ShieldTag == finalShieldTag);
+                break;
+            case 3:
+                break;
             default:
                 break;
         }
@@ -222,6 +280,13 @@ public class UISkinShopCanvas : UICanvas
                 finalPantSkinTag = currentPantButtonData.PantSkinTag;
                 SetEquipedMark(currentPantButtonData);
                 EquipHandler(true);
+                break;
+            case 2:
+                finalShieldTag = curretnShieldButtonData.ShieldTag;
+                SetEquipedMark(curretnShieldButtonData);
+                EquipHandler(true);
+                break;
+            case 3:
                 break;
             default:
                 break;
@@ -265,6 +330,13 @@ public class UISkinShopCanvas : UICanvas
                 finalPantSkinTag = PantSkinType.Invisible;
                 EquipedTextObj.SetActive(false);
                 EquipHandler(false);
+                break;
+            case 2:
+                finalShieldTag = ShieldType.None;
+                EquipedTextObj.SetActive(false);
+                EquipHandler(false);
+                break;
+            case 3:
                 break;
             default:
                 break;
@@ -313,6 +385,7 @@ public class UISkinShopCanvas : UICanvas
 
         finalHatTag = playerRef.HatTag;
         finalPantSkinTag = playerRef.PantSkinTag;
+        finalShieldTag = playerRef.ShieldTag;
 
         SetupEquipedMark(currentPanel);
 
@@ -328,6 +401,7 @@ public class UISkinShopCanvas : UICanvas
 
         SetBackHat();
         SetBackPant();
+        SetBackShield();
     }
     private void SetBackHat()
     {
@@ -338,6 +412,11 @@ public class UISkinShopCanvas : UICanvas
     {
         playerRef.SetPantSkin(finalPantSkinTag);
         playerRef.SetUpPantSkin();
+    }
+    private void SetBackShield()
+    {
+        playerRef.SetShield(finalShieldTag);
+        playerRef.SetUpShield();
     }
     private void SetSelectedFrame(RectTransform parentButton)
     {
@@ -353,6 +432,11 @@ public class UISkinShopCanvas : UICanvas
                 break;
             case PanelType.PantPanel:
                 SetupEquipedMarkPantPanel();
+                break;
+            case PanelType.ShieldPanel:
+                SetupEquipedMarkShieldPanel();
+                break;
+            case PanelType.SkinSetPanel:
                 break;
             default:
                 break;
@@ -394,6 +478,24 @@ public class UISkinShopCanvas : UICanvas
             }
         }
     }
+    private void SetupEquipedMarkShieldPanel()
+    {
+        if (finalShieldTag == ShieldType.None)
+        {
+            EquipedTextObj.SetActive(false);
+        }
+        else
+        {
+            for (int i = 0; i < ShieldButtonDatas.Count; i++)
+            {
+                if (ShieldButtonDatas[i].ShieldTag == finalShieldTag)
+                {
+                    SetEquipedMark(ShieldButtonDatas[i]);
+                    break;
+                }
+            }
+        }
+    }
 
     private void OnApplicationPause(bool isPause) //NOTE: Set back player setting when quit on skin shop ui, for android
     {
@@ -401,12 +503,14 @@ public class UISkinShopCanvas : UICanvas
         {
             playerRef.SetHat(finalHatTag);
             playerRef.SetPantSkin(finalPantSkinTag);
+            playerRef.SetShield(finalShieldTag);
         }
     }
     private void OnApplicationQuit() //NOTE: for window
     {
         playerRef.SetHat(finalHatTag);
         playerRef.SetPantSkin(finalPantSkinTag);
+        playerRef.SetShield(finalShieldTag);
     }
 }
 
@@ -414,6 +518,6 @@ public enum PanelType
 {
     HatPanel,
     PantPanel,
-    PowerUpPanel,
+    ShieldPanel,
     SkinSetPanel
 }

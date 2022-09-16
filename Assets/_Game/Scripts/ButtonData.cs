@@ -12,6 +12,7 @@ public class ButtonData : MonoBehaviour
     [HideInInspector] public WeaponSkinType WeaponSkinTag;
     [HideInInspector] public PantSkinType PantSkinTag;
     [HideInInspector] public HatType HatTag;
+    [HideInInspector] public ShieldType ShieldTag;
     [HideInInspector] public int ItemCost;
     [HideInInspector] public bool IsUnlock;
     [HideInInspector] public PanelType PanelTag;
@@ -30,6 +31,7 @@ public enum ButtonType
     WeaponItem,
     PantItem,
     HatItem,
+    ShieldItem,
     SkinShopCategory,
     ColorItem,
     ColorPartItem
@@ -43,6 +45,7 @@ public class ButtonDataGUI : Editor
     SerializedProperty WeaponSkinTag;
     SerializedProperty PantSkinTag;
     SerializedProperty HatTag;
+    SerializedProperty ShieldTag;
     SerializedProperty ItemCost;
     SerializedProperty IsUnlock;
     SerializedProperty PanelTag;
@@ -60,6 +63,7 @@ public class ButtonDataGUI : Editor
         WeaponSkinTag = serializedObject.FindProperty("WeaponSkinTag");
         PantSkinTag = serializedObject.FindProperty("PantSkinTag");
         HatTag = serializedObject.FindProperty("HatTag");
+        ShieldTag = serializedObject.FindProperty("ShieldTag");
         ItemCost = serializedObject.FindProperty("ItemCost");
         IsUnlock = serializedObject.FindProperty("IsUnlock");
         PanelTag = serializedObject.FindProperty("PanelTag");
@@ -87,6 +91,9 @@ public class ButtonDataGUI : Editor
                 break;
             case ButtonType.HatItem:
                 DisplayHatButton();
+                break;
+            case ButtonType.ShieldItem:
+                DisplayShieldButton();
                 break;
             case ButtonType.SkinShopCategory:
                 DisplaySkinShopCategory();
@@ -127,6 +134,15 @@ public class ButtonDataGUI : Editor
     {
         EditorGUILayout.Space();
         EditorGUILayout.PropertyField(HatTag, new GUIContent("Hat Tag"));
+        EditorGUILayout.PropertyField(ItemCost, new GUIContent("Item Cost"));
+        EditorGUILayout.PropertyField(LockIcon, new GUIContent("Lock Icon"));
+        EditorGUILayout.PropertyField(RectTrans, new GUIContent("RectTransform"));
+
+        serializedObject.ApplyModifiedProperties();
+    }
+    private void DisplayShieldButton(){
+        EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(ShieldTag, new GUIContent("Shield Tag"));
         EditorGUILayout.PropertyField(ItemCost, new GUIContent("Item Cost"));
         EditorGUILayout.PropertyField(LockIcon, new GUIContent("Lock Icon"));
         EditorGUILayout.PropertyField(RectTrans, new GUIContent("RectTransform"));

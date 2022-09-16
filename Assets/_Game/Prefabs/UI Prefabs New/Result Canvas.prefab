@@ -853,7 +853,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 0, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &612168497821878194
 CanvasRenderer:
@@ -910,10 +910,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 35.8
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -946,7 +946,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 80, y: 0, z: 80, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1608,6 +1608,16 @@ MonoBehaviour:
   UnlockBackground: {fileID: 8583161926980508228}
   ZoneIconUnlock: {fileID: 4164495205043682502}
   QuoteText: {fileID: 612168497821878197}
+  WinText:
+  - A quitter never wins and a winner never quits
+  - Imagination has a great deal to do with winning
+  - You rarely win, but sometimes you do
+  - To winners, nothing seems unpleasant
+  LoseText:
+  - Too bad, try again
+  - To win you have to risk loss
+  - 'Better luck next time '
+  - You can't win unless you learn how to lose
   ProgressBar: {fileID: 612168498027612248}
   WinPanel: {fileID: 1434735142730386843}
   LosePanel: {fileID: 612168498143132333}
@@ -1619,6 +1629,7 @@ MonoBehaviour:
   CoinDisplay: {fileID: 2563736220387092201}
   Holder: {fileID: 6173362589591044510}
   TripleRewardButton: {fileID: 7044002149953532125}
+  NextZoneButtonText: {fileID: 179233564800003344}
 --- !u!1 &612168498140431178
 GameObject:
   m_ObjectHideFlags: 0
@@ -4682,8 +4693,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

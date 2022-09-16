@@ -25,6 +25,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         SetUpHandWeapon();
         SetUpPantSkin();
         SetUpHat();
+        SetUpShield();
         SetRandomBodySkin();
         SetRandomName();
 
@@ -94,6 +95,16 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
 
         PantSkinTag = (PantSkinType)Random.Range((int)PantSkinType.Batman, (int)PantSkinType.Vantim + 1);
         HatTag = (HatType)Random.Range((int)HatType.Arrow, (int)HatType.Beard + 1);
+
+        //NOTE: Bot can have a chance to get shield only if player have shield
+        if (Player.PlayerGlobalReference.ShieldTag != ShieldType.None)
+        {
+            float ran = Random.Range(0f, 100f);
+            if (ran > ConstValues.VALUE_PERCENTAGE_OF_BOT_HAVE_SHIELD)
+            {
+                ShieldTag = (ShieldType)Random.Range((int)ShieldType.Star, (int)ShieldType.Knight + 1);
+            }
+        }
     }
     public void SetRandomBodySkin()
     {
