@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0137b06d61cf240aacc9486985c7e9, type: 3}
+  m_Name: Weapon Data
+  m_EditorClassIdentifier: 
+  WeaponDatas:
+  - WeaponTag: 0
+    WeaponPrefab: {fileID: 3549616032071664881, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+    PoolSize: 10
+  - WeaponTag: 1
+    WeaponPrefab: {fileID: 7781565161665100080, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+    PoolSize: 11
+  - WeaponTag: 2
+    WeaponPrefab: {fileID: 3269093494425163855, guid: 3556972fde084a946b59159fd5146574, type: 3}
+    PoolSize: 12
+  - WeaponTag: 3
+    WeaponPrefab: {fileID: 6488665240584564782, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+    PoolSize: 8
+  WeaponSkinDatas:
+  - WeaponSkinTag: 0
+    WeaponSkinMaterial: {fileID: 2100000, guid: 0b77d9a17fcb2c54995323732b4119fc, type: 2}
+  - WeaponSkinTag: 1
+    WeaponSkinMaterial: {fileID: 2100000, guid: a5d1166a9fc9d6d45ae8fd49925787ae, type: 2}
+  - WeaponSkinTag: 2
+    WeaponSkinMaterial: {fileID: 2100000, guid: 8b91cf163ea501e498dc1eda5382acaa, type: 2}
+  - WeaponSkinTag: 3
+    WeaponSkinMaterial: {fileID: 2100000, guid: 980990aca6a2b1f4d93300d3098bb501, type: 2}
+  - WeaponSkinTag: 4
+    WeaponSkinMaterial: {fileID: 2100000, guid: 73bb2461389dabc41b9b7b4634d72b5e, type: 2}
+  - WeaponSkinTag: 5
+    WeaponSkinMaterial: {fileID: 2100000, guid: 85cbce6dd2c93c148ba302233a06adce, type: 2}
+  - WeaponSkinTag: 6
+    WeaponSkinMaterial: {fileID: 2100000, guid: f8734caed5bbf444697c38cf261fdd3a, type: 2}
+  - WeaponSkinTag: 7
+    WeaponSkinMaterial: {fileID: 2100000, guid: d5eaa87465da518469cb0d195733ed19, type: 2}
+  - WeaponSkinTag: 8
+    WeaponSkinMaterial: {fileID: 2100000, guid: 1b84dba73984e4c4cbc3c5c39eca0855, type: 2}
+  - WeaponSkinTag: 9
+    WeaponSkinMaterial: {fileID: 2100000, guid: dd5e7e2dc50eca9449ed5aa5e5042ad0, type: 2}

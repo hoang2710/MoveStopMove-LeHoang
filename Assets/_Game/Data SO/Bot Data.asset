@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23849fcf7d5b68e47a9708071bad7ede, type: 3}
+  m_Name: Bot Data
+  m_EditorClassIdentifier: 
+  BotMaterials:
+  - {fileID: 2100000, guid: 5f23c72aa7c1dce4ca3fcd5c74d11ac9, type: 2}
+  - {fileID: 2100000, guid: d1ec4ceac282682469552c100fc5f62f, type: 2}
+  - {fileID: 2100000, guid: fae1f0f8352ee6246962a2a027bfde53, type: 2}
+  - {fileID: 2100000, guid: 78ad4be2b7408b64aacfebb07c8ec4e7, type: 2}
+  - {fileID: 2100000, guid: 7cd0a9dba3daeb74d9ee8e8168b5cb53, type: 2}
+  - {fileID: 2100000, guid: 9db96fa2e51264140a1648800fe69ca7, type: 2}
+  - {fileID: 2100000, guid: ce17d243d115e82419d15b604c36b526, type: 2}
+  - {fileID: 2100000, guid: 29a6538adca07b444b39834ae0705e79, type: 2}
+  BotNames:
+  - Raiden Shogun
+  - Raiden Ei
+  - Yae Miko
+  - Hu Tao
+  - Zhongli
+  - Klee
+  - Xingqiu
+  - Albedo
+  - Kazuha
+  - Yelan
+  - Shenhe
+  - Bennet
+  - Kujou Sara
+  - Eula
+  - Jean
+  - Cyno
+  - Nilou
+  - Candace
+  - Tighnari
+  - Dori
+  - Mona
+  - Diluc
+  - Kamisato Ayaka
+  - Kamisato Ayato
+  - Kequing
+  - Qiqi

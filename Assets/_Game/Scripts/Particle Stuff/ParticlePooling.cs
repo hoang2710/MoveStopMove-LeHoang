@@ -13,18 +13,23 @@ public class ParticlePooling : SingletonMono<ParticlePooling>
     }
 
     public Transform PoolParent;
-    public List<ParticleData> ParticleDatas;
+    public ParticleDataSO ParticleDataSO;
+    private List<ParticleData> particleDatas;
     private Dictionary<ParticleType, GameObject> particlePrefabsDictionay = new Dictionary<ParticleType, GameObject>();
     private Dictionary<ParticleType, Stack<GameObject>> particlePool = new Dictionary<ParticleType, Stack<GameObject>>();
 
     private void Start()
     {
+        ConvertSO();
         InitPool();
     }
-
+    private void ConvertSO()
+    {
+        particleDatas = ParticleDataSO.ParticleDatas;
+    }
     private void InitPool()
     {
-        foreach (var item in ParticleDatas)
+        foreach (var item in particleDatas)
         {
             Stack<GameObject> stack = new Stack<GameObject>();
 

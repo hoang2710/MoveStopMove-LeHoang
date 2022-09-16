@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5304f5bd9fdb8094aadae6ab93c8d814, type: 3}
+  m_Name: Hat Data
+  m_EditorClassIdentifier: 
+  HatDatas:
+  - HatTag: 1
+    HatPrefabs: {fileID: 6042589602980300648, guid: b491ed06418f99f44945cc2041df2819, type: 3}
+    poolSize: 2
+  - HatTag: 2
+    HatPrefabs: {fileID: 6697264268448391798, guid: ac39303cb953580488373d99bfa1a57d, type: 3}
+    poolSize: 2
+  - HatTag: 3
+    HatPrefabs: {fileID: 2205729906524229176, guid: 3bc5872672e2b64419cec5a34d049f22, type: 3}
+    poolSize: 2
+  - HatTag: 4
+    HatPrefabs: {fileID: 6531702766755918909, guid: 2aa80f906f627e048ab6a2f597094375, type: 3}
+    poolSize: 2
+  - HatTag: 5
+    HatPrefabs: {fileID: 1060202117688293469, guid: f040c456f568aa540b26e2517053dbed, type: 3}
+    poolSize: 2
+  - HatTag: 6
+    HatPrefabs: {fileID: 1538787713130483476, guid: 38dbba3ff5af37a448e17ecb4f9687c6, type: 3}
+    poolSize: 2
+  - HatTag: 7
+    HatPrefabs: {fileID: 8974345966323817301, guid: e121e7f397059ff48837f84b448efb43, type: 3}
+    poolSize: 2
+  - HatTag: 8
+    HatPrefabs: {fileID: 4348096812185447581, guid: fb8e05597e55fe741aaa3fa10da1ed19, type: 3}
+    poolSize: 2
+  - HatTag: 9
+    HatPrefabs: {fileID: 2919488848567977776, guid: cb45fbc6633804e45b28dac72d018f53, type: 3}
+    poolSize: 2
+  - HatTag: 10
+    HatPrefabs: {fileID: 4708442440563622203, guid: 91a8fa43215347a4f8180651679d14ef, type: 3}
+    poolSize: 2
+  - HatTag: 0
+    HatPrefabs: {fileID: 6042589602980300648, guid: 3359f5db12ef2f94aa40ef99adbffb4c, type: 3}
+    poolSize: 2

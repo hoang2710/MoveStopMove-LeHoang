@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ae3a54253ef164c802d0428c509517, type: 3}
+  m_Name: Shield Data
+  m_EditorClassIdentifier: 
+  ShieldDatas:
+  - ShieldTag: 0
+    ShieldPrefabs: {fileID: 6042589602980300648, guid: 3359f5db12ef2f94aa40ef99adbffb4c, type: 3}
+    poolSize: 0
+  - ShieldTag: 1
+    ShieldPrefabs: {fileID: 4989988423705032731, guid: 2ce0d6e4fb6ccf0479a01e0401b0bd6c, type: 3}
+    poolSize: 0
+  - ShieldTag: 2
+    ShieldPrefabs: {fileID: 5628145850911271956, guid: e071d04859d885c4ba0a14d2cbf3a39e, type: 3}
+    poolSize: 0

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c59842f8a8766c43a663d65948df1dc, type: 3}
+  m_Name: Custom Color Data
+  m_EditorClassIdentifier: 
+  ColorDatas:
+  - CustomColor: 0
+    Color: {fileID: 2100000, guid: 69b1f3b56418a8848a842a3ff372cf59, type: 2}
+  - CustomColor: 1
+    Color: {fileID: 2100000, guid: e1950363964c46147a7e4f3aa57a698b, type: 2}
+  - CustomColor: 2
+    Color: {fileID: 2100000, guid: d596efc94b497544a9f0456e47a7a473, type: 2}
+  - CustomColor: 3
+    Color: {fileID: 2100000, guid: 561a0be3bae9032459f89e85c4a32f6c, type: 2}
+  - CustomColor: 4
+    Color: {fileID: 2100000, guid: b289a2549d1a89b4390a880d101f9e06, type: 2}
+  - CustomColor: 5
+    Color: {fileID: 2100000, guid: 1e1ad1d64fddbd84cb079759001d63e9, type: 2}
+  - CustomColor: 6
+    Color: {fileID: 2100000, guid: d0fc9c0cabba2874b87a1188f87be514, type: 2}
+  - CustomColor: 7
+    Color: {fileID: 2100000, guid: ee16b279bc4e8254aacedad768cda770, type: 2}
+  - CustomColor: 8
+    Color: {fileID: 2100000, guid: a09d32f7c6fc6fe42b25821802cecad8, type: 2}
+  - CustomColor: 9
+    Color: {fileID: 2100000, guid: 26bf575db6ae5584a9ce4d68aa667893, type: 2}
+  - CustomColor: 10
+    Color: {fileID: 2100000, guid: f49905144523bf2438105c0b69ba18f5, type: 2}
+  - CustomColor: 11
+    Color: {fileID: 2100000, guid: 943b7b9396ec1534580d037351486cf8, type: 2}
+  - CustomColor: 12
+    Color: {fileID: 2100000, guid: e11bdf93a78f11245957afa1adb7161a, type: 2}
+  - CustomColor: 13
+    Color: {fileID: 2100000, guid: e9fca848b93bd454abd700722a3b960d, type: 2}
+  - CustomColor: 14
+    Color: {fileID: 2100000, guid: b1176610eaf939a4e99d1efd167d482b, type: 2}
+  - CustomColor: 15
+    Color: {fileID: 2100000, guid: 9c6b405542f9f6548a6e01eee18232bd, type: 2}
+  - CustomColor: 16
+    Color: {fileID: 2100000, guid: 1d8cfa3c3d744674c8c9a776ae7146aa, type: 2}
+  - CustomColor: 17
+    Color: {fileID: 2100000, guid: b0c6ea0af9f875f47a41c79f7b8a1eb3, type: 2}
+  - CustomColor: 18
+    Color: {fileID: 2100000, guid: 7a54e9918f8019c4682c992d1343348d, type: 2}
+  - CustomColor: 19
+    Color: {fileID: 2100000, guid: ebc42705130d7474780bf9a5051bdadc, type: 2}

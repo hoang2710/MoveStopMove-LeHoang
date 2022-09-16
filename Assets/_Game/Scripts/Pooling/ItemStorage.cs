@@ -44,18 +44,23 @@ public class ItemStorage : SingletonMono<ItemStorage>
         public Material Color;
     }
 
-    [NonReorderable]
-    public List<WeaponTypeData> WeaponTypeDatas;
-    [NonReorderable]
-    public List<WeaponSkinData> WeaponSkinDatas;
-    [NonReorderable]
-    public List<PantData> PantDatas;
-    public List<HatData> HatDatas;
-    public List<ShieldData> ShieldDatas;
-    public List<ColorData> ColorDatas;
-    public List<Material> BotMaterials;
-    public List<string> BotNames;
-    public List<Material> ObstacleMaterial; //NOTE: assign trans material on second element 
+    public WeaponDataSO WeaponDataSO;
+    public PantDataSO PantDataSO;
+    public HatDataSO HatDataSO;
+    public ShieldDataSO ShieldDataSO;
+    public CustomColorDataSO CustomColorDataSO;
+    public BotDataSO BotDataSO;
+    public ObstacleDataSO ObstacleDataSO;
+
+    private List<WeaponTypeData> weaponTypeDatas;
+    private List<WeaponSkinData> weaponSkinDatas;
+    private List<PantData> pantDatas;
+    private List<HatData> hatDatas;
+    private List<ShieldData> shieldDatas;
+    private List<ColorData> colorDatas;
+    private List<Material> botMaterials;
+    private List<string> botNames;
+    private List<Material> obstacleMaterial; //NOTE: assign trans material on second element 
 
     private Dictionary<WeaponType, GameObject> weaponItems = new Dictionary<WeaponType, GameObject>();
     private Dictionary<WeaponSkinType, Material> weaponSkins = new Dictionary<WeaponSkinType, Material>();
@@ -73,49 +78,62 @@ public class ItemStorage : SingletonMono<ItemStorage>
 
     private void Start()
     {
+        ConvertSO();
         StartCoroutine(DataToDictionary());
         StartCoroutine(InitPool());
     }
+    private void ConvertSO()
+    {
+        weaponTypeDatas = WeaponDataSO.WeaponDatas;
+        weaponSkinDatas = WeaponDataSO.WeaponSkinDatas;
+        pantDatas = PantDataSO.PantDatas;
+        hatDatas = HatDataSO.HatDatas;
+        shieldDatas = ShieldDataSO.ShieldDatas;
+        colorDatas = CustomColorDataSO.ColorDatas;
+        botMaterials = BotDataSO.BotMaterials;
+        botNames = BotDataSO.BotNames;
+        obstacleMaterial = ObstacleDataSO.ObstacleMaterials;
+    }
     private IEnumerator DataToDictionary()
     {
-        foreach (var item in WeaponTypeDatas)
+        foreach (var item in weaponTypeDatas)
         {
             weaponItems.Add(item.WeaponTag, item.WeaponPrefab);
         }
         yield return null;
 
-        foreach (var item in WeaponSkinDatas)
+        foreach (var item in weaponSkinDatas)
         {
             weaponSkins.Add(item.WeaponSkinTag, item.WeaponSkinMaterial);
         }
         yield return null;
 
-        foreach (var item in PantDatas)
+        foreach (var item in pantDatas)
         {
             pantSkins.Add(item.PantSkinTag, item.PantMaterial);
         }
         yield return null;
 
-        foreach (var item in HatDatas)
+        foreach (var item in hatDatas)
         {
             hatItems.Add(item.HatTag, item.HatPrefabs);
         }
         yield return null;
 
-        foreach (var item in ShieldDatas)
+        foreach (var item in shieldDatas)
         {
             shieldItems.Add(item.ShieldTag, item.ShieldPrefabs);
         }
         yield return null;
 
-        foreach (var item in ColorDatas)
+        foreach (var item in colorDatas)
         {
             customColors.Add(item.CustomColor, item.Color);
         }
     }
     private IEnumerator InitPool() //NOTE: might optimize later or not
     {
-        foreach (var item in WeaponTypeDatas)
+        foreach (var item in weaponTypeDatas)
         {
             Stack<GameObject> tmpStack = new Stack<GameObject>();
             for (int i = 0; i < item.PoolSize; i++)
@@ -130,7 +148,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
         }
         yield return null;
 
-        foreach (var item in HatDatas)
+        foreach (var item in hatDatas)
         {
             Stack<GameObject> tmpStack = new Stack<GameObject>();
             for (int i = 0; i < item.poolSize; i++)
@@ -145,7 +163,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
         }
         yield return null;
 
-        foreach (var item in ShieldDatas)
+        foreach (var item in shieldDatas)
         {
             Stack<GameObject> tmpStack = new Stack<GameObject>();
             for (int i = 0; i < item.poolSize; i++)
@@ -297,13 +315,13 @@ public class ItemStorage : SingletonMono<ItemStorage>
     }
     public Material GetRandomBotMaterial()
     {
-        int ran = Random.Range(0, BotMaterials.Count);
-        return BotMaterials[ran];
+        int ran = Random.Range(0, botMaterials.Count);
+        return botMaterials[ran];
     }
     public string GetRandomBotName()
     {
-        int ran = Random.Range(0, BotNames.Count);
-        return BotNames[ran];
+        int ran = Random.Range(0, botNames.Count);
+        return botNames[ran];
     }
     public Material[] GetCustomMaterials(CustomColor color1, CustomColor color2)
     {
@@ -325,6 +343,10 @@ public class ItemStorage : SingletonMono<ItemStorage>
         };
 
         return materials;
+    }
+    public Material GetObstacleMaterial(int index)
+    {
+        return obstacleMaterial[index];
     }
 }
 

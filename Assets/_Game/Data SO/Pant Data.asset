@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a43be5a3edcfeb47ab36c0f01b5955c, type: 3}
+  m_Name: Pant Data
+  m_EditorClassIdentifier: 
+  PantDatas:
+  - PantSkinTag: 0
+    PantMaterial: {fileID: 2100000, guid: 644af021e1993994c9d16533ab441e04, type: 2}
+  - PantSkinTag: 1
+    PantMaterial: {fileID: 2100000, guid: 43d7e2c84d2882c499d6fef1a35f013f, type: 2}
+  - PantSkinTag: 2
+    PantMaterial: {fileID: 2100000, guid: 678a0dc5717253441b9f6a4e1580f5b2, type: 2}
+  - PantSkinTag: 3
+    PantMaterial: {fileID: 2100000, guid: fe17bcd7381950f4788265857cf12313, type: 2}
+  - PantSkinTag: 4
+    PantMaterial: {fileID: 2100000, guid: b194bfc7c5736bd41a51541450b0f237, type: 2}
+  - PantSkinTag: 5
+    PantMaterial: {fileID: 2100000, guid: 4784eb5ea603e10498ff781dea29e995, type: 2}
+  - PantSkinTag: 6
+    PantMaterial: {fileID: 2100000, guid: 45e6529028e4ae145a634fdeff087f68, type: 2}
+  - PantSkinTag: 7
+    PantMaterial: {fileID: 2100000, guid: 674c15445aab8a344bc1f4d20be7d012, type: 2}
+  - PantSkinTag: 8
+    PantMaterial: {fileID: 2100000, guid: 8848cb7477927db4a92e4f6ac162000b, type: 2}
+  - PantSkinTag: 9
+    PantMaterial: {fileID: 2100000, guid: 266f6f9acdda30e4f8303b6714142e12, type: 2}

@@ -656,7 +656,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122991533}
-  m_LocalRotation: {x: 0.21093889, y: 0.000000016819234, z: -0.000000003629497, w: 0.97749925}
+  m_LocalRotation: {x: 0.21093887, y: -0.000000016819214, z: 0.0000000036294932, w: 0.97749925}
   m_LocalPosition: {x: -540, y: -937.04, z: -9.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1334,16 +1334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PoolParent: {fileID: 717566645}
-  ParticleDatas:
-  - ParticleTag: 1
-    ParticleObj: {fileID: 1395712099863456, guid: 918347a131c946046bb26f54bb2f1e50, type: 3}
-    poolSize: 5
-  - ParticleTag: 2
-    ParticleObj: {fileID: 1018898938589420, guid: 6e900767b89ea624da6c9b4e21a73ce2, type: 3}
-    poolSize: 5
-  - ParticleTag: 0
-    ParticleObj: {fileID: 1318644777150600, guid: ea074d0c418e62646bb27bce1a37211a, type: 3}
-    poolSize: 5
+  ParticleDataSO: {fileID: 11400000, guid: 1b4a4612cff3d8042bd6d9d11befe66a, type: 2}
 --- !u!4 &717566645
 Transform:
   m_ObjectHideFlags: 0
@@ -1595,7 +1586,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21093889, y: 0.000000016819234, z: -0.000000003629497, w: 0.97749925}
+  m_LocalRotation: {x: 0.21093887, y: -0.000000016819214, z: 0.0000000036294932, w: 0.97749925}
   m_LocalPosition: {x: -540, y: -937.04, z: -9.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1815,7 +1806,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226000545}
-  m_LocalRotation: {x: 0.23712535, y: -0.000000028952336, z: 0.0000000070668866, w: 0.9714791}
+  m_LocalRotation: {x: 0.23712537, y: -1.5622612e-15, z: 4.6824156e-16, w: 0.97147906}
   m_LocalPosition: {x: -540, y: -938.57, z: -13.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2118,174 +2109,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0b89e8377d3e54196217a92d09e694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponTypeDatas:
-  - WeaponTag: 0
-    WeaponPrefab: {fileID: 3549616032071664881, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
-    PoolSize: 10
-  - WeaponTag: 1
-    WeaponPrefab: {fileID: 7781565161665100080, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
-    PoolSize: 11
-  - WeaponTag: 2
-    WeaponPrefab: {fileID: 3269093494425163855, guid: 3556972fde084a946b59159fd5146574, type: 3}
-    PoolSize: 12
-  - WeaponTag: 3
-    WeaponPrefab: {fileID: 6488665240584564782, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
-    PoolSize: 8
-  WeaponSkinDatas:
-  - WeaponSkinTag: 0
-    WeaponSkinMaterial: {fileID: 2100000, guid: 0b77d9a17fcb2c54995323732b4119fc, type: 2}
-  - WeaponSkinTag: 1
-    WeaponSkinMaterial: {fileID: 2100000, guid: a5d1166a9fc9d6d45ae8fd49925787ae, type: 2}
-  - WeaponSkinTag: 2
-    WeaponSkinMaterial: {fileID: 2100000, guid: 8b91cf163ea501e498dc1eda5382acaa, type: 2}
-  - WeaponSkinTag: 3
-    WeaponSkinMaterial: {fileID: 2100000, guid: 980990aca6a2b1f4d93300d3098bb501, type: 2}
-  - WeaponSkinTag: 4
-    WeaponSkinMaterial: {fileID: 2100000, guid: 73bb2461389dabc41b9b7b4634d72b5e, type: 2}
-  - WeaponSkinTag: 5
-    WeaponSkinMaterial: {fileID: 2100000, guid: 85cbce6dd2c93c148ba302233a06adce, type: 2}
-  - WeaponSkinTag: 6
-    WeaponSkinMaterial: {fileID: 2100000, guid: f8734caed5bbf444697c38cf261fdd3a, type: 2}
-  - WeaponSkinTag: 7
-    WeaponSkinMaterial: {fileID: 2100000, guid: d5eaa87465da518469cb0d195733ed19, type: 2}
-  - WeaponSkinTag: 8
-    WeaponSkinMaterial: {fileID: 2100000, guid: 1b84dba73984e4c4cbc3c5c39eca0855, type: 2}
-  - WeaponSkinTag: 9
-    WeaponSkinMaterial: {fileID: 2100000, guid: dd5e7e2dc50eca9449ed5aa5e5042ad0, type: 2}
-  PantDatas:
-  - PantSkinTag: 0
-    PantMaterial: {fileID: 2100000, guid: 644af021e1993994c9d16533ab441e04, type: 2}
-  - PantSkinTag: 1
-    PantMaterial: {fileID: 2100000, guid: 43d7e2c84d2882c499d6fef1a35f013f, type: 2}
-  - PantSkinTag: 2
-    PantMaterial: {fileID: 2100000, guid: 678a0dc5717253441b9f6a4e1580f5b2, type: 2}
-  - PantSkinTag: 3
-    PantMaterial: {fileID: 2100000, guid: fe17bcd7381950f4788265857cf12313, type: 2}
-  - PantSkinTag: 4
-    PantMaterial: {fileID: 2100000, guid: b194bfc7c5736bd41a51541450b0f237, type: 2}
-  - PantSkinTag: 5
-    PantMaterial: {fileID: 2100000, guid: 4784eb5ea603e10498ff781dea29e995, type: 2}
-  - PantSkinTag: 6
-    PantMaterial: {fileID: 2100000, guid: 45e6529028e4ae145a634fdeff087f68, type: 2}
-  - PantSkinTag: 7
-    PantMaterial: {fileID: 2100000, guid: 674c15445aab8a344bc1f4d20be7d012, type: 2}
-  - PantSkinTag: 8
-    PantMaterial: {fileID: 2100000, guid: 8848cb7477927db4a92e4f6ac162000b, type: 2}
-  - PantSkinTag: 9
-    PantMaterial: {fileID: 2100000, guid: 266f6f9acdda30e4f8303b6714142e12, type: 2}
-  HatDatas:
-  - HatTag: 1
-    HatPrefabs: {fileID: 6042589602980300648, guid: b491ed06418f99f44945cc2041df2819, type: 3}
-    poolSize: 2
-  - HatTag: 2
-    HatPrefabs: {fileID: 6697264268448391798, guid: ac39303cb953580488373d99bfa1a57d, type: 3}
-    poolSize: 2
-  - HatTag: 3
-    HatPrefabs: {fileID: 2205729906524229176, guid: 3bc5872672e2b64419cec5a34d049f22, type: 3}
-    poolSize: 2
-  - HatTag: 4
-    HatPrefabs: {fileID: 6531702766755918909, guid: 2aa80f906f627e048ab6a2f597094375, type: 3}
-    poolSize: 2
-  - HatTag: 5
-    HatPrefabs: {fileID: 1060202117688293469, guid: f040c456f568aa540b26e2517053dbed, type: 3}
-    poolSize: 2
-  - HatTag: 6
-    HatPrefabs: {fileID: 1538787713130483476, guid: 38dbba3ff5af37a448e17ecb4f9687c6, type: 3}
-    poolSize: 2
-  - HatTag: 7
-    HatPrefabs: {fileID: 8974345966323817301, guid: e121e7f397059ff48837f84b448efb43, type: 3}
-    poolSize: 2
-  - HatTag: 8
-    HatPrefabs: {fileID: 4348096812185447581, guid: fb8e05597e55fe741aaa3fa10da1ed19, type: 3}
-    poolSize: 2
-  - HatTag: 9
-    HatPrefabs: {fileID: 2919488848567977776, guid: cb45fbc6633804e45b28dac72d018f53, type: 3}
-    poolSize: 2
-  - HatTag: 10
-    HatPrefabs: {fileID: 4708442440563622203, guid: 91a8fa43215347a4f8180651679d14ef, type: 3}
-    poolSize: 2
-  - HatTag: 0
-    HatPrefabs: {fileID: 6042589602980300648, guid: 3359f5db12ef2f94aa40ef99adbffb4c, type: 3}
-    poolSize: 2
-  ShieldDatas:
-  - ShieldTag: 0
-    ShieldPrefabs: {fileID: 6042589602980300648, guid: 3359f5db12ef2f94aa40ef99adbffb4c, type: 3}
-    poolSize: 0
-  - ShieldTag: 1
-    ShieldPrefabs: {fileID: 4989988423705032731, guid: 2ce0d6e4fb6ccf0479a01e0401b0bd6c, type: 3}
-    poolSize: 0
-  - ShieldTag: 2
-    ShieldPrefabs: {fileID: 5628145850911271956, guid: e071d04859d885c4ba0a14d2cbf3a39e, type: 3}
-    poolSize: 0
-  ColorDatas:
-  - CustomColor: 0
-    Color: {fileID: 2100000, guid: 69b1f3b56418a8848a842a3ff372cf59, type: 2}
-  - CustomColor: 1
-    Color: {fileID: 2100000, guid: e1950363964c46147a7e4f3aa57a698b, type: 2}
-  - CustomColor: 2
-    Color: {fileID: 2100000, guid: d596efc94b497544a9f0456e47a7a473, type: 2}
-  - CustomColor: 3
-    Color: {fileID: 2100000, guid: 561a0be3bae9032459f89e85c4a32f6c, type: 2}
-  - CustomColor: 4
-    Color: {fileID: 2100000, guid: b289a2549d1a89b4390a880d101f9e06, type: 2}
-  - CustomColor: 5
-    Color: {fileID: 2100000, guid: 1e1ad1d64fddbd84cb079759001d63e9, type: 2}
-  - CustomColor: 6
-    Color: {fileID: 2100000, guid: d0fc9c0cabba2874b87a1188f87be514, type: 2}
-  - CustomColor: 7
-    Color: {fileID: 2100000, guid: ee16b279bc4e8254aacedad768cda770, type: 2}
-  - CustomColor: 8
-    Color: {fileID: 2100000, guid: a09d32f7c6fc6fe42b25821802cecad8, type: 2}
-  - CustomColor: 9
-    Color: {fileID: 2100000, guid: 26bf575db6ae5584a9ce4d68aa667893, type: 2}
-  - CustomColor: 10
-    Color: {fileID: 2100000, guid: f49905144523bf2438105c0b69ba18f5, type: 2}
-  - CustomColor: 11
-    Color: {fileID: 2100000, guid: 943b7b9396ec1534580d037351486cf8, type: 2}
-  - CustomColor: 12
-    Color: {fileID: 2100000, guid: e11bdf93a78f11245957afa1adb7161a, type: 2}
-  - CustomColor: 13
-    Color: {fileID: 2100000, guid: e9fca848b93bd454abd700722a3b960d, type: 2}
-  - CustomColor: 14
-    Color: {fileID: 2100000, guid: b1176610eaf939a4e99d1efd167d482b, type: 2}
-  - CustomColor: 15
-    Color: {fileID: 2100000, guid: 9c6b405542f9f6548a6e01eee18232bd, type: 2}
-  - CustomColor: 16
-    Color: {fileID: 2100000, guid: 1d8cfa3c3d744674c8c9a776ae7146aa, type: 2}
-  - CustomColor: 17
-    Color: {fileID: 2100000, guid: b0c6ea0af9f875f47a41c79f7b8a1eb3, type: 2}
-  - CustomColor: 18
-    Color: {fileID: 2100000, guid: 7a54e9918f8019c4682c992d1343348d, type: 2}
-  - CustomColor: 19
-    Color: {fileID: 2100000, guid: ebc42705130d7474780bf9a5051bdadc, type: 2}
-  BotMaterials:
-  - {fileID: 2100000, guid: 5f23c72aa7c1dce4ca3fcd5c74d11ac9, type: 2}
-  - {fileID: 2100000, guid: d1ec4ceac282682469552c100fc5f62f, type: 2}
-  - {fileID: 2100000, guid: fae1f0f8352ee6246962a2a027bfde53, type: 2}
-  - {fileID: 2100000, guid: 78ad4be2b7408b64aacfebb07c8ec4e7, type: 2}
-  - {fileID: 2100000, guid: 7cd0a9dba3daeb74d9ee8e8168b5cb53, type: 2}
-  - {fileID: 2100000, guid: 9db96fa2e51264140a1648800fe69ca7, type: 2}
-  - {fileID: 2100000, guid: ce17d243d115e82419d15b604c36b526, type: 2}
-  - {fileID: 2100000, guid: 29a6538adca07b444b39834ae0705e79, type: 2}
-  BotNames:
-  - Raiden Shogun
-  - Raiden Ei
-  - Yae Miko
-  - Hu Tao
-  - Zhongli
-  - Klee
-  - Xingqiu
-  - Albedo
-  - Kazuha
-  - Yelan
-  - Shenhe
-  - Bennet
-  - Kujou Sara
-  - Eula
-  - Jean
-  ObstacleMaterial:
-  - {fileID: 2100000, guid: 0be1889a9447a314ba92b3670b3e9f90, type: 2}
-  - {fileID: 2100000, guid: f57abecd49c877e45bbfbf931dbbd4ce, type: 2}
+  WeaponDataSO: {fileID: 11400000, guid: 51bfa03cdbcb85447989f9c909ae0d6c, type: 2}
+  PantDataSO: {fileID: 11400000, guid: aa47adcf093e71b44a0b96d4658f53ea, type: 2}
+  HatDataSO: {fileID: 11400000, guid: c8d6bf71cd13bbc4b8c76488000d1427, type: 2}
+  ShieldDataSO: {fileID: 11400000, guid: e4606e684dd6466429fcc590fe933219, type: 2}
+  CustomColorDataSO: {fileID: 11400000, guid: e8e88d7375bd96a4f8d4a2f4fa779b04, type: 2}
+  BotDataSO: {fileID: 11400000, guid: cb9eb569d0aa6ec47bf655c09753b77b, type: 2}
+  ObstacleDataSO: {fileID: 11400000, guid: dc94ec2b48bf8b84495b09b355985891, type: 2}
 --- !u!4 &1995170573
 Transform:
   m_ObjectHideFlags: 0
@@ -2359,7 +2189,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035489454}
-  m_LocalRotation: {x: 0.38512617, y: 0.000000011392317, z: -0.0000000047541993, w: 0.92286396}
+  m_LocalRotation: {x: 0.3851262, y: -0.000000027503491, z: 0.000000011477656, w: 0.9228639}
   m_LocalPosition: {x: -540, y: -921, z: -18.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

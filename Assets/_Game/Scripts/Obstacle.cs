@@ -17,8 +17,8 @@ public class Obstacle : MonoBehaviour, IHit
         Player.OnPlayerSizeUp += PlayerOnPlayerSizeUp;
         GameManager.OnGameStateChange += GameManagerOnGameStateChange;
 
-        defaultMat = ItemStorage.Instance.ObstacleMaterial[0];
-        transMat = ItemStorage.Instance.ObstacleMaterial[1];
+        defaultMat = ItemStorage.Instance.GetObstacleMaterial(0);
+        transMat = ItemStorage.Instance.GetObstacleMaterial(1);
 
         ObstacleRenderer.material = defaultMat;
 
