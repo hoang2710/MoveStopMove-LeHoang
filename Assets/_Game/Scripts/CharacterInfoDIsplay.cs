@@ -124,9 +124,9 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
 
         UITrans.position = pos;
     }
-    public void SetUpUI(string name, Color color, bool isPlayer)
+    public void SetUpUI(string name, Color color, bool isPlayer, int score)
     {
-        ScoreText.text = 0.ToString();
+        ScoreText.text = score.ToString();
         NameText.text = name;
         ScoreImage.color = color;
         ArrowImage.color = color;

@@ -17,6 +17,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     protected Quaternion weaponHandRotationOffset;
     public Vector3 ThrowRotateOffset; //NOTE: use this X,Y,Z of Vector to set up Quaternion only
     protected Quaternion weaponThrowRotationOffset;
+    public float DefaultScale;
     protected Vector3 flyDir;
     protected float lifeTime = ConstValues.VALUE_WEAPON_DEFAULT_LIFE_TIME;
     protected float timer = 0;
@@ -74,6 +75,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
         SetFlyDir(dir);
         SetBulletOwner(owner);
         CalculateLifeTime();
+        SetAdaptiveSize(owner);
         OnThrowHandle();
     }
     public void SetFlyDir(Vector3 dir)
@@ -87,6 +89,11 @@ public class Weapon : MonoBehaviour, IPooledWeapon
     public void CalculateLifeTime()
     {
         lifeTime = (bulletOwner.AttackRange - bulletOwner.AttackPosOffset) / flyingSpeed;
+    }
+    public void SetAdaptiveSize(CharacterBase owner)
+    {
+        WeaponTrans.localScale = owner.CharaterTrans.localScale * DefaultScale;
+        flyingSpeed = ConstValues.WALUE_WEAPON_DEFAULT_FLY_SPEED * owner.CharaterTrans.localScale.x;
     }
     public float GetRemainLifeTime()
     {

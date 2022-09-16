@@ -6,11 +6,9 @@ using UnityEngine.AI;
 public class Player : CharacterBase, IHit, IDataHandler
 {
     public static Vector3 MoveDir;
-    [SerializeField]
-    private float moveSpeed = 1.5f;
+    [SerializeField] private float moveSpeed = 1.5f;
     private float defaultMoveSpeed;
-    [SerializeField]
-    private float rotateSpeed = 8f;
+    [SerializeField] private float rotateSpeed = 8f;
 
     private bool isAttackable = true;
     private bool isAttack;
@@ -211,7 +209,7 @@ public class Player : CharacterBase, IHit, IDataHandler
         Score = 0;
         KillScore = defaultKillScore;
         moveSpeed = defaultMoveSpeed;
-        PlayerLevel = 1;
+        CharacterLevel = 1;
 
         AttackTarget = null;
         AttackTargetTrans = null;
@@ -264,7 +262,7 @@ public class Player : CharacterBase, IHit, IDataHandler
             CameraManager.Instance.ZoomOutCamera();
             AudioManager.Instance.MakeVibration();
 
-            moveSpeed += defaultMoveSpeed * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
+            moveSpeed = (1 + CharacterLevel * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO) * defaultMoveSpeed;
             currentUIDisplay?.MoveUI();
 
             OnPlayerSizeUp?.Invoke(this);

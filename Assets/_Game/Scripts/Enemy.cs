@@ -14,14 +14,13 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
 
         IsAlive = true;
         CharacterCollider.enabled = true;
-        CharaterTrans.localScale = Vector3.one;
-        AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
+
+        SetUpBotStat();
 
         AttackTarget = null;
         AttackTargetTrans = null;
 
         SetRandomEnumData();
-        ResetScore();
         SetUpHandWeapon();
         SetUpPantSkin();
         SetUpHat();
@@ -114,11 +113,16 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
     {
         CharacterName = ItemStorage.Instance.GetRandomBotName();
     }
-
-    private void ResetScore()
+    public void SetUpBotStat()
     {
-        Score = 0;
-        KillScore = defaultKillScore;
+        CharacterLevel = LevelManager.Instance.GetCurrentBotLevel();
+        SizeUpCharacter(CharacterLevel, false);
+        
+        int floorScore = Mathf.CeilToInt(Mathf.Pow(CharacterLevel/scoreSlope, 2));
+        int CeilScore = Mathf.FloorToInt(Mathf.Pow(CharacterLevel + 1/scoreSlope, 2));
+
+        Score = Random.Range(floorScore, CeilScore);
+        KillScore = Mathf.FloorToInt(CharacterLevel * killScoreMultipler); Debug.Log(CharacterLevel + "    " + Score + "    " + KillScore);
     }
 
     public void OnHit(CharacterBase bulletOwner, Weapon weapon)

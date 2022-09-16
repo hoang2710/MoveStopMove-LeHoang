@@ -136,4 +136,5 @@ MonoBehaviour:
   weaponPositionOffset: {x: 0, y: 0, z: 0}
   HandRotateOffset: {x: 90, y: -90, z: 180}
   ThrowRotateOffset: {x: -90, y: 0, z: 0}
+  DefaultScale: 39
   rotateSpeed: 0

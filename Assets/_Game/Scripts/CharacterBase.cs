@@ -15,10 +15,10 @@ public class CharacterBase : MonoBehaviour
     public string CharacterName { get; protected set; }
     public int Score { get; protected set; }
     public int KillScore { get; protected set; }
-    protected int PlayerLevel = 1;
-    protected int defaultKillScore = 5;
-    protected int scoreStep = 8;
-    protected float scoreStepMultipler = 1.1f;
+    public int CharacterLevel { get; protected set; } = 1;
+    protected int defaultKillScore = 1;
+    protected float scoreSlope = 1.2f;
+    protected float killScoreMultipler = 1.05f;
     protected bool isSizeUp;
 
     public float AttackRange { get; protected set; }
@@ -33,9 +33,9 @@ public class CharacterBase : MonoBehaviour
     public Transform AttackPos;
     [HideInInspector] public Transform AttackTargetTrans;
     [HideInInspector] public CharacterBase AttackTarget;
-    [HideInInspector] public float AttackPosOffset = 1f; //NOTE: distance from attack pos to character center, use for calculate weapon life time
-    private float minorOffset = 1.1f; //NOTE: prevent targetmark blinking due to detect and un-detect at the same time
-    private float detectOffSetDistance = 2f;
+    [HideInInspector] public float AttackPosOffset = 1.2f; //NOTE: distance from attack pos to character center, use for calculate weapon life time
+    protected float minorOffset = 1.1f; //NOTE: prevent targetmark blinking due to detect and un-detect at the same time
+    protected float detectOffSetDistance = 2f;
 
     public bool IsAlive { get; protected set; }
     protected bool isPlayer; //NOTE: use for ui display. moveUI
@@ -73,7 +73,7 @@ public class CharacterBase : MonoBehaviour
     {
         CharacterName = ConstValues.VALUE_CHARACTER_DEFAULT_NAME;
         Score = 0;
-        KillScore = 5;
+        KillScore = 1;
         AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
         AttackRate = ConstValues.VALUE_BASE_ATTACK_RATE;
 
@@ -214,33 +214,42 @@ public class CharacterBase : MonoBehaviour
         isSizeUp = CalculateScore(gainedScore);
         if (isSizeUp)
         {
-            CharaterTrans.localScale += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * Vector3.one;
-            AttackRange += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO * ConstValues.VALUE_BASE_ATTACK_RANGE;
-            AttackPosOffset += ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
-
-            ParticlePooling.Instance.PopParticleFromPool(ParticleType.Upgrade,
-                                                        CharaterTrans.position,
-                                                        ConstValues.VALUE_PARTICLE_UPGRADE_DEFAULT_ROTATION,
-                                                        this);
-
-            PlayAudioWithCondition(AudioType.SizeUp);
+            SizeUpCharacter(CharacterLevel);
         }
     }
     private bool CalculateScore(int gainedScore)
     {
         Score += gainedScore;
-        KillScore = Score / 2;
 
         currentUIDisplay?.UpdateScore(Score);
         currentUIDisplay?.TriggerPopupScore(gainedScore);
 
-        if (((float)Score / (scoreStep * Mathf.Pow(scoreStepMultipler, (Score / scoreStep)))) > PlayerLevel)
+        int tmpLvl = Mathf.FloorToInt(scoreSlope * Mathf.Sqrt(Score));
+
+        if (tmpLvl > CharacterLevel)
         {
-            PlayerLevel++;
+            CharacterLevel = tmpLvl;
+            KillScore = Mathf.FloorToInt(CharacterLevel * killScoreMultipler);
             return true;
         }
 
         return false;
+    }
+    public void SizeUpCharacter(int sizeUpTime, bool isEffectOn = true)
+    {
+        CharaterTrans.localScale = (1 + sizeUpTime * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO) * Vector3.one;
+        AttackRange = (1 + sizeUpTime * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO) * ConstValues.VALUE_BASE_ATTACK_RANGE;
+        AttackPosOffset = 1 + sizeUpTime * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
+
+        if (isEffectOn)
+        {
+            ParticlePooling.Instance.PopParticleFromPool(ParticleType.Upgrade,
+                                                    CharaterTrans.position,
+                                                    ConstValues.VALUE_PARTICLE_UPGRADE_DEFAULT_ROTATION,
+                                                    this);
+
+            PlayAudioWithCondition(AudioType.SizeUp);
+        }
     }
     public void SetUpThrowWeapon(Quaternion rotation)
     {
@@ -256,7 +265,7 @@ public class CharacterBase : MonoBehaviour
         {
             CharacterUIPooling.Instance.PopUIFromPool(this);
 
-            currentUIDisplay?.SetUpUI(CharacterName, CharacterRenderer.material.color, isPlayer);
+            currentUIDisplay?.SetUpUI(CharacterName, CharacterRenderer.material.color, isPlayer, Score);
         }
     }
     public void RemoveCharacterUI()

@@ -6,19 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : SingletonMono<LevelManager>, IDataHandler
 {
+    private Player playerRef;
+
     public float MapSpawnOuterRadius;
     public float MapSpawnInnerRadius;
     public Transform MapSpawnCenter;
     [SerializeField] private int numOfBaseBot = 10;
     [SerializeField] private int minCharater = 25;
     [SerializeField] private int maxCharacter = 35;
+    [SerializeField] private int botLevelFloorBound = 1;
+    [SerializeField] private int botLevelCeilBound = 1;
     private int numOfTotalCharacter;
     private int numOfCurrentCharacter;
     private int numOfBotToSpawn;
     private UIGamePlayCanvas gamePlayCanvas;
 
-    [SerializeField] private Level currentLevel = Level.Level_1; //temp
-    [SerializeField] private Level levelToLoad = Level.Level_1; //temp
+    [SerializeField] private Level currentLevel = Level.Level_1;
+    [SerializeField] private Level levelToLoad = Level.Level_1;
+    public List<LevelDataSO> LevelDataSO;
+
     private bool isFirstLoad = true;
 
     private void Start()
@@ -26,6 +32,8 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
         GameManager.OnGameStateChange += GameManagerOnGameStateChange;
 
         DataManager.Instance.AssignDataHandler(this);
+
+        playerRef = Player.PlayerGlobalReference;
     }
     private void OnDestroy()
     {
@@ -39,7 +47,6 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
                 SetData();
                 LoadLevel();
                 StartCoroutine(DelaySpawnBot()); //NOTE: wait for remain bot to be push to pool --> avoid instantiate more bot, may optimize later 
-                // SpawnBaseBot();
                 break;
             default:
                 break;
@@ -119,6 +126,16 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
         }
         result = Vector3.zero;
         return false;
+    }
+    public int GetCurrentBotLevel()
+    {
+        int floorBound = playerRef.CharacterLevel - botLevelFloorBound;
+        if (floorBound < 1)
+        {
+            floorBound = 1;
+        }
+
+        return Random.Range(floorBound, playerRef.CharacterLevel + botLevelCeilBound + 1);
     }
     public void LoadLevel()
     {
