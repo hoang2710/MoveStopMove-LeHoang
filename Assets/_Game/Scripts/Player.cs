@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Player : CharacterBase, IHit, IDataHandler
 {
     public static Vector3 MoveDir;
+    private Quaternion curRotation;
     [SerializeField] private float moveSpeed = 1.5f;
     private float defaultMoveSpeed;
     [SerializeField] private float rotateSpeed = 8f;
@@ -31,6 +32,9 @@ public class Player : CharacterBase, IHit, IDataHandler
 
     public NavMeshAgent NavMeshAgent;
 
+    private bool moveFlag; //NOTE: use for prevent some code execute every frame
+    private bool attackFlag; //NOTE: use for prevent some code execute every frame
+
     protected override void Awake()
     {
         base.Awake();
@@ -44,7 +48,7 @@ public class Player : CharacterBase, IHit, IDataHandler
 
         DataManager.Instance.AssignDataHandler(this);
     }
-    private void FixedUpdate()
+    private void Update()
     {
         LogicHandle();
     }
@@ -79,6 +83,8 @@ public class Player : CharacterBase, IHit, IDataHandler
                 }
                 break;
             case GameState.ResultPhase:
+                NavMeshAgent.enabled = false; 
+                CharacterCollider.enabled = false;
                 isAttackable = false;
                 break;
             default:
@@ -118,10 +124,17 @@ public class Player : CharacterBase, IHit, IDataHandler
 
         ChangeAnimation(ConstValues.ANIM_TRIGGER_RUN);
 
-        isAttackable = true;
-        isAttack = false;
+        if (!moveFlag)
+        {
+            moveFlag = true;
+            attackFlag = false;
+
+            isAttackable = true;
+            isAttack = false;
+            WeaponPlaceHolder.SetActive(true);
+        }
+
         timer = 0;
-        WeaponPlaceHolder.SetActive(true);
     }
     private void Idle() //Optimize later
     {
@@ -143,11 +156,17 @@ public class Player : CharacterBase, IHit, IDataHandler
     {
         ChangeAnimation(ConstValues.ANIM_TRIGGER_ATTACK);
 
-        Vector3 lookDir = AttackTargetTrans.position - CharaterTrans.position;
-        lookDir.y = 0;
+        if (!attackFlag)
+        {
+            attackFlag = true;
+            moveFlag = false;
 
-        Quaternion curRotation = Quaternion.LookRotation(lookDir);
-        CharaterTrans.rotation = curRotation;
+            Vector3 lookDir = AttackTargetTrans.position - CharaterTrans.position;
+            lookDir.y = 0;
+
+            curRotation = Quaternion.LookRotation(lookDir);
+            CharaterTrans.rotation = curRotation;
+        }
 
         if (timer > AttackAnimThrow)
         {
@@ -161,10 +180,12 @@ public class Player : CharacterBase, IHit, IDataHandler
     }
     private void Die(CharacterBase bulletOwner)
     {
+        moveFlag = false;
+        attackFlag = false;
+
         isDead = true;
         ChangeAnimation(ConstValues.ANIM_TRIGGER_DEAD);
         CharacterCollider.enabled = false;
-        NavMeshAgent.enabled = false; //NOTE: set false to prevent a frame delay when set back to default position for new level in SetPLaying method 
 
         StartCoroutine(DelayDieHandle(bulletOwner));
     }
@@ -219,13 +240,17 @@ public class Player : CharacterBase, IHit, IDataHandler
         AttackRangeDisplay.SetActive(false);
         AttackRange = ConstValues.VALUE_BASE_ATTACK_RANGE;
         AttackRangeDisplayTrans.localScale = Vector3.one * AttackRange;
+        AttackPosOffset = ConstValues.VALUE_DEFAULT_ATTACK_POS_OFFSET;
         CharaterTrans.position = Vector3.zero;
         CharaterTrans.rotation = Quaternion.Euler(0, 180f, 0);
     }
     private void SetUpPLayerPlaying()
     {
-        CharaterTrans.position = Vector3.zero;
-        CharaterTrans.rotation = Quaternion.Euler(0, 180f, 0);
+        moveFlag = false;
+        attackFlag = false;
+
+        // CharaterTrans.position = Vector3.zero;  // ???
+        // CharaterTrans.rotation = Quaternion.Euler(0, 180f, 0); // ???
         AttackRangeDisplay.SetActive(true);
         NavMeshAgent.enabled = true; //NOTE: set back just that
     }
@@ -262,7 +287,7 @@ public class Player : CharacterBase, IHit, IDataHandler
             CameraManager.Instance.ZoomOutCamera();
             AudioManager.Instance.MakeVibration();
 
-            moveSpeed = (1 + CharacterLevel * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO) * defaultMoveSpeed;
+            moveSpeed = (1 + (CharacterLevel - 1) * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO) * defaultMoveSpeed;
             currentUIDisplay?.MoveUI();
 
             OnPlayerSizeUp?.Invoke(this);

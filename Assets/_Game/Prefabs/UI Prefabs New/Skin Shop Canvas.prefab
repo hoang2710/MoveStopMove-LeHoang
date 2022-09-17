@@ -8486,7 +8486,7 @@ MonoBehaviour:
   - {fileID: 9032420295455118342}
   ButtonOnDeselectColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
   ButtonOnSelectColor: {r: 0, g: 0, b: 0, a: 0}
-  IconOnDeselectColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 0.4509804}
+  IconOnDeselectColor: {r: 0.44313726, g: 0.4627451, b: 0.5176471, a: 1}
   BottomLockStateObj: {fileID: 9193730079244799619}
   ItemCostText: {fileID: 6196867747621923343}
   ItemCostSubText: {fileID: 5015221179942370178}
@@ -9297,7 +9297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  m_Color: {r: 0.44313726, g: 0.4627451, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9372,7 +9372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  m_Color: {r: 0.44313726, g: 0.4627451, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9525,7 +9525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  m_Color: {r: 0.44313726, g: 0.4627451, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

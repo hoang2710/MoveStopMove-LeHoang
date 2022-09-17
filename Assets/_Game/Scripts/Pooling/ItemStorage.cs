@@ -79,7 +79,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
     private void Start()
     {
         ConvertSO();
-        StartCoroutine(DataToDictionary());
+        DataToDictionary();
         StartCoroutine(InitPool());
     }
     private void ConvertSO()
@@ -94,38 +94,28 @@ public class ItemStorage : SingletonMono<ItemStorage>
         botNames = BotDataSO.BotNames;
         obstacleMaterial = ObstacleDataSO.ObstacleMaterials;
     }
-    private IEnumerator DataToDictionary()
+    private void DataToDictionary()
     {
         foreach (var item in weaponTypeDatas)
         {
             weaponItems.Add(item.WeaponTag, item.WeaponPrefab);
         }
-        yield return null;
-
         foreach (var item in weaponSkinDatas)
         {
             weaponSkins.Add(item.WeaponSkinTag, item.WeaponSkinMaterial);
         }
-        yield return null;
-
         foreach (var item in pantDatas)
         {
             pantSkins.Add(item.PantSkinTag, item.PantMaterial);
         }
-        yield return null;
-
         foreach (var item in hatDatas)
         {
             hatItems.Add(item.HatTag, item.HatPrefabs);
         }
-        yield return null;
-
         foreach (var item in shieldDatas)
         {
             shieldItems.Add(item.ShieldTag, item.ShieldPrefabs);
         }
-        yield return null;
-
         foreach (var item in colorDatas)
         {
             customColors.Add(item.CustomColor, item.Color);

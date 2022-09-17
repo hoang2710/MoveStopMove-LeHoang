@@ -15,7 +15,7 @@ public class CharacterBase : MonoBehaviour
     public string CharacterName { get; protected set; }
     public int Score { get; protected set; }
     public int KillScore { get; protected set; }
-    public int CharacterLevel { get; protected set; } = 1;
+    public int CharacterLevel { get; protected set; }
     protected int defaultKillScore = 1;
     protected float scoreSlope = 1.2f;
     protected float killScoreMultipler = 1.05f;
@@ -31,11 +31,11 @@ public class CharacterBase : MonoBehaviour
     protected string curAnim = ConstValues.ANIM_TRIGGER_IDLE;
 
     public Transform AttackPos;
-    [HideInInspector] public Transform AttackTargetTrans;
-    [HideInInspector] public CharacterBase AttackTarget;
-    [HideInInspector] public float AttackPosOffset = 0.95f; //NOTE: distance from attack pos to character center, use for calculate weapon life time
+    public Transform AttackTargetTrans { get; protected set; }
+    public CharacterBase AttackTarget { get; protected set; }
+    public float AttackPosOffset { get; protected set; } = 0.8f; //NOTE: distance from attack pos to character center, use for calculate weapon life time
     protected float minorOffset = 1.1f; //NOTE: prevent targetmark blinking due to detect and un-detect at the same time
-    protected float detectOffSetDistance = 2f;
+    protected float detectOffSetDistance = 0.2f;
 
     public bool IsAlive { get; protected set; }
     protected bool isPlayer; //NOTE: use for ui display. moveUI
@@ -235,11 +235,12 @@ public class CharacterBase : MonoBehaviour
 
         return false;
     }
-    public void SizeUpCharacter(int sizeUpTime, bool isEffectOn = true)
+    public void SizeUpCharacter(int characterLevel, bool isEffectOn = true)
     {
+        int sizeUpTime = characterLevel - 1;
         CharaterTrans.localScale = (1 + sizeUpTime * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO) * Vector3.one;
         AttackRange = (1 + sizeUpTime * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO) * ConstValues.VALUE_BASE_ATTACK_RANGE;
-        AttackPosOffset = 1 + sizeUpTime * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO;
+        AttackPosOffset = (1 + sizeUpTime * ConstValues.VALUE_CHARACTER_UP_SIZE_RATIO) * ConstValues.VALUE_DEFAULT_ATTACK_POS_OFFSET;
 
         if (isEffectOn)
         {

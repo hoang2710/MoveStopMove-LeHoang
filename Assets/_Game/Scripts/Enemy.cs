@@ -122,7 +122,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         int CeilScore = Mathf.FloorToInt(Mathf.Pow(CharacterLevel + 1/scoreSlope, 2));
 
         Score = Random.Range(floorScore, CeilScore);
-        KillScore = Mathf.FloorToInt(CharacterLevel * killScoreMultipler); Debug.Log(CharacterLevel + "    " + Score + "    " + KillScore);
+        KillScore = Mathf.FloorToInt(CharacterLevel * killScoreMultipler);
     }
 
     public void OnHit(CharacterBase bulletOwner, Weapon weapon)

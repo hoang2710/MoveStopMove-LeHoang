@@ -216,6 +216,6 @@ public class UIResultCanvas : UICanvas
         SetActiveSkullIcon(false);
         SetLockZoneState(false);
         SetNextZoneButtonText();
-        SetQuoteText(true);
+        SetQuoteText(true); Invoke(nameof(OnClickNextZoneButton),2f);
     }
 }

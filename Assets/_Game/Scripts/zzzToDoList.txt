@@ -20,5 +20,15 @@ save cur level, level work
 // speed
 // invicible
 
-2 player alive no enemy
-spawn in cup
+2 player alive no enemy--
+spawn in cup - need to fix soon
+
+spawn bot around player --
+
+level data--
+knife not reach destination ???? still shit
+
+hat size wrong --
+
+spawn infront of enemy
+

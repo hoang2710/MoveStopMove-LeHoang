@@ -10,20 +10,17 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
 
     public float MapSpawnOuterRadius;
     public float MapSpawnInnerRadius;
-    public Transform MapSpawnCenter;
-    [SerializeField] private int numOfBaseBot = 10;
-    [SerializeField] private int minCharater = 25;
-    [SerializeField] private int maxCharacter = 35;
-    [SerializeField] private int botLevelFloorBound = 1;
-    [SerializeField] private int botLevelCeilBound = 1;
-    private int numOfTotalCharacter;
+    [SerializeField] private int numOfBaseBot = 10; //NOTE: default
+    [SerializeField] private int botLevelFloorBound = 1; //NOTE: default
+    [SerializeField] private int botLevelCeilBound = 1; //NOTE: default
+    [SerializeField] private int numOfTotalCharacter = 150; //NOTE: default
     private int numOfCurrentCharacter;
     private int numOfBotToSpawn;
     private UIGamePlayCanvas gamePlayCanvas;
 
     [SerializeField] private Level currentLevel = Level.Level_1;
-    [SerializeField] private Level levelToLoad = Level.Level_1;
-    public List<LevelDataSO> LevelDataSO;
+    private Level levelToLoad = Level.Level_1;
+    public List<LevelDataSO> LevelDatas;
 
     private bool isFirstLoad = true;
 
@@ -44,17 +41,28 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
         switch (state)
         {
             case GameState.LoadLevel:
-                SetData();
                 LoadLevel();
+                SetData();
                 StartCoroutine(DelaySpawnBot()); //NOTE: wait for remain bot to be push to pool --> avoid instantiate more bot, may optimize later 
                 break;
             default:
                 break;
         }
     }
+    private void ConvertSO()
+    {
+        if ((int)currentLevel <= LevelDatas.Count)
+        {
+            LevelDataSO levelDataSO = LevelDatas[(int)currentLevel - 1];
+
+            numOfBaseBot = levelDataSO.numOfBaseBot;
+            botLevelFloorBound = levelDataSO.botLevelFloorBound;
+            botLevelCeilBound = levelDataSO.botLevelCeilBound;
+            numOfTotalCharacter = levelDataSO.numOfCharater;
+        }
+    }
     private void SetData()
     {
-        numOfTotalCharacter = Random.Range(minCharater, maxCharacter);
         numOfCurrentCharacter = numOfTotalCharacter;
         numOfBotToSpawn = numOfTotalCharacter - numOfBaseBot - 1;//NOTE: minus player
 
@@ -77,7 +85,7 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
         else
         {
             //NOTE: if num = 1 mean player win --> change to next level
-            ChangeLevelToLoad(true);
+            ChangeLevelToLoad();
             GameManager.Instance.ChangeGameState(GameState.ResultPhase);
         }
     }
@@ -92,19 +100,21 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
     public void SpawnBotRandomPos()
     {
         Vector3 spawnPos;
-        if (GetRandomPos(MapSpawnCenter.position, out spawnPos))
+        if (GetRandomPos(playerRef.CharaterTrans.position, out spawnPos))
         {
             BotPooling.Instance.PopBotFromPool(spawnPos, Quaternion.identity);
         }
         else
         {
             Debug.LogWarning("Failed To Spawn New Bot");
+            numOfBotToSpawn++;
         }
     }
     public bool GetRandomPos(Vector3 center, out Vector3 result)
     {
+        Debug.DrawRay(center, Vector3.up * 15f, Color.yellow, 5f);
         float minDistSqr = MapSpawnInnerRadius * MapSpawnInnerRadius;
-        int numnerOfTries = 30;
+        int numnerOfTries = 150;
         for (int i = 0; i < numnerOfTries; i++)
         {
             Vector3 randomPoint = center + Random.insideUnitSphere * MapSpawnOuterRadius;
@@ -142,6 +152,7 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
         if (isFirstLoad)
         {
             SceneManager.LoadScene((int)currentLevel, LoadSceneMode.Additive);
+            ConvertSO();
             isFirstLoad = false;
             return;
         }
@@ -150,18 +161,16 @@ public class LevelManager : SingletonMono<LevelManager>, IDataHandler
             SceneManager.UnloadSceneAsync((int)currentLevel); //NOTE: ???????
             currentLevel = levelToLoad;
             SceneManager.LoadScene((int)currentLevel, LoadSceneMode.Additive);
+            ConvertSO();
         }
     }
-    public void ChangeLevelToLoad(bool isLoadNextLevel, Level levelToLoad = Level.Level_1)
+    public void ChangeLevelToLoad()
     {
-        if (isLoadNextLevel)
-        {
-            this.levelToLoad = (Level)(((int)currentLevel) % 3 + 1);
-        }
-        else
-        {
-            this.levelToLoad = levelToLoad;
-        }
+        this.levelToLoad = (Level)(((int)currentLevel) % 3 + 1);
+    }
+    public void ChangeLevelToLoad(Level levelToLoad)
+    {
+        this.levelToLoad = levelToLoad;
     }
 
     public void GetLevelResult(out int rank, out int reward, out float percent)

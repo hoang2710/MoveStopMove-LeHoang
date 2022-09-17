@@ -1673,9 +1673,6 @@ MonoBehaviour:
   CharacterCollider: {fileID: 3294892474641139643}
   Anim: {fileID: 453025387669463118}
   AttackPos: {fileID: 3294892475848216417}
-  AttackTargetTrans: {fileID: 0}
-  AttackTarget: {fileID: 0}
-  AttackPosOffset: 1
   WeaponPlaceHolder: {fileID: 3294892474264917845}
   WeaponPlaceHolderTrans: {fileID: 3294892474264917844}
   HatPLaceHolderTrans: {fileID: 8894360842374643671}
@@ -1714,8 +1711,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 6, z: 0.5}
-  m_Center: {x: 0, y: 3, z: 0}
+  m_Size: {x: 0.5, y: 2.2, z: 0.5}
+  m_Center: {x: 0, y: 1.1, z: 0}
 --- !u!195 &3294892474641139268
 NavMeshAgent:
   m_ObjectHideFlags: 0
