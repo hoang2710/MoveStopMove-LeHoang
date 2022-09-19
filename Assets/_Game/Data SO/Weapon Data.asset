@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponDatas:
   - WeaponTag: 0
-    WeaponPrefab: {fileID: 3549616032071664881, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
+    WeaponPrefab: {fileID: -6654169746174933108, guid: 4c43d1554edabf0488303a66937758b1, type: 3}
     PoolSize: 10
   - WeaponTag: 1
-    WeaponPrefab: {fileID: 7781565161665100080, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
+    WeaponPrefab: {fileID: 8362357097267058059, guid: 7250f3e5e98457349b94aa1f32493bb0, type: 3}
     PoolSize: 11
   - WeaponTag: 2
-    WeaponPrefab: {fileID: 3269093494425163855, guid: 3556972fde084a946b59159fd5146574, type: 3}
+    WeaponPrefab: {fileID: -5840765899892526846, guid: 3556972fde084a946b59159fd5146574, type: 3}
     PoolSize: 12
   - WeaponTag: 3
-    WeaponPrefab: {fileID: 6488665240584564782, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
+    WeaponPrefab: {fileID: 7596065641767412479, guid: a3677185c2c7dc048b0aff4c9e3f7a5d, type: 3}
     PoolSize: 8
   WeaponSkinDatas:
   - WeaponSkinTag: 0

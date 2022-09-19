@@ -56,7 +56,7 @@ public class Weapon : MonoBehaviour, IPooledWeapon
         }
         else
         {
-            ItemStorage.Instance.PushWeaponToPool(WeaponTag, WeaponObject);
+            ItemStorage.Instance.PushWeaponToPool(this);
         }
     }
     public void SetUpHandWeapon(CharacterBase owner)

@@ -131,7 +131,7 @@ public class Enemy : CharacterBase, IPoolCharacter, IHit
         IsAlive = false;
         CharacterCollider.enabled = false;
 
-        ItemStorage.Instance.PushWeaponToPool(weapon.WeaponTag, weapon.WeaponObject);
+        ItemStorage.Instance.PushWeaponToPool(weapon);
 
         ParticlePooling.Instance.PopParticleFromPool(ParticleType.HitCharacter,
                                                     CharaterTrans.position,

@@ -74,6 +74,6 @@ public class Obstacle : MonoBehaviour, IHit
     public IEnumerator FreezeWeapon(float duration, Weapon weapon)
     {
         yield return new WaitForSeconds(duration);
-        ItemStorage.Instance.PushWeaponToPool(weapon.WeaponTag, weapon.WeaponObject);
+        ItemStorage.Instance.PushWeaponToPool(weapon);
     }
 }

@@ -583,6 +583,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: GameData.json
+  UnlockOneTimeHat: 
+  UnlockOneTimePantSkin: 
+  UnlockOneTimeShield: 
+  UnlockOneTimeSkinSet: 
 --- !u!4 &91505139
 Transform:
   m_ObjectHideFlags: 0
@@ -1836,7 +1840,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226000545}
-  m_LocalRotation: {x: 0.23712535, y: 0.000000028952336, z: -0.0000000070668866, w: 0.9714791}
+  m_LocalRotation: {x: 0.23712537, y: 1.5622612e-15, z: -4.6824156e-16, w: 0.97147906}
   m_LocalPosition: {x: -540, y: -938.57, z: -13.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

@@ -40,12 +40,10 @@ public class TripleShotWeapon : Weapon
     private void Throwwwww(Quaternion rotation, WeaponSkinType weaponSkinTag)
     {
         Vector3 moveDir = rotation * Vector3.forward;
-        TripleShotWeapon weapon;
-        ItemStorage.Instance.PopWeaponFromPool(WeaponTag,
-                                               weaponSkinTag,
-                                               WeaponTrans.position,
-                                               rotation * weaponThrowRotationOffset,
-                                               out weapon);
+        TripleShotWeapon weapon = ItemStorage.Instance.PopWeaponFromPool<TripleShotWeapon>(WeaponTag,
+                                                                                           weaponSkinTag,
+                                                                                           WeaponTrans.position,
+                                                                                           rotation * weaponThrowRotationOffset);
 
         weapon?.CloneSetup(); //NOTE: NEver put this line under setupThrowWeapon, may optimize later or not
         weapon?.SetUpThrowWeapon(moveDir, bulletOwner);

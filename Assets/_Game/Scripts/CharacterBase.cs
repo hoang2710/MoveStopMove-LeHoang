@@ -51,8 +51,7 @@ public class CharacterBase : MonoBehaviour
     public Transform BackPlaceHolderTrans;
     public Transform TailPlaceHolderTrans;
     protected GameObject handWeapon;
-    protected Transform handWeaponTrans;
-    protected WeaponType currentHandWeaponTag;
+    protected Weapon currentHandWeapon;
     protected GameObject hatObject;
     protected HatType currentHatTag;
     protected GameObject shieldObject;
@@ -149,31 +148,27 @@ public class CharacterBase : MonoBehaviour
         PlayAudioWithCondition(AudioType.ThrowWeapon);
 
         Vector3 moveDir = curRotation * Vector3.forward;
-        Weapon weapon;
-        ItemStorage.Instance.PopWeaponFromPool(WeaponTag,
-                                               WeaponSkinTag,
-                                               AttackPos.position,
-                                               curRotation * ThrowWeaponRotation,
-                                               out weapon);
-        weapon?.SetUpThrowWeapon(moveDir, this);
+        Weapon weapon = ItemStorage.Instance.PopWeaponFromPool<Weapon>(WeaponTag,
+                                                                       WeaponSkinTag,
+                                                                       AttackPos.position,
+                                                                       curRotation * ThrowWeaponRotation);
+        weapon.SetUpThrowWeapon(moveDir, this);
     }
     public void SetUpHandWeapon()
     {
-        if (handWeapon != null)
+        if (currentHandWeapon != null)
         {
-            ItemStorage.Instance.PushWeaponToPool(currentHandWeaponTag, handWeapon, handWeaponTrans);
+            currentHandWeapon.WeaponTrans.SetParent(null, false);
+            ItemStorage.Instance.PushWeaponToPool(currentHandWeapon);
         }
 
-        currentHandWeaponTag = WeaponTag;
-        Weapon weapon;
-        handWeapon = ItemStorage.Instance.PopWeaponFromPool(WeaponTag,
-                                                            WeaponSkinTag,
-                                                            WeaponPlaceHolderTrans,
-                                                            Vector3.zero,
-                                                            Quaternion.identity,
-                                                            out weapon);
-        weapon?.SetUpHandWeapon(this);
-        handWeaponTrans = weapon?.WeaponTrans;
+        Weapon weapon = ItemStorage.Instance.PopWeaponFromPool<Weapon>(WeaponTag,
+                                                                       WeaponSkinTag,
+                                                                       Vector3.zero,
+                                                                       Quaternion.identity);
+        weapon.WeaponTrans.SetParent(WeaponPlaceHolderTrans, false);
+        currentHandWeapon = weapon;
+        weapon.SetUpHandWeapon(this);
     }
     public void SetUpHat()
     {

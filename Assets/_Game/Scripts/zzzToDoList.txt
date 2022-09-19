@@ -32,3 +32,4 @@ hat size wrong --
 
 spawn infront of enemy
 
+fix spawn weapon

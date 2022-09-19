@@ -212,7 +212,7 @@ public class Player : CharacterBase, IHit, IDataHandler
     {
         Die(bulletOwner);
 
-        ItemStorage.Instance.PushWeaponToPool(weapon.WeaponTag, weapon.WeaponObject);
+        ItemStorage.Instance.PushWeaponToPool(weapon);
 
         //NOTE: temp solution for random enum option
         int ran = Random.Range((int)AudioType.Die1, (int)AudioType.Die4 + 1);

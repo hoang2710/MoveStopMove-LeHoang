@@ -8,7 +8,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
     public class WeaponTypeData
     {
         public WeaponType WeaponTag;
-        public GameObject WeaponPrefab;
+        public Weapon WeaponPrefab;
         public int PoolSize;
     }
     [System.Serializable]
@@ -79,7 +79,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
     private List<string> botNames;
     private List<Material> obstacleMaterial; //NOTE: assign trans material on second element 
 
-    private Dictionary<WeaponType, GameObject> weaponItems = new Dictionary<WeaponType, GameObject>();
+    private Dictionary<WeaponType, Weapon> weaponItems = new Dictionary<WeaponType, Weapon>();
     private Dictionary<WeaponSkinType, Material> weaponSkins = new Dictionary<WeaponSkinType, Material>();
     private Dictionary<PantSkinType, Material> pantSkins = new Dictionary<PantSkinType, Material>();
     private Dictionary<HatType, GameObject> hatItems = new Dictionary<HatType, GameObject>();
@@ -90,7 +90,7 @@ public class ItemStorage : SingletonMono<ItemStorage>
     private Dictionary<SkinSet, SkinSetDataSO> skinSets = new Dictionary<SkinSet, SkinSetDataSO>();
 
     //Pool of weapon
-    private Dictionary<WeaponType, Stack<GameObject>> weaponPool = new Dictionary<WeaponType, Stack<GameObject>>();
+    private Dictionary<WeaponType, Stack<Weapon>> weaponPool = new Dictionary<WeaponType, Stack<Weapon>>();
     //Pool of Hat
     private Dictionary<HatType, Stack<GameObject>> hatPool = new Dictionary<HatType, Stack<GameObject>>();
     //Pool of Shield
@@ -159,13 +159,13 @@ public class ItemStorage : SingletonMono<ItemStorage>
     {
         foreach (var item in weaponTypeDatas)
         {
-            Stack<GameObject> tmpStack = new Stack<GameObject>();
+            Stack<Weapon> tmpStack = new Stack<Weapon>();
             for (int i = 0; i < item.PoolSize; i++)
             {
-                GameObject tmpObj = Instantiate(item.WeaponPrefab);
-                tmpStack.Push(tmpObj);
+                Weapon tmp = Instantiate(item.WeaponPrefab);
+                tmpStack.Push(tmp);
 
-                tmpObj.SetActive(false);
+                tmp.WeaponObject.SetActive(false);
             }
 
             weaponPool.Add(item.WeaponTag, tmpStack);
@@ -201,56 +201,32 @@ public class ItemStorage : SingletonMono<ItemStorage>
             shieldPool.Add(item.ShieldTag, tmpStack);
         }
     }
-    public GameObject PopWeaponFromPool<T>(WeaponType weaponTag, WeaponSkinType skinTag, Vector3 position, Quaternion rotation, out T weapon) where T : Weapon
+    public T PopWeaponFromPool<T>(WeaponType weaponTag, WeaponSkinType skinTag, Vector3 position, Quaternion rotation) where T : Weapon
     {
-        GameObject obj = CheckIfHaveWeaponLeftInPool(weaponTag);
-        Transform objTrans = obj.transform;
-        weapon = CacheWeapon.Get(obj) as T;
+        Weapon weapon = CheckIfHaveWeaponLeftInPool(weaponTag);
+        Transform objTrans = weapon.WeaponTrans;
+        GameObject obj = weapon.WeaponObject;
 
         obj.SetActive(true);
         objTrans.position = position;
         objTrans.rotation = rotation;
 
-        IPooledWeapon pooledWeapon = CacheIpooledWeapon.Get(obj);
+        IPooledWeapon pooledWeapon = CacheIpooledWeapon.Get(weapon);
         pooledWeapon?.OnPopFromPool(skinTag);
 
-        return obj;
-    }
-    public GameObject PopWeaponFromPool<T>(WeaponType weaponTag, WeaponSkinType skinTag, Transform parentTrans, Vector3 localPosition, Quaternion localRotation, out T weapon) where T : Weapon
-    {
-        GameObject obj = CheckIfHaveWeaponLeftInPool(weaponTag);
-        Transform objTrans = obj.transform;
-        weapon = CacheWeapon.Get(obj) as T;
-
-        obj.SetActive(true);
-        objTrans.SetParent(parentTrans);
-        objTrans.localPosition = localPosition;
-        objTrans.localRotation = localRotation;
-
-        IPooledWeapon pooledWeapon = CacheIpooledWeapon.Get(obj);
-        pooledWeapon?.OnPopFromPool(skinTag);
-
-        return obj;
+        return weapon as T;
     }
 
-    public void PushWeaponToPool(WeaponType weaponTag, GameObject obj)
+    public void PushWeaponToPool(Weapon weapon)
     {
-        weaponPool[weaponTag].Push(obj);
+        weaponPool[weapon.WeaponTag].Push(weapon);
 
-        IPooledWeapon pooledWeapon = CacheIpooledWeapon.Get(obj);
+        IPooledWeapon pooledWeapon = CacheIpooledWeapon.Get(weapon);
         pooledWeapon?.OnPushToPool();
 
-        obj.SetActive(false);
+        weapon.WeaponObject.SetActive(false);
     }
-    /// <summary>
-    /// Use to push onHand Weapon to pool
-    /// </summary>
-    public void PushWeaponToPool(WeaponType weaponTag, GameObject obj, Transform objTrans)
-    {
-        objTrans.SetParent(null);
-        PushWeaponToPool(weaponTag, obj);
-    }
-    private GameObject CheckIfHaveWeaponLeftInPool(WeaponType tag)
+    private Weapon CheckIfHaveWeaponLeftInPool(WeaponType tag)
     {
         if (weaponPool[tag].Count > 0)
         {
@@ -329,10 +305,6 @@ public class ItemStorage : SingletonMono<ItemStorage>
         return skinSets[tag];
     }
 
-    public GameObject GetWeaponType(WeaponType tag)
-    {
-        return weaponItems[tag];
-    }
     public Material GetWeaponSkin(WeaponSkinType tag)
     {
         return weaponSkins[tag];
