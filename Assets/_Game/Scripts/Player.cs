@@ -263,8 +263,6 @@ public class Player : CharacterBase, IHit, IDataHandler
         moveFlag = false;
         attackFlag = false;
 
-        // CharaterTrans.position = Vector3.zero;  // ???
-        // CharaterTrans.rotation = Quaternion.Euler(0, 180f, 0); // ???
         AttackRangeDisplay.SetActive(true);
         NavMeshAgent.enabled = true; //NOTE: set back just that
     }

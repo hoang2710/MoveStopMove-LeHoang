@@ -21,7 +21,7 @@ public class ConstValues
     public const float VALUE_PERCENTAGE_OF_BOT_HAVE_SHIELD = 43f;
     public const float VALUE_BASE_ATTACK_RANGE = 6f;
     public const float VALUE_BASE_ATTACK_RATE = 2f;
-    public const float VALUE_DEFAULT_ATTACK_POS_OFFSET = 0.92f;
+    public const float VALUE_DEFAULT_ATTACK_POS_OFFSET = 0.85f;
     public const float VALUE_WEAPON_DEFAULT_LIFE_TIME = 2f;
     public const float WALUE_WEAPON_DEFAULT_FLY_SPEED = 8f;
     public const float VALUE_PLAYER_ATTACK_ANIM_THROW_TIME_POINT = 0.24f;
