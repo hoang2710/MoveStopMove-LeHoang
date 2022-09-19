@@ -126,6 +126,20 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
     }
     public void SetUpUI(string name, Color color, bool isPlayer, int score)
     {
+        if (isPlayer)
+        {
+            currentChar.IsAudioPlayable = true;
+
+            Player playerRef = Player.PlayerGlobalReference;
+            if (playerRef.SkinSetTag == SkinSet.Set_4)
+            {
+                color = ConstValues.VALUE_UI_COLOR_FOR_SKIN_SET_4;
+            }
+            if (playerRef.SkinSetTag == SkinSet.Set_5)
+            {
+                color = ConstValues.VALUE_UI_COLOR_FOR_SKIN_SET_5;
+            }
+        }
         ScoreText.text = score.ToString();
         NameText.text = name;
         ScoreImage.color = color;
@@ -134,10 +148,6 @@ public class CharacterInfoDIsplay : MonoBehaviour, IPoolCharacterUI
         enableFlag = CheckOutScreen();
         this.isPlayer = isPlayer;
 
-        if (isPlayer)
-        {
-            currentChar.IsAudioPlayable = true;
-        }
 
         MoveUI();
     }
