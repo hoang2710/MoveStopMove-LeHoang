@@ -27,6 +27,7 @@ public class UISkinShopCanvas : UICanvas
     public RectTransform SelectedFrame; //NOTE: display current selected item
     public RectTransform EquipedText; //NOTE: display currnet equiped item
     public GameObject EquipedTextObj; //NOTE: use for disable text 
+    public GameObject UnlockOneTimeTextObj;
 
     [SerializeField] private ButtonData currentHatButtonData; //NOTE: assign first item in hat panel
     [SerializeField] private ButtonData currentPantButtonData; //NOTE: assign first item in pant panel
@@ -261,10 +262,45 @@ public class UISkinShopCanvas : UICanvas
 
         SetCoinValue(DataManager.Instance.Coin);
     }
+    public void OnClickUnlockOneTimeButton()
+    {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+
+        switch ((int)currentPanel)
+        {
+            case 0:
+                DataManager.Instance.UnlockOneTimeHat.Add(currentHatButtonData.HatTag);
+                DataManager.Instance.HatUnlockState[currentHatButtonData.HatTag] = true;
+                ItemUnlockHandle(currentHatButtonData);
+                currentHatButtonData.LockIcon.SetActive(false);
+                break;
+            case 1:
+                DataManager.Instance.UnlockOneTimePantSkin.Add(currentPantButtonData.PantSkinTag);
+                DataManager.Instance.PantSkinUnlockState[currentPantButtonData.PantSkinTag] = true;
+                ItemUnlockHandle(currentPantButtonData);
+                currentPantButtonData.LockIcon.SetActive(false);
+                break;
+            case 2:
+                DataManager.Instance.UnlockOneTimeShield.Add(curretnShieldButtonData.ShieldTag);
+                DataManager.Instance.ShieldUnlockState[curretnShieldButtonData.ShieldTag] = true;
+                ItemUnlockHandle(curretnShieldButtonData);
+                curretnShieldButtonData.LockIcon.SetActive(false);
+                break;
+            case 3:
+                DataManager.Instance.UnlockOneTimeSkinSet.Add(currentSkinSetButtonData.SkinSetDataSO.SkinSet);
+                DataManager.Instance.SkinSetUnlockState[currentSkinSetButtonData.SkinSetDataSO.SkinSet] = true;
+                ItemUnlockHandle(currentSkinSetButtonData);
+                currentSkinSetButtonData.LockIcon.SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
     private void ItemLockHandle(ButtonData buttonData)
     {
         BottomLockStateObj.SetActive(true);
         BottomUnlockStateObj.SetActive(false);
+        UnlockOneTimeTextObj.SetActive(false);
 
         SetItemCost(buttonData.ItemCost);
 
@@ -281,20 +317,25 @@ public class UISkinShopCanvas : UICanvas
     {
         BottomLockStateObj.SetActive(false);
         BottomUnlockStateObj.SetActive(true);
+        UnlockOneTimeTextObj.SetActive(false);
 
         switch ((int)currentPanel)
         {
             case 0:
                 EquipHandler(buttonData.HatTag == finalHatTag);
+                SetUnlockOneTimeTextState(DataManager.Instance.UnlockOneTimeHat.Contains(buttonData.HatTag));
                 break;
             case 1:
                 EquipHandler(buttonData.PantSkinTag == finalPantSkinTag);
+                SetUnlockOneTimeTextState(DataManager.Instance.UnlockOneTimePantSkin.Contains(buttonData.PantSkinTag));
                 break;
             case 2:
                 EquipHandler(buttonData.ShieldTag == finalShieldTag);
+                SetUnlockOneTimeTextState(DataManager.Instance.UnlockOneTimeShield.Contains(buttonData.ShieldTag));
                 break;
             case 3:
                 EquipHandler(buttonData.SkinSetDataSO.SkinSet == finalSkinSet);
+                SetUnlockOneTimeTextState(DataManager.Instance.UnlockOneTimeSkinSet.Contains(buttonData.SkinSetDataSO.SkinSet));
                 break;
             default:
                 break;
@@ -348,6 +389,10 @@ public class UISkinShopCanvas : UICanvas
             EquipButtonObj.SetActive(false);
             UnequipButtonObj.SetActive(true);
         }
+    }
+    private void SetUnlockOneTimeTextState(bool isOn)
+    {
+        UnlockOneTimeTextObj.SetActive(isOn);
     }
     private void SetEquipedMark(ButtonData buttonData)
     {

@@ -13,9 +13,4 @@ public class SkinSetDataSO : ScriptableObject
     public PantSkinType PantSkinTag;
     public BackItemType BackItemTag;
     public TailType TailTag;
-    public Material defaultCharSkin;
-
-    
-
-  
 }

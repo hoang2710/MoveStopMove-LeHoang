@@ -151,6 +151,52 @@ public class UIMainMenuCanvas : UICanvas
 
         PlayerName.text = playerRef.CharacterName;
 
+        if (GameManager.Instance.PrevGameState == GameState.ResultPhase)
+        {
+            CheckUnlockOneTimeItem();
+        }
+
         isLoadUI = false; //NOTE: prevent audio play on load UI
+    }
+
+    private void CheckUnlockOneTimeItem()
+    {
+        HatType hatTag = playerRef.HatTag;
+        PantSkinType pantSkinTag = playerRef.PantSkinTag;
+        ShieldType shieldTag = playerRef.ShieldTag;
+        SkinSet skinSetTag = playerRef.SkinSetTag;
+
+        if (DataManager.Instance.UnlockOneTimeHat.Contains(hatTag))
+        {
+            DataManager.Instance.HatUnlockState[hatTag] = false;
+            DataManager.Instance.UnlockOneTimeHat.Remove(hatTag);
+
+            playerRef.SetHat(HatType.None);
+            playerRef.SetUpHat();
+        }
+        if (DataManager.Instance.UnlockOneTimePantSkin.Contains(pantSkinTag))
+        {
+            DataManager.Instance.PantSkinUnlockState[pantSkinTag] = false;
+            DataManager.Instance.UnlockOneTimePantSkin.Remove(pantSkinTag);
+
+            playerRef.SetPantSkin(PantSkinType.Invisible);
+            playerRef.SetUpPantSkin();
+        }
+        if (DataManager.Instance.UnlockOneTimeShield.Contains(shieldTag))
+        {
+            DataManager.Instance.ShieldUnlockState[shieldTag] = false;
+            DataManager.Instance.UnlockOneTimeShield.Remove(shieldTag);
+
+            playerRef.SetShield(ShieldType.None);
+            playerRef.SetUpShield();
+        }
+        if (DataManager.Instance.UnlockOneTimeSkinSet.Contains(skinSetTag))
+        {
+            DataManager.Instance.SkinSetUnlockState[skinSetTag] = false;
+            DataManager.Instance.UnlockOneTimeSkinSet.Remove(skinSetTag);
+
+            playerRef.SetSkinSet(SkinSet.None);
+            playerRef.SetupSkinSet();
+        }
     }
 }

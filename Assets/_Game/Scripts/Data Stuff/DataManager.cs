@@ -21,6 +21,10 @@ public class DataManager : SingletonMono<DataManager>
     public Dictionary<HatType, bool> HatUnlockState;
     public Dictionary<ShieldType, bool> ShieldUnlockState;
     public Dictionary<SkinSet, bool> SkinSetUnlockState;
+    public List<HatType> UnlockOneTimeHat;
+    public List<PantSkinType> UnlockOneTimePantSkin;
+    public List<ShieldType> UnlockOneTimeShield;
+    public List<SkinSet> UnlockOneTimeSkinSet;
     public Dictionary<WeaponType, List<CustomColor>> CustomColorDict;
     public int HighestRank { get; set; }
 
@@ -94,6 +98,11 @@ public class DataManager : SingletonMono<DataManager>
         ShieldUnlockState = gameData.ShieldUnlockState;
         SkinSetUnlockState = gameData.SkinSetUnlockState;
         CustomColorDict = gameData.CustomColorDict;
+
+        UnlockOneTimeHat = gameData.UnlockOneTimeHat;
+        UnlockOneTimePantSkin = gameData.UnlockOneTimePantSkin;
+        UnlockOneTimeShield = gameData.UnlockOneTimeShield;
+        UnlockOneTimeSkinSet = gameData.UnlockOneTimeSkinSet;
     }
     private void SaveGlobalData(GameData gameData)
     {

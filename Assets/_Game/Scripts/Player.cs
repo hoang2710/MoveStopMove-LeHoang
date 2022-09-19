@@ -338,7 +338,15 @@ public class Player : CharacterBase, IHit, IDataHandler
     }
     public void SetupSkinSet()
     {
-        DestroyEquipedBackAndTail();
+        if (SkinSetTag == SkinSet.None)
+        {
+            UnequipSkinSet();
+            return;
+        }
+        else
+        {
+            DestroyEquipedBackAndTail();
+        }
 
         SkinSetDataSO skinSet = ItemStorage.Instance.GetSkinSet(SkinSetTag);
 

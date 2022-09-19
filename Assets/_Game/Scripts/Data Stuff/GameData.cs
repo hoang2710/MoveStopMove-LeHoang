@@ -26,6 +26,10 @@ public class GameData
     public SerializableDictionary<HatType, bool> HatUnlockState;
     public SerializableDictionary<ShieldType, bool> ShieldUnlockState;
     public SerializableDictionary<SkinSet, bool> SkinSetUnlockState;
+    public List<HatType> UnlockOneTimeHat;
+    public List<PantSkinType> UnlockOneTimePantSkin;
+    public List<ShieldType> UnlockOneTimeShield;
+    public List<SkinSet> UnlockOneTimeSkinSet;
     public SerializableCustomColorDictionary<WeaponType, List<CustomColor>> CustomColorDict;
 
     public GameData()
@@ -52,6 +56,11 @@ public class GameData
         InitDictionaryData<HatType>(out HatUnlockState);
         InitDictionaryData<ShieldType>(out ShieldUnlockState);
         InitDictionaryData<SkinSet>(out SkinSetUnlockState);
+
+        UnlockOneTimeHat = new List<HatType>();
+        UnlockOneTimePantSkin = new List<PantSkinType>();
+        UnlockOneTimeShield = new List<ShieldType>();
+        UnlockOneTimeSkinSet = new List<SkinSet>();
 
         //NOTE: unlock some default item
         WeaponUnlockState[WeaponType.Axe] = true;
