@@ -225,8 +225,8 @@ public class Player : CharacterBase, IHit, IDataHandler
         {
             TargetMark.SetActive(true);
             TargetMarkSetActiveFlag = true;
+            TargetMarkTrans.SetParent(AttackTargetTrans, false);
             TargetMarkTrans.position = AttackTargetTrans.position;
-            TargetMarkTrans.SetParent(AttackTargetTrans);
         }
         else if (AttackTargetTrans == null && TargetMarkSetActiveFlag)
         {
@@ -270,6 +270,9 @@ public class Player : CharacterBase, IHit, IDataHandler
     }
     private void SetUpPlayerOnRevive()
     {
+        moveFlag = false;
+        attackFlag = false;
+
         isDead = false;
         isAttackable = false;
         isAttack = false;
