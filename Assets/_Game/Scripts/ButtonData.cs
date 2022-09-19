@@ -13,6 +13,7 @@ public class ButtonData : MonoBehaviour
     [HideInInspector] public PantSkinType PantSkinTag;
     [HideInInspector] public HatType HatTag;
     [HideInInspector] public ShieldType ShieldTag;
+    [HideInInspector] public SkinSetDataSO SkinSetDataSO;
     [HideInInspector] public int ItemCost;
     [HideInInspector] public bool IsUnlock;
     [HideInInspector] public PanelType PanelTag;
@@ -34,7 +35,8 @@ public enum ButtonType
     ShieldItem,
     SkinShopCategory,
     ColorItem,
-    ColorPartItem
+    ColorPartItem,
+    SkinSetItem
 }
 #if UNITY_EDITOR
 
@@ -46,6 +48,7 @@ public class ButtonDataGUI : Editor
     SerializedProperty PantSkinTag;
     SerializedProperty HatTag;
     SerializedProperty ShieldTag;
+    SerializedProperty SkinSetDataSO;
     SerializedProperty ItemCost;
     SerializedProperty IsUnlock;
     SerializedProperty PanelTag;
@@ -64,6 +67,7 @@ public class ButtonDataGUI : Editor
         PantSkinTag = serializedObject.FindProperty("PantSkinTag");
         HatTag = serializedObject.FindProperty("HatTag");
         ShieldTag = serializedObject.FindProperty("ShieldTag");
+        SkinSetDataSO = serializedObject.FindProperty("SkinSetDataSO");
         ItemCost = serializedObject.FindProperty("ItemCost");
         IsUnlock = serializedObject.FindProperty("IsUnlock");
         PanelTag = serializedObject.FindProperty("PanelTag");
@@ -104,6 +108,9 @@ public class ButtonDataGUI : Editor
             case ButtonType.ColorPartItem:
                 DisplayColorPartButton();
                 break;
+            case ButtonType.SkinSetItem:
+                DisplaySkinSetItemButton();
+                break;
             default:
                 break;
         }
@@ -140,7 +147,8 @@ public class ButtonDataGUI : Editor
 
         serializedObject.ApplyModifiedProperties();
     }
-    private void DisplayShieldButton(){
+    private void DisplayShieldButton()
+    {
         EditorGUILayout.Space();
         EditorGUILayout.PropertyField(ShieldTag, new GUIContent("Shield Tag"));
         EditorGUILayout.PropertyField(ItemCost, new GUIContent("Item Cost"));
@@ -174,6 +182,16 @@ public class ButtonDataGUI : Editor
         EditorGUILayout.PropertyField(RectTrans, new GUIContent("RectTransform"));
         EditorGUILayout.PropertyField(Object, new GUIContent("Object"));
         EditorGUILayout.PropertyField(CustomPartIndex, new GUIContent("Part Button Index"));
+
+        serializedObject.ApplyModifiedProperties();
+    }
+    private void DisplaySkinSetItemButton()
+    {
+        EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(SkinSetDataSO, new GUIContent("SkinSet DataSO"));
+        EditorGUILayout.PropertyField(ItemCost, new GUIContent("Item Cost"));
+        EditorGUILayout.PropertyField(LockIcon, new GUIContent("Lock Icon"));
+        EditorGUILayout.PropertyField(RectTrans, new GUIContent("RectTransform"));
 
         serializedObject.ApplyModifiedProperties();
     }

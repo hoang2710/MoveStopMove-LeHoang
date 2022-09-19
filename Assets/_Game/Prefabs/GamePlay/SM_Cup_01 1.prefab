@@ -57,7 +57,6 @@ GameObject:
   - component: {fileID: 8254304265256853919}
   - component: {fileID: 8254304265256853888}
   - component: {fileID: 8254304265256853916}
-  - component: {fileID: 8254304265256853915}
   - component: {fileID: 8254304265256853914}
   m_Layer: 0
   m_Name: SM_Cup_01 1
@@ -160,22 +159,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7251255731686344134, guid: 3651f736e3355314588c3f5f78b88533, type: 3}
---- !u!208 &8254304265256853915
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8254304265256853889}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.04, y: 0.2, z: 0.04}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: -0.02}
-  m_TimeToStationary: 0.5
 --- !u!54 &8254304265256853914
 Rigidbody:
   m_ObjectHideFlags: 0

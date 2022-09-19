@@ -12,6 +12,7 @@ public class GameData
     public PantSkinType PantSkinTag;
     public HatType HatTag;
     public ShieldType ShieldTag;
+    public SkinSet SkinSetTag;
     public string PlayerName;
     public float PlayerExp;
     public Level CurrentLevel;
@@ -24,17 +25,19 @@ public class GameData
     public SerializableDictionary<PantSkinType, bool> PantSkinUnlockState;
     public SerializableDictionary<HatType, bool> HatUnlockState;
     public SerializableDictionary<ShieldType, bool> ShieldUnlockState;
+    public SerializableDictionary<SkinSet, bool> SkinSetUnlockState;
     public SerializableCustomColorDictionary<WeaponType, List<CustomColor>> CustomColorDict;
 
     public GameData()
     {
-        DataVersion = 10010;
+        DataVersion = 10011;
 
         WeaponTag = WeaponType.Axe;
         WeaponSkinTag = WeaponSkinType.Axe_0;
         PantSkinTag = PantSkinType.Invisible;
         HatTag = HatType.None;
         ShieldTag = ShieldType.None;
+        SkinSetTag = SkinSet.None;
         PlayerName = "Anon";
         PlayerExp = 0f;
         CurrentLevel = Level.Level_1;
@@ -48,6 +51,7 @@ public class GameData
         InitDictionaryData<PantSkinType>(out PantSkinUnlockState);
         InitDictionaryData<HatType>(out HatUnlockState);
         InitDictionaryData<ShieldType>(out ShieldUnlockState);
+        InitDictionaryData<SkinSet>(out SkinSetUnlockState);
 
         //NOTE: unlock some default item
         WeaponUnlockState[WeaponType.Axe] = true;

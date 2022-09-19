@@ -46,3 +46,12 @@ MonoBehaviour:
   - HatTag: 0
     HatPrefabs: {fileID: 6042589602980300648, guid: 3359f5db12ef2f94aa40ef99adbffb4c, type: 3}
     poolSize: 2
+  - HatTag: 11
+    HatPrefabs: {fileID: 3963858092646454128, guid: 7c4bd821091a82740a708519cfe4ccb7, type: 3}
+    poolSize: 0
+  - HatTag: 12
+    HatPrefabs: {fileID: 706869614817504835, guid: 62b1eed0065f533459ed81bdbc389cdc, type: 3}
+    poolSize: 0
+  - HatTag: 13
+    HatPrefabs: {fileID: 1268375618423646678, guid: 5d32390c105530844866cbe045c9c223, type: 3}
+    poolSize: 0

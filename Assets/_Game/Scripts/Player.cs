@@ -35,6 +35,13 @@ public class Player : CharacterBase, IHit, IDataHandler
     private bool moveFlag; //NOTE: use for prevent some code execute every frame
     private bool attackFlag; //NOTE: use for prevent some code execute every frame
 
+    public SkinSet SkinSetTag { get; protected set; }
+
+    public EquipItem BackRef { get; set; }
+    public EquipItem TailRef { get; set; }
+
+    [SerializeField] private Material defaultCharSkin;
+
     protected override void Awake()
     {
         base.Awake();
@@ -57,12 +64,19 @@ public class Player : CharacterBase, IHit, IDataHandler
         switch (state)
         {
             case GameState.LoadGame:
+                SetUpHandWeapon();
+                if (SkinSetTag == SkinSet.None)
+                {
+                    SetUpPantSkin();
+                    SetUpHat();
+                    SetUpShield();
+                }
+                else
+                {
+                    SetupSkinSet();
+                }
                 break;
             case GameState.LoadLevel:
-                SetUpHandWeapon();
-                SetUpPantSkin();
-                SetUpHat();
-                SetUpShield();
                 SetUpPlayerLoadLevel();
                 RemoveCharacterUI();
                 break;
@@ -83,7 +97,7 @@ public class Player : CharacterBase, IHit, IDataHandler
                 }
                 break;
             case GameState.ResultPhase:
-                NavMeshAgent.enabled = false; 
+                NavMeshAgent.enabled = false;
                 CharacterCollider.enabled = false;
                 isAttackable = false;
                 break;
@@ -318,6 +332,60 @@ public class Player : CharacterBase, IHit, IDataHandler
         }
     }
 
+    public void SetSkinSet(SkinSet tag)
+    {
+        SkinSetTag = tag;
+    }
+    public void SetupSkinSet()
+    {
+        DestroyEquipedBackAndTail();
+
+        SkinSetDataSO skinSet = ItemStorage.Instance.GetSkinSet(SkinSetTag);
+
+        CharacterRenderer.material = skinSet.CharSkinMat;
+
+        SetHat(skinSet.HatTag);
+        SetUpHat();
+
+        SetShield(skinSet.ShieldTag);
+        SetUpShield();
+
+        SetPantSkin(skinSet.PantSkinTag);
+        SetUpPantSkin();
+
+        BackRef = ItemStorage.Instance.GetBackItem(skinSet.BackItemTag);
+        BackRef.SetupItem(BackPlaceHolderTrans);
+
+        TailRef = ItemStorage.Instance.GetTailItem(skinSet.TailTag);
+        TailRef.SetupItem(TailPlaceHolderTrans);
+    }
+    public void UnequipSkinSet()
+    {
+        CharacterRenderer.material = defaultCharSkin;
+
+        SetHat(HatType.None);
+        SetUpHat();
+
+        SetShield(ShieldType.None);
+        SetUpShield();
+
+        SetPantSkin(PantSkinType.Invisible);
+        SetUpPantSkin();
+
+        DestroyEquipedBackAndTail();
+    }
+    private void DestroyEquipedBackAndTail()
+    {
+        if (BackRef != null)
+        {
+            Destroy(BackRef.Object);
+        }
+        if (TailRef != null)
+        {
+            Destroy(TailRef.Object);
+        }
+    }
+
     public void LoadData(GameData data)
     {
         WeaponTag = data.WeaponTag;
@@ -325,17 +393,25 @@ public class Player : CharacterBase, IHit, IDataHandler
         PantSkinTag = data.PantSkinTag;
         HatTag = data.HatTag;
         ShieldTag = data.ShieldTag;
+        SkinSetTag = data.SkinSetTag;
 
         CharacterName = data.PlayerName;
     }
 
     public void SaveData(GameData data)
     {
+        if (UIManager.Instance.IsUICanvasOpened(UICanvasID.SkinShop))
+        {
+            UISkinShopCanvas skinShopCanvas = UIManager.Instance.GetUICanvas<UISkinShopCanvas>(UICanvasID.SkinShop);
+            skinShopCanvas.SetBackData();
+        }
+
         data.WeaponTag = WeaponTag;
         data.WeaponSkinTag = WeaponSkinTag;
         data.PantSkinTag = PantSkinTag;
         data.HatTag = HatTag;
         data.ShieldTag = ShieldTag;
+        data.SkinSetTag = SkinSetTag;
 
         data.PlayerName = CharacterName;
     }

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfBaseBot: 8
   numOfCharater: 60
-  botLevelFloorBound: 1
+  botLevelFloorBound: 0
   botLevelCeilBound: 4

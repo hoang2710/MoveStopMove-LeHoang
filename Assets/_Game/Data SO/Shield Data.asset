@@ -22,3 +22,9 @@ MonoBehaviour:
   - ShieldTag: 2
     ShieldPrefabs: {fileID: 5628145850911271956, guid: e071d04859d885c4ba0a14d2cbf3a39e, type: 3}
     poolSize: 0
+  - ShieldTag: 3
+    ShieldPrefabs: {fileID: 5453130837085113280, guid: 39432605e7a15264486f446c3c38d23e, type: 3}
+    poolSize: 0
+  - ShieldTag: 4
+    ShieldPrefabs: {fileID: 3337031126894374980, guid: a218bfb3a39b7fe4f8e4ca392f55cf50, type: 3}
+    poolSize: 0

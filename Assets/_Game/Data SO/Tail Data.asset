@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3402694a5114c49a58f19963d641c6, type: 3}
+  m_Name: Tail Data
+  m_EditorClassIdentifier: 
+  TailItemDatas:
+  - TailType: 0
+    TailPrefab: {fileID: 5394497367672170748, guid: 3359f5db12ef2f94aa40ef99adbffb4c, type: 3}
+  - TailType: 1
+    TailPrefab: {fileID: 6345802684690492130, guid: b989409a3f9f5bc4d9f5acfdbb64ed60, type: 3}

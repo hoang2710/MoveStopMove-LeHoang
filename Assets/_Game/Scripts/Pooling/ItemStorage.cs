@@ -43,6 +43,18 @@ public class ItemStorage : SingletonMono<ItemStorage>
         public CustomColor CustomColor;
         public Material Color;
     }
+    [System.Serializable]
+    public class BackItemData
+    {
+        public BackItemType BackItemType;
+        public EquipItem BackItemPrefab;
+    }
+    [System.Serializable]
+    public class TailItemData
+    {
+        public TailType TailType;
+        public EquipItem TailPrefab;
+    }
 
     public WeaponDataSO WeaponDataSO;
     public PantDataSO PantDataSO;
@@ -51,12 +63,17 @@ public class ItemStorage : SingletonMono<ItemStorage>
     public CustomColorDataSO CustomColorDataSO;
     public BotDataSO BotDataSO;
     public ObstacleDataSO ObstacleDataSO;
+    public BackItemDataSO BackItemDataSO;
+    public TailItemDataSO TailItemDataSO;
+    public List<SkinSetDataSO> SkinSetDataSO;
 
     private List<WeaponTypeData> weaponTypeDatas;
     private List<WeaponSkinData> weaponSkinDatas;
     private List<PantData> pantDatas;
     private List<HatData> hatDatas;
     private List<ShieldData> shieldDatas;
+    private List<BackItemData> backItemDatas;
+    private List<TailItemData> tailItemDatas;
     private List<ColorData> colorDatas;
     private List<Material> botMaterials;
     private List<string> botNames;
@@ -67,7 +84,10 @@ public class ItemStorage : SingletonMono<ItemStorage>
     private Dictionary<PantSkinType, Material> pantSkins = new Dictionary<PantSkinType, Material>();
     private Dictionary<HatType, GameObject> hatItems = new Dictionary<HatType, GameObject>();
     private Dictionary<ShieldType, GameObject> shieldItems = new Dictionary<ShieldType, GameObject>();
+    private Dictionary<BackItemType, EquipItem> backItems = new Dictionary<BackItemType, EquipItem>();
+    private Dictionary<TailType, EquipItem> tailItems = new Dictionary<TailType, EquipItem>();
     private Dictionary<CustomColor, Material> customColors = new Dictionary<CustomColor, Material>();
+    private Dictionary<SkinSet, SkinSetDataSO> skinSets = new Dictionary<SkinSet, SkinSetDataSO>();
 
     //Pool of weapon
     private Dictionary<WeaponType, Stack<GameObject>> weaponPool = new Dictionary<WeaponType, Stack<GameObject>>();
@@ -93,6 +113,8 @@ public class ItemStorage : SingletonMono<ItemStorage>
         botMaterials = BotDataSO.BotMaterials;
         botNames = BotDataSO.BotNames;
         obstacleMaterial = ObstacleDataSO.ObstacleMaterials;
+        backItemDatas = BackItemDataSO.BackItemDatas;
+        tailItemDatas = TailItemDataSO.TailItemDatas;
     }
     private void DataToDictionary()
     {
@@ -119,6 +141,18 @@ public class ItemStorage : SingletonMono<ItemStorage>
         foreach (var item in colorDatas)
         {
             customColors.Add(item.CustomColor, item.Color);
+        }
+        foreach (var item in backItemDatas)
+        {
+            backItems.Add(item.BackItemType, item.BackItemPrefab);
+        }
+        foreach (var item in tailItemDatas)
+        {
+            tailItems.Add(item.TailType, item.TailPrefab);
+        }
+        foreach (var item in SkinSetDataSO)
+        {
+            skinSets.Add(item.SkinSet, item);
         }
     }
     private IEnumerator InitPool() //NOTE: might optimize later or not
@@ -282,6 +316,18 @@ public class ItemStorage : SingletonMono<ItemStorage>
             return Instantiate(shieldItems[tag]);
         }
     }
+    public EquipItem GetBackItem(BackItemType tag)
+    {
+        return Instantiate(backItems[tag]);
+    }
+    public EquipItem GetTailItem(TailType tag)
+    {
+        return Instantiate(tailItems[tag]);
+    }
+    public SkinSetDataSO GetSkinSet(SkinSet tag)
+    {
+        return skinSets[tag];
+    }
 
     public GameObject GetWeaponType(WeaponType tag)
     {
@@ -386,13 +432,30 @@ public enum HatType
     StrawHat,
     HeadPhone,
     Horn,
-    Beard
+    Beard,
+    AngelHalo,
+    ThorHelmet,
+    MagicHat
 }
 public enum ShieldType
 {
     None,
     Star,
-    Knight
+    Knight,
+    AngelBow,
+    MagicBook
+}
+public enum BackItemType
+{
+    None,
+    Blade,
+    DevilWing,
+    AngelWing
+}
+public enum TailType
+{
+    None,
+    Devil
 }
 public enum CustomColor
 {
@@ -416,4 +479,13 @@ public enum CustomColor
     Smoke,
     Brown,
     Nutmeg
+}
+public enum SkinSet
+{
+    Set_1,
+    Set_2,
+    Set_3,
+    Set_4,
+    Set_5,
+    None
 }

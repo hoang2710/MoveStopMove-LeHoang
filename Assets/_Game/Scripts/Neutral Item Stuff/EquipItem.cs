@@ -15,4 +15,11 @@ public class EquipItem : MonoBehaviour
     {
         rotationOffset = Quaternion.Euler(RotationOffset.x, RotationOffset.y, RotationOffset.z);
     }
+
+    public void SetupItem(Transform parentTrans)
+    {
+        Trans.SetParent(parentTrans, false); //NOTE: false param to fix scale change bug
+        Trans.localPosition = PositionOffSet;
+        Trans.localRotation = rotationOffset;
+    }
 }

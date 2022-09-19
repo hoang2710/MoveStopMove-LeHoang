@@ -130,9 +130,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8254304264490221920, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8254304265256853889, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
       propertyPath: m_Name
       value: SM_Cup_01 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254304265256853889, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8254304265256853917, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
       propertyPath: m_RootOrder
@@ -280,9 +288,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8254304264490221920, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8254304265256853889, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
       propertyPath: m_Name
       value: SM_Cup_01 1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254304265256853889, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8254304265256853917, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
       propertyPath: m_RootOrder
@@ -349,9 +365,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8254304264490221920, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8254304265256853889, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
       propertyPath: m_Name
       value: SM_Cup_01 1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254304265256853889, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8254304265256853917, guid: 0d8175ce56ce93044908c1c4e6a34516, type: 3}
       propertyPath: m_RootOrder

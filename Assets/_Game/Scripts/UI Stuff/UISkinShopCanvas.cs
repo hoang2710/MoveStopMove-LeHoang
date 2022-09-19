@@ -31,15 +31,17 @@ public class UISkinShopCanvas : UICanvas
     [SerializeField] private ButtonData currentHatButtonData; //NOTE: assign first item in hat panel
     [SerializeField] private ButtonData currentPantButtonData; //NOTE: assign first item in pant panel
     [SerializeField] private ButtonData curretnShieldButtonData; //NOTE: assign first item in shield panel
-    private ButtonData currentButtonData; //NOTE: use for set cost value when re enter skin shop panel, assign first item of hat panel
+    [SerializeField] private ButtonData currentSkinSetButtonData; //NOTE: assign first item in skinset panel
 
     public List<ButtonData> PantButtonDatas; //NOTE: use for setting item lock icon
     public List<ButtonData> HatButtonDatas; //NOTE: use for setting item lock icon
     public List<ButtonData> ShieldButtonDatas; //NOTE: use for setting item lock icon
+    public List<ButtonData> SkinSetButtonDatas; //NOTE: use for setting item lock icon
 
     private PantSkinType finalPantSkinTag; //NOTE: use for decide which pant is equip when out shop
     private HatType finalHatTag; //NOTE: use for decide which hat is equip when out shop
     private ShieldType finalShieldTag; //NOTE: use for decide which hat is equip when out shop
+    private SkinSet finalSkinSet; //NOTE: .........................
 
     private void Start() //NOTE: setting lock icon for each item
     {
@@ -64,6 +66,13 @@ public class UISkinShopCanvas : UICanvas
         foreach (ButtonData item in ShieldButtonDatas)
         {
             bool isUnlock = DataManager.Instance.ShieldUnlockState[item.ShieldTag];
+            item.LockIcon.SetActive(!isUnlock);
+        }
+        yield return null;
+
+        foreach (ButtonData item in SkinSetButtonDatas)
+        {
+            bool isUnlock = DataManager.Instance.SkinSetUnlockState[item.SkinSetDataSO.SkinSet];
             item.LockIcon.SetActive(!isUnlock);
         }
     }
@@ -103,6 +112,7 @@ public class UISkinShopCanvas : UICanvas
                 SetBackShield();
                 break;
             case 3:
+                SetBackSkinSetOnChangePanel();
                 break;
             default:
                 break;
@@ -131,6 +141,10 @@ public class UISkinShopCanvas : UICanvas
                 playerRef.SetUpShield();
                 break;
             case 3:
+                ItemStateHandler(DataManager.Instance.SkinSetUnlockState[currentSkinSetButtonData.SkinSetDataSO.SkinSet], currentSkinSetButtonData);
+                SetSelectedFrame(currentSkinSetButtonData.RectTrans);
+                playerRef.SetSkinSet(currentSkinSetButtonData.SkinSetDataSO.SkinSet);
+                playerRef.SetupSkinSet();
                 break;
             default:
                 break;
@@ -184,6 +198,22 @@ public class UISkinShopCanvas : UICanvas
             ItemStateHandler(DataManager.Instance.ShieldUnlockState[buttonData.ShieldTag], buttonData);
         }
     }
+    public void OnclickSkinSetButton(ButtonData buttonData)
+    {
+        AudioManager.Instance.PlayAudioClip(AudioType.ButtonClick);
+
+        if (currentSkinSetButtonData != buttonData)
+        {
+            currentSkinSetButtonData = buttonData;
+
+            playerRef.SetSkinSet(currentSkinSetButtonData.SkinSetDataSO.SkinSet);
+            playerRef.SetupSkinSet();
+
+            SetSelectedFrame(buttonData.RectTrans);
+
+            ItemStateHandler(DataManager.Instance.SkinSetUnlockState[buttonData.SkinSetDataSO.SkinSet], buttonData);
+        }
+    }
     private void ItemStateHandler(bool isUnlock, ButtonData buttonData)
     {
         if (isUnlock)
@@ -220,6 +250,10 @@ public class UISkinShopCanvas : UICanvas
                 curretnShieldButtonData.LockIcon.SetActive(false);
                 break;
             case 3:
+                DataManager.Instance.Coin -= currentSkinSetButtonData.ItemCost;
+                DataManager.Instance.SkinSetUnlockState[currentSkinSetButtonData.SkinSetDataSO.SkinSet] = true;
+                ItemUnlockHandle(currentSkinSetButtonData);
+                currentSkinSetButtonData.LockIcon.SetActive(false);
                 break;
             default:
                 break;
@@ -260,6 +294,7 @@ public class UISkinShopCanvas : UICanvas
                 EquipHandler(buttonData.ShieldTag == finalShieldTag);
                 break;
             case 3:
+                EquipHandler(buttonData.SkinSetDataSO.SkinSet == finalSkinSet);
                 break;
             default:
                 break;
@@ -273,20 +308,29 @@ public class UISkinShopCanvas : UICanvas
         {
             case 0:
                 finalHatTag = currentHatButtonData.HatTag;
+                finalSkinSet = SkinSet.None;
                 SetEquipedMark(currentHatButtonData);
                 EquipHandler(true);
                 break;
             case 1:
                 finalPantSkinTag = currentPantButtonData.PantSkinTag;
+                finalSkinSet = SkinSet.None;
                 SetEquipedMark(currentPantButtonData);
                 EquipHandler(true);
                 break;
             case 2:
                 finalShieldTag = curretnShieldButtonData.ShieldTag;
+                finalSkinSet = SkinSet.None;
                 SetEquipedMark(curretnShieldButtonData);
                 EquipHandler(true);
                 break;
             case 3:
+                finalSkinSet = currentSkinSetButtonData.SkinSetDataSO.SkinSet;
+                finalHatTag = HatType.None;
+                finalPantSkinTag = PantSkinType.Invisible;
+                finalShieldTag = ShieldType.None;
+                SetEquipedMark(currentSkinSetButtonData);
+                EquipHandler(true);
                 break;
             default:
                 break;
@@ -337,6 +381,9 @@ public class UISkinShopCanvas : UICanvas
                 EquipHandler(false);
                 break;
             case 3:
+                finalSkinSet = SkinSet.None;
+                EquipedTextObj.SetActive(false);
+                EquipHandler(false);
                 break;
             default:
                 break;
@@ -383,9 +430,21 @@ public class UISkinShopCanvas : UICanvas
 
         playerRef.ChangeAnimation(ConstValues.ANIM_TRIGGER_DANCE_CHAR_SKIN);
 
-        finalHatTag = playerRef.HatTag;
-        finalPantSkinTag = playerRef.PantSkinTag;
-        finalShieldTag = playerRef.ShieldTag;
+        finalSkinSet = playerRef.SkinSetTag;
+        if (finalSkinSet == SkinSet.None)
+        {
+            finalHatTag = playerRef.HatTag;
+            finalPantSkinTag = playerRef.PantSkinTag;
+            finalShieldTag = playerRef.ShieldTag;
+        }
+        else
+        {
+            finalHatTag = HatType.None;
+            finalPantSkinTag = PantSkinType.Invisible;
+            finalShieldTag = ShieldType.None;
+        }
+
+        playerRef.UnequipSkinSet();
 
         SetupEquipedMark(currentPanel);
 
@@ -399,24 +458,69 @@ public class UISkinShopCanvas : UICanvas
     {
         playerRef.ChangeAnimation(ConstValues.ANIM_TRIGGER_IDLE);
 
-        SetBackHat();
-        SetBackPant();
-        SetBackShield();
+        SetBackSKinSet();
     }
     private void SetBackHat()
     {
-        playerRef.SetHat(finalHatTag);
+        if (finalSkinSet == SkinSet.None)
+        {
+            playerRef.SetHat(finalHatTag);
+        }
+        else
+        {
+            playerRef.SetHat(HatType.None);
+        }
+
         playerRef.SetUpHat();
     }
     private void SetBackPant()
     {
-        playerRef.SetPantSkin(finalPantSkinTag);
+        if (finalSkinSet == SkinSet.None)
+        {
+            playerRef.SetPantSkin(finalPantSkinTag);
+        }
+        else
+        {
+            playerRef.SetPantSkin(PantSkinType.Invisible);
+        }
+
         playerRef.SetUpPantSkin();
     }
     private void SetBackShield()
     {
-        playerRef.SetShield(finalShieldTag);
+        if (finalSkinSet == SkinSet.None)
+        {
+            playerRef.SetShield(finalShieldTag);
+        }
+        else
+        {
+            playerRef.SetShield(ShieldType.None);
+        }
+
         playerRef.SetUpShield();
+    }
+    private void SetBackSKinSet()
+    {
+        playerRef.SetSkinSet(finalSkinSet);
+
+        if (finalSkinSet == SkinSet.None)
+        {
+            playerRef.UnequipSkinSet();
+            SetBackHat();
+            SetBackPant();
+            SetBackShield();
+        }
+        else
+        {
+            playerRef.SetupSkinSet();
+        }
+    }
+    private void SetBackSkinSetOnChangePanel()
+    {
+        playerRef.UnequipSkinSet();
+        SetBackHat();
+        SetBackPant();
+        SetBackShield();
     }
     private void SetSelectedFrame(RectTransform parentButton)
     {
@@ -437,6 +541,7 @@ public class UISkinShopCanvas : UICanvas
                 SetupEquipedMarkShieldPanel();
                 break;
             case PanelType.SkinSetPanel:
+                SetupEquipedMarkSkinSetPanel();
                 break;
             default:
                 break;
@@ -444,7 +549,7 @@ public class UISkinShopCanvas : UICanvas
     }
     private void SetupEquipedMarkHatPanel()
     {
-        if (finalHatTag == HatType.None)
+        if (finalHatTag == HatType.None || finalSkinSet != SkinSet.None)
         {
             EquipedTextObj.SetActive(false);
         }
@@ -462,7 +567,7 @@ public class UISkinShopCanvas : UICanvas
     }
     private void SetupEquipedMarkPantPanel()
     {
-        if (finalPantSkinTag == PantSkinType.Invisible)
+        if (finalPantSkinTag == PantSkinType.Invisible || finalSkinSet != SkinSet.None)
         {
             EquipedTextObj.SetActive(false);
         }
@@ -480,7 +585,7 @@ public class UISkinShopCanvas : UICanvas
     }
     private void SetupEquipedMarkShieldPanel()
     {
-        if (finalShieldTag == ShieldType.None)
+        if (finalShieldTag == ShieldType.None || finalSkinSet != SkinSet.None)
         {
             EquipedTextObj.SetActive(false);
         }
@@ -496,21 +601,31 @@ public class UISkinShopCanvas : UICanvas
             }
         }
     }
-
-    private void OnApplicationPause(bool isPause) //NOTE: Set back player setting when quit on skin shop ui, for android
+    private void SetupEquipedMarkSkinSetPanel()
     {
-        if (isPause)
+        if (finalSkinSet == SkinSet.None)
         {
-            playerRef.SetHat(finalHatTag);
-            playerRef.SetPantSkin(finalPantSkinTag);
-            playerRef.SetShield(finalShieldTag);
+            EquipedTextObj.SetActive(false);
+        }
+        else
+        {
+            for (int i = 0; i < SkinSetButtonDatas.Count; i++)
+            {
+                if (SkinSetButtonDatas[i].SkinSetDataSO.SkinSet == finalSkinSet)
+                {
+                    SetEquipedMark(SkinSetButtonDatas[i]);
+                    break;
+                }
+            }
         }
     }
-    private void OnApplicationQuit() //NOTE: for window
+
+    public void SetBackData() //NOTE: use for set back player origin data when quit on skinshop panel
     {
         playerRef.SetHat(finalHatTag);
         playerRef.SetPantSkin(finalPantSkinTag);
         playerRef.SetShield(finalShieldTag);
+        playerRef.SetSkinSet(finalSkinSet);
     }
 }
 

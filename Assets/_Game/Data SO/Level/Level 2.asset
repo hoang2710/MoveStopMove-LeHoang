@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   numOfBaseBot: 12
-  numOfCharater: 150
+  numOfCharater: 112
   botLevelFloorBound: 1
   botLevelCeilBound: 2

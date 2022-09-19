@@ -48,6 +48,8 @@ public class CharacterBase : MonoBehaviour
     public Transform WeaponPlaceHolderTrans;
     public Transform HatPLaceHolderTrans;
     public Transform ShieldPlaceHolderTrans;
+    public Transform BackPlaceHolderTrans;
+    public Transform TailPlaceHolderTrans;
     protected GameObject handWeapon;
     protected Transform handWeaponTrans;
     protected WeaponType currentHandWeaponTag;
@@ -296,5 +298,4 @@ public class CharacterBase : MonoBehaviour
     {
         ShieldTag = tag;
     }
-
 }
